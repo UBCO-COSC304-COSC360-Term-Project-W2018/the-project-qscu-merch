@@ -5,46 +5,59 @@
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  */
 
-footer{
-  border: 1px solid #e2e2e2;
-  background: #183263;
-  padding: 1em;
-  color: white;
+footer {
+    border: 1px solid #ce1818;
+    background: #183263;
+    padding: 2em;
+    margin: 2em;
+    color: white;
+    overflow: auto;
 }
 
-.socialMedia{
-  padding-right: 10em;
+.socialMedia {
+    padding-right: 10em;
 }
 
 
-.footLogo, #socialMedia{
-  display: inline:
+.footLogo{
+    float:left;
+    display: inline;
 }
-.footnav{
-  margin: -2.75em 0 0 10em;
+
+p.footnav {
+/*    margin: 3em 0 0 10em;*/
+    display: inline;
 }
+#socialMedia{
+    display: inline;
+}
+
 footer ul.icons li {
     box-shadow: inset 0 0 0 2px #e2e2e2;
 }
 
 footer ul.icons li a.icon:hover:before {
-		box-shadow: inset 0 0 0 2px #18bfef;
-	}
+    box-shadow: inset 0 0 0 2px #18bfef;
+}
 
 a:hover {
-			border-bottom-color: transparent;
-			color: #18bfef !important;
-		}
-footer .copyright{
-  margin: 5em 0em 1em 41em;
-   list-style-type: none;
+    border-bottom-color: transparent;
+    color: #18bfef !important;
 }
 
-footer .icons{
-  float: right;
+footer .copyright {
+/*    margin: 5em 0em 10em 0em;*/
+    float: left;
+    text-align: center;
 }
 
-ul.icons li  {
+footer .icons {
+    float: right;
+    padding: 0em 0em 0em 0em;
+    overflow: auto;
+}
+
+ul.icons li {
     width: 2.25rem;
     height: 2.25rem;
     line-height: 2.25rem;
