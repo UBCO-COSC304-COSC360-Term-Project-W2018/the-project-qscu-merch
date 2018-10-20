@@ -6,7 +6,8 @@
 <head lang="en">
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
-    <link rel="stylesheet" href="css/qscu.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
 </head>
 
@@ -16,38 +17,44 @@
 <body>
 <!--    Header-->
 <header>
-	<a href="home.html"><img src="images/QSCU_Plain.png" alt="Quantitative Sciences Course Union" width="120px" height="80px"> </a>
-	<h1>QSCU Merchandise Store</h1>
-	<form id="SearchBar">
-		<fieldset>
-			<p>
-				<label id="Search">Search: </label>
-				<input type="text" name="Search"/>
-				<a href="#"><img src="images/search.png" alt="search icon" width="20px" height="20px"/></a>
-			</p>
-		</fieldset>
+	<div id="htop">
+	<a href="home.html" id="logo"><img src="images/QSCU_Plain.png" alt="Quantitative Sciences Course Union" width="120px" height="80px"> </a>
+	<h1 id="title">QSCU Merchandise Store</h1>
+	</div>
+
+<div id="hbot">
+<div id="browse">  
+<p><a href="#" id="browsebutton"><i class="fa fa-bars"></i> Browse</a></p>
+<nav id="browsenav">
+	<table border="none">
+	<tr><td>
+    	<ul>
+		<li><a href="#"></a>T1</li>
+		<li><a href="#"></a>T2</li>
+		<li><a href="#"></a>T3</li>
+		<li><a href="#"></a>T4</li>
+    	</ul>
+	</td></tr>
+	</table>
+</nav>
+</div>
+
+<div id="searchbar">
+	<form id="searchform">
+			<label id="search">Search: </label>
+			<input type="text" name="Search"/>
+			<a href="#" id="searchicon"><i class="fa fa-search"></i></a>
 	</form>
-	<h3><a href="browse">Browse</a></h3>
+</div>
+
 	
 	<p id="profile">
 		<a href="#"><img src="images/shoppingcart.png" alt="shopping cart icon" width="20px" height="20px"/></a>
 		<a href="#">My Profile</a>
 	</p>
 	
-<div>  
-<nav id="Browse">
-	<table border="none">
-		<tr><td>
-    <ul>
-    <li><a href="#"></a>T1</li>
-    <li><a href="#"></a>T2</li>
-    <li><a href="#"></a>T3</li>
-    <li><a href="#"></a>T4</li>
-    </ul>
-			</td></tr>
-	</table>
-</nav>
-  </div>
+</div>
+
 </header>
 
     

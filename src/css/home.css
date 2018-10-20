@@ -1,0 +1,46 @@
+#htop{
+	margin-bottom: 2em;
+}
+#logo {
+	float: left;
+	width: 80px;
+	margin-top: -1em;
+
+}
+
+#title{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#hbot{
+}
+
+#searchbar{
+	/*margin-left: auto;
+	margin-right: auto;*/
+	width: 30%;
+	text-align: center;
+}
+
+#searchicon{
+	
+}
+#searchform{
+	display: inline;
+}
+
+#browse{
+	float: left;
+	width:100px;
+}
+#profile{
+	float: right;
+	width: 100px;
+}
+
+
+footer{
+	clear: left;
+}
