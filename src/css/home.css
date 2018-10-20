@@ -1,10 +1,10 @@
 #htop{
 	margin-bottom: 2em;
+	overflow: auto;
 }
 #logo {
 	float: left;
 	width: 80px;
-	margin-top: -1em;
 
 }
 
@@ -14,13 +14,17 @@
 	margin-right: auto;
 }
 
-#hbot{
+.hbotline{
+	display: inline;
+	overflow: auto;
 }
 
 #searchbar{
-	/*margin-left: auto;
-	margin-right: auto;*/
-	width: 30%;
+/*
+	margin-left: 10em;
+	margin-right: 10em;
+*/
+	width: 70%;
 	text-align: center;
 }
 
