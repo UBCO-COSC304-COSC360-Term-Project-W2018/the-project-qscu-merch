@@ -8,29 +8,34 @@
 footer{
   border: 1px solid #e2e2e2;
   background: white;
+  padding: 1em;
 }
 
 footer .socialMedia{
-  padding-right: 20em;
+  padding-right: 10em;
 }
-
-/* footer .email{
-  padding-left: 40em;
-} */
+.footnav{
+  margin: -2.75em 0 0 10em;
+}
 footer ul.icons li {
     box-shadow: inset 0 0 0 2px #e2e2e2;
 }
-footer .icons{
- list-style-type: none;
-}
 
+footer ul.icons li a.icon:hover:before {
+		box-shadow: inset 0 0 0 2px #18bfef;
+	}
+
+a:hover {
+			border-bottom-color: transparent;
+			color: #18bfef !important;
+		}
 footer .copyright{
+  margin: 5em 0em 1em 41em;
    list-style-type: none;
 }
 
 footer .icons{
   float: right;
-
 }
 
 ul.icons li  {
