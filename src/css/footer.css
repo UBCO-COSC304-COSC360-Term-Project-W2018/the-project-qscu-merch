@@ -7,12 +7,18 @@
 
 footer{
   border: 1px solid #e2e2e2;
-  background: white;
+  background: #183263;
   padding: 1em;
+  color: white;
 }
 
-footer .socialMedia{
+.socialMedia{
   padding-right: 10em;
+}
+
+
+.footLogo, #socialMedia{
+  display: inline:
 }
 .footnav{
   margin: -2.75em 0 0 10em;
