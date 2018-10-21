@@ -1,0 +1,62 @@
+#loginForm, #signUpForm {
+    width: 40%;
+}
+
+#signUpForm {
+    float: right;
+    margin-right: 4em;
+    margin-top: 4em;
+    color:white;
+    background-color: #183263;
+    padding:1em;
+}
+
+#loginForm {
+    display: inline-block;
+    margin-left: 4em;
+    margin-top: 4em;
+    color:white;
+    background-color: #183263;
+    padding:1em;
+}
+
+#loginTitle, #signUpTitle {
+    text-align: center;
+    font-size: 3em;
+}
+
+label {
+    display: block;
+}
+
+fieldset {
+    text-align: center;
+}
+
+.loginFormElement {
+    padding: 1em;
+}
+
+#loginEmailLabel, #SUemailLabel {
+    position: relative;
+    left:-4em;
+}
+
+#loginPasswordLabel, #SUpasswordLabel {
+    position: relative;
+    left:-3.25em;
+}
+
+#SUfnameLabel, #SUlnameLabel {
+    position:relative;
+    left: -3em;
+}
+
+#SUconfirmPasswordLabel {
+    position: relative;
+    left:-1.4em;
+}
+
+.SUformElement {
+    padding:0.5em;
+}

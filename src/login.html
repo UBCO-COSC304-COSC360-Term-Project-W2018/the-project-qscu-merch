@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login/Sign-up</title>
+    <link rel="stylesheet"  href="css/login.css">
+</head>
+<body>
+
+<div>
+    <form id="loginForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
+        <fieldset>
+            <legend id="loginTitle">Login</legend>
+
+            <div class="loginFormElement">
+                <label id="loginEmailLabel">Email: </label>
+                <input type="email" name="username">
+            </div>
+
+            <div class="loginFormElement">
+                <label id="loginPasswordLabel">Password: </label>
+                <input type="password" name="loginpassword">
+            </div>
+
+            <div class="loginFormElement">
+                 <button type="submit">Login</button>
+            </div>
+
+            <div class="loginFormElement">
+                <a href="#">Forgot Password?</a>
+            </div>
+        </fieldset>
+    </form>
+
+    <form id="signUpForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
+        <fieldset>
+            <legend id="signUpTitle">Sign-Up</legend>
+            <div class="SUformElement">
+                <label id="SUfnameLabel">First name: </label>
+                <input type="text" name="fname">
+            </div>
+
+            <div class="SUformElement">
+                <label id="SUlnameLabel">Last name: </label>
+                <input type="text" name="lname">
+            </div>
+
+            <div class="SUformElement">
+                <label id="SUemailLabel">Email: </label>
+                <input type="email" name="email">
+            </div>
+
+            <div class="SUformElement">
+                <label id="SUpasswordLabel">Password: </label>
+                <input type="password" name="signuppassword">
+            </div>
+
+            <div class="SUformElement">
+                <label id="SUconfirmPasswordLabel">Confirm Password: </label>
+                <input type="password" name="confirmpassword">
+            </div>
+
+            <div class="SUformElement">
+                <button type="submit">Sign-up</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>
