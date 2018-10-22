@@ -1,11 +1,11 @@
+html, body{
+	margin: 0;
+}
+
 header{
 	padding-bottom: 1em;
 	color: white;
 	background-color: #183263;
-}
-
-html, body{
-	margin: 0;
 }
 
 #htop{
@@ -17,10 +17,10 @@ html, body{
 	overflow-y: auto;
 	overflow-x: none;
 }
+
 #logo {
 	width: 80px;
 	flex-grow: 0;
-
 }
 
 #title{
@@ -35,13 +35,13 @@ html, body{
 	flex-direction: row;
 }
 
+.hbotline{
+	font-size: 1.2em;
+}
+
 #browse{
 	margin-left:1em;
 	margin-right: 1em;
-}
-
-.hbotline{
-	font-size: 1.2em;
 }
 
 #browse, #profile{
@@ -62,8 +62,6 @@ html, body{
 	flex-grow: 6;
 }
 
-#searchform{
-}
 #searchicon{
 	position: relative;
 	left: -30px;
@@ -78,15 +76,12 @@ html, body{
 #profile{
 	float: left;
 	text-align: end;
-
 	margin-right: 1em;
 }
 
 #shoppingcart{
-
 	width: 40px;
 	height: 40px;
-	
 }
 
 #browsenav{
