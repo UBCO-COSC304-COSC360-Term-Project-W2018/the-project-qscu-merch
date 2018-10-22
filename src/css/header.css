@@ -1,0 +1,93 @@
+html, body{
+	margin: 0;
+}
+
+header{
+	padding-bottom: 1em;
+	color: white;
+	background-color: #183263;
+}
+
+#htop{
+	white-space: nowrap;
+	display: flex;
+	align-items: stretch;
+	flex-direction: row;
+	margin-bottom: 2em;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+#logo {
+	width: 80px;
+	flex-grow: 0;
+}
+
+#title{
+	flex-grow: 10;
+	margin-left: 80px;
+}
+
+#hbot{	
+	white-space: nowrap;
+	display: flex;
+	align-items: stretch;
+	flex-direction: row;
+}
+
+.hbotline{
+	font-size: 1.2em;
+}
+
+#browse{
+	margin-left:1em;
+	margin-right: 1em;
+}
+
+#browse, #profile{
+	color: white;
+	text-decoration: none;
+	width: 100px;
+	flex-grow: 2;
+}
+
+#profile a:link, #profile a:visited, #browse a:visited, #browse a:link{
+	color: white;
+	text-decoration: none;
+}
+
+#searchbar{
+	margin-right: 100px;
+	width:100px;
+	flex-grow: 6;
+}
+
+#searchicon{
+	position: relative;
+	left: -30px;
+}
+
+#textinput{
+	width: 80%;
+	flex-grow: inherit;
+	height: 2em;
+}
+
+#profile{
+	float: left;
+	text-align: end;
+	margin-right: 1em;
+}
+
+#shoppingcart{
+	width: 40px;
+	height: 40px;
+}
+
+#browsenav{
+	display: none;
+}
+
+footer{
+	clear: left;
+}
