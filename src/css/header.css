@@ -15,7 +15,7 @@ header{
 	flex-direction: row;
 	margin-bottom: 2em;
 	overflow-y: auto;
-	overflow-x: none;
+	overflow-x: hidden;
 }
 
 #logo {
