@@ -15,7 +15,7 @@ html, body{
 	flex-direction: row;
 	margin-bottom: 2em;
 	overflow-y: auto;
-	overflow-x: none;
+	/*overflow-x: none;*/
 }
 #logo {
 	width: 80px;
@@ -78,8 +78,10 @@ html, body{
 #profile{
 	float: left;
 	text-align: end;
-
 	margin-right: 1em;
+	display:flex;
+	align-items: center;
+	justify-content: center;
 }
 
 #shoppingcart{
