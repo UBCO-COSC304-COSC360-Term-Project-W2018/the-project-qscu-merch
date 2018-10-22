@@ -2,8 +2,35 @@
 	margin:2em;
 	border: thin solid black;
 }
+#bestselling{
+	overflow: auto;
+	border: thin solid green;
+}
+.overflow{
+	
+	overflow: hidden;
+	margin: 2em;
+	border: thin solid aqua;
+}
 
-.products{
-	margin: 1em;
+.item{
+	background-color: green;
+
+	white-space: nowrap;
+	padding: 0.5em;
+	margin: 2em;
+	border: thin solid yellow;
+}
+.pname{
+	float: both;
+	text-align: center;
 	border: thin solid black;
 }
+.item img{
+	display: inline;
+	clear: left;
+	border: thin solid black;
+	height: 60%;
+	width: auto;
+}
+
