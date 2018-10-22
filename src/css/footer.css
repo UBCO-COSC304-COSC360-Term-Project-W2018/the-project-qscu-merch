@@ -1,46 +1,35 @@
 /* css for the footer section */
-
-/*
- *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
- *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
- */
 html, body{
 	margin: 0;
+}
+
+html, body {
+    min-width: 670px;
 }
 
 footer {
     border: 1px solid #e2e2e2;
     background: #183263;
     padding: 2em;
+    margin: 1em;
     color: white;
-    overflow: hidden;
-    position: relative;
-    height 150px;
-/*    text-align: center;*/
-align-content:center;
-
+    min-width: 670px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .socialMedia {
     padding-right: 10em;
 }
 
-
-.footLogo{
-    float:left;
-    display: inline;
+.footLogo {
+    flex: 0;
 }
-
-.footIcons{
-  position: relative;
-  display: inline;
-}
-/* p.footnav {
-/*    margin: 3em 0 0 10em;*/
-    display: inline;
-} */
-#socialMedia{
-    display: inline;
+.footLogo img {
+    width: 180px;
+    height: 120px;
 }
 
 footer ul.icons li {
@@ -51,24 +40,24 @@ footer ul.icons li a.icon:hover:before {
     box-shadow: inset 0 0 0 2px #18bfef;
 }
 
-a{
+a {
     color: white;
 }
+
 a:hover {
     border-bottom-color: transparent;
     color: #18bfef !important;
 }
 
 footer .copyright {
-/*    margin: 5em 0em 10em 0em;*/
-    float: left;
-
+    flex: 1;
 }
 
 footer .icons {
-    float: right;
     padding: 0em 0em 0em 0em;
-    overflow: auto;
+}
+
+.icons h3 {
     text-align: center;
 }
 
