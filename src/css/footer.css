@@ -1,15 +1,19 @@
 /* css for the footer section */
-html, body{
-	margin: 0;
+
+html,
+body {
+    margin: 0;
 }
 
-html, body {
+html,
+body {
     min-width: 670px;
 }
 
 footer {
     border: 1px solid #e2e2e2;
     background: #183263;
+/*    background: tomato;*/
     padding: 2em;
     margin: 1em;
     color: white;
@@ -27,6 +31,7 @@ footer {
 .footLogo {
     flex: 0;
 }
+
 .footLogo img {
     width: 180px;
     height: 120px;
