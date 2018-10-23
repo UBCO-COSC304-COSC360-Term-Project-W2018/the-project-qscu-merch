@@ -27,6 +27,7 @@
 #loginTitle, #signUpTitle {
     text-align: center;
     font-size: 3em;
+    color: #18bfef;
 }
 
 label {
@@ -79,4 +80,13 @@ fieldset {
 
 #forms >* {
     flex-basis:40%;
+}
+a{
+    color: #18bfef;
+}
+a:hover{
+  color: tomato;
+}
+label{
+  padding-bottom: 0.5em;
 }
