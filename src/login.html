@@ -4,26 +4,27 @@
     <meta charset="UTF-8">
     <title>Login/Sign-up</title>
     <link rel="stylesheet"  href="css/login.css">
+    <script type="text/javascript" src="script/client-side-validation.js"></script>
 </head>
 <body>
 
-<div>
+<div id="forms">
     <form id="loginForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
         <fieldset>
             <legend id="loginTitle">Login</legend>
 
             <div class="loginFormElement">
                 <label id="loginEmailLabel">Email: </label>
-                <input type="email" name="username">
+                <input type="email" name="username" id="loginEmailInput">
             </div>
 
             <div class="loginFormElement">
                 <label id="loginPasswordLabel">Password: </label>
-                <input type="password" name="loginpassword">
+                <input type="password" name="loginpassword" id="loginPasswordInput">
             </div>
 
             <div class="loginFormElement">
-                 <button type="submit">Login</button>
+                 <input type="submit" id="loginSubmitButton">Login</input>
             </div>
 
             <div class="loginFormElement">
@@ -37,27 +38,27 @@
             <legend id="signUpTitle">Sign-Up</legend>
             <div class="SUformElement">
                 <label id="SUfnameLabel">First name: </label>
-                <input type="text" name="fname">
+                <input type="text" name="fname" id="fnameInput">
             </div>
 
             <div class="SUformElement">
                 <label id="SUlnameLabel">Last name: </label>
-                <input type="text" name="lname">
+                <input type="text" name="lname" id="lnameInput">
             </div>
 
             <div class="SUformElement">
                 <label id="SUemailLabel">Email: </label>
-                <input type="email" name="email">
+                <input type="email" name="email" id="signUpEmailInput">
             </div>
 
             <div class="SUformElement">
                 <label id="SUpasswordLabel">Password: </label>
-                <input type="password" name="signuppassword">
+                <input type="password" name="signuppassword" id="signUpPasswordInput">
             </div>
 
             <div class="SUformElement">
                 <label id="SUconfirmPasswordLabel">Confirm Password: </label>
-                <input type="password" name="confirmpassword">
+                <input type="password" name="confirmpassword" id = "signUpPasswordConfirmationInput">
             </div>
 
             <div class="SUformElement">
