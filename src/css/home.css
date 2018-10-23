@@ -9,7 +9,7 @@
 	border: medium solid #183263;
 }
 
-<<<<<<< HEAD
+
 #htop{
 	white-space: nowrap;
 	display: flex;
@@ -22,13 +22,11 @@
 #logo {
 	width: 80px;
 	flex-grow: 0;
+}
 
-=======
 .overflow{
 	overflow: hidden;
 	margin: 2em;
-/* 	border: thin solid aqua; */
->>>>>>> 4b1ea347bb88b959ff39921fb227b89fad6af12c
 }
 
 .mainproducts{
@@ -44,7 +42,7 @@
 }
 .pname{
 	font-size: 1.2em;
-	float: both;
+	/*float: both;*/
 	text-align: center;
 
 }
@@ -59,7 +57,7 @@
 	width: auto;
 }
 
-<<<<<<< HEAD
+
 #textinput{
 	width: 80%;
 	flex-grow: inherit;
@@ -75,16 +73,17 @@
 	justify-content: center;
 }
 
-#shoppingcart{
+#shoppingcart {
 
 	width: 40px;
 	height: 40px;
-=======
+}
+
 .tablename{
 	font-size: 2em;
 	text-align: left;
 	margin:0.1em 0em 0.1em 0.5em;
 	text-decoration: underline;
->>>>>>> 4b1ea347bb88b959ff39921fb227b89fad6af12c
+
 	
 }
