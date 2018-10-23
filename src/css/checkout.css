@@ -1,0 +1,32 @@
+#checkOutForm {
+    width:40%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5em;
+    text-align: center;
+}
+
+#checkOutFormTitle {
+    font-size: 3em;
+    text-align: center;
+}
+
+.checkoutContainer {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size:1.1em;
+}
+
+#addressRadioGroup {
+    display: inline-block;
+    text-align: left;
+}
+
+#addressContainer {
+    text-align:center;
+}
+
+
+
+
+

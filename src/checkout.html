@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check-Out</title>
+    <link rel="stylesheet" href="css/checkout.css">
+</head>
+<body>
+
+<form method="post" action=http://www.randyconnolly.com/tests/process.php" id="checkOutForm">
+
+    <fieldset>
+        <legend id="checkOutFormTitle">Check Out</legend>
+
+        <div id="ccNameContainer" class="checkoutContainer">
+            <label>Card Holder Full Name: </label>
+            <input type="text" name="ccName" id="ccName" class="required" >
+        </div>
+
+        <div id="ccNumContainer" class="checkoutContainer">
+            <label>Credit Card Number: </label>
+            <input type="number" name="ccNum" id="ccNum" class="required" >
+        </div>
+
+        <div id="ccExpirationContainer" class="checkoutContainer">
+            <label>Expiry Date on Credit Card (MMYY): </label>
+            <input type="number" name="ccExpiration" class="required" id="ccExpiration" >
+        </div>
+
+        <div id="ccCCVContainer" class="checkoutContainer">
+            <label>CCV: </label>
+            <input type="number" name="ccv" class="required" id="ccCCV">
+        </div>
+
+        <div id="addressContainer">
+            <label>Specify your shipping address: </label> <br>
+            <div id="addressRadioGroup">
+                <input type="radio" name="address">Use your address on file <br>
+                <input type="radio" name="address">Use a new address <br>
+            </div>
+        </div>
+
+        <div id="checkoutButtonContainer" class="checkoutContainer">
+            <button type="submit" id="checkOutButton">Check-Out</button>
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>
