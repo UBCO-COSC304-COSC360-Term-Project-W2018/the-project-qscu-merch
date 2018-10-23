@@ -1,7 +1,7 @@
 
 
 #topselling, #liamspicks, #staffpicks, #onsale{
-	margin-bottom:2em;
+/* 	margin-bottom:2em; */
 	overflow: auto;
 	border: medium solid #183263;
 }
@@ -19,7 +19,7 @@
 .item{
 	white-space: nowrap;
 	padding: 0em 1.5em 0em 1.5em;
-	margin: 1em;
+/* 	margin: 1em; */
 	border-right: 0.3em solid #183263;
 }
 .pname{
@@ -61,22 +61,21 @@
 #browsetable{
 	display: flex;
 	flex-grow: 1;
-	float: left;
 	width: 10em;
-	height: inherit;
-	margin-bottom: 1em;
 }
 #browsenav{
-	height: inherit;
+	display: flex;
+	flex-direction: column;
 }
 
 #browsecol{
-		display: flex;
+	display: flex;
 	flex-direction: column;
 }
 
 #producttable{
 	display: flex;
 	flex-direction: column;
+	overflow: hidden;
 	
 }
