@@ -1,27 +1,9 @@
-#main{
-	margin:2em;
-/* 	border: thin solid black; */
-}
+
 
 #topselling, #liamspicks, #staffpicks, #onsale{
 	margin-bottom:2em;
 	overflow: auto;
 	border: medium solid #183263;
-}
-
-
-#htop{
-	white-space: nowrap;
-	display: flex;
-	align-items: stretch;
-	flex-direction: row;
-	margin-bottom: 2em;
-	overflow-y: auto;
-	/*overflow-x: none;*/
-}
-#logo {
-	width: 80px;
-	flex-grow: 0;
 }
 
 .overflow{
@@ -42,7 +24,6 @@
 }
 .pname{
 	font-size: 1.2em;
-	/*float: both;*/
 	text-align: center;
 
 }
@@ -64,26 +45,38 @@
 	height: 2em;
 }
 
-#profile{
-	float: left;
-	text-align: end;
-	margin-right: 1em;
-	display:flex;
-	align-items: center;
-	justify-content: center;
-}
-
-#shoppingcart{
-	width: 40px;
-	height: 40px;
-	}
-
-
 .tablename{
 	font-size: 2em;
 	text-align: left;
 	margin:0.1em 0em 0.1em 0.5em;
 	text-decoration: underline;
+}
 
+#main{
+	display: flex;
+	flex-direction: row;
+	margin:2em;
+}
+
+#browsetable{
+	display: flex;
+	flex-grow: 1;
+	float: left;
+	width: 10em;
+	height: inherit;
+	margin-bottom: 1em;
+}
+#browsenav{
+	height: inherit;
+}
+
+#browsecol{
+		display: flex;
+	flex-direction: column;
+}
+
+#producttable{
+	display: flex;
+	flex-direction: column;
 	
 }

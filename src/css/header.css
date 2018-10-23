@@ -39,19 +39,19 @@ header{
 	font-size: 1.2em;
 }
 
-#browse{
+#home{
 	margin-left:1em;
 	margin-right: 1em;
 }
 
-#browse, #profile{
+#home, #profile{
 	color: white;
 	text-decoration: none;
 	width: 100px;
 	flex-grow: 2;
 }
 
-#profile a:link, #profile a:visited, #browse a:visited, #browse a:link{
+#profile a:link, #profile a:visited, #home a:visited, #home a:link{
 	color: white;
 	text-decoration: none;
 }
@@ -77,16 +77,17 @@ header{
 	float: left;
 	text-align: end;
 	margin-right: 1em;
+		display:flex;
+	align-items: center;
+	justify-content: center;
 }
+
 
 #shoppingcart{
 	width: 40px;
 	height: 40px;
 }
 
-#browsenav{
-	display: none;
-}
 
 footer{
 	clear: left;

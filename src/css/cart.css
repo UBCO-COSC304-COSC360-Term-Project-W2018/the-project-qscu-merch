@@ -1,0 +1,58 @@
+a{
+    text-decoration: none;
+}
+
+
+main{
+    padding: 2em;
+    width: 90%;
+    margin: auto;
+}
+
+#cartHeader{
+    margin: 0.5em 0;
+    font-size: 2em;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+#cartHeader p{
+    margin: 0;
+    margin-bottom: 0.5em;
+}
+
+#cartMain{
+    margin: 0 3em;
+
+}
+
+#cartFooter{
+    border-top: 2px solid black;
+    margin: 1em 0;
+    padding-top: .5em;
+
+}
+
+.product{
+    font-size: 1em;
+    margin: .5em;
+}
+.product input{
+    width: 17px;
+}
+
+#cartMain span{
+    margin: 0 1em;
+}
+#cartFooter span{
+    margin: 0 1em;
+}
+#cartFooter button{
+    margin: 0.25em;
+}
+
+#cartMain #productPrice{
+    margin-left: 22em;
+}
+
+
