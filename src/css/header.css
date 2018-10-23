@@ -77,7 +77,11 @@ header{
 	float: left;
 	text-align: end;
 	margin-right: 1em;
+		display:flex;
+	align-items: center;
+	justify-content: center;
 }
+
 
 #shoppingcart{
 	width: 40px;

@@ -42,7 +42,6 @@
 }
 .pname{
 	font-size: 1.2em;
-	/*float: both;*/
 	text-align: center;
 
 }
@@ -64,26 +63,21 @@
 	height: 2em;
 }
 
-#profile{
-	float: left;
-	text-align: end;
-	margin-right: 1em;
-	display:flex;
-	align-items: center;
-	justify-content: center;
-}
-
-#shoppingcart{
-	width: 40px;
-	height: 40px;
-	}
-
-
 .tablename{
 	font-size: 2em;
 	text-align: left;
 	margin:0.1em 0em 0.1em 0.5em;
 	text-decoration: underline;
+}
 
+#main{
+	display: flex;
+}
+
+#browsecol{
+	
+}
+
+#producttable{
 	
 }
