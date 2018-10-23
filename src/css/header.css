@@ -39,19 +39,19 @@ header{
 	font-size: 1.2em;
 }
 
-#browse{
+#home{
 	margin-left:1em;
 	margin-right: 1em;
 }
 
-#browse, #profile{
+#home, #profile{
 	color: white;
 	text-decoration: none;
 	width: 100px;
 	flex-grow: 2;
 }
 
-#profile a:link, #profile a:visited, #browse a:visited, #browse a:link{
+#profile a:link, #profile a:visited, #home a:visited, #home a:link{
 	color: white;
 	text-decoration: none;
 }
@@ -84,9 +84,6 @@ header{
 	height: 40px;
 }
 
-#browsenav{
-	display: none;
-}
 
 footer{
 	clear: left;
