@@ -1,21 +1,14 @@
 /* css for the footer section */
-
-html,
-body {
-    margin: 0;
-}
-
 html,
 body {
     min-width: 670px;
+    margin: 0;
 }
-
 footer {
     border: 1px solid #e2e2e2;
     background: #183263;
 /*    background: tomato;*/
     padding: 2em;
-    margin: 1em;
     color: white;
     min-width: 670px;
     display: flex;
@@ -37,33 +30,32 @@ footer {
     height: 120px;
 }
 
-footer ul.icons li {
-    box-shadow: inset 0 0 0 2px #e2e2e2;
-}
-
-footer ul.icons li a.icon:hover:before {
-    box-shadow: inset 0 0 0 2px #18bfef;
-}
-
 a {
     color: white;
 }
 
 a:hover {
     border-bottom-color: transparent;
-    color: #18bfef !important;
+    color: #18bfef;
 }
 
-footer .copyright {
+.copyright {
     flex: 1;
 }
 
-footer .icons {
+.icons {
     padding: 0em 0em 0em 0em;
 }
 
 .icons h3 {
     text-align: center;
+}
+ul.icons li {
+    box-shadow: inset 0 0 0 2px #e2e2e2;
+}
+
+ul.icons li a.icon:hover:before {
+    box-shadow: inset 0 0 0 2px #18bfef;
 }
 
 ul.icons li {
