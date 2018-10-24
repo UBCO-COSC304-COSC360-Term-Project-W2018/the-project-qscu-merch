@@ -7,11 +7,15 @@ centers form in middle of page
     margin-left: auto;
     margin-top: 5em;
     text-align: center;
+    background-color: #183263;
+    color: white;
+    padding:1em;
 }
 
 #checkOutFormTitle {
     font-size: 3em;
     text-align: center;
+    color: #18bfef;
 }
 
 /*
