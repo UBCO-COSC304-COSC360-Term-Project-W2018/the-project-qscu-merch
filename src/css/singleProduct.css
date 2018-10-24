@@ -1,5 +1,7 @@
 /*css for single product*/
-
+#reviews a:visited{
+/*    color: tomato;*/
+}
 html {
     /*    min-width: 413px;*/
     min-width: 734px;
@@ -16,7 +18,7 @@ html {
     width: 100%;
 }
 
-img {
+.container img {
     /*    border: 1px solid red;*/
     order: -1;
     align-self: flex-start;
@@ -110,6 +112,7 @@ input.qtyminus {
     margin: 2em;
     margin-top: 0;
     border-top: 1px solid #18bfef;
+    background-color: #93daf0;
     /*    border: 1px solid black;*/
 }
 
@@ -127,7 +130,23 @@ input.qtyminus {
 }
 
 #reviews .userReview{
-    margin-top: 1em;
         border-bottom: 1px dashed  #18bfef;
+}
 
+#reviews .userProfile{
+    margin: 0;
+}
+
+#reviews img{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    align-self: middle;
+}
+#reviews a{
+text-decoration: none;
+
+}
+#reviews a:visited{
+    
 }
