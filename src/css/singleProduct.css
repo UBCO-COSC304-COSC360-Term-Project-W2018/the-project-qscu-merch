@@ -1,7 +1,7 @@
 /*css for single product*/
 
 html {
-/*    min-width: 413px;*/
+    /*    min-width: 413px;*/
     min-width: 734px;
 }
 
@@ -25,18 +25,18 @@ img {
 
 .pName h1 {
     /*    border: 1px solid blue;*/
-/*        padding: 0.5em;*/
+    /*        padding: 0.5em;*/
     margin-bottom: 0;
 }
 
-.pName p{
-        margin-top: 0;
+.pName p {
+    margin-top: 0;
 }
 
 
 .pDesc {
     /*    border: 1px solid orange;*/
-/*    padding-left: 0.5em;*/
+    /*    padding-left: 0.5em;*/
 }
 
 #myform {
@@ -72,42 +72,62 @@ input.qtyminus {
 }
 
 .rating {
-/*    padding-left: 0.5em;*/
+    /*    padding-left: 0.5em;*/
 }
 
-.oldPrice{
+.oldPrice {
     text-decoration: line-through;
 }
 
-.sale{
+.sale {
     font-size: 1.5em;
     color: tomato;
 }
 
-.addCart{
-     font-size: 1.5em;
+.addCart {
+    font-size: 1.5em;
     background-color: #18bfef;
     margin-left: 5em;
     height: 2em;
     overflow: hidden;
-/*    background-color: orange;*/
-/*    color: white;*/
+    /*    background-color: orange;*/
+    /*    color: white;*/
 }
 
-.quant button{
+.quant button {
     border-radius: 5em;
 }
 
-.addCart:hover{
+.addCart:hover {
     background-color: tomato;
     color: white;
-    box-shadow: 10px solid black;
-
+    /*    box-shadow: 10px solid black;*/
 }
 
 
 #reviews {
     padding: 0.5em;
-    border-top: 1px dashed #18bfef;
-/*    border: 1px solid black;*/
+    margin: 2em;
+    margin-top: 0;
+    border-top: 1px solid #18bfef;
+    /*    border: 1px solid black;*/
+}
+
+#reviews h3 {
+    margin-top: 0;
+}
+
+#reviews .byline {
+    font-style: italic;
+    margin-bottom: 0.5em;
+}
+
+#reviews p{
+    margin-top: 0;
+}
+
+#reviews .userReview{
+    margin-top: 1em;
+        border-bottom: 1px dashed  #18bfef;
+
 }
