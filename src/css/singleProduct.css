@@ -1,12 +1,21 @@
 /*css for single product*/
 
-#reviews a:visited {
-    /*    color: tomato;*/
+* {
+    font-family: serif;
+}
+
+.bigboi {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1080px;
+    background-color: white;
+    /*    color: #18bfef;*/
 }
 
 html {
     /*    min-width: 413px;*/
     min-width: 734px;
+    background-color: aliceblue;
 }
 
 .container {
@@ -109,7 +118,7 @@ input.qtyminus {
 
 #reviews {
     padding: 0.5em;
-    margin: 2em;
+    /*    margin: 2em;*/
     margin-top: 0;
     border-top: 1px solid #18bfef;
     background-color: #93daf0;
@@ -118,6 +127,14 @@ input.qtyminus {
 
 #reviews h3 {
     margin-top: 0;
+}
+
+#reviews h3 a {
+    border: 1px solid clear;
+    background-color: #18bfef;
+    padding: 0.5em;
+    border-radius: 5em;
+    color: black;
 }
 
 #reviews .byline {
