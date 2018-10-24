@@ -1,4 +1,50 @@
+html, body{
 
+}
+
+#main{
+	display: flex;
+	height:100%;
+	flex-direction: row;
+	margin:2em;
+}
+
+#browsecol{
+	margin: 2em 2em 2em 0em;
+	border: thin solid blue;
+}
+
+#browsenav{
+	height: 100%;
+	border: thin solid green;
+}
+
+#browsetitle{
+	border: thin solid red;
+/*
+	float:left;
+	margin-left: 1em;
+*/
+}
+
+#browselist{
+	list-style: none;
+
+/* 	clear:left; */
+/* 	width: 10em;*/ 
+/* 	height: 100%; */
+
+	border: thin solid pink;
+}
+
+#productviews{
+	overflow: hidden;
+}
+
+.productList {
+	display: flex;
+	flex-direction: row;
+}
 
 #topselling, #liamspicks, #staffpicks, #onsale{
 	margin: 2em 0em 2em 0em; 
@@ -15,59 +61,6 @@
 .pname{
 	font-size: 1.2em;
 	text-align: center;
-}
-
-.price{
-	text-align: center;
-}
-
-#textinput{
-	width: 80%;
-	flex-grow: inherit;
-	height: 2em;
-}
-
-
-
-#main{
-	display: flex;
-	flex-direction: row;
-	margin:2em;
-}
-
-#browsecol{
-	height: 100%;
-	margin: 2em 2em 2em 0em;
-}
-
-
-#browsetable, #browsetable tr{
-	height: 100%;
-	
-}
-
-#browsenav{
-	height:100%
-}
-
-#browsetitle{
-	float:left;
-	margin-left: 1em;
-}
-#browselist{
-	list-style: none;
-	clear:left;
-	width: 10em;
-
-
-}
-
-#productviews{
-	overflow: hidden;
-}
-.productList {
-	display: flex;
-	flex-direction: row;
 }
 
 .viewname{
