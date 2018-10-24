@@ -16,33 +16,40 @@ html {
 }
 
 img {
-/*    border: 1px solid red;*/
+    /*    border: 1px solid red;*/
     order: -1;
     align-self: flex-start;
     padding: 2em;
 }
 
-.pName {
-/*    border: 1px solid blue;*/
-    /*    padding: 0.5em;*/
+.pName h1 {
+    /*    border: 1px solid blue;*/
+/*        padding: 0.5em;*/
+    margin-bottom: 0;
 }
 
+.pName p{
+        margin-top: 0;
+}
+
+
 .pDesc {
-/*    border: 1px solid orange;*/
-    padding-left: 0.5em;
+    /*    border: 1px solid orange;*/
+/*    padding-left: 0.5em;*/
 }
 
 #myform {
     text-align: left;
     padding: 5px;
-/*    border: 1px dotted #ccc;*/
-/*    margin: 2%;*/
+    /*    border: 1px dotted #ccc;*/
+    /*    margin: 2%;*/
 }
 
-.quant p{
+.quant p {
     margin: 0;
     margin-left: 1.75em;
 }
+
 .qty {
     width: 40px;
     height: 25px;
@@ -59,21 +66,26 @@ input.qtyminus {
     height: 25px;
 }
 
-
-
 .checked {
     color: orange;
 }
 
 .rating {
-    padding-left: 0.5em;
+/*    padding-left: 0.5em;*/
 }
 
-.price {
-    padding: 0.5em;
+.oldPrice{
+    text-decoration: line-through;
+}
+
+.sale{
+    
+    font-size: 1.5em;
+    color: tomato;
 }
 
 #reviews {
     padding: 0.5em;
-    border: 1px solid black;
+    border-top: 1px dashed #18bfef;
+/*    border: 1px solid black;*/
 }
