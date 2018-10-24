@@ -32,6 +32,12 @@
 
 label {
     display: block;
+    padding-bottom: 0.5em;
+}
+
+#loginFormInputElements, #signUpInputElements {
+    display:inline-block;
+    text-align: left;
 }
 
 fieldset {
@@ -39,38 +45,44 @@ fieldset {
 }
 
 .loginFormElement {
-    padding: 1em;
-}
-
-#loginEmailLabel, #SUemailLabel {
-    position: relative;
-    left:-4em;
-}
-
-#loginPasswordLabel, #SUpasswordLabel {
-    position: relative;
-    left:-3.25em;
-}
-
-#forms {
-    width: 90%;
-    margin-right:auto;
-    margin-left:auto;
-}
-
-#SUfnameLabel, #SUlnameLabel {
-    position:relative;
-    left: -3em;
-}
-
-#SUconfirmPasswordLabel {
-    position: relative;
-    left:-1.4em;
+    padding-top:1em;
+    padding-bottom: 1em;
 }
 
 .SUformElement {
-    padding:0.5em;
+    padding-top:0.7em;
+    padding-bottom:0.7em;
 }
+
+/*#loginEmailLabel, #SUemailLabel {*/
+    /*position: relative;*/
+    /*left:-4em;*/
+/*}*/
+
+/*#loginPasswordLabel, #SUpasswordLabel {*/
+    /*position: relative;*/
+    /*left:-3.25em;*/
+/*}*/
+
+/*#forms {*/
+    /*width: 90%;*/
+    /*margin-right:auto;*/
+    /*margin-left:auto;*/
+/*}*/
+
+/*#SUfnameLabel, #SUlnameLabel {*/
+    /*position:relative;*/
+    /*left: -3em;*/
+/*}*/
+
+/*#SUconfirmPasswordLabel {*/
+    /*position: relative;*/
+    /*left:-1.4em;*/
+/*}*/
+
+/*.SUformElement {*/
+    /*padding:0.5em;*/
+/*}*/
 
 #forms {
     display:flex;
@@ -89,6 +101,4 @@ a{
 a:hover{
   color: tomato;
 }
-label{
-  padding-bottom: 0.5em;
-}
+

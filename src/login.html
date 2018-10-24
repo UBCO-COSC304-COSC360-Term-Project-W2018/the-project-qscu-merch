@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login/Sign-up</title>
-    <link rel="stylesheet"  href="css/login.css">
+    <link rel="stylesheet" href="css/login.css">
     <script type="text/javascript" src="script/client-side-validation.js"></script>
 </head>
 <body>
@@ -12,19 +12,19 @@
     <form id="loginForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
         <fieldset>
             <legend id="loginTitle">Login</legend>
+            <div id="loginFormInputElements">
+                <div class="loginFormElements">
+                    <label id="loginEmailLabel">Email: </label>
+                    <input type="email" name="username" id="loginEmailInput" placeholder="your@email.com">
+                </div>
 
-            <div class="loginFormElement">
-                <label id="loginEmailLabel">Email: </label>
-                <input type="email" name="username" id="loginEmailInput" placeholder="your@email.com">
+                <div class="loginFormElement">
+                    <label id="loginPasswordLabel">Password: </label>
+                    <input type="password" name="loginpassword" id="loginPasswordInput" placeholder="********">
+                </div>
             </div>
-
             <div class="loginFormElement">
-                <label id="loginPasswordLabel">Password: </label>
-                <input type="password" name="loginpassword" id="loginPasswordInput" placeholder="********">
-            </div>
-
-            <div class="loginFormElement">
-                 <input type="submit" id="loginSubmitButton">Login</input>
+                <button type="submit" id="loginSubmitButton">Login</button>
             </div>
 
             <div class="loginFormElement">
@@ -36,29 +36,31 @@
     <form id="signUpForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
         <fieldset>
             <legend id="signUpTitle">Sign-Up</legend>
-            <div class="SUformElement">
-                <label id="SUfnameLabel">First name: </label>
-                <input type="text" name="fname" id="fnameInput">
-            </div>
+            <div id="signUpInputElements">
+                <div class="SUformElement">
+                    <label id="SUfnameLabel">First name: </label>
+                    <input type="text" name="fname" id="fnameInput">
+                </div>
 
-            <div class="SUformElement">
-                <label id="SUlnameLabel">Last name: </label>
-                <input type="text" name="lname" id="lnameInput">
-            </div>
+                <div class="SUformElement">
+                    <label id="SUlnameLabel">Last name: </label>
+                    <input type="text" name="lname" id="lnameInput">
+                </div>
 
-            <div class="SUformElement">
-                <label id="SUemailLabel">Email: </label>
-                <input type="email" name="email" id="signUpEmailInput">
-            </div>
+                <div class="SUformElement">
+                    <label id="SUemailLabel">Email: </label>
+                    <input type="email" name="email" id="signUpEmailInput">
+                </div>
 
-            <div class="SUformElement">
-                <label id="SUpasswordLabel">Password: </label>
-                <input type="password" name="signuppassword" id="signUpPasswordInput">
-            </div>
+                <div class="SUformElement">
+                    <label id="SUpasswordLabel">Password: </label>
+                    <input type="password" name="signuppassword" id="signUpPasswordInput">
+                </div>
 
-            <div class="SUformElement">
-                <label id="SUconfirmPasswordLabel">Confirm Password: </label>
-                <input type="password" name="confirmpassword" id = "signUpPasswordConfirmationInput">
+                <div class="SUformElement">
+                    <label id="SUconfirmPasswordLabel">Confirm Password: </label>
+                    <input type="password" name="confirmpassword" id="signUpPasswordConfirmationInput">
+                </div>
             </div>
 
             <div class="SUformElement">
