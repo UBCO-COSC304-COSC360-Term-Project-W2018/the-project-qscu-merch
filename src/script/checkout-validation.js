@@ -9,10 +9,12 @@ window.onload = function () {
             alert("please enter valid date in valid form: MMYY");
         }
 
+        console.log();
+
         var radio1 = document.getElementById("addressOnFileRadio");
         var radio2 = document.getElementById("newAddressRadio");
 
-        if (validRadioGroup( radio1, radio2 )) {
+        if ( !validRadioGroup( radio1, radio2 )) {
             e.preventDefault();
             alert("Please select a shipping address");
         }
@@ -27,7 +29,7 @@ window.onload = function () {
 
     function validDate ( givenDate ) {
 
-        givenDate = givenDate.toString();
+        givenDate = givenDate.value.toString();
 
         var month = givenDate.substring(0,2);
         var year = givenDate.substring(2);
@@ -55,7 +57,7 @@ window.onload = function () {
 
         var radiogrouptest = true;
 
-        if ( !( rb1.checked ^ rb2.checked )) {
+        if ( !( rb1.checked || rb2.checked ) ) {
             radiogrouptest = false;
         }
 
