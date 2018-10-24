@@ -1,0 +1,32 @@
+/*css for single product*/
+
+.container {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: flex-start;
+}
+
+.sideContent {
+    order 2;
+    width: 100%;
+}
+
+img {
+    border: 1px solid red;
+    order: -1;
+    align-self: flex-start;
+
+}
+
+.pName {
+    border: 1px solid blue;
+}
+
+.pDesc {
+    border: 1px solid orange;
+}
+
+#reviews {
+    border: 1px solid black;
+}
