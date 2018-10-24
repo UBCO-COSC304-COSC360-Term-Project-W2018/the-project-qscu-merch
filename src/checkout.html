@@ -12,6 +12,8 @@
     <fieldset>
         <legend id="checkOutFormTitle">Check Out</legend>
 
+        <div id="checkoutFormElements">
+            <div id="checkoutFormInputElements">
         <div id="ccNameContainer" class="checkoutContainer">
             <label id="ccNameLabel">Card Holder Full Name: </label>
             <input type="text" name="ccName" id="ccName" class="required" >
@@ -23,7 +25,7 @@
         </div>
 
         <div id="ccExpirationContainer" class="checkoutContainer">
-            <label id="ccExpDateLabel">Expiry Date on Credit Card (MMYY): </label>
+            <label id="ccExpDateLabel">Expiry Date (MMYY): </label>
             <input type="number" name="ccExpiration" class="required" id="ccExpiration" >
         </div>
 
@@ -31,19 +33,51 @@
             <label id="ccCCVLabel">CCV: </label>
             <input type="number" name="ccv" class="required" id="ccCCV">
         </div>
-
-        <div id="addressContainer">
+            </div>
+        <div id="addressContainer" class="checkoutContainer">
             <label>Specify your shipping address: </label> <br>
             <div id="addressRadioGroup">
                 <input type="radio" name="address">Use your address on file <br>
                 <input type="radio" name="address">Use a new address <br>
+
+                <div id="newShippingAddress">
+                    <div id="newAddress">
+                        <label>Address: </label>
+                        <input type="text" name="newAddress" id="newAddressInput">
+                    </div>
+
+                    <div id="newCity">
+                        <label>City: </label>
+                        <input type="text" name="newCity" id="newCityInput">
+                    </div>
+
+                    <div id="newProvince">
+                        <label>Province/State: </label>
+                        <input type="text" name="newProvince" id="newProvinceInput">
+                    </div>
+
+                    <div id="newCountry">
+                        <label>Country: </label>
+                        <input type="text" name="newCountry" id="newCountryInput">
+                    </div>
+
+                    <div id="newPostalCode">
+                        <label>Postal Code: </label>
+                        <input type="text" name="newPostalCode" id="newPostalCodeInput">
+                    </div>
+                </div>
             </div>
         </div>
 
         <div id="checkoutButtonContainer" class="checkoutContainer">
-            <button type="submit" id="checkOutButton">Check-Out</button>
+            <button type="submit" id="checkOutButton">Confirm</button>
+        </div>
         </div>
     </fieldset>
 </form>
+
+<div id="paypalButtonContainer">
+    <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal" id="paypalButton"></a>
+</div>
 </body>
 </html>

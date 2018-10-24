@@ -1,5 +1,8 @@
+/*
+centers form in middle of page
+ */
 #checkOutForm {
-    width:40%;
+    width:30%;
     margin-right: auto;
     margin-left: auto;
     margin-top: 5em;
@@ -11,25 +14,60 @@
     text-align: center;
 }
 
+/*
+sets font size for labels and input fields
+ */
 .checkoutContainer {
     margin-top: 1em;
     margin-bottom: 1em;
     font-size:1.1em;
 }
 
+/*
+inline block display ensures that the div that holds the radio button is the width of the largest
+radio button. All buttons are aligned on far left of this div
+ */
 #addressRadioGroup {
     display: inline-block;
     text-align: left;
 }
 
-#addressContainer {
-    text-align:center;
-}
-
+/*
+give each label a new line
+ */
 label {
-
+    display: block;
 }
 
+/*
+sets labels to left of div. Inline-block display ensures that the width of the div
+is the width of its largest element
+ */
+#checkoutFormInputElements {
+    text-align: left;
+    display: inline-block;
+}
+
+
+#checkOutButton {
+    font-size: 1.1em;
+}
+
+
+/*
+centers pay pal logo in middle
+ */
+#paypalButtonContainer {
+    text-align: center;
+}
+
+/*
+sets form input elements for user to input new address as hidden and removes
+from normal flow
+ */
+#newShippingAddress {
+    display:none;
+}
 
 
 
