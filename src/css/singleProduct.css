@@ -1,5 +1,6 @@
 /*css for single product*/
-html{
+
+html {
     min-width: 413px;
 }
 
@@ -23,23 +24,51 @@ img {
 
 .pName {
     border: 1px solid blue;
-/*    padding: 0.5em;*/
+    /*    padding: 0.5em;*/
 }
 
 .pDesc {
     border: 1px solid orange;
     padding-left: 0.5em;
 }
+
+#myform {
+    text-align: left;
+    padding: 5px;
+/*    border: 1px dotted #ccc;*/
+    margin: 2%;
+}
+
+.qty {
+    width: 40px;
+    height: 25px;
+    text-align: center;
+}
+
+input.qtyplus {
+    width: 25px;
+    height: 25px;
+}
+
+input.qtyminus {
+    width: 25px;
+    height: 25px;
+}
+
+
+
 .checked {
     color: orange;
 }
-.rating{
+
+.rating {
     padding-left: 0.5em;
 }
 
-.price{
+.price {
     padding: 0.5em;
 }
+
 #reviews {
     padding: 0.5em;
     border: 1px solid black;
