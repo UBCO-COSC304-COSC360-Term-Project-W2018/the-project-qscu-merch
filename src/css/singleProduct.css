@@ -18,20 +18,29 @@ img {
     border: 1px solid red;
     order: -1;
     align-self: flex-start;
-
+    padding: 2em;
 }
 
 .pName {
     border: 1px solid blue;
+/*    padding: 0.5em;*/
 }
 
 .pDesc {
     border: 1px solid orange;
+    padding-left: 0.5em;
 }
 .checked {
     color: orange;
 }
+.rating{
+    padding-left: 0.5em;
+}
 
+.price{
+    padding: 0.5em;
+}
 #reviews {
+    padding: 0.5em;
     border: 1px solid black;
 }
