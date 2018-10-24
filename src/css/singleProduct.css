@@ -79,10 +79,20 @@ input.qtyminus {
 }
 
 .sale{
-    
     font-size: 1.5em;
     color: tomato;
 }
+
+.addCart{
+     font-size: 1.5em;
+    background-color: #18bfef;
+/*    background-color: orange;*/
+}
+
+.addCart:hover{
+    background-color: tomato;
+}
+
 
 #reviews {
     padding: 0.5em;
