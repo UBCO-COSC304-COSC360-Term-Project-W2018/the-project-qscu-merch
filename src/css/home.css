@@ -1,7 +1,7 @@
 
 
 #topselling, #liamspicks, #staffpicks, #onsale{
-/* 	margin-bottom:2em; */
+	margin: 2em 0em 2em 0em; 
 	overflow: auto;
 	border: medium solid #183263;
 }
@@ -25,7 +25,6 @@
 .pname{
 	font-size: 1.2em;
 	text-align: center;
-
 }
 
 .price{
@@ -46,10 +45,13 @@
 }
 
 .tablename{
+	position: fixed;
 	font-size: 2em;
 	text-align: left;
 	margin:0.1em 0em 0.1em 0.5em;
 	text-decoration: underline;
+	color: #18bfef;
+	
 }
 
 #main{
@@ -58,19 +60,35 @@
 	margin:2em;
 }
 
-#browsetable{
-	display: flex;
-	flex-grow: 1;
-	width: 10em;
-}
-#browsenav{
-	display: flex;
-	flex-direction: column;
-}
-
 #browsecol{
 	display: flex;
 	flex-direction: column;
+/* 	border: thin solid green; */
+	height: auto;
+	margin: 2em 2em 2em 0em;
+}
+
+#browsetable, #browsetable tr{
+	display: flex;
+	flex-grow: 1;
+/* 	border: thick solid pink; */
+	height: 100%;
+	
+}
+
+#browsenav{
+	display: flex;
+/* 	border: thin solid blue; */
+	height:100%
+}
+
+#browselist{
+	display: flex;
+	flex-direction: column;
+	width: 10em;
+	border: thin solid yellow;
+
+
 }
 
 #producttable{
@@ -79,3 +97,4 @@
 	overflow: hidden;
 	
 }
+
