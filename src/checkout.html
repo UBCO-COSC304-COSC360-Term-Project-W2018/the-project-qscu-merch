@@ -16,7 +16,7 @@
         <div id="checkoutFormElements">
             <div id="checkoutFormInputElements">
                 <div id="ccNameContainer" class="checkoutContainer">
-                    <label id="ccNameLabel">Card Holder Full Name: </label>
+                    <label id="ccNameLabel">Name on Card: </label>
                     <input type="text" name="ccName" id="ccName" required>
                 </div>
 
@@ -34,41 +34,68 @@
                     <label id="ccCCVLabel">CCV: </label>
                     <input type="number" name="ccv" required id="ccCCV">
                 </div>
-            </div>
-            <div id="addressContainer" class="checkoutContainer">
-                <label>Specify your shipping address: </label> <br>
-                <div id="addressRadioGroup">
-                    <input type="radio" name="address" id="addressOnFileRadio">Use your address on file <br>
-                    <input type="radio" name="address" id="newAddressRadio">Use a new address <br>
 
-                    <div id="newShippingAddress">
-                        <div id="newAddress">
+                <div id="addressContainer" class="checkoutContainer">
+                    <label>Billing Address: </label>
+                    <div id="billingAddressContainer" class="checkoutContainer">
+                        <div id="billingAddress">
                             <label>Address: </label>
-                            <input type="text" name="newAddress" id="newAddressInput">
+                            <input type="text" name="billingAddress" id="billingAddressInput">
                         </div>
 
-                        <div id="newCity">
+                        <div id="billingCity">
                             <label>City: </label>
-                            <input type="text" name="newCity" id="newCityInput">
+                            <input type="text" name="billingCity" id="billingCityInput">
                         </div>
 
-                        <div id="newProvince">
+                        <div id="billingProvince">
                             <label>Province/State: </label>
-                            <input type="text" name="newProvince" id="newProvinceInput">
+                            <input type="text" name="billingProvince" id="billingProvinceInput">
                         </div>
 
-                        <div id="newCountry">
+                        <div id="billingCountry">
                             <label>Country: </label>
-                            <input type="text" name="newCountry" id="newCountryInput">
+                            <input type="text" name="billingCountry" id="billingCountryInput">
                         </div>
 
-                        <div id="newPostalCode">
+                        <div id="billingPostalCode">
                             <label>Postal Code: </label>
-                            <input type="text" name="newPostalCode" id="newPostalCodeInput">
+                            <input type="text" name="billingPostalCode" id="billingPostalCodeInput">
                         </div>
                     </div>
                 </div>
-            </div>
+                    <div id="shippingAddressRadioGroup" >
+                        <label>Select a shipping address: </label>
+                        <input type="radio" name="shippingAddress">Billing address <br>
+                        <input type="radio" name="shippingAddress">New shipping address <br>
+                    </div>
+                    <div id="shippingAddressContainer" class="checkoutContainer">
+                        <div id="shippingAddress">
+                            <label>Address: </label>
+                            <input type="text" name="shippingAddress" id="shippingAddressInput">
+                        </div>
+
+                        <div id="shippingCity">
+                            <label>City: </label>
+                            <input type="text" name="shippingCity" id="shippingCityInput">
+                        </div>
+
+                        <div id="shippingProvince">
+                            <label>Province/State: </label>
+                            <input type="text" name="shippingProvince" id="shippingProvinceInput">
+                        </div>
+
+                        <div id="shippingCountry">
+                            <label>Country: </label>
+                            <input type="text" name="shippingCountry" id="shippingCountryInput">
+                        </div>
+
+                        <div id="shippingPostalCode">
+                            <label>Postal Code: </label>
+                            <input type="text" name="shippingPostalCode" id="shippingPostalCodeInput">
+                        </div>
+                    </div>
+                </div>
 
             <div id="checkoutButtonContainer" class="checkoutContainer">
                 <!--<button type="submit" id="checkOutButton">Confirm</button>-->

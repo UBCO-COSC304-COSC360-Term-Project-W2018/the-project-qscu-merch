@@ -9,8 +9,6 @@ window.onload = function () {
             alert("please enter valid date in valid form: MMYY");
         }
 
-        console.log();
-
         var radio1 = document.getElementById("addressOnFileRadio");
         var radio2 = document.getElementById("newAddressRadio");
 
