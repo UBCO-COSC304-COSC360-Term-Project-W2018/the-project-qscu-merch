@@ -3,7 +3,6 @@
 .container {
     display: flex;
     flex-direction: row;
-
     justify-content: flex-start;
 }
 
@@ -25,6 +24,9 @@ img {
 
 .pDesc {
     border: 1px solid orange;
+}
+.checked {
+    color: orange;
 }
 
 #reviews {
