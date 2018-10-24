@@ -1,4 +1,7 @@
 /*css for single product*/
+html{
+    min-width: 413px;
+}
 
 .container {
     display: flex;
