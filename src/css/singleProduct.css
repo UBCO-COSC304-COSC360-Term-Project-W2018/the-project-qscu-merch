@@ -1,7 +1,9 @@
 /*css for single product*/
-#reviews a:visited{
-/*    color: tomato;*/
+
+#reviews a:visited {
+    /*    color: tomato;*/
 }
+
 html {
     /*    min-width: 413px;*/
     min-width: 734px;
@@ -73,9 +75,7 @@ input.qtyminus {
     color: orange;
 }
 
-.rating {
-    /*    padding-left: 0.5em;*/
-}
+.rating {}
 
 .oldPrice {
     text-decoration: line-through;
@@ -125,28 +125,48 @@ input.qtyminus {
     margin-bottom: 0.5em;
 }
 
-#reviews p{
+#reviews p {
     margin-top: 0;
 }
 
-#reviews .userReview{
-        border-bottom: 1px dashed  #18bfef;
+#reviews .reviewDescription {
+    padding-bottom: 0.5em;
+    border-bottom: 1px dashed #18bfef;
 }
 
-#reviews .userProfile{
+#reviews .userProfile {
     margin: 0;
 }
 
-#reviews img{
-    width: 40px;
-    height: 40px;
+#reviews .userProfile time {
+    /*    color: lightblue;*/
+    font-size: 0.85em;
+}
+
+#reviews img {
+    width: 30px;
+    height: 30px;
     border-radius: 100%;
     align-self: middle;
+    border: 1px solid tomato;
+    margin:
 }
-#reviews a{
-text-decoration: none;
+
+#reviews a {
+    text-decoration: none;
+    padding-left: 1em;
 
 }
-#reviews a:visited{
-    
+
+#reviews .userRating {
+    padding-top: 0.5em;
+    margin: 0;
+    /*    padding-left: 1em;*/
 }
+
+#reviews .reviewTitle {
+    padding-top: 0.5em;
+    font-weight: bold;
+}
+
+#reviews a:visited {}
