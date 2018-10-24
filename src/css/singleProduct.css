@@ -91,10 +91,18 @@ input.qtyminus {
     height: 2em;
     overflow: hidden;
 /*    background-color: orange;*/
+/*    color: white;*/
+}
+
+.quant button{
+    border-radius: 5em;
 }
 
 .addCart:hover{
     background-color: tomato;
+    color: white;
+    box-shadow: 10px solid black;
+
 }
 
 
