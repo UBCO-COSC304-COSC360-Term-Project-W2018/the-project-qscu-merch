@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Check-Out</title>
     <link rel="stylesheet" href="css/checkout.css">
+    <script type="text/javascript" src="script/checkout-validation.js"></script>
 </head>
 <body>
 
@@ -26,7 +27,7 @@
 
                 <div id="ccExpirationContainer" class="checkoutContainer">
                     <label id="ccExpDateLabel">Expiry Date (MMYY): </label>
-                    <input type="number" name="ccExpiration" required id="ccExpiration">
+                    <input type="text" name="ccExpiration" required id="ccExpiration">
                 </div>
 
                 <div id="ccCCVContainer" class="checkoutContainer">
@@ -37,8 +38,8 @@
             <div id="addressContainer" class="checkoutContainer">
                 <label>Specify your shipping address: </label> <br>
                 <div id="addressRadioGroup">
-                    <input type="radio" name="address">Use your address on file <br>
-                    <input type="radio" name="address">Use a new address <br>
+                    <input type="radio" name="address" id="addressOnFileRadio">Use your address on file <br>
+                    <input type="radio" name="address" id="newAddressRadio">Use a new address <br>
 
                     <div id="newShippingAddress">
                         <div id="newAddress">
@@ -70,7 +71,8 @@
             </div>
 
             <div id="checkoutButtonContainer" class="checkoutContainer">
-                <button type="submit" id="checkOutButton">Confirm</button>
+                <!--<button type="submit" id="checkOutButton">Confirm</button>-->
+                <input type="submit" id="checkOutButton">
             </div>
         </div>
     </fieldset>
