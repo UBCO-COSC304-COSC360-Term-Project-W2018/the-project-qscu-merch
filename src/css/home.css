@@ -6,20 +6,10 @@
 	border: medium solid #183263;
 }
 
-.overflow{
-	overflow: hidden;
-	margin: 2em;
-}
-
-.mainproducts{
-	border-collapse-right: collapse;
-	border-spacing: 1em;
-}
-
 .item{
 	white-space: nowrap;
 	padding: 0em 1.5em 0em 1.5em;
-/* 	margin: 1em; */
+	margin: 1em 1em 1em 0em;
 	border-right: 0.3em solid #183263;
 }
 .pname{
@@ -31,28 +21,13 @@
 	text-align: center;
 }
 
-.item img{
-	border: thin solid #183263;
-	height: 60%;
-	width: auto;
-}
-
-
 #textinput{
 	width: 80%;
 	flex-grow: inherit;
 	height: 2em;
 }
 
-.tablename{
-	position: fixed;
-	font-size: 2em;
-	text-align: left;
-	margin:0.1em 0em 0.1em 0.5em;
-	text-decoration: underline;
-	color: #18bfef;
-	
-}
+
 
 #main{
 	display: flex;
@@ -61,40 +36,69 @@
 }
 
 #browsecol{
-	display: flex;
-	flex-direction: column;
-/* 	border: thin solid green; */
-	height: auto;
+	height: 100%;
 	margin: 2em 2em 2em 0em;
 }
 
+
 #browsetable, #browsetable tr{
-	display: flex;
-	flex-grow: 1;
-/* 	border: thick solid pink; */
 	height: 100%;
 	
 }
 
 #browsenav{
-	display: flex;
-/* 	border: thin solid blue; */
 	height:100%
 }
 
+#browsetitle{
+	float:left;
+	margin-left: 1em;
+}
 #browselist{
-	display: flex;
-	flex-direction: column;
+	list-style: none;
+	clear:left;
 	width: 10em;
-	border: thin solid yellow;
 
 
 }
 
-#producttable{
-	display: flex;
-	flex-direction: column;
+#productviews{
 	overflow: hidden;
-	
+}
+.productList {
+	display: flex;
+	flex-direction: row;
 }
 
+.viewname{
+	position: sticky;
+	font-size: 2em;
+	text-align: left;
+	margin:0.1em 0em 0.1em 0.5em;
+	text-decoration: underline;
+	color: #18bfef;
+}
+
+.item {
+	width: 225px;
+	height: 225px;
+}
+
+.item img {
+	height: 150px;
+	width: 150px;
+}
+
+.extraStuff {
+	display: flex;
+	flex-direction: row;
+}
+
+.itemPrice{
+	margin: 0.5em;
+}
+
+.numberOfLiams{
+	margin: 0.5em;
+	margin-top: 5em;
+}
