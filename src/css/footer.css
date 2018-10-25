@@ -1,9 +1,5 @@
 /* css for the footer section */
-html,
-body {
-    min-width: 670px;
-    margin: 0;
-}
+
 footer {
     border: 1px solid #e2e2e2;
     background: #183263;
@@ -15,50 +11,51 @@ footer {
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
+     min-width: 670px;
 }
 
-.socialMedia {
+footer .socialMedia {
     padding-right: 10em;
 }
 
-.footLogo {
+footer .footLogo {
     flex: 0;
 }
 
-.footLogo img {
+footer .footLogo img {
     width: 180px;
     height: 120px;
 }
 
-a {
+footer a {
     color: white;
 }
 
-a:hover {
+footer a:hover {
     border-bottom-color: transparent;
     color: #18bfef;
 }
 
-.copyright {
+footer .copyright {
     flex: 1;
 }
 
-.icons {
+footer .icons {
     padding: 0em 0em 0em 0em;
 }
 
-.icons h3 {
+footer .icons h3 {
     text-align: center;
 }
-ul.icons li {
+footer ul.icons li {
     box-shadow: inset 0 0 0 2px #e2e2e2;
 }
 
-ul.icons li a.icon:hover:before {
+footer ul.icons li a.icon:hover:before {
     box-shadow: inset 0 0 0 2px #18bfef;
 }
 
-ul.icons li {
+footer ul.icons li {
     width: 2.25rem;
     height: 2.25rem;
     line-height: 2.25rem;
