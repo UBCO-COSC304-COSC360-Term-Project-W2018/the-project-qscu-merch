@@ -117,6 +117,12 @@
     background-color: #18bfef;
     height: 2em;
 }
+
+.addtoCart button:hover {
+    background-color: tomato;
+    color: white;
+}
+
 #pagenumber{
 	text-align: center;
 
