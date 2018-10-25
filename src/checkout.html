@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Check-Out</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="css/checkout.css">
     <script type="text/javascript" src="script/checkout-validation.js"></script>
 </head>
@@ -40,35 +42,36 @@
                         <label id="billingAddressLabel">Billing Address: </label>
                         <div id="billingAddress">
                             <label>Address: </label>
-                            <input type="text" name="billingAddress" id="billingAddressInput">
+                            <input type="text" name="billingAddress" id="billingAddressInput" required>
                         </div>
 
                         <div id="billingCity">
                             <label>City: </label>
-                            <input type="text" name="billingCity" id="billingCityInput">
+                            <input type="text" name="billingCity" id="billingCityInput" required>
                         </div>
 
                         <div id="billingProvince">
                             <label>Province/State: </label>
-                            <input type="text" name="billingProvince" id="billingProvinceInput">
+                            <input type="text" name="billingProvince" id="billingProvinceInput" required>
                         </div>
 
                         <div id="billingCountry">
                             <label>Country: </label>
-                            <input type="text" name="billingCountry" id="billingCountryInput">
+                            <input type="text" name="billingCountry" id="billingCountryInput" required>
                         </div>
 
                         <div id="billingPostalCode">
                             <label>Postal Code: </label>
-                            <input type="text" name="billingPostalCode" id="billingPostalCodeInput">
+                            <input type="text" name="billingPostalCode" id="billingPostalCodeInput" required>
                         </div>
                     </div>
                 </div>
                     <div id="shippingAddressRadioGroup" >
                         <label>Select a shipping address: </label>
-                        <input type="radio" name="shippingAddress">Billing address <br>
-                        <input type="radio" name="shippingAddress">New shipping address <br>
+                        <input type="radio" name="shippingAddress" id="billingAddressRadio" checked="checked">Billing address <br>
+                        <input type="radio" name="shippingAddress" id="shippingAddressRadio">New shipping address <br>
                     </div>
+                    <!-- note these inputs do not have required class -->
                     <div id="shippingAddressContainer" class="checkoutContainer">
                         <div id="shippingAddress">
                             <label>New Shipping Address:</label>
@@ -78,7 +81,7 @@
 
                         <div id="shippingCity">
                             <label>City: </label>
-                            <input type="text" name="shippingCity" id="shippingCityInput">
+                            <input type="text" name="shippingCity" id="shippingCityInput" >
                         </div>
 
                         <div id="shippingProvince">
