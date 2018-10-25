@@ -68,6 +68,9 @@ header{
 	top: 2px;
 	color: #183263;
 }
+#searchicon:hover{
+	color: #18bfef;
+}
 
 #textinput{
 	width: 80%;

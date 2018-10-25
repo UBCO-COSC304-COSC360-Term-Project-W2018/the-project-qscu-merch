@@ -47,53 +47,86 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-/* 	border: thin solid black; */
+
+}
+.browselist{
+	font-size: 1.2em;
+	margin: 1em;
+	padding: 0.5em;
+
 }
 
+.browselink{
+	text-decoration: none;
+	color: white;
+}
+
+.browselink:hover{
+	color: tomato;
+}
 .item{
 	margin: 1em;
 	display: flex;
 	flex-direction: row;
-	border: thin solid blue;
+	border: thin solid #183263;
 }
 
 .itempicture{
 	margin: 1em 1em 1em 1em;
-/* 	border: thin solid pink; */
+
 }
 
 .iteminfo{
 	width: 100%;
 	margin: 1em;
-/* 	border: thin solid green; */
+
 
 }
 .pname{
 	float: left;
+	font-size: 1.2em;
 	margin: 1em 0em 2em 1em;
-	border: thin solid yellow;
 	
+}
+.pname a{
+	text-decoration: none;
+	color:black;
 }
 
 .itemprice{
 	clear: left;
+	font-size: 1.2em;
 	margin: 1em;
-	border: thin solid red;
 
 }
 
 .numberofliams{
 	float: right;
 	margin: 1em;
-	border: thin solid black;
 	
+}
+
+.addtocart{
+	clear:right;
+	float: right;
+	margin: 1em;
+	
+}
+.addtocart button{
+	font-size: 1.1em;
+    background-color: #18bfef;
+    height: 2em;
 }
 #pagenumber{
 	text-align: center;
+
 	
 }
 #number{
 	background-color: #183263;
+}
+#pagenumber a{
+	color: white;
 }
 #pagenumber a:hover{
 	color: tomato;

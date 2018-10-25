@@ -24,19 +24,19 @@
 	clear:left;
 }
 
-.categorylist{
+.browselist{
 	font-size: 1.2em;
 	margin: 1em;
 	padding: 0.5em;
 
 }
 
-.categorylink{
+.browselink{
 	text-decoration: none;
 	color: white;
 }
 
-.categorylink:hover{
+.browselink:hover{
 	color: tomato;
 }
 
