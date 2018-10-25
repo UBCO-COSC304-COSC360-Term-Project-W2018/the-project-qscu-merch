@@ -17,6 +17,7 @@ between forms
     background-color: #183263;
     padding:1em;
     margin-left: 0.5em;
+    margin-bottom:4em;
 }
 /*
 sets background and text colours, sets right margin to maintain space between forms
@@ -28,6 +29,7 @@ sets background and text colours, sets right margin to maintain space between fo
     background-color: #183263;
     padding:1em;
     margin-right:0.5em;
+    margin-bottom: 4em;
 
 }
 
@@ -43,7 +45,7 @@ set titles in centre of forms
 /*
 puts labels on seperate line from input elements
  */
-label {
+.loginLabel, .signUpLabel {
     display: block;
     padding-bottom: 0.5em;
 }

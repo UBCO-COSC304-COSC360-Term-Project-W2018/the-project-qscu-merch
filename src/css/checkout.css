@@ -13,7 +13,7 @@ centers form in middle of page
 }
 
 #checkOutFormTitle {
-    font-size: 3em;
+    font-size: 1em;
     text-align: center;
     color: #18bfef;
 }
@@ -24,7 +24,7 @@ sets font size for labels and input fields
 .checkoutContainer {
     margin-top: 1em;
     margin-bottom: 1em;
-    font-size:1.1em;
+    font-size:1em;
 }
 
 /*
@@ -39,7 +39,7 @@ radio button. All buttons are aligned on far left of this div
 /*
 give each label a new line
  */
-label {
+.elementLabel {
     display: block;
 }
 
