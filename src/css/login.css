@@ -1,7 +1,14 @@
+/*
+set width of forms
+ */
 #loginForm, #signUpForm {
     width: 40%;
 }
 
+/*
+moves sign up form to right, sets background and text colours. Left margin maintains space
+between forms
+ */
 #signUpForm {
     float: right;
     margin-right: 4em;
@@ -9,69 +16,73 @@
     color:white;
     background-color: #183263;
     padding:1em;
-    margin-left: 0;
-    display:inline-block;
+    margin-left: 0.5em;
 }
-
+/*
+sets background and text colours, sets right margin to maintain space between forms
+ */
 #loginForm {
-    display: inline-block;
     margin-left: 4em;
     margin-top: 4em;
     color:white;
     background-color: #183263;
     padding:1em;
-    margin-right:0;
-    float:none;
+    margin-right:0.5em;
+
 }
 
+/*
+set titles in centre of forms
+ */
 #loginTitle, #signUpTitle {
     text-align: center;
     font-size: 3em;
     color: #18bfef;
 }
 
+/*
+puts labels on seperate line from input elements
+ */
 label {
     display: block;
+    padding-bottom: 0.5em;
 }
 
+/*
+shifts labels to far left of input element container of respective form. Setting
+display to inline-block sets container to size of its contents
+ */
+#loginFormInputElements, #signUpInputElements {
+    display:inline-block;
+    text-align: left;
+}
+
+/*
+aligns all form elements in centre of form
+ */
 fieldset {
     text-align: center;
 }
 
+/*
+spaces out element in login form
+ */
 .loginFormElement {
-    padding: 1em;
+    padding-top:1em;
+    padding-bottom: 1em;
 }
 
-#loginEmailLabel, #SUemailLabel {
-    position: relative;
-    left:-4em;
-}
-
-#loginPasswordLabel, #SUpasswordLabel {
-    position: relative;
-    left:-3.25em;
-}
-
-#forms {
-    width: 90%;
-    margin-right:auto;
-    margin-left:auto;
-}
-
-#SUfnameLabel, #SUlnameLabel {
-    position:relative;
-    left: -3em;
-}
-
-#SUconfirmPasswordLabel {
-    position: relative;
-    left:-1.4em;
-}
-
+/*
+spaces out elements in sign up form
+ */
 .SUformElement {
-    padding:0.5em;
+    padding-top:0.7em;
+    padding-bottom:0.7em;
 }
 
+/*
+prevents sign up form from jumping underneath
+ */
 #forms {
     display:flex;
     flex-direction:row;
@@ -80,15 +91,18 @@ fieldset {
     align-content: center;
 }
 
+
 #forms >* {
     flex-basis:40%;
 }
+
+/*
+forget me link
+ */
 a{
     color: #18bfef;
 }
 a:hover{
   color: tomato;
 }
-label{
-  padding-bottom: 0.5em;
-}
+

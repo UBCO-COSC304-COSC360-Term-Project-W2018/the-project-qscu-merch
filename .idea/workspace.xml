@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fff9f9ba-7cab-4119-ac91-f375a60b7de8" name="Default Changelist" comment="">
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/src/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/checkout.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/css/checkout.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/css/checkout.css" afterDir="false" />
+>>>>>>> c01842e72c210170bfc5db066b16135bad0f2c03
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,10 +22,18 @@
     <session id="-1520680004">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+<<<<<<< HEAD
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.15" value="1" />
+          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="3" />
+=======
           <entry key="project.closed" value="1" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.opened" value="2" />
+>>>>>>> c01842e72c210170bfc5db066b16135bad0f2c03
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -61,6 +73,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/src/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="35" column="95" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="95" />
+=======
         <entry file="file://$PROJECT_DIR$/src/checkout.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="273">
@@ -83,6 +101,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="595">
               <caret line="35" column="95" lean-forward="true" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="95" />
+>>>>>>> c01842e72c210170bfc5db066b16135bad0f2c03
             </state>
           </provider>
         </entry>
@@ -90,8 +109,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/css/login.css">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="935">
+              <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
+=======
             <state relative-caret-position="155">
               <caret line="55" column="15" lean-forward="true" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
+>>>>>>> c01842e72c210170bfc5db066b16135bad0f2c03
             </state>
           </provider>
         </entry>
@@ -229,6 +253,18 @@
       <option name="presentableId" value="Default" />
       <updated>1540159968009</updated>
       <workItem from="1540159973816" duration="19048000" />
+<<<<<<< HEAD
+      <workItem from="1540321249468" duration="8944000" />
+      <workItem from="1540345875071" duration="315000" />
+    </task>
+    <task id="LOCAL-00001" summary="I centered the forms for login/sign up">
+      <created>1540321564075</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1540321564075</updated>
+    </task>
+=======
       <workItem from="1540321249468" duration="7770000" />
     </task>
     <task id="LOCAL-00001" summary="I centered the forms for login/sign up">
@@ -238,15 +274,19 @@
       <option name="project" value="LOCAL" />
       <updated>1540321564075</updated>
     </task>
+>>>>>>> c01842e72c210170bfc5db066b16135bad0f2c03
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="28307000" />
+=======
     <option name="totallyTimeSpent" value="26818000" />
+>>>>>>> c01842e72c210170bfc5db066b16135bad0f2c03
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -296,6 +336,21 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/css/checkout.css" />
+    <entry file="file://$PROJECT_DIR$/src/checkout.html" />
+    <entry file="file://$PROJECT_DIR$/src/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="35" column="95" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="55" column="15" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
+=======
     <entry file="file://$PROJECT_DIR$/src/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -317,18 +372,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
+>>>>>>> c01842e72c210170bfc5db066b16135bad0f2c03
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/login.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="153">
+          <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
+=======
         <state relative-caret-position="595">
           <caret line="35" column="95" lean-forward="true" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="95" />
+>>>>>>> c01842e72c210170bfc5db066b16135bad0f2c03
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/css/login.css">
+    <entry file="file://$PROJECT_DIR$/src/script/client-side-validation.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/css/home.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/about_us.html">
+      <provider selected="true" editor-type-id="text-editor" />
+=======
         <state relative-caret-position="155">
           <caret line="55" column="15" lean-forward="true" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
         </state>
@@ -347,6 +424,7 @@
           <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
         </state>
       </provider>
+>>>>>>> c01842e72c210170bfc5db066b16135bad0f2c03
     </entry>
   </component>
 </project>
