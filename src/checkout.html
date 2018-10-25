@@ -4,12 +4,42 @@
     <meta charset="UTF-8">
     <title>Check-Out</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/checkout.css">
     <script type="text/javascript" src="script/checkout-validation.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
+    <link rel="stylesheet" href="css/footer.css">
 </head>
 <body>
+<header>
+    <div id="htop">
+        <a href="home.html" id="logo"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" width="120px" height="80px"/> </a>
+        <h1 id="title">QSCU Merchandise Store</h1>
+    </div>
 
+    <div id="hbot">
+        <div id="home" class="hbotline">
+            <a href="#" id="homebutton">Home</a>
+        </div>
+
+        <div id="searchbar" class="hbotline">
+            <form id="searchform">
+                <label id="search">Search: </label>
+                <input type="text" name="Search" id="textinput"/>
+                <a href="#" id="searchicon"><i class="fa fa-search"></i></a>
+            </form>
+        </div>
+
+        <div id="profile" class="hbotline">
+            <a href="#"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
+            <a href="#">My Profile</a>
+        </div>
+
+    </div>
+
+</header>
+<main>
 <form method="post" action="http://www.randyconnolly.com/tests/process.php" id="checkOutForm">
 
     <fieldset>
@@ -18,84 +48,84 @@
         <div id="checkoutFormElements">
             <div id="checkoutFormInputElements">
                 <div id="ccNameContainer" class="checkoutContainer">
-                    <label id="ccNameLabel">Name on Card: </label>
+                    <label id="ccNameLabel" class="elementLabel">Name on Card: </label>
                     <input type="text" name="ccName" id="ccName" required>
                 </div>
 
                 <div id="ccNumContainer" class="checkoutContainer">
-                    <label id="ccNumLabel">Credit Card Number: </label>
+                    <label id="ccNumLabel" class="elementLabel">Credit Card Number: </label>
                     <input type="number" name="ccNum" id="ccNum" required>
                 </div>
 
                 <div id="ccExpirationContainer" class="checkoutContainer">
-                    <label id="ccExpDateLabel">Expiry Date (MMYY): </label>
+                    <label id="ccExpDateLabel" class="elementLabel">Expiry Date (MMYY): </label>
                     <input type="text" name="ccExpiration" required id="ccExpiration">
                 </div>
 
                 <div id="ccCCVContainer" class="checkoutContainer">
-                    <label id="ccCCVLabel">CCV: </label>
+                    <label id="ccCCVLabel" class="elementLabel">CCV: </label>
                     <input type="number" name="ccv" required id="ccCCV">
                 </div>
 
                 <div id="addressContainer" class="checkoutContainer">
                     <div id="billingAddressContainer" class="checkoutContainer">
-                        <label id="billingAddressLabel">Billing Address: </label>
+                        <label id="billingAddressLabel" class="elementLabel">Billing Address: </label>
                         <div id="billingAddress">
-                            <label>Address: </label>
+                            <label class="elementLabel">Address Line: </label>
                             <input type="text" name="billingAddress" id="billingAddressInput" required>
                         </div>
 
                         <div id="billingCity">
-                            <label>City: </label>
+                            <label class="elementLabel">City: </label>
                             <input type="text" name="billingCity" id="billingCityInput" required>
                         </div>
 
                         <div id="billingProvince">
-                            <label>Province/State: </label>
+                            <label class="elementLabel">Province/State: </label>
                             <input type="text" name="billingProvince" id="billingProvinceInput" required>
                         </div>
 
                         <div id="billingCountry">
-                            <label>Country: </label>
+                            <label class="elementLabel">Country: </label>
                             <input type="text" name="billingCountry" id="billingCountryInput" required>
                         </div>
 
                         <div id="billingPostalCode">
-                            <label>Postal Code: </label>
+                            <label class="elementLabel">Postal Code: </label>
                             <input type="text" name="billingPostalCode" id="billingPostalCodeInput" required>
                         </div>
                     </div>
                 </div>
                     <div id="shippingAddressRadioGroup" >
-                        <label>Select a shipping address: </label>
+                        <label class="elementLabel">Select a shipping address: </label>
                         <input type="radio" name="shippingAddress" id="billingAddressRadio" checked="checked">Billing address <br>
                         <input type="radio" name="shippingAddress" id="shippingAddressRadio">New shipping address <br>
                     </div>
                     <!-- note these inputs do not have required class -->
                     <div id="shippingAddressContainer" class="checkoutContainer">
                         <div id="shippingAddress">
-                            <label>New Shipping Address:</label>
-                            <label>Address: </label>
+                            <label class="elementLabel">New Shipping Address:</label>
+                            <label class="elementLabel">Address Line: </label>
                             <input type="text" name="shippingAddress" id="shippingAddressInput">
                         </div>
 
                         <div id="shippingCity">
-                            <label>City: </label>
+                            <label class="elementLabel">City: </label>
                             <input type="text" name="shippingCity" id="shippingCityInput" >
                         </div>
 
                         <div id="shippingProvince">
-                            <label>Province/State: </label>
+                            <label class="elementLabel">Province/State: </label>
                             <input type="text" name="shippingProvince" id="shippingProvinceInput">
                         </div>
 
                         <div id="shippingCountry">
-                            <label>Country: </label>
+                            <label class="elementLabel">Country: </label>
                             <input type="text" name="shippingCountry" id="shippingCountryInput">
                         </div>
 
                         <div id="shippingPostalCode">
-                            <label>Postal Code: </label>
+                            <label class="elementLabel">Postal Code: </label>
                             <input type="text" name="shippingPostalCode" id="shippingPostalCodeInput">
                         </div>
                     </div>
@@ -113,5 +143,31 @@
     <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal"
                                           id="paypalButton"></a>
 </div>
+</main>
+<footer>
+    <div class="footLogo">
+        <a href="home.html"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" > </a>
+    </div>
+
+
+    <nav class=footNav>
+        <p><a href="home.html">Home</a> | <a href="categorypage.html">Browse</a> | <a href="home.html">Search </a> | <a href="login.html">Login </a>| <a href="cart.html">Cart </a>| <a href="about_us.html"> About Us</a></p>
+    </nav>
+
+    <!-- Copyright -->
+    <div class="footIcons">
+        <ul class="icons">
+            <h3>Social Media</h3>
+            <li><a href="https://twitter.com/ubcoqscu"><span class="fa fa-twitter"></span></a></li>
+            <li><a href="https://www.facebook.com/ubcoqscu/"><span class="fa fa-facebook"></span></a></li>
+            <li><a href="https://www.instagram.com/ubcoqscu"><span class="fa fa-instagram"></span></a></li>
+            <li><a href="http://www.qscu.org"><span class="fa fa-globe"></span></a></li>
+            <li><a href="mailto:qscu.ubco@gmail.com"><span class="fa fa-send-o"></span></a></li>
+        </ul>
+
+        <p class="copyright">&copy; COSC 304/360 Project 2018</p>
+
+    </div>
+</footer>
 </body>
 </html>

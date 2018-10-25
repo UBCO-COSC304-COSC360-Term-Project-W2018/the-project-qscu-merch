@@ -4,22 +4,54 @@
     <meta charset="UTF-8">
     <title>Login/Sign-up</title>
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="script/client-side-validation.js"></script>
+    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
+
 </head>
 <body>
 
+<header>
+    <div id="htop">
+        <a href="home.html" id="logo"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" width="120px" height="80px"/> </a>
+        <h1 id="title">QSCU Merchandise Store</h1>
+    </div>
+
+    <div id="hbot">
+        <div id="home" class="hbotline">
+            <a href="#" id="homebutton">Home</a>
+        </div>
+
+        <div id="searchbar" class="hbotline">
+            <form id="searchform">
+                <label id="search">Search: </label>
+                <input type="text" name="Search" id="textinput"/>
+                <a href="#" id="searchicon"><i class="fa fa-search"></i></a>
+            </form>
+        </div>
+
+        <div id="profile" class="hbotline">
+            <a href="#"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
+            <a href="#">My Profile</a>
+        </div>
+
+    </div>
+
+</header>
 <div id="forms">
     <form id="loginForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
         <fieldset>
             <legend id="loginTitle">Login</legend>
             <div id="loginFormInputElements">
                 <div class="loginFormElements">
-                    <label id="loginEmailLabel">Email: </label>
+                    <label id="loginEmailLabel" class="loginLabel">Email: </label>
                     <input type="email" name="username" id="loginEmailInput" placeholder="your@email.com">
                 </div>
 
                 <div class="loginFormElement">
-                    <label id="loginPasswordLabel">Password: </label>
+                    <label id="loginPasswordLabel" class="loginLabel">Password: </label>
                     <input type="password" name="loginpassword" id="loginPasswordInput" placeholder="********">
                 </div>
             </div>
@@ -38,27 +70,27 @@
             <legend id="signUpTitle">Sign-Up</legend>
             <div id="signUpInputElements">
                 <div class="SUformElement">
-                    <label id="SUfnameLabel">First name: </label>
+                    <label id="SUfnameLabel" class="signUpLabel">First name: </label>
                     <input type="text" name="fname" id="fnameInput">
                 </div>
 
                 <div class="SUformElement">
-                    <label id="SUlnameLabel">Last name: </label>
+                    <label id="SUlnameLabel" class="signUpLabel">Last name: </label>
                     <input type="text" name="lname" id="lnameInput">
                 </div>
 
                 <div class="SUformElement">
-                    <label id="SUemailLabel">Email: </label>
+                    <label id="SUemailLabel" class="signUpLabel">Email: </label>
                     <input type="email" name="email" id="signUpEmailInput">
                 </div>
 
                 <div class="SUformElement">
-                    <label id="SUpasswordLabel">Password: </label>
+                    <label id="SUpasswordLabel" class="signUpLabel">Password: </label>
                     <input type="password" name="signuppassword" id="signUpPasswordInput">
                 </div>
 
                 <div class="SUformElement">
-                    <label id="SUconfirmPasswordLabel">Confirm Password: </label>
+                    <label id="SUconfirmPasswordLabel" class="signUpLabel">Confirm Password: </label>
                     <input type="password" name="confirmpassword" id="signUpPasswordConfirmationInput">
                 </div>
             </div>
@@ -69,5 +101,31 @@
         </fieldset>
     </form>
 </div>
+
+<footer>
+    <div class="footLogo">
+        <a href="home.html"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" > </a>
+    </div>
+
+
+    <nav class=footNav>
+        <p><a href="home.html">Home</a> | <a href="categorypage.html">Browse</a> | <a href="home.html">Search </a> | <a href="login.html">Login </a>| <a href="cart.html">Cart </a>| <a href="about_us.html"> About Us</a></p>
+    </nav>
+
+    <!-- Copyright -->
+    <div class="footIcons">
+        <ul class="icons">
+            <h3>Social Media</h3>
+            <li><a href="https://twitter.com/ubcoqscu"><span class="fa fa-twitter"></span></a></li>
+            <li><a href="https://www.facebook.com/ubcoqscu/"><span class="fa fa-facebook"></span></a></li>
+            <li><a href="https://www.instagram.com/ubcoqscu"><span class="fa fa-instagram"></span></a></li>
+            <li><a href="http://www.qscu.org"><span class="fa fa-globe"></span></a></li>
+            <li><a href="mailto:qscu.ubco@gmail.com"><span class="fa fa-send-o"></span></a></li>
+        </ul>
+
+        <p class="copyright">&copy; COSC 304/360 Project 2018</p>
+
+    </div>
+</footer>
 </body>
 </html>
