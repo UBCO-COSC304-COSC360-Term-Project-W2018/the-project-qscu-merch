@@ -1,90 +1,89 @@
-html, body{
-
-}
 
 #main{
 	display: flex;
-	height:100%;
 	flex-direction: row;
 	margin:2em;
 }
 
 #browsecol{
 	margin: 2em 2em 2em 0em;
-	border: thin solid blue;
-}
-
-#browsenav{
-	height: 100%;
-	border: thin solid green;
+	background-color: #183263;
+	color: white;
 }
 
 #browsetitle{
-	border: thin solid red;
-/*
+	color: #18bfef;
 	float:left;
-	margin-left: 1em;
-*/
+	font-size: 2em;
+	margin: 0.5em 2em 1em 0.5em;
 }
 
 #browselist{
 	list-style: none;
+	padding: 0em;
+	clear:left;
+}
 
-/* 	clear:left; */
-/* 	width: 10em;*/ 
-/* 	height: 100%; */
+#browselist li{
+	font-size: 1.2em;
+	margin: 1em;
+	padding: 0.5em;
 
-	border: thin solid pink;
+}
+
+#browselist li a{
+	text-decoration: none;
+}
+
+#browselist li a:hover{
+	color: tomato;
 }
 
 #productviews{
-	overflow: hidden;
+	overflow: auto;
 }
 
-.productList {
+.products{
+	margin: 2em 0em 2em 0em; 
+	overflow-x: auto;
+	border: medium solid #183263;
+}
+
+.viewname{
+	font-size: 2em;
+	position: absolute;
+	margin:0.1em 0em 0.1em 0.5em;
+	text-decoration: underline;
+	color: #18bfef;
+}
+.productlist{
 	display: flex;
 	flex-direction: row;
-}
-
-#topselling, #liamspicks, #staffpicks, #onsale{
-	margin: 2em 0em 2em 0em; 
-	overflow: auto;
-	border: medium solid #183263;
+	top: 2em;
 }
 
 .item{
 	white-space: nowrap;
 	padding: 0em 1.5em 0em 1.5em;
-	margin: 1em 1em 1em 0em;
+	margin: 3em 1em 1em 0em;
 	border-right: 0.3em solid #183263;
+	width: 225px;
+	height: 225px;
 }
+
 .pname{
 	font-size: 1.2em;
 	text-align: center;
 }
 
-.viewname{
-	position: sticky;
-	font-size: 2em;
-	text-align: left;
-	margin:0.1em 0em 0.1em 0.5em;
-	text-decoration: underline;
-	color: #18bfef;
-}
-
-.item {
-	width: 225px;
-	height: 225px;
+.extraStuff {
+	display: flex;
+	flex-direction: row;
 }
 
 .item img {
 	height: 150px;
 	width: 150px;
-}
-
-.extraStuff {
-	display: flex;
-	flex-direction: row;
 }
 
 .itemPrice{
