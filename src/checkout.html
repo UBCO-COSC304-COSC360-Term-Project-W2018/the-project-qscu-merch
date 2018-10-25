@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Check-Out</title>
+    <link rel="stylesheet" href="css/checkout.css">
+    <script type="text/javascript" src="script/checkout-validation.js"></script>
+</head>
+<body>
+
+<form method="post" action="http://www.randyconnolly.com/tests/process.php" id="checkOutForm">
+
+    <fieldset>
+        <legend id="checkOutFormTitle">Check Out</legend>
+
+        <div id="checkoutFormElements">
+            <div id="checkoutFormInputElements">
+                <div id="ccNameContainer" class="checkoutContainer">
+                    <label id="ccNameLabel">Name on Card: </label>
+                    <input type="text" name="ccName" id="ccName" required>
+                </div>
+
+                <div id="ccNumContainer" class="checkoutContainer">
+                    <label id="ccNumLabel">Credit Card Number: </label>
+                    <input type="number" name="ccNum" id="ccNum" required>
+                </div>
+
+                <div id="ccExpirationContainer" class="checkoutContainer">
+                    <label id="ccExpDateLabel">Expiry Date (MMYY): </label>
+                    <input type="text" name="ccExpiration" required id="ccExpiration">
+                </div>
+
+                <div id="ccCCVContainer" class="checkoutContainer">
+                    <label id="ccCCVLabel">CCV: </label>
+                    <input type="number" name="ccv" required id="ccCCV">
+                </div>
+
+                <div id="addressContainer" class="checkoutContainer">
+                    <div id="billingAddressContainer" class="checkoutContainer">
+                        <label id="billingAddressLabel">Billing Address: </label>
+                        <div id="billingAddress">
+                            <label>Address: </label>
+                            <input type="text" name="billingAddress" id="billingAddressInput">
+                        </div>
+
+                        <div id="billingCity">
+                            <label>City: </label>
+                            <input type="text" name="billingCity" id="billingCityInput">
+                        </div>
+
+                        <div id="billingProvince">
+                            <label>Province/State: </label>
+                            <input type="text" name="billingProvince" id="billingProvinceInput">
+                        </div>
+
+                        <div id="billingCountry">
+                            <label>Country: </label>
+                            <input type="text" name="billingCountry" id="billingCountryInput">
+                        </div>
+
+                        <div id="billingPostalCode">
+                            <label>Postal Code: </label>
+                            <input type="text" name="billingPostalCode" id="billingPostalCodeInput">
+                        </div>
+                    </div>
+                </div>
+                    <div id="shippingAddressRadioGroup" >
+                        <label>Select a shipping address: </label>
+                        <input type="radio" name="shippingAddress">Billing address <br>
+                        <input type="radio" name="shippingAddress">New shipping address <br>
+                    </div>
+                    <div id="shippingAddressContainer" class="checkoutContainer">
+                        <div id="shippingAddress">
+                            <label>New Shipping Address:</label>
+                            <label>Address: </label>
+                            <input type="text" name="shippingAddress" id="shippingAddressInput">
+                        </div>
+
+                        <div id="shippingCity">
+                            <label>City: </label>
+                            <input type="text" name="shippingCity" id="shippingCityInput">
+                        </div>
+
+                        <div id="shippingProvince">
+                            <label>Province/State: </label>
+                            <input type="text" name="shippingProvince" id="shippingProvinceInput">
+                        </div>
+
+                        <div id="shippingCountry">
+                            <label>Country: </label>
+                            <input type="text" name="shippingCountry" id="shippingCountryInput">
+                        </div>
+
+                        <div id="shippingPostalCode">
+                            <label>Postal Code: </label>
+                            <input type="text" name="shippingPostalCode" id="shippingPostalCodeInput">
+                        </div>
+                    </div>
+                </div>
+
+            <div id="checkoutButtonContainer" class="checkoutContainer">
+                <!--<button type="submit" id="checkOutButton">Confirm</button>-->
+                <input type="submit" id="checkOutButton">
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<div id="paypalButtonContainer">
+    <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal"
+                                          id="paypalButton"></a>
+</div>
+</body>
+</html>

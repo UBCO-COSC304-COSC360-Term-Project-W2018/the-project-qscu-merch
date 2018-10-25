@@ -1,0 +1,189 @@
+/*css for single product*/
+
+* {
+    font-family: serif;
+}
+
+.bigboi {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1080px;
+    background-color: white;
+    /*    color: #18bfef;*/
+}
+
+html {
+    /*    min-width: 413px;*/
+    min-width: 734px;
+    background-color: aliceblue;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.sideContent {
+    order 2;
+    width: 100%;
+}
+
+.container img {
+    /*    border: 1px solid red;*/
+    order: -1;
+    align-self: flex-start;
+    padding: 2em;
+}
+
+.pName h1 {
+    /*    border: 1px solid blue;*/
+    /*        padding: 0.5em;*/
+    margin-bottom: 0;
+}
+
+.pName p {
+    margin-top: 0;
+}
+
+
+.pDesc {
+    /*    border: 1px solid orange;*/
+    /*    padding-left: 0.5em;*/
+}
+
+#myform {
+    text-align: left;
+    padding: 5px;
+    /*    border: 1px dotted #ccc;*/
+    /*    margin: 2%;*/
+}
+
+.quant p {
+    margin: 0;
+    margin-left: 1.75em;
+}
+
+.qty {
+    width: 40px;
+    height: 25px;
+    text-align: center;
+}
+
+input.qtyplus {
+    width: 25px;
+    height: 25px;
+}
+
+input.qtyminus {
+    width: 25px;
+    height: 25px;
+}
+
+.checked {
+    color: orange;
+}
+
+.rating {}
+
+.oldPrice {
+    text-decoration: line-through;
+}
+
+.sale {
+    font-size: 1.5em;
+    color: tomato;
+}
+
+.addCart {
+    font-size: 1.5em;
+    background-color: #18bfef;
+    margin-left: 5em;
+    height: 2em;
+    overflow: hidden;
+    /*    background-color: orange;*/
+    /*    color: white;*/
+}
+
+.quant button {
+    border-radius: 5em;
+}
+
+.addCart:hover {
+    background-color: tomato;
+    color: white;
+    /*    box-shadow: 10px solid black;*/
+}
+
+
+#reviews {
+    padding: 0.5em;
+    /*    margin: 2em;*/
+    margin-top: 0;
+    border-top: 1px solid #18bfef;
+    background-color: #93daf0;
+    /*    border: 1px solid black;*/
+}
+
+#reviews h3 {
+    margin-top: 0;
+}
+
+#reviews h3 a {
+    border: 1px solid clear;
+    background-color: #18bfef;
+    padding: 0.5em;
+    border-radius: 5em;
+    color: black;
+}
+
+#reviews .byline {
+    font-style: italic;
+    margin-bottom: 0.5em;
+}
+
+#reviews p {
+    margin-top: 0;
+}
+
+#reviews .reviewDescription {
+    padding-bottom: 0.5em;
+    border-bottom: 1px dashed #18bfef;
+}
+
+#reviews .userProfile {
+    margin: 0;
+}
+
+#reviews .userProfile time {
+    /*    color: lightblue;*/
+    font-size: 0.85em;
+}
+
+#reviews img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    align-self: middle;
+    border: 1px solid tomato;
+    margin:
+}
+
+#reviews a {
+    text-decoration: none;
+    padding-left: 1em;
+
+}
+
+#reviews .userRating {
+    padding-top: 0.5em;
+    margin: 0;
+    /*    padding-left: 1em;*/
+}
+
+#reviews .reviewTitle {
+    padding-top: 0.5em;
+    font-weight: bold;
+}
+
+#reviews a:visited {}
