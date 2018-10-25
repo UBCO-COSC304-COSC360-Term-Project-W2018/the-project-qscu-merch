@@ -1,0 +1,14 @@
+main{
+    margin: 1em;
+}
+#container{
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+}
+table{
+    min-width: 50%;
+}
+tr{
+    border: 1px solid black;
+}
