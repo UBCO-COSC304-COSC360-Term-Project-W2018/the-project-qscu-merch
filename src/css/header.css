@@ -65,6 +65,8 @@ header{
 #searchicon{
 	position: relative;
 	left: -30px;
+	top: 2px;
+	color: #183263;
 }
 
 #textinput{
