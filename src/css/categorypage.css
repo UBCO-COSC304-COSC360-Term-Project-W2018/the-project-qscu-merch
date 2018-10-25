@@ -1,0 +1,107 @@
+#main{
+	display: flex;
+	flex-direction: row;
+	margin:2em 2em 0em 2em;
+}
+/*categories formatting*/
+#browsecol{
+	margin: 2em 2em 2em 0em;
+	background-color: #183263;
+	color: white;
+}
+
+#browsetitle{
+	color: #18bfef;
+	float:left;
+	font-size: 2em;
+	margin: 0.5em 2em 1em 0.5em;
+}
+
+#browselist{
+	list-style: none;
+	padding: 0em;
+	clear:left;
+}
+
+#browselist li{
+	font-size: 1.2em;
+	margin: 1em;
+	padding: 0.5em;
+
+}
+
+#browselist li a{
+	text-decoration: none;
+}
+
+#browselist li a:hover{
+	color: tomato;
+}
+
+
+/* item formatting */
+
+#categoryviews{
+	white-space: nowrap;
+	margin: 1em;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+/* 	border: thin solid black; */
+}
+
+.item{
+	margin: 1em;
+	display: flex;
+	flex-direction: row;
+	border: thin solid blue;
+}
+
+.itempicture{
+	margin: 1em 1em 1em 1em;
+/* 	border: thin solid pink; */
+}
+
+.iteminfo{
+	width: 100%;
+	margin: 1em;
+/* 	border: thin solid green; */
+
+}
+.pname{
+	float: left;
+	margin: 1em 0em 2em 1em;
+	border: thin solid yellow;
+	
+}
+
+.itemprice{
+	clear: left;
+	margin: 1em;
+	border: thin solid red;
+
+}
+
+.numberofliams{
+	float: right;
+	margin: 1em;
+	border: thin solid black;
+	
+}
+#pagenumber{
+	text-align: center;
+	
+}
+#number{
+	background-color: #183263;
+}
+#pagenumber a:hover{
+	color: tomato;
+}
+#pagenumber a:visited{
+	color: #18bfef;
+}
+
+.checked{
+	color: orange;
+}
