@@ -1,8 +1,20 @@
 window.onload = function () {
 
-$("#shippingAddressContainer").on('change',function() {
 
-})
+    $("#shippingAddressRadioGroup input").change(function() {
+        console.log(this.value);
+        if (this.value == '1') {
+            console.log("if")
+            validateNewShippingAddress(false);
+            $('#shippingAddressContainer').hide()
+        }
+        else if (this.value == '2') {
+            console.log('else')
+            validateNewShippingAddress(true);
+            $('#shippingAddressContainer').show()
+        }
+    });
+
 
     document.getElementById("checkOutForm").onsubmit = function (e) {
 
@@ -27,9 +39,9 @@ $("#shippingAddressContainer").on('change',function() {
         // }
 
         if ( radio2.checked ) {
-            e.preventDefault();
-            document.getElementById("shippingAddressContainer").style.display = "show";
-            validateNewShippingAddress();
+            // e.preventDefault();
+            // document.getElementById("shippingAddressContainer").style.display = "show";
+            // validateNewShippingAddress(true);
         }
 
         var ccNum = document.getElementById("ccNum");
@@ -81,12 +93,12 @@ $("#shippingAddressContainer").on('change',function() {
     /*
     validate new shipping address fields
      */
-    function validateNewShippingAddress () {
+    function validateNewShippingAddress (required) {
 
-        document.getElementById("shippingAddressInput").required = true;
-        document.getElementById("shippingCityInput").required=true;
-        document.getElementById("shippingProvinceInput").required=true;
-        document.getElementById("shippingCountryInput").required = true;
+        document.getElementById("shippingAddressInput").required = required;
+        document.getElementById("shippingCityInput").required= required;
+        document.getElementById("shippingProvinceInput").required= required;
+        document.getElementById("shippingCountryInput").required = required;
 
     }
 

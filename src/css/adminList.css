@@ -6,9 +6,12 @@ main{
     flex-direction: row;
     align-content: stretch;
 }
-table{
+#container table{
     min-width: 50%;
 }
-tr{
+#container table tr{
     border: 1px solid black;
+}
+#container table th{
+    text-align: left;
 }

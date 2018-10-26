@@ -1,0 +1,45 @@
+.bigboi {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1080px;
+    background-color: white;
+    /*    color: #18bfef;*/
+}
+
+html {
+/*        min-width: 413px;*/
+    min-width: 956px;
+    background-color: aliceblue;
+}
+
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.container img{
+    order: -1;
+    width: 450px;
+    height: 320px;
+    padding: 2em;
+
+    
+}
+
+.container p{
+    margin: 0;
+}
+.inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 2em;
+}
+
+.inner .QSCUbio{
+order: -1;
+}
+
+
+

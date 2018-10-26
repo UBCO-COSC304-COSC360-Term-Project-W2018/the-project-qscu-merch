@@ -28,12 +28,12 @@ window.onload = function () {
             alert("put in an actual first name");
         }
 
-        if ( !(validateName ( lnamefield )) ) {
+        else if ( !(validateName ( lnamefield )) ) {
             e.preventDefault();
             alert("put in an actual last name");
         }
 
-        if ( passwordField.value != passwordConfirmField.value ) {
+        else if ( passwordField.value != passwordConfirmField.value ) {
             e.preventDefault();
             alert("passwords do not match");
         }
