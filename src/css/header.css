@@ -1,6 +1,10 @@
 html, body{
 	margin: 0;
 }
+#headerIcon{
+	width:120px;
+	height: 80px;
+}
 
 header{
 	padding-bottom: 1em;
