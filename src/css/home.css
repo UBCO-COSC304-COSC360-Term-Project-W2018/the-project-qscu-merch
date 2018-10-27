@@ -46,11 +46,16 @@
 
 .products{
 	margin: 2em 0em 2em 0em; 
-	overflow-x: auto;
+	overflow-x: hidden;
 	border: medium solid #183263;
 }
-
+.viewnamediv{
+	position: relative;
+	}
+	
 .viewname{
+	white-space: nowrap;
+	overflow: hidden;
 	font-size: 2em;
 	position: absolute;
 	margin:0.1em 0em 0.1em 0.5em;
@@ -58,6 +63,7 @@
 	color: #18bfef;
 }
 .productlist{
+	overflow: auto;
 	display: flex;
 	flex-direction: row;
 	top: 2em;
@@ -73,6 +79,7 @@
 }
 
 .pname{
+	
 	font-size: 1.2em;
 	text-align: center;
 }
