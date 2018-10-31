@@ -15,7 +15,7 @@
 
 <header>
     <div id="htop">
-        <a href="home.html" id="logo"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" width="120px" height="80px"/> </a>
+        <a href="home.html" id="logo"><img id="headerIcon" src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union"/> </a>
         <h1 id="title">QSCU Merchandise Store</h1>
     </div>
 
@@ -47,12 +47,12 @@
             <div id="loginFormInputElements">
                 <div class="loginFormElements">
                     <label id="loginEmailLabel" class="loginLabel">Email: </label>
-                    <input type="email" name="username" id="loginEmailInput" placeholder="your@email.com">
+                    <input type="email" name="username" id="loginEmailInput" placeholder="your@email.com" required>
                 </div>
 
                 <div class="loginFormElement">
                     <label id="loginPasswordLabel" class="loginLabel">Password: </label>
-                    <input type="password" name="loginpassword" id="loginPasswordInput" placeholder="********">
+                    <input type="password" name="loginpassword" id="loginPasswordInput" placeholder="********" required>
                 </div>
             </div>
             <div class="loginFormElement">
@@ -71,27 +71,27 @@
             <div id="signUpInputElements">
                 <div class="SUformElement">
                     <label id="SUfnameLabel" class="signUpLabel" for="fnameInput">First name: </label>
-                    <input type="text" name="fname" id="fnameInput">
+                    <input type="text" name="fname" id="fnameInput" required>
                 </div>
 
                 <div class="SUformElement">
                     <label id="SUlnameLabel" class="signUpLabel" for="lnameInput">Last name: </label>
-                    <input type="text" name="lname" id="lnameInput">
+                    <input type="text" name="lname" id="lnameInput" required>
                 </div>
 
                 <div class="SUformElement">
                     <label id="SUemailLabel" class="signUpLabel" for="signUpEmailInput">Email: </label>
-                    <input type="email" name="email" id="signUpEmailInput">
+                    <input type="email" name="email" id="signUpEmailInput" required>
                 </div>
 
                 <div class="SUformElement">
                     <label id="SUpasswordLabel" class="signUpLabel" for="signUpPasswordInput">Password: </label>
-                    <input type="password" name="signuppassword" id="signUpPasswordInput">
+                    <input type="password" name="signuppassword" id="signUpPasswordInput" required>
                 </div>
 
                 <div class="SUformElement">
                     <label id="SUconfirmPasswordLabel" class="signUpLabel" for="signUpPasswordConfirmationInput">Confirm Password: </label>
-                    <input type="password" name="confirmpassword" id="signUpPasswordConfirmationInput">
+                    <input type="password" name="confirmpassword" id="signUpPasswordConfirmationInput" required>
                 </div>
             </div>
 

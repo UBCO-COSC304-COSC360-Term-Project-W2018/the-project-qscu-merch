@@ -2,44 +2,45 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="css/cart.css">
-    <link rel="stylesheet" href="css/header.css"/>
-    <link rel="stylesheet" href="css/footer.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png"/>
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script type="text/javascript" src="libs/jquery-3.3.1.min.js">\x3C/script>')</script>
+    <script>
+        window.jQuery || document.write('<script type="text/javascript" src="libs/jquery-3.3.1.min.js">\x3C/script>')
+    </script>
     <script type="text/javascript" src="script/cart_controller.js"></script>
 </head>
-<body>
 
+<body>
 	<!--    Header-->
 <header>
 	<div id="htop">
-		<a href="home.html" id="logo"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" width="120px" height="80px"/> </a>
+		<a href="home.html" id="logo"><img id="headerIcon" src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union"/> </a>
 		<h1 id="title">QSCU Merchandise Store</h1>
 	</div>
+        <div id="hbot">
+            <div id="home" class="hbotline">
+                <a href="home.html" id="homebutton">Home</a>
+            </div>
 
-<div id="hbot">
-	<div id="home" class="hbotline">
-		<a href="home.html" id="homebutton">Home</a>
-	</div>
+            <div id="searchbar" class="hbotline">
+                <form id="searchform">
+                    <label id="search" for="textinput">Search: </label>
+                    <input type="text" name="Search" id="textinput" />
+                    <a href="categorypage.html" id="searchicon"><i class="fa fa-search"></i></a>
+                </form>
+            </div>
 
-<div id="searchbar" class="hbotline">
-	<form id="searchform">
-			<label id="search" for="textinput">Search: </label>
-			<input type="text" name="Search" id="textinput"/>
-			<a href="categorypage.html" id="searchicon"><i class="fa fa-search"></i></a>
-	</form>
-</div>
+            <div id="profile" class="hbotline">
+                <a href="cart.html"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
+                <a href="login.html">My Profile</a>
+            </div>
 
-	<div id="profile" class="hbotline">
-		<a href="cart.html"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
-		<a href="login.html">My Profile</a>
-	</div>
+        </div>
 
-</div>
-
-</header>
+    </header>
 
     <main>
         <div id="cartHeader">
@@ -63,36 +64,37 @@
         </div>
         <div id="cartFooter">
             <span>Total Cost: $<span id="costTotal">897.00</span>
-                <button>Update Cart</button>
-                <button>Check-out</button>
+            <button>Update Cart</button>
+            <button>Check-out</button>
             </span>
         </div>
     </main>
+
+    <!--    footer-->
     <footer>
-    <div class="footLogo">
-        <a href="home.html"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" > </a>
-    </div>
+        <div class="footLogo">
+            <a href="home.html"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" > </a>
+        </div>
 
 
         <nav class=footNav>
-        <p><a href="home.html">Home</a> | <a href="categorypage.html">Browse</a> | <a href="home.html">Search </a> | <a href="login.html">Login </a>| <a href="cart.html">Cart </a>| <a href="about_us.html"> About Us</a></p>
+            <p><a href="home.html">Home</a> | <a href="categorypage.html">Browse</a> | <a href="home.html">Search </a> | <a href="login.html">Login </a>| <a href="cart.html">Cart </a>| <a href="about_us.html"> About Us</a></p>
         </nav>
+        <!-- Copyright -->
+        <div class="footIcons">
+            <ul class="icons">
+                <p>Social Media</p>
+                <li><a href="https://twitter.com/ubcoqscu"><span class="fa fa-twitter"></span></a></li>
+                <li><a href="https://www.facebook.com/ubcoqscu/"><span class="fa fa-facebook"></span></a></li>
+                <li><a href="https://www.instagram.com/ubcoqscu"><span class="fa fa-instagram"></span></a></li>
+                <li><a href="http://www.qscu.org"><span class="fa fa-globe"></span></a></li>
+                <li><a href="mailto:qscu.ubco@gmail.com"><span class="fa fa-send-o"></span></a></li>
+            </ul>
 
-    <!-- Copyright -->
-    <div class="footIcons">
-        <ul class="icons">
-            <h3>Social Media</h3>
-            <li><a href="https://twitter.com/ubcoqscu"><span class="fa fa-twitter"></span></a></li>
-            <li><a href="https://www.facebook.com/ubcoqscu/"><span class="fa fa-facebook"></span></a></li>
-            <li><a href="https://www.instagram.com/ubcoqscu"><span class="fa fa-instagram"></span></a></li>
-            <li><a href="http://www.qscu.org"><span class="fa fa-globe"></span></a></li>
-            <li><a href="mailto:qscu.ubco@gmail.com"><span class="fa fa-send-o"></span></a></li>
-        </ul>
+            <p class="copyright">&copy; COSC 304/360 Project 2018</p>
 
-        <p class="copyright">&copy; COSC 304/360 Project 2018</p>
-
-    </div>
-</footer>
+        </div>
+    </footer>
 
 </body>
 </html>

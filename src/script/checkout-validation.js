@@ -28,26 +28,20 @@ window.onload = function () {
         }
 
         /*
-        make sure a radio button is checked
+        ensure that credit card number is valid (is a non negative value with 19 digits or less
          */
-        // var radio1 = document.getElementById("billingAddressRadio");
-        var radio2 = document.getElementById("shippingAddressRadio");
-
-        // if ( !validRadioGroup( radio1, radio2 )) {
-        //     e.preventDefault();
-        //     alert("Please select a shipping address");
-        // }
-
-        if ( radio2.checked ) {
-            // e.preventDefault();
-            // document.getElementById("shippingAddressContainer").style.display = "show";
-            // validateNewShippingAddress(true);
+        var ccNum = document.getElementById("ccNum");
+        if ( ccNum.value < 0 || ccNum.value > 9999999999999999999 ) {
+            e.preventDefault();
+            alert("please enter a valid credit card number");
         }
 
-        var ccNum = document.getElementById("ccNum");
-        if ( ccNum < 0 ) {
+        /*
+        ensure that user enters valid CCV
+         */
+        var ccCCV = document.getElementById("#ccCCV").value;
+        if ( ccCCV < 100 || ccCCV > 999 ) {
             e.preventDefault();
-            alert("please enter a valid ccv")
         }
     }
 

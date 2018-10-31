@@ -3,7 +3,7 @@
 footer {
     border: 1px solid #e2e2e2;
     background: #183263;
-/*    background: tomato;*/
+    /*    background: tomato;*/
     padding: 2em;
     color: white;
     min-width: 670px;
@@ -11,7 +11,7 @@ footer {
     flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
-     min-width: 670px;
+    min-width: 670px;
 }
 
 footer .socialMedia {
@@ -44,9 +44,12 @@ footer .icons {
     padding: 0em 0em 0em 0em;
 }
 
-footer .icons h3 {
+footer .icons p {
+    font-size: 1.17em;
+    font-weight: bold;
     text-align: center;
 }
+
 footer ul.icons li {
     box-shadow: inset 0 0 0 2px #e2e2e2;
 }
@@ -64,7 +67,7 @@ footer ul.icons li {
     border-radius: 100%;
     font-size: 1.25rem;
 }
-footer .fa{
+
+footer .fa {
     padding-top: 0.4em;
 }
-
