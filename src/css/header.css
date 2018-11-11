@@ -7,6 +7,7 @@ html, body{
 }
 
 header{
+	z-index: -1;
 	padding-bottom: 1em;
 	color: white;
 	background-color: #183263;
@@ -95,4 +96,44 @@ header{
 #shoppingcart{
 	width: 40px;
 	height: 40px;
+}
+
+#browsedrop{
+	pointer-events: auto;
+	position: absolute;
+	width: 226px;
+	display: none;
+	margin: 0em;
+	background-color: #183263;
+	color: white;
+	z-index: 10;
+}
+
+#browsetitle{
+	color: #18bfef;
+	float:left;
+	font-size: 2em;
+	margin: 0.5em 2em 1em 0.5em;
+}
+
+#browselist{
+	list-style: none;
+	padding: 0em;
+	clear:left;
+}
+
+.browseitem{
+	font-size: 1.2em;
+	margin: 1em;
+	padding: 0.5em;
+
+}
+
+.browselink{
+	text-decoration: none;
+	color: white;
+}
+
+.browselink:hover{
+	color: tomato;
 }
