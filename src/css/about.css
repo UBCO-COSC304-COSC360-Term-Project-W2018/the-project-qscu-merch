@@ -23,13 +23,12 @@ html {
     width: 450px;
     height: 320px;
     padding: 2em;
-
-    
 }
 
 .container p{
     margin: 0;
 }
+
 .inner{
     display: flex;
     flex-direction: column;
@@ -40,6 +39,3 @@ html {
 .inner .QSCUbio{
 order: -1;
 }
-
-
-
