@@ -10,6 +10,27 @@ echo "Failed to connect to MySQL";
 }
 
 ?>
+<!DOCTYPE HTML>
+<html lang="en">
+<!--    Head-->
+
+<head lang="en">
+    <meta charset="utf-8">
+    <title>QSCU Merch Store</title>
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/singleProduct.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script type="text/javascript" src="script/quantity.js"></script>
+</head>
+
+
+<!--    Body-->
+
+<body>
+<main>
     <!--    make sure all the files that we update have the same and CORRECT width/height -->
     <div class="bigboi">
         <div class="container">
@@ -110,6 +131,9 @@ echo "Failed to connect to MySQL";
 -->
         </section>
     </div>
+</main>
+</body>
+</html>
 
 
 <?php
