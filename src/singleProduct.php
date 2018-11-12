@@ -2,35 +2,11 @@
 include "init.php";
 include "header.php";
 
-
-$con = mysqli_connect("cosc360.ok.ubc.ca", "40215162", "password", "db_402151562");
-
-if ( mysqli_connect_errno()) {
-echo "Failed to connect to MySQL";
-}
-
+//TODO: Remove this
+// $_SESSION["cart"] = $arrayName = array('' => , );
+$_SESSION["cart"];
 ?>
-<!DOCTYPE HTML>
-<html lang="en">
-<!--    Head-->
 
-<head lang="en">
-    <meta charset="utf-8">
-    <title>QSCU Merch Store</title>
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" href="css/singleProduct.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-    <script type="text/javascript" src="script/quantity.js"></script>
-</head>
-
-
-<!--    Body-->
-
-<body>
-<main>
     <!--    make sure all the files that we update have the same and CORRECT width/height -->
     <div class="bigboi">
         <div class="container">
@@ -65,17 +41,25 @@ echo "Failed to connect to MySQL";
                 <div class="quant">
                     <p>Quantity</p>
                     <form id='myform' method='POST' action='#'>
-                        <!--TODO: need to send this somwehere-->
+                        <!-- TODO: need to send this somwehere -->
                         <input type='button' value='-' class='qtyminus' field='quantity' />
                         <input type='text' name='quantity' value='0' class='qty' />
                         <input type='button' value='+' class='qtyplus' field='quantity' />
 
-                        <button class="addCart">Add to Cart <i class="fa fa-shopping-cart"></i></button>
+                        <!-- added drop down menu -->
+                        <select class="size">
+                          <option value="SML">Small (S)</option>
+                          <option value="MED">Medium (M)</option>
+                          <option value="LG">Large (L)</option>
+                          <option value="XLG">Extra-Large (XL)</option>
+                        </select>
                     </form>
+                    <!-- moved button outside of form element -->
+                    <button class="addCart">Add to Cart <i class="fa fa-shopping-cart"></i></button>
 
                 </div>
 
-                <!--            price-->
+                <!-- price -->
                 <div class="price">
                     <p>Listed Price: <label class="oldPrice">CDN$299.99</label></p>
 
@@ -131,9 +115,6 @@ echo "Failed to connect to MySQL";
 -->
         </section>
     </div>
-</main>
-</body>
-</html>
 
 
 <?php

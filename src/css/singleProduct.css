@@ -80,6 +80,12 @@ input.qtyminus {
     height: 25px;
 }
 
+select.size{
+  text-align-last: center;
+  margin-left: 4em;
+  background: none;
+}
+
 .checked {
     color: orange;
 }
@@ -98,7 +104,7 @@ input.qtyminus {
 .addCart {
     font-size: 1.5em;
     background-color: #18bfef;
-    margin-left: 10em;
+    margin-left: 3em;
     height: 2em;
     overflow: hidden;
     /*    background-color: orange;*/
