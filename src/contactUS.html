@@ -20,43 +20,46 @@
 
 
   <div class="bigboi">
+    <div class ="container">
+      <div class ="contactInfo">
+        <h1>Get In Touch</h1>
+        <p>Since 2011, the <a href="http://qscu.org">Quantitative Science Course Union</a> has been representing UBC Okanagan students in Mathematics, Computer Science, Statistics, and Physics and Data Science. The QSCU organizes both fun and educational events while also assisting first-year students in their courses. These events are usually held on campus. The course union strives to bring students and professors together in a casual atmosphere in hopes of creating social networking and research opportunities.
+        </p>
+
+
+      </div>
+
+
     <form id="contactForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
       <fieldset>
         <!-- legend -->
-        <legend id="contactTittle">Contact Us</legend>
+        <legend id="contactTitle">Contact Us</legend>
 
         <!-- First Name input -->
-        <div class="fistNameElement">
+        <div class="formElement">
           <input type="text" name="firstName" id="firstNameInput" placeholder="First Name" required>
         </div>
 
         <!-- Last Name input -->
-        <div class="lastNameElement">
+        <div class="formElement">
           <input type="text" name="lastName" id="lastNameInput" placeholder="Last Name" required>
         </div>
 
         <!-- Email input -->
-        <div id="emailElement">
+        <div class="formElement">
           <input type="email" name="email" id="emailInput" placeholder="Email" required>
         </div>
 
         <!-- Message input -->
-        <div id="messageElement">
-          <input type="text" name="message" id="messageInput" placeholder="Your Message" required>
+        <div class="formElement">
+          <!-- max lenght is 200 chars and there are 3 rows -->
+          <textarea id="messageInput" name="message" placeholder="Your Message" rows="4" maxlength="200"required></textarea>
         </div>
 
-          <div class="loginFormElement">
-            <input type="password" name="loginpassword" id="loginPasswordInput" placeholder="********" required>
-          </div>
-        </div>
-
-        <inpu <div class="loginFormElement">
-          <button type="submit" id="loginSubmitButton">Login</button>
+        <div class="formElement">
+          <button type="submit" id="SubmitButton">Submit</button>
   </div>
 
-  <div class="loginFormElement">
-    <a href="#">Forgot Password?</a>
-  </div>
   </fieldset>
   </form>
 
@@ -72,8 +75,6 @@
                 </p>
             </div> -->
   </div>
-
-
   </div>
 
   <!-- Insert Footer Here-->
