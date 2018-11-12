@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 * {
-	font-family: 'Montserrat', Helvetica, sans-serif !important;
+	font-family: 'Montserrat', Helvetica, sans-serif;
 }
 html, body{
 	margin: 0;
@@ -102,10 +102,7 @@ header{
 	height: 40px;
 }
 
-#browsedrop{
-	pointer-events: auto;
-	position: absolute;
-	width: 226px;
+#browsenav{
 	display: none;
 	margin: 0em;
 	background-color: #183263;
