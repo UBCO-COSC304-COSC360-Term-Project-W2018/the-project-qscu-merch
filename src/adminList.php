@@ -2,6 +2,17 @@
 include "init.php";
 include "header.php";
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/adminList.css">
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
+</head>
+
+<body>
 
     <main>
         <div id="container">
@@ -48,6 +59,8 @@ include "header.php";
             </table>
         </div>
     </main>
+</body>
+</html>
 
 <?php
 include "footer.php";

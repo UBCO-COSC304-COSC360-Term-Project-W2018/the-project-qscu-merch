@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?php
 include "init.php";
 include "header.php";
@@ -52,7 +52,6 @@ if ($result = mysqli_query($con, $sql2)) {
         $lastName = $row['lname'];
     }
 }
-
 $fullName = $firstName." ".$lastName;
 
 ?>
@@ -79,36 +78,6 @@ $fullName = $firstName." ".$lastName;
 </head>
 
 <body>
-
-<header>
-    <div id="htop">
-        <a href="home.html" id="logo"><img id="headerIcon" src="images/QSCU_whitePlain.png"
-                                           alt="Quantitative Sciences Course Union" width="120px" height="80px"/> </a>
-        <h1 id="title">QSCU Merchandise Store</h1>
-    </div>
-
-    <div id="hbot">
-        <div id="home" class="hbotline">
-            <a href="home.html" id="homebutton">Home</a>
-        </div>
-
-        <div id="searchbar" class="hbotline">
-            <form id="searchform">
-                <label id="search" for="search" for="textinput">Search: </label>
-                <input type="text" name="Search" id="textinput"/>
-                <a href="categorypage.html" id="searchicon"><i class="fa fa-search"></i></a>
-            </form>
-        </div>
-
-        <div id="profile" class="hbotline">
-            <a href="cart.html"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
-            <a href="login.html">My Profile</a>
-        </div>
-
-    </div>
-
-
-</header>
 <main>
     <form method="post" action="http://www.randyconnolly.com/tests/process.php" id="checkOutForm">
 
@@ -124,7 +93,6 @@ $fullName = $firstName." ".$lastName;
                         </div>
                         <div id="ccNumContainer" class="checkoutContainer">
                             <label id="ccNumLabel" for="ccNum" class="elementLabel">Credit Card Number: </label>
-<<<<<<< HEAD
                             <input type="number" name="ccNum" id="ccNum" required <?php echo "value=".$creditCardNum?>>
                         </div>
 
@@ -136,7 +104,6 @@ $fullName = $firstName." ".$lastName;
 
                         <div id="ccCCVContainer" class="checkoutContainer">
                             <label id="ccCCVLabel" for="ccCCV" class="elementLabel">CCV: </label>
-<<<<<<< HEAD
                             <input type="number" name="ccv" required id="ccCCV" <?php "value=".$ccv ?>>
                         </div>
                     </div>
@@ -204,7 +171,6 @@ $fullName = $firstName." ".$lastName;
                         </div>
                     </div>
                 </div>
-
                 <div id="checkoutButtonContainer" class="checkoutContainer">
                     <!--<button type="submit" id="checkOutButton">Confirm</button>-->
                     <input type="submit" id="checkOutButton">
@@ -218,38 +184,8 @@ $fullName = $firstName." ".$lastName;
                                               id="paypalButton"></a>
     </div>
 </main>
-
-<!--    footer-->
-<footer>
-    <div class="footLogo">
-        <a href="home.html"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union"> </a>
-    </div>
-
-
-    <nav class=footNav>
-        <p><a href="home.html">Home</a> | <a href="categorypage.html">Browse</a> | <a href="home.html">Search </a> | <a
-                href="login.html">Login </a>| <a href="cart.html">Cart </a>| <a href="about_us.html"> About Us</a></p>
-    </nav>
-
-    <!-- Copyright -->
-    <div class="footIcons">
-        <ul class="icons">
-            <h3>Social Media</h3>
-            <li><a href="https://twitter.com/ubcoqscu"><span class="fa fa-twitter"></span></a></li>
-            <li><a href="https://www.facebook.com/ubcoqscu/"><span class="fa fa-facebook"></span></a></li>
-            <li><a href="https://www.instagram.com/ubcoqscu"><span class="fa fa-instagram"></span></a></li>
-            <li><a href="http://www.qscu.org"><span class="fa fa-globe"></span></a></li>
-            <li><a href="mailto:qscu.ubco@gmail.com"><span class="fa fa-send-o"></span></a></li>
-        </ul>
-
-        <p class="copyright">&copy; COSC 304/360 Project 2018</p>
-
-    </div>
-</footer>
 </body>
 </html>
-
-
 <?php
 include "footer.php";
 ?>

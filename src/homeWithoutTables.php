@@ -1,12 +1,30 @@
 <?php 
+
 include "init.php";
+$headerSet = 1;
 include "header.php";
 
 ?>
+
+<!DOCTYPE HTML>
+<html>
+<!--    Head-->
+
+<head lang="en">
+    <meta charset="utf-8">
+    <title>QSCU Merch Store</title>
+    <link rel="stylesheet" href="css/home.css"/>
+    <link rel="stylesheet" href="css/header.css"/>
+    <link rel="stylesheet" href="css/footer.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png"/>
+</head>
+
+
+<!--    Body-->
+
+<body>
   <!-- Main Body -->
-  	<style>
-		<?php include "css/home.css";?>
-	</style>
 <main>
 	<div id="main">
 		<div id="browsecol">
@@ -333,7 +351,8 @@ include "header.php";
 	</div>
 </div>
 </main>
-
+</body>
+</html>
 <?php
 include "footer.php";
 ?>
