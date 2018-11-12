@@ -1,194 +1,259 @@
 /*css for single product*/
-
 * {
-    font-family: serif;
+  font-family: serif;
 }
 
 .bigboi {
-    width: 100%;
-    margin: 0 auto;
-    max-width: 1080px;
-    background-color: white;
-    /*    color: #18bfef;*/
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1080px;
+  background-color: white;
+  /*    color: #18bfef;*/
 }
 
 html {
-    /*    min-width: 413px;*/
-    min-width: 734px;
-    background-color: aliceblue;
+  /*    min-width: 413px;*/
+  min-width: 734px;
+  background-color: aliceblue;
 }
 
 .container {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .sideContent {
-    order 2;
-    width: 100%;
+  order 2;
+  width: 100%;
 }
 
 .container img {
-    /*    border: 1px solid red;*/
-    order: -1;
-    align-self: flex-start;
-    padding: 2em;
+  /*    border: 1px solid red;*/
+  order: -1;
+  align-self: flex-start;
+  padding: 2em;
 }
 
 .pName h1 {
-    /*    border: 1px solid blue;*/
-    /*        padding: 0.5em;*/
-    margin-bottom: 0;
+  /*    border: 1px solid blue;*/
+  /*        padding: 0.5em;*/
+  margin-bottom: 0;
 }
 
 .pName p {
-    margin-top: 0;
+  margin-top: 0;
 }
 
-
 .pDesc {
-    /*    border: 1px solid orange;*/
-    /*    padding-left: 0.5em;*/
+  /*    border: 1px solid orange;*/
+  /*    padding-left: 0.5em;*/
 }
 
 #myform {
-    text-align: left;
-    padding: 5px;
-    /*    border: 1px dotted #ccc;*/
-    /*    margin: 2%;*/
+  text-align: left;
+  padding: 5px;
+  /*    border: 1px dotted #ccc;*/
+  /*    margin: 2%;*/
 }
 
 .quant p {
-    margin: 0;
-    margin-left: 1.75em;
+  margin: 0;
+  margin-left: 1.75em;
 }
 
 .qty {
-    width: 40px;
-    height: 25px;
-    text-align: center;
+  width: 40px;
+  height: 25px;
+  text-align: center;
 }
 
 input.qtyplus {
-    width: 25px;
-    height: 25px;
+  width: 25px;
+  height: 25px;
 }
 
 input.qtyminus {
-    width: 25px;
-    height: 25px;
+  width: 25px;
+  height: 25px;
 }
 
-select.size{
+select.size {
   text-align-last: center;
   margin-left: 4em;
   background: none;
 }
 
 .checked {
-    color: orange;
+  color: orange;
 }
 
 .rating {}
 
 .oldPrice {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .sale {
-    font-size: 1.5em;
-    color: tomato;
+  font-size: 1.5em;
+  color: tomato;
 }
 
+/* button css */
 .addCart {
-    font-size: 1.5em;
-    background-color: #18bfef;
-    margin-left: 3em;
-    height: 2em;
-    overflow: hidden;
-    /*    background-color: orange;*/
-    /*    color: white;*/
-}
-
-.quant button {
-    border-radius: 5em;
+  font-size: 1.5em;
+  background-color: #18bfef;
+  margin-left: 3em;
+  height: 2em;
+  overflow: hidden;
+  /*    background-color: orange;*/
+  /*    color: white;*/
+  border-radius: 5em;
 }
 
 .addCart:hover {
-    background-color: tomato;
-    color: white;
+  background-color: tomato;
+  color: white;
 }
 
-
 #reviews {
-    padding: 0.5em;
-    /*    margin: 2em;*/
-    margin-top: 0;
-    border-top: 1px solid #18bfef;
-    /*    background-color: #93daf0;*/
-    /*    border: 1px solid black;*/
+  padding: 0.5em;
+  /*    margin: 2em;*/
+  margin-top: 0;
+  border-top: 1px solid #18bfef;
+  /*    background-color: #93daf0;*/
+  /*    border: 1px solid black;*/
 }
 
 #reviews h3 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 #reviews h3 a {
-    border: 1px solid clear;
-    background-color: #18bfef;
-    padding: 0.5em;
-    border-radius: 5em;
-    color: black;
+  border: 1px solid clear;
+  background-color: #18bfef;
+  padding: 0.5em;
+  border-radius: 5em;
+  color: black;
 }
 
 #reviews .byline {
-    font-style: italic;
-    margin-bottom: 0.5em;
+  font-style: italic;
+  margin-bottom: 0.5em;
 }
 
 #reviews p {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 #reviews .reviewDescription {
-    padding-bottom: 0.5em;
-    border-bottom: 1px dashed #18bfef;
+  padding-bottom: 0.5em;
+  border-bottom: 1px dashed #18bfef;
 }
 
 #reviews .userProfile {
-    margin: 0;
+  margin: 0;
 }
 
 #reviews .userProfile time {
-    /*    color: lightblue;*/
-    font-size: 0.85em;
+  /*    color: lightblue;*/
+  font-size: 0.85em;
 }
 
 #reviews img {
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    align-self: middle;
-    border: 1px solid tomato;
-
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  align-self: middle;
+  border: 1px solid tomato;
 }
 
 #reviews a {
-    text-decoration: none;
-    padding-left: 1em;
-
+  text-decoration: none;
+  padding-left: 1em;
 }
 
 #reviews .userRating {
-    padding-top: 0.5em;
-    margin: 0;
-    /*    padding-left: 1em;*/
+  padding-top: 0.5em;
+  margin: 0;
+  /*    padding-left: 1em;*/
 }
 
 #reviews .reviewTitle {
-    padding-top: 0.5em;
+  padding-top: 0.5em;
+  font-weight: bold;
+}
+
+#reviews a:visited {
+
+}
+/* ---------------NEW STUFF---------------*/
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
     font-weight: bold;
 }
 
-#reviews a:visited {}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
