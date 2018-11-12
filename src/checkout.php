@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 <?php
-include "init.php";
+//include "init.php";
 include "header.php";
 ?>
 <?php
@@ -25,7 +24,7 @@ $creditCardNum="";
 $creditCardExpiryDate="";
 $ccv="";
 
-$con = mysqli_connect("localhost", "40215162", "qscu42069!", "db_40215162");
+$con = mysqli_connect("cosc304.ok.ubc.ca", "rgelden", "40215162", "db_rgelden");
 
 if ( mysqli_connect_errno()) {
     echo "Failed to connect to MySQL";
@@ -124,7 +123,6 @@ $fullName = $firstName." ".$lastName;
                         </div>
                         <div id="ccNumContainer" class="checkoutContainer">
                             <label id="ccNumLabel" for="ccNum" class="elementLabel">Credit Card Number: </label>
-<<<<<<< HEAD
                             <input type="number" name="ccNum" id="ccNum" required <?php echo "value=".$creditCardNum?>>
                         </div>
 
@@ -136,7 +134,6 @@ $fullName = $firstName." ".$lastName;
 
                         <div id="ccCCVContainer" class="checkoutContainer">
                             <label id="ccCCVLabel" for="ccCCV" class="elementLabel">CCV: </label>
-<<<<<<< HEAD
                             <input type="number" name="ccv" required id="ccCCV" <?php "value=".$ccv ?>>
                         </div>
                     </div>
