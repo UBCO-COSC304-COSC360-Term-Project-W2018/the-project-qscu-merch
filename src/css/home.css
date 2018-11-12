@@ -19,8 +19,9 @@
 }
 
 #browselist{
+	padding-bottom: 1em;
 	list-style: none;
-	padding: 0em;
+	padding-left: 2em;
 	clear:left;
 }
 
@@ -32,6 +33,7 @@
 }
 
 .browselink{
+	
 	text-decoration: none;
 	color: white;
 }

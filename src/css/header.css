@@ -102,7 +102,7 @@ header{
 	height: 40px;
 }
 
-#browsenav{
+#browsedropnav{
 	display: none;
 	margin: 0em;
 	background-color: #183263;
@@ -110,31 +110,32 @@ header{
 	z-index: 10;
 }
 
-#browsetitle{
+#browsedroptitle{
 	color: #18bfef;
 	float:left;
 	font-size: 2em;
 	margin: 0.5em 2em 1em 0.5em;
 }
 
-#browselist{
+#browsedroplist{
+	padding-bottom: 0.5em;
 	list-style: none;
-	padding: 0em;
+	padding-left: 2em;
 	clear:left;
 }
 
-.browseitem{
-	font-size: 1.2em;
+.browsedropitem{
+	font-size: 1em;
 	margin: 1em;
 	padding: 0.5em;
 
 }
 
-.browselink{
+.browsedroplink{
 	text-decoration: none;
 	color: white;
 }
 
-.browselink:hover{
+.browsedroplink:hover{
 	color: tomato;
 }
