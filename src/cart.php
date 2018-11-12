@@ -96,4 +96,6 @@ $sqlGetCartPrice = "SELECT SUM(P.price) AS cartPrice FROM HasCart H, Product P W
 
 <?php
 include "footer.php";
+$con->close();
+
 ?>
