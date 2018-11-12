@@ -4,7 +4,9 @@ include "header.php";
 ?>
 
     <!-- Main Body -->
-
+<style>
+		<?php include "css/searchpage.css";?>
+	</style>
 <main>
 	<div id="main">
 		<div id="refinecol">
