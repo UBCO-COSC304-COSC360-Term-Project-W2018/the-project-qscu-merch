@@ -1,4 +1,5 @@
 <?php 
+	$headerSet = 1;
 include "init.php";
 include "header.php";
 ?>
