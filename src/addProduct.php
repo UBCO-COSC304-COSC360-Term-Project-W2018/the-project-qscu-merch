@@ -68,32 +68,33 @@ $arrSizes = 69;
 for($i = 1; $i <= sizeof($arrSizes); $i++){
 	$sqlAdd = "INSERT INTO Product VALUES (".$pNo.",'".$arrSizes[$i]."', '".$pName."', '".$keywords."', ".$price.",'".$image."','".$cType."')";	
 
-	if($con->query($sqlAdd) === TRUE){
+	if($result = $con->query($sqlAdd)){
 		echo "Product ".$pNo." added successfully to Product table.";
 	}
 	else{
 		echo "Error: ".$sqlAdd."<br>".$con->error;
+		die();
 	}
 }
 
 //Will also need to add product to Product in Category Table, get Categories from a query.
 
 $sqlCategories = "SELECT DISTINCT cname FROM Category";
-$cats = mysqli_query($con, $sqlCategories);
 
-if(!empty($cats)){ //If we have elements in categories array
+if($cats = $con->query($sqlCategories)){ //If we have elements in categories array
 	
 	echo "<select multiple>"
-	//for each loop that will print out one of those multiple attribute things
-
-	foreach ($cats as $c) {
-		echo '<option value="'.$c.'>'.$c.'</option>';
+	// While loop to traverse the result set.
+	while($catName = $cats->fetch_array()){
+		//DOUBLE CHECK THIS HTML PLEASE
+		echo '<option value="'.$catName["cname"].'>'.$catName["cname"].'</option>';
 	}
 	echo "</select>"
 
 }
 else{
 	echo "Error: ".$sqlCategories."<br>".mysql_error($con)
+	die();
 }
 
 //Cool, so I'm going to assume that you are all able to figure out what option's of categories they chose, and once again can keep it in an array
@@ -113,27 +114,27 @@ for($i = 1; $i<=$productCategories; $i++){
 }
 
 
-$cIDs = mysqli_query($con, $sqlGetCID);
+if($cIDs = $con-> query($sqlGetCID)){
 
-if(!empty($cIDs)){
 	for($i = 1; $i <= sizeof($cIDs); $i++) {
 		for($j = 1; $j <= sizeof($arrSizes); $j++){
 			$sqlAdd = "INSERT INTO ProductInCategory VALUES (".$pNo.",'".$arrSizes[j]."',".$cIDs[i].")";
 
-			if($con->query($sqlAdd) === TRUE){
+			if($results = $con->query($sqlAdd)){
 				echo "Product ".$pNo."is now part of the ".$productCategories[i];
 			}
 			else{
 				echo "Error: ".$sqlAdd."<br>".$con->error;
+				die();
 			}
 		}
 	}
 }
+else{
+	die();
+}
 mysqli_close($con);
 ?>
-
-
-
 
 </body>
 </html>
