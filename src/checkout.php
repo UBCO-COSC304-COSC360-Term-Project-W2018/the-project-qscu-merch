@@ -189,4 +189,3 @@ $fullName = $firstName." ".$lastName;
 <?php
 include "footer.php";
 ?>
-
