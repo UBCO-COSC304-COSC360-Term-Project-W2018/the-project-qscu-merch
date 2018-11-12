@@ -1,16 +1,27 @@
-#profileImage {
-    width: 240px;
-    height: 240px;
-}
-#imageContent{
-    max-width: 15em;
-}
-
 #userProfile{
     margin: 1em;
     display: flex;
     flex-direction: row;
 }
+
+#imageContent{
+    max-width: 15em;
+}
+
+#profileImage {
+    width: 240px;
+    height: 240px;
+}
+
+#infoContent{
+	
+}
+
+#personalContent{
+	
+}
+
+#
 #imageContent, #infoContent, #billingContent{
     padding: 0 2em;
 }
@@ -18,3 +29,4 @@
 #infoContent *, #billingContent label, #billingAddress *, #billingEditSave{
     display: block;
 }
+
