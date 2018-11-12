@@ -2,7 +2,25 @@
 include "init.php";
 include "header.php";
 ?>
+<!--HTML about us page for shop.qscu.org-->
+<!DOCTYPE HTML>
+<html>
+<!--    Head-->
 
+<head lang="en">
+    <meta charset="utf-8">
+    <title>QSCU Merch Store</title>
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <link rel="icon" type="image/x-icon" href="../src/images/QSCU_favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<!--    Body-->
+
+<body>
+<main>
     <div class="bigboi">
         <div class="container">
             <img src="../src/images/QSCUGroup.jpg">
@@ -19,7 +37,9 @@ include "header.php";
 
 
     </div>
-
+</main>
+</body>
+</html>
 	<?php
 	include "footer.php";
 	?>
