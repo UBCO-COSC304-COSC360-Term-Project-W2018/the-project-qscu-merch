@@ -29,7 +29,8 @@ $con = mysqli_connect("localhost", "40215162", "qscu42069!", "db_40215162");
 
 if ( mysqli_connect_errno()) {
     echo "Failed to connect to MySQL";
-}
+}else
+    echo "we in bois";
 
 $sql1 = "SELECT * FROM BillingInfo WHERE uid=".$uid;
 if ($result = mysqli_query($con, $sql1)) {
