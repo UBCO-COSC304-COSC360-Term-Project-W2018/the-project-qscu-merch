@@ -4,6 +4,7 @@ include "header.php";
 ?>
 
 <main>
+	<link rel="stylesheet" href="css/categorypage.css" type="text/css">
 	<div id="main">
 		<div id="browsecol">
 			<nav id="browsenav">
@@ -25,7 +26,7 @@ include "header.php";
 		<div id="categoryviews">
 			<div class="item">
 				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
+					<a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
 				</div>
 				<div class="iteminfo">
 					<p class="pname"><a href="#">Ping Pong Balls</a></p>
@@ -44,7 +45,7 @@ include "header.php";
 			</div>
 			<div class="item">
 				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
+					<a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
 				</div>
 				<div class="iteminfo">
 					<p class="pname"><a href="#">Ping Pong Balls</a></p>
@@ -63,7 +64,7 @@ include "header.php";
 			</div>
 			<div class="item">
 				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
+					<a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
 				</div>
 				<div class="iteminfo">
 					<p class="pname"><a href="#">Ping Pong Balls</a></p>
@@ -82,7 +83,7 @@ include "header.php";
 			</div>
 			<div class="item">
 				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
+					<a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
 				</div>
 				<div class="iteminfo">
 					<p class="pname"><a href="#">Ping Pong Balls</a></p>
@@ -101,7 +102,7 @@ include "header.php";
 			</div>
 			<div class="item">
 				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
+					<a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
 				</div>
 				<div class="iteminfo">
 					<p class="pname"><a href="#">Ping Pong Balls</a></p>

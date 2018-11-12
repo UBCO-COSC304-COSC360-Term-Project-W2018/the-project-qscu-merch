@@ -56,7 +56,7 @@ include "header.php";
 		</div>
 			<div class="item">
 				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
+					<a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
 				</div>
 				<div class="iteminfo">
 					<p class="pname"><a href="#">Ping Pong Balls</a></p>
@@ -75,7 +75,7 @@ include "header.php";
 			</div>
 			<div class="item">
 				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
+					<a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
 				</div>
 				<div class="iteminfo">
 					<p class="pname"><a href="#">Ping Pong Balls</a></p>
@@ -94,7 +94,7 @@ include "header.php";
 			</div>
 			<div class="item">
 				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
+					<a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
 				</div>
 				<div class="iteminfo">
 					<p class="pname"><a href="#">Ping Pong Balls</a></p>
@@ -113,7 +113,7 @@ include "header.php";
 			</div>
 			<div class="item">
 				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
+					<a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
 				</div>
 				<div class="iteminfo">
 					<p class="pname"><a href="#">Ping Pong Balls</a></p>
@@ -132,7 +132,7 @@ include "header.php";
 			</div>
 			<div class="item">
 				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
+					<a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
 				</div>
 				<div class="iteminfo">
 					<p class="pname"><a href="#">Ping Pong Balls</a></p>

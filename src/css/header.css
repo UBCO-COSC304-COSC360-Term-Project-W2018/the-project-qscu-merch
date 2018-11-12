@@ -14,14 +14,17 @@ header{
 	padding-bottom: 1em;
 	color: white;
 	background-color: #183263;
+	z-index:99999;
 }
-
+header.sticky.top {
+	position:sticky;
+	top:0;
+}
 #htop{
 	white-space: nowrap;
 	display: flex;
 	align-items: stretch;
 	flex-direction: row;
-	margin-bottom: 2em;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
@@ -41,6 +44,7 @@ header{
 	display: flex;
 	align-items: stretch;
 	flex-direction: row;
+	padding-top:2em;
 }
 
 .hbotline{

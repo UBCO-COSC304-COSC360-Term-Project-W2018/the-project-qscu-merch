@@ -1,11 +1,11 @@
     <!--    start footer-->
     <footer>
         <div class="footLogo">
-            <a href="home.html"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" > </a>
+            <a href="home.php"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" > </a>
         </div>
 
         <nav class=footNav>
-            <p><a href="home.html">Home</a> | <a href="categorypage.html">Browse</a> | <a href="home.html">Search </a> | <a href="login.html">Login </a>| <a href="cart.html">Cart </a>| <a href="about_us.html"> About Us</a></p>
+            <p><a href="home.php">Home</a> | <a href="categorypage.php">Browse</a> | <a href="home.php">Search </a> | <a href="login.php">Login </a>| <a href="cart.php">Cart </a>| <a href="about_us.php"> About Us</a></p>
         </nav>
 
         <!-- Copyright -->
