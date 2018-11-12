@@ -73,10 +73,22 @@ fieldset {
 #messageInput{
   max-width: 150px;
   min-width: 150px;
+
 }
 
 .messageInput{
   height: 20px;
+}
+
+.address p{
+    margin: 0;
+}
+
+p.qscu{
+  font-weight: bold;
+}
+h2{
+  margin: 0;
 }
 a{
     color: #18bfef;
@@ -84,6 +96,7 @@ a{
 a:hover{
   color: tomato;
 }
+
 /* .container{
     display: flex;
     flex-direction: row;
