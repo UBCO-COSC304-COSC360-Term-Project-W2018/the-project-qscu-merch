@@ -7,6 +7,9 @@
   Product Name:<br>
   <input type="text" name="pName">
 
+
+<!--TODO: 360 Folks, can you change this size check box table?  -->
+
 <p>Product Size(s):</p>
 
 <div>
@@ -48,7 +51,7 @@
 //Also, I assume this Add Product thing will occur on some button press action, like "ADD PRODUCT"
 
 
-$databaseName = "db_40215162"; //some database name I don't know yet
+$databaseName = "db_40215162"; //database name
 $uID = "40215162"; //admin's ID
 $pw = "qscu42069!"; //admin's password
 $host = "cosc.360.ok.ubc.ca"; //host of database
@@ -65,11 +68,11 @@ $arrSizes = 69;
 for($i = 1; $i <= sizeof($arrSizes); $i++){
 	$sqlAdd = "INSERT INTO Product VALUES (".$pNo.",'".$arrSizes[$i]."', '".$pName."', '".$keywords."', ".$price.",'".$image."','".$cType."')";	
 
-	if(mysqli_query($con, $sqlAdd)){
+	if($con->query($sqlAdd) === TRUE){
 		echo "Product ".$pNo." added successfully to Product table.";
 	}
 	else{
-		echo "Error: ".$sqlAdd."<br>".mysql_error($con)
+		echo "Error: ".$sqlAdd."<br>".$con->error;
 	}
 }
 
@@ -101,7 +104,7 @@ $productCategories = [];
 //Now we will need to make another query that link the categories they chose (cname) to the cid
 
 for($i = 1; $i<=$productCategories; $i++){
-	if($i == 1){
+	if($i === 1){
 		$sqlGetCID = "SELECT cid FROM Category WHERE cname = '".$productCategories[i]."'";
 	}
 	else{
@@ -117,11 +120,11 @@ if(!empty($cIDs)){
 		for($j = 1; $j <= sizeof($arrSizes); $j++){
 			$sqlAdd = "INSERT INTO ProductInCategory VALUES (".$pNo.",'".$arrSizes[j]."',".$cIDs[i].")";
 
-			if(mysqli_query($con, $sqlAdd)){
+			if($con->query($sqlAdd) === TRUE){
 				echo "Product ".$pNo."is now part of the ".$productCategories[i];
 			}
 			else{
-				echo "Error: ".$sqlAdd."<br>".mysql_error($con)
+				echo "Error: ".$sqlAdd."<br>".$con->error;
 			}
 		}
 	}
