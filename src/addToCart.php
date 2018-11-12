@@ -2,6 +2,7 @@ Here I assume that I have the variables quantity, productNumber, size, and the u
 
 
 <?php
+try{
 
 $databaseName = "db_40215162"; //database name
 $uID = "40215162"; //admin's ID
@@ -10,13 +11,15 @@ $host = "cosc.360.ok.ubc.ca"; //host of database
 
 $con = new mysqli($host, $uID, $pw, $databaseName);
 
-if($con -> connect_error){
-	die("Connection Failed: ".$con -> connect_error);
+if($con -> connect_errno){
+	die("Connection Failed: ".$con -> connect_errno);
 }
 
 //HERE IS WHERE I HAVE THE DUMMY VARIABLES THAT I ASSUME THE 360 FOLK CAN GET WITH HTML STUFF
 
-$uid = 0;
+$uid = $_SESSION["userId"];
+
+//This is where I need you guys to somehow access this information
 $pNo = 0;
 $size = "";
 $quantity = 0;
@@ -24,12 +27,16 @@ $quantity = 0;
 $sqlAdd = "INSERT INTO HasCart VALUES (".$uid.",".$pNo.",'".$size."',".$quantity.")";
 
 if($con->query($sqlAdd) === TRUE){
-	echo "Product ".$pNo." added successfully to your Cart.";
+	echo "Product ".$pNo." added successfully to your Cart. \n";
 }
 else{
 	echo "Error: ".$sqlAdd."<br>".mysql_error($con)
 }
 
 $con->close();
+}
+catch (Exception $e) {
+	die("Error with Cart. Session Terminated.")
+}
 
 ?>
