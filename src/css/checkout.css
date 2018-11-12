@@ -2,11 +2,11 @@
 centers form in middle of page
  */
 #checkOutForm {
-    width:30%;
+    width:50%;
     margin-right: auto;
     margin-left: auto;
     margin-top: 5em;
-    text-align: center;
+    /*text-align: center;*/
     background-color: #183263;
     color: white;
     padding:1em;
@@ -22,8 +22,8 @@ centers form in middle of page
 sets font size for labels and input fields
  */
 .checkoutContainer {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    /*margin-top: 1em;*/
+    /*margin-bottom: 1em;*/
     font-size:1em;
 }
 
@@ -47,7 +47,7 @@ give each label a new line
 sets labels to left of div. Inline-block display ensures that the width of the div
 is the width of its largest element
  */
-#checkoutFormInputElements {
+#creditCardElementsContainer {
     text-align: left;
     display: inline-block;
 }
@@ -71,6 +71,10 @@ from normal flow
  */
 #shippingAddressContainer {
     display:none;
+}
+
+#addressContainer {
+    float:right;
 }
 
 

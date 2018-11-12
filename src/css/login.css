@@ -9,28 +9,11 @@ set width of forms
 moves sign up form to right, sets background and text colours. Left margin maintains space
 between forms
  */
-#signUpForm {
-    float: right;
-    margin-right: 4em;
-    margin-top: 4em;
+#signUpForm, #loginForm {
     color:white;
     background-color: #183263;
     padding:1em;
-    margin-left: 0.5em;
-    margin-bottom:4em;
-}
-/*
-sets background and text colours, sets right margin to maintain space between forms
- */
-#loginForm {
-    margin-left: 4em;
-    margin-top: 4em;
-    color:white;
-    background-color: #183263;
-    padding:1em;
-    margin-right:0.5em;
-    margin-bottom: 4em;
-
+    margin: 4em auto 4em auto;
 }
 
 /*
