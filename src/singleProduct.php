@@ -1,6 +1,14 @@
-<?php 
+<?php
 include "init.php";
 include "header.php";
+
+
+$con = mysqli_connect("cosc360.ok.ubc.ca", "40215162", "password", "db_402151562");
+
+if ( mysqli_connect_errno()) {
+echo "Failed to connect to MySQL";
+}
+
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -57,7 +65,7 @@ include "header.php";
                 <div class="quant">
                     <p>Quantity</p>
                     <form id='myform' method='POST' action='#'>
-                        <!--                    TODO: need to send this somwehere-->
+                        <!--TODO: need to send this somwehere-->
                         <input type='button' value='-' class='qtyminus' field='quantity' />
                         <input type='text' name='quantity' value='0' class='qty' />
                         <input type='button' value='+' class='qtyplus' field='quantity' />

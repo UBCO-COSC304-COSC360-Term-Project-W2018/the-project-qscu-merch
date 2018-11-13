@@ -29,7 +29,8 @@ $con = mysqli_connect("cosc360.ok.ubc.ca", "37078136", "qscu42069!", "db_3707813
 
 if ( mysqli_connect_errno()) {
     echo "Failed to connect to MySQL";
-}
+}else
+    echo "we in bois";
 
 $sql1 = "SELECT * FROM BillingInfo WHERE uid=".$uid;
 if ($result = mysqli_query($con, $sql1)) {
@@ -189,4 +190,3 @@ $fullName = $firstName." ".$lastName;
 <?php
 include "footer.php";
 ?>
-
