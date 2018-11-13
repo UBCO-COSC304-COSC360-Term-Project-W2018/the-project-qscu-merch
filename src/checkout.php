@@ -25,7 +25,7 @@ $creditCardNum="";
 $creditCardExpiryDate="";
 $ccv="";
 
-$con = mysqli_connect("cosc360.ok.ubc.ca", "37078136", "qscu42069!", "db_37078136");
+$con = mysqli_connect("cosc360.ok.ubc.ca", "40215162", "qscu42069!", "db_40215162");
 
 if ( mysqli_connect_errno()) {
     echo "Failed to connect to MySQL";
