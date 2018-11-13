@@ -1,6 +1,4 @@
-<?php 
-
-include "init.php";
+<?php
 $headerSet = 1;
 include "header.php";
 

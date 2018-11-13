@@ -1,5 +1,5 @@
 <?php
-define("DBHOST","temp");
-define("DBNAME", "temp");
-define("DBUSER", "temp");
-define("DBPASS", "temp");
+define("DBHOST","cosc304.ok.ubc.ca");
+define("DBNAME", "db_rgelden");
+define("DBUSER", "rgelden");
+define("DBPASS", "40215162");

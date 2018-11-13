@@ -1,5 +1,20 @@
-<?php 
-include "init.php";
+<?php
+//session has to be first in the file
+include "includes/session.php";
+
+if(isset($_SESSION["userId"])){
+    header("location: profile.php");
+}
+
+$errorType;
+$error;
+
+if(isset($_SESSION['hasError'])){
+    $errorType = $_SESSION['errorType'];
+    $error = $_SESSION['error'];
+}
+$headerSet = 0;
+
 include "header.php";
 ?>
 <!DOCTYPE html>
@@ -18,18 +33,18 @@ include "header.php";
 <body>
 <main>
 <div id="forms">
-    <form id="loginForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
+    <form id="loginForm" method="post" action="action/login.php">
         <fieldset>
             <legend id="loginTitle">Login</legend>
             <div id="loginFormInputElements">
                 <div class="loginFormElements">
                     <label id="loginEmailLabel" class="loginLabel">Email: </label>
-                    <input type="email" name="username" id="loginEmailInput" placeholder="your@email.com" required>
+                    <input type="email" name="email" id="loginEmailInput" placeholder="your@email.com" required>
                 </div>
 
                 <div class="loginFormElement">
                     <label id="loginPasswordLabel" class="loginLabel">Password: </label>
-                    <input type="password" name="loginpassword" id="loginPasswordInput" placeholder="********" required>
+                    <input type="password" name="password" id="loginPasswordInput" placeholder="********" required>
                 </div>
             </div>
             <div class="loginFormElement">
@@ -42,18 +57,18 @@ include "header.php";
         </fieldset>
     </form>
 
-    <form id="signUpForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
+    <form id="signUpForm" method="post" action="action/createUser.php">
         <fieldset>
             <legend id="signUpTitle">Sign-Up</legend>
             <div id="signUpInputElements">
                 <div class="SUformElement">
                     <label id="SUfnameLabel" class="signUpLabel" for="fnameInput">First name: </label>
-                    <input type="text" name="fname" id="fnameInput" required>
+                    <input type="text" name="firstName" id="fnameInput" required>
                 </div>
 
                 <div class="SUformElement">
                     <label id="SUlnameLabel" class="signUpLabel" for="lnameInput">Last name: </label>
-                    <input type="text" name="lname" id="lnameInput" required>
+                    <input type="text" name="lastName" id="lnameInput" required>
                 </div>
 
                 <div class="SUformElement">
@@ -63,12 +78,12 @@ include "header.php";
 
                 <div class="SUformElement">
                     <label id="SUpasswordLabel" class="signUpLabel" for="signUpPasswordInput">Password: </label>
-                    <input type="password" name="signuppassword" id="signUpPasswordInput" required>
+                    <input type="password" name="password" id="signUpPasswordInput" required>
                 </div>
 
                 <div class="SUformElement">
                     <label id="SUconfirmPasswordLabel" class="signUpLabel" for="signUpPasswordConfirmationInput">Confirm Password: </label>
-                    <input type="password" name="confirmpassword" id="signUpPasswordConfirmationInput" required>
+                    <input type="password" name="confirmPassword" id="signUpPasswordConfirmationInput" required>
                 </div>
             </div>
 
