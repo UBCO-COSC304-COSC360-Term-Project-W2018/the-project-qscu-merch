@@ -1,3 +1,6 @@
+<?php 
+	$user = $_SESSION["userId"]; ?>
+	
 <!--HTML home page for shop.qscu.org-->
 <!DOCTYPE HTML>
 <html lang="en">
@@ -49,10 +52,20 @@
 
             <div id="profile" class="hbotline">
                 <a href="cart.php"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
-                <a href="login.php">My Profile</a>
+                
+	                <?php 
+	                if(isset($_SESSION["userId"])){
+						echo "<a href='profile.php'>" . $user . "</a>";
+	        		}else{
+						echo "<a href='login.php'>Login</a>";
+	        		}
+	        		?>
+	        
             </div>
 
         </div>
 
     </header>
+</body>
+</html>
 <!-- Header end -->
