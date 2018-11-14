@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/footer.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="script/browsebar.js"></script>
 </head>
 
 <!--    Body-->
@@ -22,10 +24,20 @@
             <h1 id="title">QSCU Merchandise Store</h1>
         </div>
 
-        <div id="hbot">
-            <div id="home" class="hbotline">
-                <a href="homeWithoutTables.php" id="homebutton">Home</a>
-            </div>
+        <div id="hbot"><?php 
+	        if($headerSet==1){
+		        echo '<div id="variablebutton" class="hbotline">
+                			<a href="homeWithoutTables.php" id="homebutton">Home</a>
+							</div>';
+	        }else{
+		        echo '<div id="variablebutton" class="hbotline">
+	            		<div id="browsedropsection">
+							<p id="browsedropbutton">Browse</p>
+						</div>
+					</div>';
+	        }
+	        ?>
+            
 
             <div id="searchbar" class="hbotline">
                 <form id="searchform">

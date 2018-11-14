@@ -48,19 +48,19 @@ header{
 	font-size: 1.2em;
 }
 
-#home{
+#variablebutton{
 	margin-left:1em;
 	margin-right: 1em;
 }
 
-#home, #profile{
+#variablebutton, #profile{
 	color: white;
 	text-decoration: none;
 	width: 100px;
 	flex-grow: 2;
 }
 
-#profile a:link, #profile a:visited, #home a:visited, #home a:link{
+#profile a:link, #profile a:visited, #homebutton:visited, #homebutton:link{
 	color: white;
 	text-decoration: none;
 }
@@ -91,15 +91,20 @@ header{
 	float: left;
 	text-align: end;
 	margin-right: 1em;
-		display:flex;
-	align-items: center;
+	display:flex;
 	justify-content: center;
 }
 
 
 #shoppingcart{
-	width: 40px;
-	height: 40px;
+	width: 36px;
+	height: 36px;
+	position: relative;
+	top: -6px;
+}
+
+#browsedropbutton{
+	display: inline;
 }
 
 #browsedropnav{
