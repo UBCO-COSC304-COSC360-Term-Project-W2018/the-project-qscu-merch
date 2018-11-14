@@ -1,6 +1,8 @@
 <?php 
 include "init.php";
 $headerSet = 1;
+//$user = (isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
+$userName = 'James';
 include "header.php";
 ?>
 <!DOCTYPE html>
@@ -29,15 +31,21 @@ include "header.php";
 <body>
 
 <main>
+	<h2 id="welcome">
+	     <?php echo "Welcome " . $userName . "!"; ?>
+	</h2>
     <div id="userProfile">
+	    
         <div id="imageContent">
             <!--TODO DO NOT STYLE FORMS-->
             <!--They will not be there when it a admin in on the user page-->
 
             <!--TODO for brandon make action page-->
             <form method="post" action="">
+	           
                 <img id="profileImage" src="images/profile.png">
                 <input type="file" value="Upload  Image">
+	
             </form>
         </div>
         <div id="infoContent">
@@ -45,34 +53,37 @@ include "header.php";
             <!--They will not be there when it a admin in on the user page-->
 
             <!--TODO for brandon make action page-->
-            <form>
-                <fieldset>
-                    <legend>Personal Information</legend>
-                    <label for="emailInput">Email:</label>
-                    <input type="email" id="emailInput" name="emailInput" placeholder="" readonly>
-
-                    <label for="firstNameInput">First Name:</label>
-                    <input type="text" id="firstNameInput" name="firstNameInput" placeholder="" readonly>
-
-                    <label for="lastNameInput">Last Name:</label>
-                    <input type="text" id="lastNameInput" name="lastNameInput" placeholder="" readonly>
-
-                    <input id="infoEditSave" type="button" value="Edit">
-                </fieldset>
-            </form>
-
-            <form id="passwordContent">
-                <fieldset>
-                    <legend>Change Password:</legend>
-                    <label for="passwordInput">New Password:</label>
-                    <input type="password" id="passwordInput" name="passwordInput" readonly>
-
-                    <label for="confirmPasswordInput">Confirm Password</label>
-                    <input type="password" id="confirmPasswordInput" name="confirmPasswordInput" readonly>
-
-                    <input id="passwordEditSave" type="button" value="Edit">
-                </fieldset>
-            </form>
+            <div id="personalContent">
+	            <form>
+	                <fieldset>
+	                    <legend>Personal Information</legend>
+	                    <label for="emailInput">Email:</label>
+	                    <input type="email" id="emailInput" name="emailInput" placeholder="" readonly>
+	
+	                    <label for="firstNameInput">First Name:</label>
+	                    <input type="text" id="firstNameInput" name="firstNameInput" placeholder="" readonly>
+	
+	                    <label for="lastNameInput">Last Name:</label>
+	                    <input type="text" id="lastNameInput" name="lastNameInput" placeholder="" readonly>
+	
+	                    <input id="infoEditSave" type="button" value="Edit">
+	                </fieldset>
+	            </form>
+            </div>
+			<div id="passwordContent">
+	            <form id="passwordContent">
+	                <fieldset>
+	                    <legend>Change Password:</legend>
+	                    <label for="passwordInput">New Password:</label>
+	                    <input type="password" id="passwordInput" name="passwordInput" readonly>
+	
+	                    <label for="confirmPasswordInput">Confirm Password:</label>
+	                    <input type="password" id="confirmPasswordInput" name="confirmPasswordInput" readonly>
+	
+	                    <input id="passwordEditSave" type="button" value="Edit">
+	                </fieldset>
+	            </form>
+			</div>
         </div>
 
         <div id="billingContent">
@@ -98,13 +109,13 @@ include "header.php";
                     <label for="billingPostalCodeInput">Postal Code: </label>
                     <input type="text" name="billingPostalCode" id="billingPostalCodeInput" maxlength="10" placeholder="" readonly>
 
-                    <label for="cardNumberInput">Credit card Number:</label>
+                    <label for="cardNumberInput">Credit Card Number:</label>
                     <input class="numberOnly" id="cardNumberInput" type="text" name="cardNumberInput" maxlength="19" placeholder="" readonly>
 
-                    <label for="expiryInput">Expiry date</label>
+                    <label for="expiryInput">Expiry Date:</label>
                     <input id="expiryInput" type="month" name="expiryInput" value="2018-05" readonly>
 
-                    <label for="securityCodeInput">security code</label>
+                    <label for="securityCodeInput">Security Code:</label>
                     <input class="numberOnly" id="securityCodeInput" type="text" form="securityCodeInput" maxlength="4" placeholder="***" readonly>
 
                     <input id="billingEditSave" type="button" value="Edit">
@@ -112,13 +123,14 @@ include "header.php";
             </form>
         </div>
     </div>
+    
     <div id="reviewsComments">
-        <h3>Reviews</h3>
+        <h3>Your Reviews & Comments</h3>
 
         <!--TODO put this in a include file-->
         <div class="reviewBlock">
             <div class="review">
-            <p class=userProfile>
+            <p class="userProfile">
                 <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa R</a>
                 <time datetime="2018-10-24">- October 24, 2018</time>
             </p>
@@ -137,8 +149,8 @@ include "header.php";
             </div>
             <div class="comments">
                 <div class="comment">
-                <p class=userProfile>
-                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle">Not Parsa R
+                <p class="userProfile">
+                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle">	Not Parsa R
                     <time datetime="2018-10-30">- October 30, 2018</time>
                 </p>
                 <p class="reviewTitle">
@@ -147,8 +159,8 @@ include "header.php";
                 <p class="reviewDescription">Its a bunch of balls</p>
                 </div>
                 <div class="comment">
-                    <p class=userProfile>
-                        <img src="../src/images/profile.png" alt="User's profile picture" align="middle">James
+                    <p class="userProfile">
+                        <img src="../src/images/profile.png" alt="User's profile picture" align="middle">	James
                         <time datetime="2018-11-9">- November 9, 2018</time>
                     </p>
                     <p class="reviewTitle">
@@ -157,8 +169,8 @@ include "header.php";
                     <p class="reviewDescription">Those are some dank zebra eye ping pongs!</p>
                 </div>
                 <div class="comment">
-                    <p class=userProfile>
-                        <img src="../src/images/profile.png" alt="User's profile picture" align="middle">Parsa R
+                    <p class="userProfile">
+                        <img src="../src/images/profile.png" alt="User's profile picture" align="middle">	Parsa R
                         <time datetime="2018-10-24">- October 24, 2018</time>
                     </p>
                     <p class="reviewTitle">
@@ -170,7 +182,7 @@ include "header.php";
         </div>
 
         <div class="reviewBlock">
-            <p class=userProfile>
+            <p class="userProfile">
                 <img src="../src/images/profile.png" alt="User's profile picture" align="middle">User
                 Name
                 <time datetime="2018-10-24">- Month Day, Year</time>
@@ -191,6 +203,8 @@ include "header.php";
 
     </div>
 </main>
+</body>
+</html>
 <?php
 include "footer.php";
 ?>

@@ -144,3 +144,7 @@ header{
 .browsedroplink:hover{
 	color: tomato;
 }
+
+#searchbar input{
+	min-width: 105px;
+}
