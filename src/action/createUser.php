@@ -61,12 +61,11 @@ try {
                     $salt = generateSalt();
                     $hashword = hash_pbkdf2("sha256", $password, $salt, 2500);
 
-                    $query = "INSERT INTO User (fname, lname, uEmail, password, salt) VALUES (?, ?, ?, ?, ?);";
+                    $query = "INSERT INTO User (fname, lname, uEmail, password, salt, customerBanned) VALUES (?, ?, ?, ?, ?, 0);";
                     $stmt = $mysqli->prepare($query);
                     $stmt->bind_param('sssss', $firstName, $lastName, $email, $hashword, $salt);
                     $stmt->execute();
                     $uid = $stmt->insert_id;
-
 
                     $data["uid"] = $uid;
                     $stmt->close();

@@ -1,5 +1,5 @@
 <?php 
-	$user = $_SESSION["userId"]; ?>
+	$user = isset($_SESSION["userId"])? null: $_SESSION['userId']; ?>
 	
 <!--HTML home page for shop.qscu.org-->
 <!DOCTYPE HTML>

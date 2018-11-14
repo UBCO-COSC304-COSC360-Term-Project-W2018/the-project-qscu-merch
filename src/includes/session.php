@@ -4,8 +4,10 @@ session_start();
 $cookie_hasCookie = "hasCookie";
 $cookie_value = true;
 
-if(!isset($_COOKIE)) {
-    setcookie($cookie_hasCookie, $cookie_value, time() + (86400 * 30), "/"); //
+if (!isset($_COOKIE)) {
+    if (!isset($_COOKIE['userCart'])) {
+        setcookie('userCart', new UserCart(), time() + (86400 * 30)); //
+    }
 }
 
 ?>
