@@ -116,6 +116,9 @@ select.size {
   color: white;
 }
 
+#writeReviewButton{
+
+}
 #reviews {
   padding: 0.5em;
   /*    margin: 2em;*/
@@ -156,7 +159,7 @@ select.size {
 }
 
 #reviews .userProfile time {
-  /*    color: lightblue;*/
+     color: lightblue;
   font-size: 0.85em;
 }
 
