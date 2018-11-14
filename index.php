@@ -1,4 +1,4 @@
 <?php
-header("Location: src/home.html");
+header("Location: src/homeWithoutTables.php");
 die();
 ?>
