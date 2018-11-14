@@ -1,28 +1,58 @@
 <?php
-class userCart{
+
+class userCart
+{
     var $cart = [];
 
-    function addItem($pno, $size, $qty){
-        $item = array('pno'=>$pno, 'size'=>$size, 'qty'=>$qty);
+    function addItem($pno, $size, $qty = 1, $itemPrice = -1){
+        $item = array('pno' => $pno, 'size' => $size, 'qty' => $qty, 'price' => $itemPrice);
         array_push($this->cart, $item);
-        $this->sort();
+    }
+
+    function getCart(){
+        return $this->cart;
+    }
+
+    function setCart($cart){
+        $this->cart = $cart;
+    }
+
+    function sort()
+    {
+        $newArray = array();
+        foreach ($this->cart as $key => $item) {
+            $newArray[$key] = $item['pno'];
+        }
+        array_multisort($newArray, SORT_ASC, $this->cart);
+    }
+
+
+    function updateItem($pno, $size, $qty = null, $price = null){
+        $key = $this->getItemKey($pno, $size);
+
+        if($price != null && $price > 0){
+            $this->cart[$key]['price'] = $price;
+        }
+        if ($qty != null) {
+            if ($qty < 1) {
+                $this->removeItemByKey($key);
+            } else {
+                $this->cart[$key]['qty'] = $qty;
+            }
+        }
 
     }
-    function sort(){
-        $newArray = array();
-        foreach ($this->cart as $key => $item)
-        {
-            $newArray[$key] = $item['pid'];
-        }
-        array_multisort($newArray, SORT_DESC, $this->cart);
-    }
-    function removeItem($pno, $size){
-        $key = $this->getItemKey($pno,$size);
+
+    function removeItemByKey($key){
         $item = $this->cart[$key];
         unset($this->cart[$key]);
         $this->cart = array_values($this->cart);
-        $this->sort();
-        return$item;
+        return $item;
+    }
+
+    function removeItem($pno, $size){
+        $key = $this->getItemKey($pno, $size);
+        return $this->removeItemByKey($key);
     }
 
     function getItem($pno, $size){
@@ -31,8 +61,8 @@ class userCart{
 
     function getItemKey($pno, $size){
         $index = -1;
-        foreach ($this->cart as $key => $item){
-            if($item[$key] == $pno && $item[$key] == $size){
+        foreach ($this->cart as $key => $item) {
+            if ($item[$key] == $pno && $item[$key] == $size) {
                 $index = $key;
                 break;
             }
@@ -40,4 +70,5 @@ class userCart{
         return $index;
     }
 }
+
 ?>
