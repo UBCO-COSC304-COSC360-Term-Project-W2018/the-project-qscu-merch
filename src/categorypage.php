@@ -2,6 +2,31 @@
 	$headerSet = 1;
 include "init.php";
 include "header.php";
+
+
+try{
+
+$databaseName = "db_40215162"; //database name
+$uID = "40215162"; //admin's ID
+$pw = "qscu42069!"; //admin's password
+$host = "cosc.360.ok.ubc.ca"; //host of database
+
+$con = new mysqli($host, $uID, $pw, $databaseName);
+
+if($con -> connect_errno){
+	die("Connection Failed: ".$con -> connect_errno);
+}
+
+//Query for categories, then query for the individual products in the category
+
+//Im gonna assume I know what category you are all clicking on also, that would make it easier for me
+
+}
+catch (Exception $e) {
+	die("Error with Cart. Session Terminated.")
+}
+
+
 ?>
 
 <html>
@@ -27,20 +52,85 @@ include "header.php";
 			<nav id="browsenav">
 				<h4 id="browsetitle">Categories</h4>
 				<ul id="browselist">
-					<li class="browseitem"><a href="categorypage.php" class="browselink">T-Shirts</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Hoodies</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Lanyards</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Ping Pongs</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Solo Cups</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Hats</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Rain Jackets</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Exam Answers</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Liam</a></li>		    				
+
+
+					<!-- LIAM MAKE THIS A QUERY FOR THE CATEGORIES LIST -->
+					<?php
+					$sqlCats = "SELECT cname FROM Category";
+
+					if($cats = $con->query($sqlCats)){
+
+						while($catNames = $cats->fetch_assoc()){
+
+							$name = '"'.$catNames['cname'].'"';
+
+							echo "<li class='browseitem'><a href='categorypage.php' class='browselink'>$name</a></li>";
+						}
+					}
+					else{
+						echo "Category Query failed.";
+						die();
+					}
+
+					?>	    				
 				</ul>
 	    	</nav>
 		</div>
 		
 		<div id="categoryviews">
+
+			<?php
+
+			//So here I will use a cat = $_GET["cname"] to determine what category I'm in
+			//This might be the wrong way of getting the current category, so James do you wanna double check? Thanks
+			$currCat = $_GET["cname"];
+
+			$getCID = "SELECT cid FROM Category WHERE cname = $currCat";
+
+			if($catID = $con->query($currCat)){
+
+				$categoryID = $catID->fetch_assoc();
+
+				$cID = '"'.$categoryID['cid'].'"';
+
+
+				//IDK why its purple... I dont like it what if it breaks. PHP is not fun
+				$sqlListProds = "SELECT pname, price, image, AVG(rating) AS score FROM Product, Reviews, ProductInCategory WHERE ProductInCategory.cid = $cID, ProductInCategory.pNo = Product.pNo, Product.pNo = Reviews.pNo";
+
+				if($prods = $con->query($sqlListProds)){
+
+					while($prod = $prods->fetch_assoc()){
+
+						$image = '"'.$prod['image'].'"';
+                    	$price = '"'.$prod['price'].'"';
+                    	$prodName = '"'.$prod['pname'].'"';
+                    	$rating = $prod['score'];
+
+                    	$rating = '"'.round($rating).'"';
+
+						echo "<div class='item'>
+						<div class='itempicture'>
+						<a href='singleProduct.html'><img src=$image alt='Product Picture'/></a>
+						</div>
+						<div class='iteminfo'>
+						<p class='pname'><a href='#'>$prodName</a></p>
+						<p class='itemprice'>$price</p>
+						<p class='numberofliams'>$rating</p>
+                		<p class='addtocart'>
+	                	<button>Add to Cart <i class='fa fa-shopping-cart'></i></button>
+	               	 	</p>
+						</div>
+						</div>";
+
+					}
+				}
+
+
+			}
+
+			?>
+
+<!--
 			<div class="item">
 				<div class="itempicture">
 					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
@@ -117,25 +207,7 @@ include "header.php";
 	                </p>
 				</div>
 			</div>
-			<div class="item">
-				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
-				</div>
-				<div class="iteminfo">
-					<p class="pname"><a href="#">Ping Pong Balls</a></p>
-					<p class="itemprice">$200</p>
-					<p class="numberofliams">
-                    	<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-                    	<span class="fa fa-star"></span>
-                	</p>
-                	<p class="addtocart">
-	                	<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-	                </p>
-				</div>
-			</div>
+		-->
 		</div>
 	</div>
 		<div id="pagenumber">
@@ -152,4 +224,6 @@ include "header.php";
 </html>
 <?php
 include "footer.php";
+$con->close();
+
 ?>

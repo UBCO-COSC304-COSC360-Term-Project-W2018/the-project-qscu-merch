@@ -1,6 +1,5 @@
-
 <?php
-include "init.php";
+//include "init.php";
 include "header.php";
 ?>
 <?php
@@ -25,7 +24,7 @@ $creditCardNum="";
 $creditCardExpiryDate="";
 $ccv="";
 
-$con = mysqli_connect("localhost", "40215162", "qscu42069!", "db_40215162");
+$con = mysqli_connect("cosc304.ok.ubc.ca", "rgelden", "40215162", "db_rgelden");
 
 if ( mysqli_connect_errno()) {
     echo "Failed to connect to MySQL";
