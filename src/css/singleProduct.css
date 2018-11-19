@@ -24,7 +24,7 @@ html {
 }
 
 .sideContent {
-  order 2;
+ order: 2;
   width: 100%;
 }
 
@@ -132,7 +132,7 @@ select.size {
 }
 
 #reviews h3 a {
-  border: 1px solid clear;
+  border: 1px solid transparent;
   background-color: #18bfef;
   padding: 0.5em;
   border-radius: 5em;
@@ -166,7 +166,7 @@ select.size {
   width: 30px;
   height: 30px;
   border-radius: 100%;
-  align-self: middle;
+  align-self: center;
   border: 1px solid tomato;
 }
 
