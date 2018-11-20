@@ -6,7 +6,7 @@ var isOpen = false;
 
 	$("#browsedropbutton")
 		.on("click", function(e){
-			console.log(isOpen);
+			console.log("Before function: " + isOpen);
 			if(!isOpen){
 				isOpen=true;
 			var browsedropnav = $('<nav id="browsedropnav"></nav>');
@@ -24,25 +24,25 @@ var isOpen = false;
 			browsedropnav.css('position', 'absolute');
 			browsedropnav.css("top", ($("header")).height());
 			browsedropnav.css("left", "0px");
-			
+			console.log("After if: " + isOpen);
 			}else{
-				var container = $("#browsedropnav");
-					if (!container.is(e.target) && container.has(e.target).length === 0&&isOpen) 
-				{
-					container.remove();
-					isOpen=false;
-				}
-				
-			}
-			});
-			
-
-		$(document).mouseup(function(e){
 			var container = $("#browsedropnav");
     		if (!container.is(e.target) && container.has(e.target).length === 0 &&isOpen) 
 				{
 					container.remove();
-					
+					isOpen=false;
+					console.log("After mouseup: " + isOpen);
 				}
+    		}
     	});
+    	
+    	$("main").mouseup(function(e){
+			var container = $("#browsedropnav");
+    		if (!container.is(e.target) && container.has(e.target).length === 0 &&isOpen) 
+				{
+					container.remove();
+					isOpen=false;
+					console.log("After mouseup: " + isOpen);
+				}
+    		});
 });
