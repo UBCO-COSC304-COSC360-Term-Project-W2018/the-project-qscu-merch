@@ -116,8 +116,10 @@ select.size {
   color: white;
 }
 
-#writeReviewButton {}
-
+#writeReviewButton {
+    font-size: 1.1em;
+    margin-left: 1em;
+}
 #reviews {
   padding: 0.5em;
   /*    margin: 2em;*/
@@ -293,7 +295,8 @@ select.size {
 }
 
 #reviewInput{
-  width: 451px;
+    /*min-width: 451px;*/
+    width: 100%;
 }
 .modal-footer {
   padding: 2px 16px;
