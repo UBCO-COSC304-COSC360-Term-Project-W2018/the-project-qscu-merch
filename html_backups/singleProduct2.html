@@ -203,29 +203,31 @@
         <h2> Overall Rating</h2>
         <!-- added drop down rating -->
         <select class="ratingInput">
-          <option value="1">1 Star</option>
-          <option value="2">2 Star</option>
+            <!--TODO: change value of default selected option, how about null?-->
+            <option  selected value="noStar">Select a rating</option>
+            <option value="1">1 Star</option>
+            <option value="2">2 Star</option>
           <option value="3">3 Star</option>
           <option value="4">4 Star</option>
-          <option value="5">5 Star</option>
+          <option  value="5">5 Star</option>
         </select>
 
 
         <form id="contactForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
 
           <!-- Review input -->
-          <h2>Write your review</h2>
+          <h2>What did you like or dislike about it? What did you use this product for?</h2>
           <div class="formElement">
             <!-- max lenght is 200 chars and there are 3 rows -->
-            <textarea id="reviewInput" name="userReviewInput" placeholder="What did you like or dislike about it? What did you use this product for?" rows="8" maxlength="400" required></textarea>
+            <textarea id="reviewInput" name="userReviewInput" placeholder="Write your review" rows="8" maxlength="400" required></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <h3>Modal Footer</h3>
+        <!--<h3>Modal Footer</h3>-->
 
         <div class="formElement">
-          <button type="submit" id="SubmitButton">Submit</button>
+          <button formaction="http://www.randyconnolly.com/tests/process.php" type="submit" id="SubmitButton" onsubmit="alert('Thank you for your review!');">Submit</button>
         </div>
       </div>
     </div>

@@ -284,7 +284,7 @@ select.size {
 
 .modal h2{
   font-weight: 700;
-  font-size: 17px;
+  font-size: 20px;
   line-height: 1.255;
   margin: 1em;
 
@@ -292,11 +292,13 @@ select.size {
 
 .ratingInput{
   margin-left: 1.75em;
+    font-size: 15px;
 }
 
 #reviewInput{
     /*min-width: 451px;*/
     width: 100%;
+    font-size: 18px;
 }
 .modal-footer {
   padding: 2px 16px;
