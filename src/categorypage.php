@@ -2,16 +2,13 @@
 	$headerSet = 1;
 include "init.php";
 include "header.php";
-
+include "db_credentials.php";
 
 try{
 
-$databaseName = "db_40215162"; //database name
-$uID = "40215162"; //admin's ID
-$pw = "qscu42069!"; //admin's password
-$host = "cosc.360.ok.ubc.ca"; //host of database
+$user = $_SESSION["userId"];
 
-$con = new mysqli($host, $uID, $pw, $databaseName);
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 if($con -> connect_errno){
 	die("Connection Failed: ".$con -> connect_errno);
@@ -23,7 +20,7 @@ if($con -> connect_errno){
 
 }
 catch (Exception $e) {
-	die("Error with Cart. Session Terminated.")
+	die("Error with Cart. Session Terminated.");
 }
 
 
@@ -85,7 +82,7 @@ catch (Exception $e) {
 			//This might be the wrong way of getting the current category, so James do you wanna double check? Thanks
 			$currCat = $_GET["cname"];
 
-			$getCID = "SELECT cid FROM Category WHERE cname = $currCat";
+			$getCID = "SELECT cid FROM Category WHERE cname = '".$currCat."'";
 
 			if($catID = $con->query($currCat)){
 
@@ -108,19 +105,7 @@ catch (Exception $e) {
 
                     	$rating = '"'.round($rating).'"';
 
-						echo "<div class='item'>
-						<div class='itempicture'>
-						<a href='singleProduct.html'><img src=$image alt='Product Picture'/></a>
-						</div>
-						<div class='iteminfo'>
-						<p class='pname'><a href='#'>$prodName</a></p>
-						<p class='itemprice'>$price</p>
-						<p class='numberofliams'>$rating</p>
-                		<p class='addtocart'>
-	                	<button>Add to Cart <i class='fa fa-shopping-cart'></i></button>
-	               	 	</p>
-						</div>
-						</div>";
+						echo "<div class='item'><div class='itempicture'><a href='singleProduct.html'><img src=$image alt='Product Picture'/></a></div><div class='iteminfo'><p class='pname'><a href='#'>$prodName</a></p><p class='itemprice'>$price</p><p class='numberofliams'>$rating</p><p class='addtocart'><button>Add to Cart <i class='fa fa-shopping-cart'></i></button></p></div></div>";
 
 					}
 				}
