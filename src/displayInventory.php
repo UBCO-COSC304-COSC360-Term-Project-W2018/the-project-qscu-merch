@@ -5,15 +5,11 @@
 
 include "init.php";
 include "header.php";
+include "db_credentials.php";
 
-$user = $_SESSION["userId"]
+$user = $_SESSION["userId"];
 
-$databaseName = "db_40215162"; //database name
-$uID = "40215162"; //admin's ID
-$pw = "qscu42069!"; //admin's password
-$host = "cosc.360.ok.ubc.ca"; //host of database
-
-$con = new mysqli($host, $uID, $pw, $databaseName);
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 if($con -> connect_errno){
     die("Connection Failed: ".$con -> connect_errno);
