@@ -1,0 +1,94 @@
+<?php
+include '../includes/session.php';
+include '../includes/db_credentials.php';
+include '../includes/inputValidation.php';
+include '../includes/validateAdmin.php';
+
+validateAdminRequest($_SESSION);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $inputFields = array('productName', 'productPrice');
+    $temp1 =arrayExists($_POST, $inputFields);
+    $temp2 = arrayIsValidInput($_POST, $inputFields);
+    $temp3 = isset($_POST['productDescription']);
+
+    if (!(arrayExists($_POST, $inputFields) && arrayIsValidInput($_POST, $inputFields) && isset($_POST['productDescription']))) {
+        //invalid data entry
+        $_SESSION['hasError'] = true;
+        $_SESSION['errorType'] = "Form";
+        $_SESSION['errorMsg'] = "invalid form data";
+        header('location: ../newProduct.php');
+        exit();
+    }else{
+
+        try {
+            $productName = $_POST['productName'];
+            $productPrice = $_POST['productPrice'];
+            $productDescription = $_POST['productDescription'];
+
+            if (isset($_FILES['uploadImage'])) {
+                $file = $_FILES['uploadImage'];
+                $fileName = basename($file["name"]);
+                $targetFilePath = "../uploads/" . $fileName;
+
+                $extension = end(explode(".", $file['name']));
+                $validExt = array("jpg", "png", "gif");
+                $validMine = array("image/jpeg", "image/png", "image/gif");
+                if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 100 * 1000))) {
+                    if (!move_uploaded_file($file['tmp_name'], $targetFilePath)) {
+                        //file failed to move;
+                    }
+
+                } else {
+                    //invalid file
+                    $_SESSION['hasError'] = true;
+                    $_SESSION['errorType'] = "upload";
+                    $_SESSION['errorMsg'] = "invalid file";
+                    header('location: ../newProduct.php');
+                    exit();
+                }
+            }
+
+
+            $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+            if ($mysql->connect_error) {
+                //connection failed
+                die();
+            }
+
+            $query = "INSERT INTO Product (image, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $mysql->prepare($query);
+
+            $size = "small";
+            $null = null;
+
+
+            $stmt->bind_param('bssds',$null, $size, $productName, $productPrice, $file['type']);
+            $stmt->send_long_data(0, file_get_contents($targetFilePath));
+            $stmt->execute();
+
+            $id = $stmt->insert_id;
+
+            $size = array('medium','large','xl');
+            $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?, ?)";
+
+            $stmt = $mysql->prepare($query);
+            foreach ($size as $key=>$value){
+                if(isset($id)){
+                    $stmt->bind_param('bissds', $null, $id, $size[$key], $productName, $productPrice, $file['type']);
+                    $stmt->send_long_data(0, file_get_contents($targetFilePath));
+                    $stmt->execute();
+                }
+            }
+            unlink($targetFilePath);
+            header("location: ../editProduct.php");
+        }catch (Exception $e){
+
+
+        }finally{
+            $stmt->close();
+        }
+    }
+}
+
+?>
