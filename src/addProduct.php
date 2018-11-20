@@ -49,14 +49,9 @@
 <?php
 
 //Also, I assume this Add Product thing will occur on some button press action, like "ADD PRODUCT"
+include "db_credentials.php"
 
-
-$databaseName = "db_40215162"; //database name
-$uID = "40215162"; //admin's ID
-$pw = "qscu42069!"; //admin's password
-$host = "cosc.360.ok.ubc.ca"; //host of database
-
-$con = new mysqli($host, $uID, $pw, $databaseName);
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 if($con -> connect_error){
 	die("Connection Failed: ".$con -> connect_error);
@@ -83,13 +78,13 @@ $sqlCategories = "SELECT DISTINCT cname FROM Category";
 
 if($cats = $con->query($sqlCategories)){ //If we have elements in categories array
 	
-	echo "<select multiple>"
+	echo "<select multiple>";
 	// While loop to traverse the result set.
 	while($catName = $cats->fetch_array()){
 		//DOUBLE CHECK THIS HTML PLEASE
 		echo '<option value="'.$catName["cname"].'>'.$catName["cname"].'</option>';
 	}
-	echo "</select>"
+	echo "</select>";
 
 }
 else{
