@@ -300,8 +300,21 @@ select.size {
     width: 100%;
     font-size: 18px;
 }
+
+/*.modal-footer .footerNote{*/
+    /*display: inline;*/
+/*}*/
+.footerNote{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+button.modal-footer{
+    position: center;
+}
 .modal-footer {
-  padding: 2px 16px;
+  /*padding: 2px 16px;*/
+    /*padding: 3% 28%;*/
+
   background-color: #183263;
   color: white;
 }
