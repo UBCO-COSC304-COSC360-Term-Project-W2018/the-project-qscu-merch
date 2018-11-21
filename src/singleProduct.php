@@ -73,9 +73,9 @@ catch (Exception $e) {
                 <p>Quantity</p>
                 <form id='myform' method='POST' action='#'>
                     <!--                    TODO: need to send this somwehere-->
-                    <input type='button' value='-' class='qtyminus' field='quantity' />
+                    <input title="Decrease Quantity" type='button' value='-' class='qtyminus' field='quantity' />
                     <input type='text' name='quantity' value='0' class='qty' />
-                    <input type='button' value='+' class='qtyplus' field='quantity' />
+                    <input title="Increase Quantity" type='button' value='+' class='qtyplus' field='quantity' />
 
                     <!-- added drop down menu -->
                     <select class="size">
@@ -86,7 +86,7 @@ catch (Exception $e) {
                     </select>
 
                 </form>
-                <button class="addCart">Add to Cart <i class="fa fa-shopping-cart"></i></button>
+                <button title="Add to Cart" class="addCart">Add to Cart <i class="fa fa-shopping-cart"></i></button>
 
             </div>
 
@@ -108,11 +108,14 @@ catch (Exception $e) {
         </h3> -->
         <!-- PLAYING WITH -->
         <h3>Reviews
-            <button id="writeReviewButton" class="addCart">Write a Review <span class="fa fa-pencil"></button>
+            <button title="Add Review" id="writeReviewButton" class="addCart">Write a Review <span class="fa fa-pencil"></button>
         </h3>
         <div class="review1">
             <p class=userProfile>
-                <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa R</a> <time datetime="2018-10-24">- October 24, 2018</time></p>
+                <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa R</a> <time datetime="2018-10-24">- October 24, 2018</time>
+
+                <button title="Add Comment" id="addCommentButton" alt="Add Comment" class="addCart"><span class="fa fa-comments-o"></button>
+            </p>
             <p class="userRating">
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
@@ -188,7 +191,7 @@ catch (Exception $e) {
         </div>
         <div class="modal-footer">
             <div class="reivewInputSubmit">
-                <button formaction="http://www.randyconnolly.com/tests/process.php" type="submit" id="SubmitButton" onsubmit="alert('Thank you for your review!');">Submit</button>
+                <button title="Submit Form" formaction="http://www.randyconnolly.com/tests/process.php" type="submit" id="SubmitButton" onsubmit="alert('Thank you for your review!');">Submit</button>
             </div>
             <h3 class="footerNote">We value your feedback!</h3>
 
