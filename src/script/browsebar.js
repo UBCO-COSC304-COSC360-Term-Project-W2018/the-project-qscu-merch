@@ -58,7 +58,7 @@ var isOpen = false;
     		
     	function dostuff1(json){
 	    	for(var i = 0; i<3; i++){
-				var browsedropitem = $("<li class='browsedropitem'><a href='categorypage.html' class='browsedroplink'>".json[i]."</a></li>");
+				var browsedropitem = $("<li class='browsedropitem'><a href='categorypage.html' class='browsedroplink'>" + json[i]+"</a></li>");
 				$(browsedroplist).append(browsedropitem);
 			}
     	}
