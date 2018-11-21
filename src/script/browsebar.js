@@ -4,7 +4,7 @@ var browsebar;
 var isOpen = false;
 
   function listCat() {
-      var results = $.get("../includes/listCategories.php");
+      var results = $.get("../src/listCategories.php");
       results.done(function(data) {
                             console.log(data);
 
@@ -23,13 +23,13 @@ var isOpen = false;
 			var browsedropnav = $('<nav id="browsedropnav"></nav>');
 			var browsedroptitle = $('<h4 id="browsedroptitle">Categories</h4>');
 			var browsedroplist = $('<ul id="browsedroplist"></ul>');
- //eventually loop so it pulls the category names from our database
+
  			listCat();
 			$(browsedroptitle).appendTo(browsedropnav);
 			$(browsedroplist).appendTo(browsedropnav);
 			$(browsedropnav).appendTo('#browsedropsection');
 			
-			browsedropnav.fadeIn(1000);
+			browsedropnav.fadeIn(100);
 			browsedropnav.css('position', 'absolute');
 			browsedropnav.css("top", ($("header")).height());
 			browsedropnav.css("left", "0px");
@@ -57,8 +57,8 @@ var isOpen = false;
     		});
     		
     	function dostuff1(json){
-	    	for(var i = 0; i<3; i++){
-				var browsedropitem = $("<li class='browsedropitem'><a href='categorypage.html' class='browsedroplink'>" + json[i]+"</a></li>");
+	    	for(var i = 0; i<json.length; i++){
+				var browsedropitem = $("<li class='browsedropitem'><a href='categorypage.html?cat=" +json[i]+"' class='browsedroplink'>" + json[i] + "</a></li>");
 				$(browsedroplist).append(browsedropitem);
 			}
     	}
