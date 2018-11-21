@@ -1,6 +1,6 @@
 <?php 
 	$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
-	$username = isset($_SESSION["fname"])? $_SESSION['fname']: null;
+	$name = isset($_SESSION["fName"])? $_SESSION['fName']: null;
 	?>
 	
 <!--HTML home page for shop.qscu.org-->
@@ -44,8 +44,8 @@
                 <a href="cart.php"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
                 
 	                <?php 
-	                if(isset($_SESSION["userId"])){
-						echo "<a href='profile.php'>" . $username . "</a>";
+	                if(isset($_SESSION["fName"])){
+						echo "<a href='profile.php'>" . $name . "</a>";
 	        		}else{
 						echo "<a href='login.php'>Login</a>";
 	        		}
