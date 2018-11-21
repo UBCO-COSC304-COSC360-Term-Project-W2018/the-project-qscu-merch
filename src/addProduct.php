@@ -49,7 +49,7 @@
 <?php
 
 //Also, I assume this Add Product thing will occur on some button press action, like "ADD PRODUCT"
-include "db_credentials.php"
+include "db_credentials.php";
 
 $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
@@ -88,7 +88,7 @@ if($cats = $con->query($sqlCategories)){ //If we have elements in categories arr
 
 }
 else{
-	echo "Error: ".$sqlCategories."<br>".mysql_error($con)
+	echo "Error: ".$sqlCategories."<br>".mysql_error($con);
 	die();
 }
 

@@ -6,7 +6,7 @@
 include "init.php";
 include "header.php";
 
-$user = $_SESSION["userId"]
+$user = $_SESSION["userId"];
 
 $databaseName = "db_40215162"; //database name
 $uID = "40215162"; //admin's ID
