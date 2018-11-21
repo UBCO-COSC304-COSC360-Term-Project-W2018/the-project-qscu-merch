@@ -1,70 +1,62 @@
 <?php
-//Ok so this will have shitty HTML in it, but it will be displaying all the products at each warehouse, kinda like the lab 7 listOrder form. Cool glad we got that out of the way...
-
-//this will require two queries. One for the warehouse, and one fro the products at each warehouse
-
 include "init.php";
 include "header.php";
 
-$user = $_SESSION["userId"]
+?>
 
-$databaseName = "db_40215162"; //database name
-$uID = "40215162"; //admin's ID
-$pw = "qscu42069!"; //admin's password
-$host = "cosc.360.ok.ubc.ca"; //host of database
 
-$con = new mysqli($host, $uID, $pw, $databaseName);
+<form>
+	First name:<br>
+	<input type="number" name="prodNum"><br>
+	<input type="submit" value="Submit"><br>
+</form>
+
+
+<?php
+
+//gotta check if its post, gotta check the user credentials... make sure that it's an admin page
+
+// if $_SERVER[] === POST.. check the login page
+
+$prodNum = $_POST['prodNum']; //make sure this is set and non-empty
+
+include "includes/db_credentials.php";
+
+$user = $_SESSION["userId"];
+
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 if($con -> connect_errno){
     die("Connection Failed: ".$con -> connect_errno);
 }
 
+//gotta use a prepared statement
 
-$sqlWH = "SELECT wNo, location FROM Warehouse";
+$sql = "SELECT pname, size, quantity, wNo FROM HasInventory, Product WHERE HasInventory.".$prodNum." = Product.".$prodNum." AND HasInventory.size";
 
-echo "<table border=\"1\"><tr><th>Warehouse Number</th><th>Location</th></tr>";
+if($result = mysqli_query($con, $sql)){
+    echo '<table border="1"><tr><th>Product Number</th></tr>';
+	echo "<tr><td>".$prodNum."</td>";
 
-if($warehouses = $con->query($sqlWH)){
-
-	while($WH = $warehouses->fetch_assoc()){
-
-		echo "<tr><td>".$WH['wNo']."</td>";
-		echo "<td>".$WH['location']."</td>";
-
-		$sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory, Product WHERE wNO = ".$WH['wNo']." AND HasInventory.pNo = Product.pNo AND HasInventory.size = Product.size";
+	echo '<tr align="right"><td colspan="4"><table border="1">';
+	echo "<th>Product Name</th><th>Size</th> <th>Quantity</th> <th>Warehouse Number</th></tr>";
+	while($row = mysqli_fetch_assoc($result)){
 
 
-		echo "<tr align=\"right\"><td colspan=\"4\"><table border=\"1\">";
-		echo "<th>Product Id</th><th>Product Name</th> <th>Size</th> <th>Quantity</th></tr>";
+        echo "<tr><td>".$row['pname']."</td>";
+        echo "<tr><td>".$row['size']."</td>";
+        echo "<tr><td>".$row['quantity']."</td>";
+        echo "<tr><td>".$row['wNo']."</td>";
 
-		if($prodInv = $con->query($sqlProds)){
-
-			while($prodList = $prodInv->fetch_assoc()){
-
-				echo "<tr><td>".$prodList['pNo']."</td>";
-				echo "<td>".$prodList['pname']."</td>";
-				echo "<td>".$prodList['size']."</td>";
-				echo "<td>".$prodList['quantity']."</td>";
-				echo "</tr>";
-
-			}
-
-		}
-		else{
-			die();
-		}
-
-		echo "</table></td></tr>";
-
-	}
-
-
+    }
+	echo "</table>";
 }
 else{
-	die();
+    die();
 }
 
-echo "</table>";
+
+$con->close();
 
 ?>
 
