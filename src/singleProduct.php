@@ -4,16 +4,16 @@ include "includes/init.php";
 include "header.php";
 
 try{
-    $user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
+$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
 
-    $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-    if($con -> connect_errno){
-        die("Connection Failed: ".$con -> connect_errno);
-    }
+if($con -> connect_errno){
+	die("Connection Failed: ".$con -> connect_errno);
+}
 }
 catch (Exception $e) {
-    die("Error with Cart. Session Terminated.");
+	die("Error with Cart. Session Terminated.");
 }
 
 ?>
@@ -33,8 +33,11 @@ catch (Exception $e) {
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="../src/script/quantity.js"></script>
     <script type="text/javascript" src="../src/script/reviewModal.js"></script>
-
 </head>
+<!--    Body-->
+
+<body>
+<main>
 
 <!--    make sure all the files that we update have the same and CORRECT width/height -->
 <div class="bigboi">
