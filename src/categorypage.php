@@ -1,12 +1,12 @@
-<?php 
-	$headerSet = 1;
-include "init.php";
+ <?php 
+$headerSet = 1;
+include "includes/init.php";
 include "header.php";
-include "db_credentials.php";
+//include "includes/db_credentials.php";
 
 try{
 
-$user = $_SESSION["userId"];
+$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
 
 $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
@@ -25,7 +25,7 @@ catch (Exception $e) {
 
 
 ?>
-
+<!DOCTYPE HTML>
 <html>
 <!--    Head-->
 
@@ -53,18 +53,18 @@ catch (Exception $e) {
 
 					<!-- LIAM MAKE THIS A QUERY FOR THE CATEGORIES LIST -->
 					<?php
+					
 					$sqlCats = "SELECT cname FROM Category";
 
-					if($cats = $con->query($sqlCats)){
+					if($cats = $con->query($sqlCats)) {
 
-						while($catNames = $cats->fetch_assoc()){
+						while($catNames = $cats->fetch_assoc()) {
 
-							$name = '"'.$catNames['cname'].'"';
+							$name = $catNames['cname'];
 
-							echo "<li class='browseitem'><a href='categorypage.php' class='browselink'>$name</a></li>";
+							echo "<li class='browseitem'><a href='categorypage.php?cat=" . $name . "' class='browselink'>" . $name . "</a></li>";
 						}
-					}
-					else{
+					} else {
 						echo "Category Query failed.";
 						die();
 					}
@@ -80,9 +80,12 @@ catch (Exception $e) {
 
 			//So here I will use a cat = $_GET["cname"] to determine what category I'm in
 			//This might be the wrong way of getting the current category, so James do you wanna double check? Thanks
-			$currCat = $_GET["cname"];
+			$currCat = "";
+			if (isset($_GET['cat'])){
+				$currCat = $_GET['cat'];
+			}
 
-			$getCID = "SELECT cid FROM Category WHERE cname = '".$currCat."'";
+			$getCID = "SELECT cid FROM Category WHERE cname = '". $currCat ."'";
 
 			if($catID = $con->query($currCat)){
 
@@ -92,7 +95,7 @@ catch (Exception $e) {
 
 
 				//IDK why its purple... I dont like it what if it breaks. PHP is not fun
-				$sqlListProds = "SELECT pname, price, image, AVG(rating) AS score FROM Product, Reviews, ProductInCategory WHERE ProductInCategory.cid = $cID, ProductInCategory.pNo = Product.pNo, Product.pNo = Reviews.pNo";
+				$sqlListProds = "SELECT pname, price, image, AVG(rating) AS score FROM Product, Reviews, ProductInCategory WHERE ProductInCategory.cid =" . $cID . ", ProductInCategory.pNo = Product.pNo, Product.pNo = Reviews.pNo";
 
 				if($prods = $con->query($sqlListProds)){
 
@@ -105,7 +108,7 @@ catch (Exception $e) {
 
                     	$rating = '"'.round($rating).'"';
 
-						echo "<div class='item'><div class='itempicture'><a href='singleProduct.html'><img src=$image alt='Product Picture'/></a></div><div class='iteminfo'><p class='pname'><a href='#'>$prodName</a></p><p class='itemprice'>$price</p><p class='numberofliams'>$rating</p><p class='addtocart'><button>Add to Cart <i class='fa fa-shopping-cart'></i></button></p></div></div>";
+						echo "<div class='item'><div class='itempicture'><a href='singleProduct.html'><img src='" . $image . "' alt='Product Picture'/></a></div><div class='iteminfo'><p class='pname'><a href='#'>" . $prodName . "</a></p><p class='itemprice'>" . $price . "</p><p class='numberofliams'>" . $rating . "</p><p class='addtocart'><button>Add to Cart <i class='fa fa-shopping-cart'></i></button></p></div></div>";
 
 					}
 				}

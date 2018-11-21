@@ -1,12 +1,21 @@
 <?php
-include "init.php";
+$headerSet = 0;
+include "includes/init.php";
 include "header.php";
 
 
-$con = mysqli_connect("cosc360.ok.ubc.ca", "40215162", "password", "db_402151562");
+try{
 
-if ( mysqli_connect_errno()) {
-echo "Failed to connect to MySQL";
+$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
+
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+
+if($con -> connect_errno){
+	die("Connection Failed: ".$con -> connect_errno);
+}
+}
+catch (Exception $e) {
+	die("Error with Cart. Session Terminated.");
 }
 
 ?>
@@ -22,7 +31,7 @@ echo "Failed to connect to MySQL";
     <link rel="stylesheet" href="css/singleProduct.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="script/quantity.js"></script>
 </head>
 

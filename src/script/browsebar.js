@@ -3,6 +3,17 @@ $(document).ready(function() {
 var browsebar;		
 var isOpen = false;
 
+  function listCat() {
+      var results = $.get("../includes/listCategories.php");
+      results.done(function(data) {
+                            console.log(data);
+
+                            dostuff1(data);
+                              });
+      results.fail(function(jqXHR) {console.log("Error: " + jqXHR.status);});
+      results.always(function() {console.log("done");});
+
+  }
 
 	$("#browsedropbutton")
 		.on("click", function(e){
@@ -12,10 +23,8 @@ var isOpen = false;
 			var browsedropnav = $('<nav id="browsedropnav"></nav>');
 			var browsedroptitle = $('<h4 id="browsedroptitle">Categories</h4>');
 			var browsedroplist = $('<ul id="browsedroplist"></ul>');
-			for(var i = 0; i<9; i++){
-				var browsedropitem = $('<li class="browsedropitem"><a href="categorypage.html" class="browsedroplink">Filler Name</a></li>');
-				$(browsedroplist).append(browsedropitem);
-			} //eventually loop so it pulls the category names from our database
+ //eventually loop so it pulls the category names from our database
+ 			listCat();
 			$(browsedroptitle).appendTo(browsedropnav);
 			$(browsedroplist).appendTo(browsedropnav);
 			$(browsedropnav).appendTo('#browsedropsection');
@@ -35,6 +44,7 @@ var isOpen = false;
 				}
     		}
     	});
+
     	
     	$("main").mouseup(function(e){
 			var container = $("#browsedropnav");
@@ -45,4 +55,11 @@ var isOpen = false;
 					console.log("After mouseup: " + isOpen);
 				}
     		});
+    		
+    	function dostuff1(json){
+	    	for(var i = 0; i<3; i++){
+				var browsedropitem = $("<li class='browsedropitem'><a href='categorypage.html' class='browsedroplink'>".json[i]."</a></li>");
+				$(browsedroplist).append(browsedropitem);
+			}
+    	}
 });
