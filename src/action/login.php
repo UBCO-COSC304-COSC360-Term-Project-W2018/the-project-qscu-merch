@@ -17,7 +17,7 @@ function loginFailed($input = null)
 }
 
 try {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ((isset($_POST["email"]) && isset($_POST["password"])) && ($_POST["email"] != "" && $_POST["password"] != "")) {
             $email = strtolower(trim($_POST['email']));
             $password = trim($_POST["password"]);

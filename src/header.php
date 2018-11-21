@@ -1,15 +1,6 @@
-<?php 
-	$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
-	?>
-	
-<!--HTML home page for shop.qscu.org-->
-<!DOCTYPE HTML>
-<html lang="en">
 
-<!--    Body-->
+<?php$user = isset($_SESSION["userId"])? $_SESSION['userId']: null; ?>
 
-<body>
-    <!--    Header-->
     <header>
         <div id="htop">
             <a href="homeWithoutTables.php" id="logo"><img id="headerIcon" src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union"/> </a>
@@ -53,10 +44,5 @@
             </div>
 
         </div>
-
     </header>
-</body>
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="script/browsebar.js"></script>
-</html>
-<!-- Header end -->
+
