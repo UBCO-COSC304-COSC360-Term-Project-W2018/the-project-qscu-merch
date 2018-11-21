@@ -19,7 +19,7 @@ $sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory, Product WHERE 
 
 $sqlWH = "SELECT wNo, location FROM Warehouse";
 
-echo "<table border=\"1\"><tr><th>Warehouse Number</th><th>Location</th></tr>";
+echo "<table border=\'"1"\'><tr><th>Warehouse Number</th><th>Location</th></tr>";
 
 if($warehouses = $con->query($sqlWH)){
 
@@ -29,7 +29,7 @@ if($warehouses = $con->query($sqlWH)){
 		echo "<td>".$WH['location']."</td>";
 
 
-		echo "<tr align=\"right\"><td colspan=\"4\"><table border=\"1\">";
+		echo "<tr align=\'"right"\'><td colspan=\'"4"\'><table border=\'"1"\'>";
 		echo "<th>Product Id</th><th>Product Name</th> <th>Size</th> <th>Quantity</th></tr>";
 
 		if($pstmt = msqli_prepare($con, $sqlProds)){
