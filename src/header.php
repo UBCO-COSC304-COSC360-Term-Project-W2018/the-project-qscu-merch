@@ -1,5 +1,5 @@
-<?php$user = isset($_SESSION["userId"])? null: $_SESSION['userId']; ?>
 
+<?php$user = isset($_SESSION["userId"])? $_SESSION['userId']: null; ?>
 
     <header>
         <div id="htop">
@@ -44,5 +44,5 @@
             </div>
 
         </div>
-
     </header>
+
