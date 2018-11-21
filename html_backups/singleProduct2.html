@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="icon" type="image/x-icon" href="../src/images/QSCU_favicon.png" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-  <script type="text/javascript" src="script/quantity.js"></script>
+  <script type="text/javascript" src="../src/script/quantity.js"></script>
 </head>
 
 
@@ -45,7 +45,8 @@
     </div>
 
   </header>
-  
+
+
   <!--    make sure all the files that we update have the same and CORRECT width/height -->
   <div class="bigboi">
     <div class="container">
@@ -111,10 +112,15 @@
 
     </div>
     <section id="reviews">
-      <h3>Reviews <a href="login.html" class="fa fa-pencil"> Write a Review </a>
+      <!-- ORIGINAL -->
+      <!-- <h3>Reviews <a href="login.html" class="fa fa-pencil"> Write a Review </a>
+      </h3> -->
+      <!-- PLAYING WITH -->
+      <h3>Reviews
+        <button id="writeReviewButton" class="addCart">Write a Review <span class="fa fa-pencil"></button>
       </h3>
       <div class="review1">
-        <p class="userProfile">
+        <p class=userProfile>
           <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa R</a> <time datetime="2018-10-24">- October 24, 2018</time></p>
         <p class="userRating">
           <span class="fa fa-star checked"></span>
@@ -146,6 +152,12 @@
         </p>
         <p class="reviewDescription">Review Description Here</p>
       </div>
+      <!--
+        <div class="review2">
+            <p class="byline">By Parsa on <time datetime="2016-10-01">October 30, 2018</time></p>
+            <p class="userReview">10/10 would buy again.</p>
+        </div>
+-->
     </section>
   </div>
 
@@ -154,7 +166,7 @@
   <!--    added footer-->
   <footer>
     <div class="footLogo">
-      <a href="home.html"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union"> </a>
+      <a href="home.html"><img src="../src/images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union"> </a>
     </div>
 
 
@@ -176,6 +188,83 @@
 
     </div>
   </footer>
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h1>Product Review</h1>
+      </div>
+      <div class="modal-body">
+
+        <h2> Overall Rating</h2>
+        <!-- added drop down rating -->
+        <select class="ratingInput">
+            <!--TODO: change value of default selected option, how about null?-->
+            <option  selected value="noStar">Select a rating</option>
+            <option value="1">1 Star</option>
+            <option value="2">2 Star</option>
+          <option value="3">3 Star</option>
+          <option value="4">4 Star</option>
+          <option  value="5">5 Star</option>
+        </select>
+
+
+        <form id="contactForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
+
+          <!-- Review input -->
+          <h2>What did you like or dislike about it? What did you use this product for?</h2>
+          <div class="formElement">
+            <!-- max lenght is 200 chars and there are 3 rows -->
+            <textarea id="reviewInput" name="userReviewInput" placeholder="Write your review" rows="8" maxlength="400" required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+          <div class="reivewInputSubmit">
+          <button formaction="http://www.randyconnolly.com/tests/process.php" type="submit" id="SubmitButton" onsubmit="alert('Thank you for your review!');">Submit</button>
+          </div>
+              <h3 class="footerNote">We value your feedback!</h3>
+
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    $(document).ready(function() {
+
+      // Get the modal
+      var modal = document.getElementById('myModal');
+
+      // Get the button that opens the modal
+      var btn = document.getElementById("writeReviewButton");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks the button, open the modal
+      btn.onclick = function() {
+        modal.style.display = "block";
+      };
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      };
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    });
+  </script>
 </body>
 
 </html>
