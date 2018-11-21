@@ -3,8 +3,9 @@ if (!isset($dbcred)) {
     include 'db_credentials.php';
 }
 
-function isAdmin($userid)
-{
+function isAdmin($userid){
+
+
     try {
         $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
         if ($mysql->errno) {

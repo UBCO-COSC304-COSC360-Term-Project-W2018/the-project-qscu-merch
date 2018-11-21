@@ -8,9 +8,6 @@ validateAdminRequest($_SESSION);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $inputFields = array('productName', 'productPrice');
-    $temp1 =arrayExists($_POST, $inputFields);
-    $temp2 = arrayIsValidInput($_POST, $inputFields);
-    $temp3 = isset($_POST['productDescription']);
 
     if (!(arrayExists($_POST, $inputFields) && arrayIsValidInput($_POST, $inputFields) && isset($_POST['productDescription']))) {
         //invalid data entry
@@ -72,16 +69,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $size = array('medium','large','xl');
             $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?, ?)";
 
-            $stmt = $mysql->prepare($query);
-            foreach ($size as $key=>$value){
-                if(isset($id)){
+            if(isset($id)) {
+                $stmt = $mysql->prepare($query);
+                foreach ($size as $key => $value) {
+
                     $stmt->bind_param('bissds', $null, $id, $size[$key], $productName, $productPrice, $file['type']);
                     $stmt->send_long_data(0, file_get_contents($targetFilePath));
                     $stmt->execute();
                 }
+                unlink($targetFilePath);
+                array_push($size,"small");
+
+                $query = "INSERT INTO HasInventory (wNo, pNo, size, quantity) VALUES (1, ?, ?, 0)";
+                $stmt = $mysql->prepare($query);
+                foreach ($size as $key2 => $value2) {
+                    $stmt->bind_param('ss', $id, $size[$key2]);
+                    $stmt->execute();
+                }
+
+                header("location: ../editProduct.php");
+            }else{
+                //failed to add item
             }
-            unlink($targetFilePath);
-            header("location: ../editProduct.php");
         }catch (Exception $e){
 
 
