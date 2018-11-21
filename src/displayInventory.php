@@ -5,7 +5,7 @@
 
 include "init.php";
 include "header.php";
-include "db_credentials.php";
+include "includes/db_credentials.php";
 
 $user = $_SESSION["userId"];
 
@@ -15,10 +15,11 @@ if($con -> connect_errno){
     die("Connection Failed: ".$con -> connect_errno);
 }
 
+$sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory, Product WHERE HasInventory.pNo = Product.pNo AND HasInventory.size = Product.size AND wNO = ?";
 
 $sqlWH = "SELECT wNo, location FROM Warehouse";
 
-echo "<table border=\"1\"><tr><th>Warehouse Number</th><th>Location</th></tr>";
+echo "<table border=\'"1"\'><tr><th>Warehouse Number</th><th>Location</th></tr>";
 
 if($warehouses = $con->query($sqlWH)){
 
@@ -27,20 +28,23 @@ if($warehouses = $con->query($sqlWH)){
 		echo "<tr><td>".$WH['wNo']."</td>";
 		echo "<td>".$WH['location']."</td>";
 
-		$sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory, Product WHERE wNO = ".$WH['wNo']." AND HasInventory.pNo = Product.pNo AND HasInventory.size = Product.size";
 
-
-		echo "<tr align=\"right\"><td colspan=\"4\"><table border=\"1\">";
+		echo "<tr align=\'"right"\'><td colspan=\'"4"\'><table border=\'"1"\'>";
 		echo "<th>Product Id</th><th>Product Name</th> <th>Size</th> <th>Quantity</th></tr>";
 
-		if($prodInv = $con->query($sqlProds)){
+		if($pstmt = msqli_prepare($con, $sqlProds)){
 
-			while($prodList = $prodInv->fetch_assoc()){
+			mysqli_stmt_bindm($pstmt, 'i', $WH['wNo']);
+			mysqli_stmt_execute($pstmt);
 
-				echo "<tr><td>".$prodList['pNo']."</td>";
-				echo "<td>".$prodList['pname']."</td>";
-				echo "<td>".$prodList['size']."</td>";
-				echo "<td>".$prodList['quantity']."</td>";
+			mysqli_stmt_bind_result($pstmt, $pNo, $size, $quantity, $pname)
+
+			while(mysqli_stmt_fetch($pstmt)){
+
+				echo "<tr><td>".$pNo."</td>";
+				echo "<td>".$pname."</td>";
+				echo "<td>".$size."</td>";
+				echo "<td>".$quantity."</td>";
 				echo "</tr>";
 
 			}
