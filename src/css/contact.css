@@ -29,9 +29,6 @@ html {
   order: -1;
   width: 400px;
 }
-h1{
-  text-align: center;
-}
 
 fieldset {
     text-align: center;
@@ -96,7 +93,11 @@ a{
 a:hover{
   color: tomato;
 }
-
+@media screen and (max-width: 790px) {
+    .container {
+        flex-direction: column;
+    }
+}
 /* .container{
     display: flex;
     flex-direction: row;
