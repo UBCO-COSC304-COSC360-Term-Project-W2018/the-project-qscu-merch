@@ -1,21 +1,10 @@
 <?php 
-	$user = isset($_SESSION["userId"])? null: $_SESSION['userId']; ?>
+	$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
+	?>
 	
 <!--HTML home page for shop.qscu.org-->
 <!DOCTYPE HTML>
 <html lang="en">
-<!--    Head-->
-
-<head lang="en">
-    <meta charset="utf-8">
-    <title>QSCU Merch Store</title>
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
-    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="script/browsebar.js"></script>
-</head>
 
 <!--    Body-->
 
@@ -67,5 +56,7 @@
 
     </header>
 </body>
+<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="script/browsebar.js"></script>
 </html>
 <!-- Header end -->
