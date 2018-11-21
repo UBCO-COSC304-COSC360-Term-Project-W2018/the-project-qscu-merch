@@ -1,23 +1,16 @@
 <?php 
 include "init.php";
 include "header.php";
+include "db_credentials.php";
 
-$user = $_SESSION["userId"]
+$user = $_SESSION["userId"];
 
-$databaseName = "db_40215162"; //database name
-$uID = "40215162"; //admin's ID
-$pw = "qscu42069!"; //admin's password
-$host = "cosc.360.ok.ubc.ca"; //host of database
-
-$con = new mysqli($host, $uID, $pw, $databaseName);
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 if($con -> connect_errno){
     die("Connection Failed: ".$con -> connect_errno);
 }
 
-$sqlGetCart = "SELECT pNo, size, quantity, pname, price FROM HasCart, Product WHERE uid = ".$user." and HasCart.pNo = Product.pNo";
-
-$sqlGetCartPrice = "SELECT SUM(P.price) AS cartPrice FROM HasCart H, Product P WHERE H.uid = ".$user." and H.pNo = P.pNo";
 
 ?>
 
@@ -44,9 +37,12 @@ $sqlGetCartPrice = "SELECT SUM(P.price) AS cartPrice FROM HasCart H, Product P W
         <div id="cartMain">
             <?php
 
+
+            $sqlGetCart = "SELECT pNo, size, quantity, pname, price FROM HasCart, Product WHERE uid = ".$user." and HasCart.pNo = Product.pNo";
+
             if($result = $con->query($sqlGetCart)){
 
-                echo "<div class='product'>"
+                echo "<div class='product'>";
 
                 while($prod = $result->fetch_assoc()){
 
@@ -55,14 +51,10 @@ $sqlGetCartPrice = "SELECT SUM(P.price) AS cartPrice FROM HasCart H, Product P W
                     $prodName = '"'.$prod['pname'].'"';
                     $size = '"'.$prod['size'].'"';
 
-                   echo "<input type='text' class='cartProductAmount' name='product'placeholder=$quant maxlength='2'>
-                   <span class='productName'><a class='aCart' href=''>$prodName</a></span>
-                    <span class='priceLabel'>Price: $</span>
-                    <span class='productPrice'>$price</span>
-                    <span><a class='aCart' href=''>remove</a></span>"
+                   echo "<input type='text' class='cartProductAmount' name='product'placeholder=$quant maxlength='2'><span class='productName'><a class='aCart' href=''>$prodName</a></span><span class='priceLabel'>Price: $</span><span class='productPrice'>$price</span><span><a class='aCart' href=''>remove</a></span>";
                 }
 
-                echo "</div>"
+                echo "</div>";
 
                 }
             else{
@@ -76,14 +68,13 @@ $sqlGetCartPrice = "SELECT SUM(P.price) AS cartPrice FROM HasCart H, Product P W
 
             <?php
 
+            $sqlGetCartPrice = "SELECT SUM(P.price) AS cartPrice FROM HasCart H, Product P WHERE H.uid = ".$user." and H.pNo = P.pNo";
+
             if($resultPrice  = $con->query($sqlGetCartPrice)){
 
                 $totalPrice = '"'.$resultPrice['cartPrice'].'"';
 
-                echo "<span>Total Cost: $<span id='costTotal'>$totalPrice</span>
-                    <button>Update Cart</button>
-                    <button>Check-out</button>
-                    </span>"
+                echo "<span>Total Cost: $<span id='costTotal'>$totalPrice</span><button>Update Cart</button><button>Check-out</button></span>";
             }
             else{
                 die();
