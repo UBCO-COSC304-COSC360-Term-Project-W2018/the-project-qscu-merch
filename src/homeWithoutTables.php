@@ -1,6 +1,29 @@
-<?php
+ <?php 
+
 $headerSet = 1;
+include "includes/init.php";
 include "header.php";
+//include "includes/db_credentials.php";
+
+try{
+
+$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
+
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+
+if($con -> connect_errno){
+	die("Connection Failed: ".$con -> connect_errno);
+}
+
+//Query for categories, then query for the individual products in the category
+
+//Im gonna assume I know what category you are all clicking on also, that would make it easier for me
+
+}
+catch (Exception $e) {
+	die("Error with Cart. Session Terminated.");
+}
+
 
 ?>
 
@@ -29,15 +52,24 @@ include "header.php";
 			<nav id="browsenav">
 				<h4 id="browsetitle">Categories</h4>
 				<ul id="browselist">
-					<li class="browseitem"><a href="categorypage.php" class="browselink">T-Shirts</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Hoodies</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Lanyards</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Ping Pongs</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Solo Cups</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Hats</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Rain Jackets</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Exam Answers</a></li>
-					<li class="browseitem"><a href="categorypage.php" class="browselink">Liam</a></li>		    				
+					<?php
+					
+					$sqlCats = "SELECT cname FROM Category";
+
+					if($cats = $con->query($sqlCats)) {
+
+						while($catNames = $cats->fetch_assoc()) {
+
+							$name = $catNames['cname'];
+
+							echo "<li class='browseitem'><a href='categorypage.php?cat=" . $name . "' class='browselink'>" . $name . "</a></li>";
+						}
+					} else {
+						echo "Category Query failed.";
+						die();
+					}
+
+					?>	
 				</ul>
 	    	</nav>
 		</div>

@@ -4,7 +4,6 @@ include "includes/init.php";
 include "header.php";
 
 try{
-
     $user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
 
     $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
@@ -18,6 +17,9 @@ catch (Exception $e) {
 }
 
 ?>
+
+<!DOCTYPE HTML>
+<html lang="en">
 
 <!--    Head-->
 <head lang="en">
