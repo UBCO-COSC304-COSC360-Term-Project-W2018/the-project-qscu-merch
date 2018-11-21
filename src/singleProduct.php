@@ -37,7 +37,6 @@ catch (Exception $e) {
 <!--    Body-->
 
 <body>
-<main>
 
 <!--    make sure all the files that we update have the same and CORRECT width/height -->
 <div class="bigboi">
