@@ -4,7 +4,7 @@ var browsebar;
 var isOpen = false;
 
   function listCat() {
-      var results = $.get("../includes/listCategories.php");
+      var results = $.get("../src/listCategories.php");
       results.done(function(data) {
                             console.log(data);
 
@@ -57,8 +57,8 @@ var isOpen = false;
     		});
     		
     	function dostuff1(json){
-	    	for(var i = 0; i<3; i++){
-				var browsedropitem = $("<li class='browsedropitem'><a href='categorypage.html' class='browsedroplink'>".json[i]."</a></li>");
+	    	for(var i = 0; i<json.length; i++){
+				var browsedropitem = $("<li class='browsedropitem'><a href='categorypage.html?cat=" +json[i]+"' class='browsedroplink'>" + json[i] + "</a></li>");
 				$(browsedroplist).append(browsedropitem);
 			}
     	}
