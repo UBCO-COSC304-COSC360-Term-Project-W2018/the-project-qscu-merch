@@ -1,7 +1,4 @@
 /*css for single product*/
-* {
-  font-family: serif;
-}
 
 .bigboi {
   width: 100%;
@@ -199,7 +196,7 @@ select.size {
   /* Stay in place */
   z-index: 1;
   /* Sit on top */
-  padding-top: 100px;
+  padding-top: 50px;
   /* Location of the box */
   left: 0;
   top: 0;
@@ -296,25 +293,29 @@ select.size {
 }
 
 #reviewInput{
-    /*min-width: 451px;*/
     width: 100%;
+    max-width: 100%;
+    min-width: 50%;
     font-size: 18px;
 }
 
 /*.modal-footer .footerNote{*/
     /*display: inline;*/
 /*}*/
-.footerNote{
-    margin-bottom: 0;
-    padding-bottom: 0;
+.modal-footer .footerNote{
+    margin: 0;
+    padding-top: 0.5em;
 }
-button.modal-footer{
-    position: center;
+.modal-footer .reivewInputSubmit{
+padding-top: 1em;
+}
+.modal-footer button{
+    font-size: 18px;
 }
 .modal-footer {
-  /*padding: 2px 16px;*/
-    /*padding: 3% 28%;*/
-
+    display: block;
+    margin: 0 auto;
+    text-align: center;
   background-color: #183263;
   color: white;
 }
