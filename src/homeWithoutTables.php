@@ -15,13 +15,9 @@ if($con -> connect_errno){
 	die("Connection Failed: ".$con -> connect_errno);
 }
 
-//Query for categories, then query for the individual products in the category
-
-//Im gonna assume I know what category you are all clicking on also, that would make it easier for me
-
 }
 catch (Exception $e) {
-	die("Error with Cart. Session Terminated.");
+	die("Session Terminated.");
 }
 
 

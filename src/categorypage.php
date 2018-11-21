@@ -2,7 +2,6 @@
 $headerSet = 1;
 include "includes/init.php";
 include "header.php";
-//include "includes/db_credentials.php";
 
 try{
 
@@ -10,16 +9,10 @@ $user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
 
 $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-if($con -> connect_errno){
-	die("Connection Failed: ".$con -> connect_errno);
-}
-
-//Query for categories, then query for the individual products in the category
-
-//Im gonna assume I know what category you are all clicking on also, that would make it easier for me
-
-}
-catch (Exception $e) {
+	if($con -> connect_errno){
+		die("Connection Failed: ".$con -> connect_errno);
+	}
+} catch (Exception $e) {
 	die("Error with Cart. Session Terminated.");
 }
 
@@ -33,10 +26,7 @@ catch (Exception $e) {
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
     <link rel="stylesheet" href="css/categorypage.css" />
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
+	<?php include 'includes/headerFooterHead.php'?>
 
 
 </head>
