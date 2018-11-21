@@ -148,3 +148,8 @@ header{
 #searchbar input{
 	min-width: 105px;
 }
+
+#logout{
+	margin-right:-1em;
+	padding-left: 1em;
+}
