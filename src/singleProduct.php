@@ -4,7 +4,6 @@ include "includes/init.php";
 include "header.php";
 
 try{
-
 $user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
 
 $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
@@ -18,82 +17,27 @@ catch (Exception $e) {
 }
 
 ?>
+
 <!DOCTYPE HTML>
 <html lang="en">
-<!--    Head-->
 
+<!--    Head-->
 <head lang="en">
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" href="css/singleProduct.css">
+    <link rel="stylesheet" href="../src/css/header.css" />
+    <link rel="stylesheet" href="../src/css/footer.css" />
+    <link rel="stylesheet" href="../src/css/singleProduct.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
+    <link rel="icon" type="image/x-icon" href="../src/images/QSCU_favicon.png" />
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="script/quantity.js"></script>
+    <script type="text/javascript" src="../src/script/quantity.js"></script>
+    <script type="text/javascript" src="../src/script/reviewModal.js"></script>
 </head>
-
-
 <!--    Body-->
 
 <body>
 <main>
-    <!--    make sure all the files that we update have the same and CORRECT width/height -->
-    <div class="bigboi">
-        <div class="container">
-            <img src="../src/images/pingpong.jpg" alt="Product Picture">
-
-            <div class="sideContent">
-                <!--            name of product-->
-                <div class="pName">
-                    <h1>Ping Pongs
-                    </h1>
-                    <!--                sub-title stuff -->
-                    <p>3 Balls per pack</p>
-                </div>
-                <!--rating-->
-                <div class="rating">
-                    <p>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star "></span>
-                        <span class="fa fa-star"></span>
-
-                        <!--                <a href="#reviews">Reviews</a>-->
-                    </p>
-                </div>
-                <!--description-->
-                <div class=pDesc>
-                    <h3> Description</h3>
-                    <p>These ping pongs are directly from south Tunisia. They are the authentic hollowed out eyes of the western red and blue zebras. Buy now, while supplies last. 100% guaranteed to improve your beer-pong game! </p>
-                </div>
-                <!--quantity counter-->
-                <div class="quant">
-                    <p>Quantity</p>
-                    <form id='myform' method='POST' action='#'>
-                        <!--TODO: need to send this somwehere-->
-                        <input type='button' value='-' class='qtyminus' field='quantity' />
-                        <input type='text' name='quantity' value='0' class='qty' />
-                        <input type='button' value='+' class='qtyplus' field='quantity' />
-
-                        <button class="addCart">Add to Cart <i class="fa fa-shopping-cart"></i></button>
-                    </form>
-
-                </div>
-
-                <!--            price-->
-                <div class="price">
-                    <p>Listed Price: <label class="oldPrice">CDN$299.99</label></p>
-
-                    <p>Price: <label class="sale">CDN$199.99</label>
-
-//TODO: Remove this
-// $_SESSION["cart"] = $arrayName = array('' => , );
-$_SESSION["cart"];
-
-
 
 <!--    make sure all the files that we update have the same and CORRECT width/height -->
 <div class="bigboi">
