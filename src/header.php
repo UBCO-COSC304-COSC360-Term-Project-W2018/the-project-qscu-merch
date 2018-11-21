@@ -1,14 +1,12 @@
 
 <?php 
 	$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
-	$username = isset($_SESSION["fname"])? $_SESSION['fname']: null;
+	$name = isset($_SESSION["fName"])? $_SESSION["fName"]: null;
 	?>
 	
 <!--HTML home page for shop.qscu.org-->
 <!DOCTYPE HTML>
 <html lang="en">
-
-<?php$user = isset($_SESSION["userId"])? $_SESSION['userId']: null; ?>
 
     <header>
         <div id="htop">
@@ -44,7 +42,7 @@
                 
 	                <?php 
 	                if(isset($_SESSION["userId"])){
-						echo "<a href='profile.php'>" . $username . "</a>";
+						echo "<a href='profile.php'>" . $name . "</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
 	        		}else{
 						echo "<a href='login.php'>Login</a>";
 	        		}

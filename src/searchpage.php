@@ -15,7 +15,7 @@ $headerSet = 0;
 <!--    Body-->
 
 <body>
-<?php include "header.php";?>
+<?php include "header.php"?>
     <!-- Main Body -->
 <main>
 	<div id="main">
