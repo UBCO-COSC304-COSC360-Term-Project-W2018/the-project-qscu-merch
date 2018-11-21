@@ -1,11 +1,38 @@
 <?php
-include "init.php";
+$headerSet = 0;
+include "includes/init.php";
 include "header.php";
 
-//TODO: Remove this
-// $_SESSION["cart"] = $arrayName = array('' => , );
-$_SESSION["cart"];
+try{
+
+    $user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
+
+    $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+
+    if($con -> connect_errno){
+        die("Connection Failed: ".$con -> connect_errno);
+    }
+}
+catch (Exception $e) {
+    die("Error with Cart. Session Terminated.");
+}
+
 ?>
+
+<!--    Head-->
+<head lang="en">
+    <meta charset="utf-8">
+    <title>QSCU Merch Store</title>
+    <link rel="stylesheet" href="../src/css/header.css" />
+    <link rel="stylesheet" href="../src/css/footer.css" />
+    <link rel="stylesheet" href="../src/css/singleProduct.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="icon" type="image/x-icon" href="../src/images/QSCU_favicon.png" />
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../src/script/quantity.js"></script>
+    <script type="text/javascript" src="../src/script/reviewModal.js"></script>
+
+</head>
 
 <!--    make sure all the files that we update have the same and CORRECT width/height -->
 <div class="bigboi">
