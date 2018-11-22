@@ -1,10 +1,6 @@
 <?php
 include "includes/init.php";
-include "includes/headerFooterHead.php";
 $headerSet = 1;
-include "header.php";
-?>
-<?php
 
 $_SESSION['userid']=1;
 
@@ -36,6 +32,7 @@ $mysqli = new mysqli ("localhost", "rachellegelden", "rachelle", "qscurachelle")
 
 if ($mysqli -> connect_errno) {
 //    echo "<p> Unable to connect to database </p>";
+    die();
 } else {
 //    echo "<p> You are connected to the database</p>";
 }
@@ -81,25 +78,14 @@ $fullName = $firstName." ".$lastName;
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Check-Out</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script>
-        window.jQuery || document.write('<script type="text/javascript" src="libs/jquery-3.3.1.min.js">\x3C/script>')
-    </script>
-    <link rel="stylesheet" href="css/header.css">
+    <?php include "includes/headerFooterHead.php"?>
+    <!--    always put my own stuff here below include :) -->
     <link rel="stylesheet" href="css/checkout.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png"/>
     <script type="text/javascript" src="script/checkout-validation.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png"/>
-    <link rel="stylesheet" href="css/footer.css">
 </head>
 
 <body>
+<?php include "header.php"?>
 <main>
     <form method="post" action="http://www.randyconnolly.com/tests/process.php" id="checkOutForm">
 
@@ -130,34 +116,34 @@ $fullName = $firstName." ".$lastName;
                         </div>
                     </div>
                     <div id="addressContainer" class="checkoutContainer">
-                        <div id="billingAddressContainer" class="checkoutContainer">
+                        <div id="billingAddressContainer" >
                             <label id="billingAddressLabel" class="elementLabel">Billing Address: </label>
-                            <div id="billingAddress">
+                            <div id="billingAddress" class="checkoutContainer">
                                 <label class="elementLabel" for="billingAddressInput">Address Line: </label>
                                 <input type="text" name="billingAddress" id="billingAddressInput" required value="<?php echo $addressLine?>">
                             </div>
 
-                            <div id="billingCity">
+                            <div id="billingCity" class="checkoutContainer">
                                 <label class="elementLabel" for="billingCityInput">City: </label>
                                 <input type="text" name="billingCity" id="billingCityInput" required value="<?php echo $city ?>">
                             </div>
 
-                            <div id="billingProvince">
+                            <div id="billingProvince" class="checkoutContainer">
                                 <label class="elementLabel" for="billingProvinceInput">Province/State: </label>
                                 <input type="text" name="billingProvince" id="billingProvinceInput" required value="<?php echo $province ?>">
                             </div>
-                            <div id="billingCountry">
+                            <div id="billingCountry" class="checkoutContainer">
                                 <label class="elementLabel" for="billingCountryInput">Country: </label>
                                 <input type="text" name="billingCountry" id="billingCountryInput" required value="<?php echo $country ?>">
                             </div>
 
-                            <div id="billingPostalCode">
+                            <div id="billingPostalCode" class="checkoutContainer">
                                 <label class="elementLabel" for="billingPostalCodeInput">Postal Code: </label>
                                 <input type="text" name="billingPostalCode" id="billingPostalCodeInput" required value="<?php echo $postalcode ?>">
                             </div>
                         </div>
                     </div>
-                    <div id="shippingAddressRadioGroup">
+                    <div id="shippingAddressRadioGroup" class="checkoutContainer">
                         <label class="elementLabel" for="shippingAddressRadioGroup">Select a shipping address: </label>
                         <input type="radio" name="shippingAddress" id="billingAddressRadio" checked="checked" value="1">Billing
                         address<br>
@@ -202,13 +188,11 @@ $fullName = $firstName." ".$lastName;
     </form>
 
     <div id="paypalButtonContainer">
-        <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal"
-                                              id="paypalButton"></a>
+        <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal" id="paypalButton"></a>
     </div>
 </main>
+<?php include "footer.php"; ?>
 </body>
 </html>
 
-<?php
-include "footer.php";
-?>
+
