@@ -1,8 +1,10 @@
 /*
-set width of forms
+set width of forms and center in middle of page
  */
 #loginForm, #signUpForm {
     width: 40%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 /*
@@ -10,26 +12,25 @@ moves sign up form to right, sets background and text colours. Left margin maint
 between forms
  */
 #signUpForm {
-    float: right;
-    margin-right: 4em;
-    margin-top: 4em;
+    /*float: right;*/
+    /*margin-right: 4em;*/
+    /*margin-top: 4em;*/
     color:white;
     background-color: #183263;
-    padding:1em;
-    margin-left: 0.5em;
-    margin-bottom:4em;
+    /*padding:1em;*/
+    /*margin-left: 0.5em;*/
+    /*margin-bottom:4em;*/
 }
 /*
 sets background and text colours, sets right margin to maintain space between forms
  */
 #loginForm {
-    margin-left: 4em;
+
     margin-top: 4em;
     color:white;
     background-color: #183263;
     padding:1em;
-    margin-right:0.5em;
-    margin-bottom: 4em;
+    margin-bottom: 1em;
 
 }
 
@@ -85,18 +86,18 @@ spaces out elements in sign up form
 /*
 prevents sign up form from jumping underneath
  */
-#forms {
-    display:flex;
-    flex-direction:row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-content: center;
-}
+/*#forms {*/
+    /*display:flex;*/
+    /*flex-direction:row;*/
+    /*flex-wrap: nowrap;*/
+    /*justify-content: space-between;*/
+    /*align-content: center;*/
+/*}*/
 
 
-#forms >* {
-    flex-basis:40%;
-}
+/*#forms >* {*/
+    /*flex-basis:40%;*/
+/*}*/
 
 /*
 forget me link
@@ -106,5 +107,13 @@ a{
 }
 a:hover{
   color: tomato;
+}
+/*
+center link
+ */
+#createAccountLink {
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
 }
 
