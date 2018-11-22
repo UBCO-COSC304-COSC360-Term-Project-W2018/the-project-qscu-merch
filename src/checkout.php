@@ -5,7 +5,6 @@ $headerSet = 1;
 $_SESSION['userid']=1;
 
 if (!isset($_SESSION['userid'])) {
-    echo "<p>no user id is set</p>";
     header('Location: http://localhost/the-project-qscu-merch/src/login.php');
     exit();
 }
@@ -57,6 +56,7 @@ if ($user_billing_info = $mysqli -> prepare($sql1)) {
         $ccv = $row['CCV'];
     }
 }
+echo "<p>".$creditCardExpiryDate."</p>";
 
 $sql2 = "SELECT fname, lname FROM user WHERE uid= ?";
 
@@ -88,7 +88,7 @@ $fullName = $firstName." ".$lastName;
 <body>
 <?php include "header.php"?>
 <main>
-    <form method="post" action="checkout-action.php" id="checkOutForm">
+    <form method="post" action="orderSummary.php" id="checkOutForm">
 
         <fieldset>
             <legend id="checkOutFormTitle">Check Out</legend>
@@ -192,7 +192,9 @@ $fullName = $firstName." ".$lastName;
         <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal" id="paypalButton"></a>
     </div>
 </main>
-<?php include "footer.php"; ?>
+<?php include "footer.php";
+$mysqli->close();
+?>
 </body>
 </html>
 
