@@ -16,7 +16,6 @@ $headerSet = 1;
 <?php include "header.php"?>
 <main>
 <div id="forms">
-    <form id="loginForm" method="post" action="action/login.php">
 
     <form id="signUpForm" method="post" action="action/createUser.php">
         <fieldset>
@@ -54,6 +53,9 @@ $headerSet = 1;
         </fieldset>
     </form>
 </div>
+    <div id="loginLink">
+        <p><a href="login.php">Already have an account?</a></p>
+    </div>
 </main>
 <?php include "footer.php"; ?>
 </body>
