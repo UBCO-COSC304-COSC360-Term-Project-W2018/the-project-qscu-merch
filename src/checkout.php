@@ -6,6 +6,7 @@ $_SESSION['userid']=1;
 
 if (!isset($_SESSION['userid'])) {
     echo "<p>no user id is set</p>";
+//    redirect to login or create account
 }
 else {
     $userid = $_SESSION['userid'];
@@ -87,7 +88,7 @@ $fullName = $firstName." ".$lastName;
 <body>
 <?php include "header.php"?>
 <main>
-    <form method="post" action="http://www.randyconnolly.com/tests/process.php" id="checkOutForm">
+    <form method="post" action="checkout-action.php" id="checkOutForm">
 
         <fieldset>
             <legend id="checkOutFormTitle">Check Out</legend>
