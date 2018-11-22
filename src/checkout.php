@@ -6,11 +6,11 @@ $_SESSION['userid']=1;
 
 if (!isset($_SESSION['userid'])) {
     echo "<p>no user id is set</p>";
-//    redirect to login or create account
+    header('Location: http://localhost/the-project-qscu-merch/src/login.php');
+    exit();
 }
 else {
     $userid = $_SESSION['userid'];
-//    echo "<p>you did it buddy!</p>";
 }
 
 //$userid = $_SESSION['userid'];
