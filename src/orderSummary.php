@@ -20,6 +20,7 @@ if (!isset($_SESSION['userid'])) {
     <?php include "includes/headerFooterHead.php" ?>
     <!--    always put my own stuff here below include :) -->
     <link rel="stylesheet" href="css/orderSummary.css">
+    <script src="libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="script/checkout-validation.js"></script>
     <script type="text/javascript" src="script/orderSummary.js"></script>
 </head>
@@ -145,3 +146,13 @@ if (!isset($_SESSION['userid'])) {
 <?php include "footer.php"; ?>
 </body>
 </html>
+
+<script>
+    console.log("hit the script tag");
+
+    $('button').click(function() {
+        <?php header("Location: http://localhost/the-project-qscu-merch/src/checkout.php") ?>
+    });
+
+
+</script>
