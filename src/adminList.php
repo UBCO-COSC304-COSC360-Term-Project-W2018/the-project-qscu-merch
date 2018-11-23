@@ -1,5 +1,5 @@
 <?php
-include 'includes/session.php';
+include 'includes/init.php';
 include 'includes/validateAdmin.php';
 
 validateAdminRequest($_SESSION);
