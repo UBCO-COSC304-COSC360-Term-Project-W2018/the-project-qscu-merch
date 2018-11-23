@@ -11,8 +11,8 @@ try{
 
 $user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
 
-//$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-    $con = new mysqli("localhost", "rachellegelden", "rachelle", "qscurachelle");
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+//    $con = new mysqli("localhost", "rachellegelden", "rachelle", "qscurachelle");
 
 if($con -> connect_errno){
 	die("Connection Failed: ".$con -> connect_errno);
