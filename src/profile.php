@@ -1,29 +1,15 @@
-<?php 
-
-$headerSet = 1;
+<?php
 include "includes/init.php";
-include "header.php";
-//$user = (isset($_SESSION["userId"]) ? $_SESSION["userId"] : null;
-$name = isset($_SESSION["fName"])? $_SESSION["fName"]: null;
 
-
-try{
-
-$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
-
-//$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-    $con = new mysqli("localhost", "rachellegelden", "rachelle", "qscurachelle");
-
-if($con -> connect_errno){
-	die("Connection Failed: ".$con -> connect_errno);
+if(!isset($_SESSION['user'])){
+    header('location: login.php');
 }
 
-
-}
-catch (Exception $e) {
-	die("Error with Cart. Session Terminated.");
-}
+$user = $_SESSION['user']->id;
+$name = $_SESSION['user']->firstName;
+$headerSet = 1;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!--    Head-->
@@ -40,7 +26,7 @@ catch (Exception $e) {
 <!--    Body-->
 
 <body>
-
+<?php include "header.php"?>
 <main>
 	<h2 id="welcome">
 	     <?php echo "Welcome " . $name . "!"; ?>
@@ -55,7 +41,8 @@ catch (Exception $e) {
             <form method="post" action="">
 	           
                 <img id="profileImage" src="images/profile.png">
-                <input type="file" value="Upload  Image">
+                <input type="file" value="Upload  Image" required>
+                <input type="submit" value="Upload">
 	
             </form>
         </div>
@@ -85,11 +72,14 @@ catch (Exception $e) {
 	            <form id="passwordContent">
 	                <fieldset>
 	                    <legend>Change Password:</legend>
+                        <label for="oldPasswordInput">Old Password:</label>
+                        <input type="password" id="oldPasswordInput" name="oldPasswordInput" placeholder="*******" readonly>
+
 	                    <label for="passwordInput">New Password:</label>
-	                    <input type="password" id="passwordInput" name="passwordInput" readonly>
+	                    <input type="password" id="passwordInput" name="passwordInput" placeholder="*******" readonly>
 	
 	                    <label for="confirmPasswordInput">Confirm Password:</label>
-	                    <input type="password" id="confirmPasswordInput" name="confirmPasswordInput" readonly>
+	                    <input type="password" id="confirmPasswordInput" name="confirmPasswordInput" placeholder="*******" readonly>
 	
 	                    <input id="passwordEditSave" type="button" value="Edit">
 	                </fieldset>
@@ -214,8 +204,6 @@ catch (Exception $e) {
 
     </div>
 </main>
+<?php include "footer.php"; ?>
 </body>
 </html>
-<?php
-include "footer.php";
-?>

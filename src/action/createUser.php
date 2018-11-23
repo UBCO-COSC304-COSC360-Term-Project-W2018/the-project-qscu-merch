@@ -1,7 +1,8 @@
 <?php
-include "../includes/session.php";
-include "../includes/inputValidation.php";
-include "../includes/db_credentials.php";
+include '../includes/init.php';
+
+
+//TODO if user has cart set it in db
 
 function generateSalt()
 {
@@ -24,8 +25,6 @@ function creationFailed($input = null)
     }else{
         $_SESSION['error'] = "Invalid username or password";
     }
-    header("Location: ../login.php");
-    exit();
 }
 
 try {
@@ -34,7 +33,7 @@ try {
             && (isValidInput($_POST['firstName']) && isValidInput($_POST['lastName']) && isValidInput($_POST['email']) && $_POST['password'] != "" && $_POST['confirmPassword'] != "") &&
             (strcmp($_POST['password'], $_POST['confirmPassword']) == 0)) {
 
-            $email = strtolower(trim($_POST['email']));
+            $email = trim($_POST['email']);
 
 //            $mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
             $mysqli = new mysqli("localhost", "rachellegelden", "rachelle", "qscurachelle");
@@ -53,8 +52,6 @@ try {
                 $data["num_rows"] = $stmt->num_rows;
                 if ($stmt->num_rows == 0) {
 
-                    $stmt->close();
-
                     $firstName = trim($_POST['firstName']);
                     $lastName = trim($_POST['lastName']);
                     $password = trim($_POST['password']);
@@ -63,29 +60,38 @@ try {
                     $salt = generateSalt();
                     $hashword = hash_pbkdf2("sha256", $password, $salt, 2500);
 
-                    $query = "INSERT INTO User (fname, lname, uEmail, password, salt, customerBanned) VALUES (?, ?, ?, ?, ?, 0);";
+                    $query = "INSERT INTO User (profilePicture, fname, lname, uEmail, password, salt, customerBanned, contentType, isAdmin) VALUES (?, ?, ?, ?, ?, ?, 0,'image/png', 0)";
                     $stmt = $mysqli->prepare($query);
-                    $stmt->bind_param('sssss', $firstName, $lastName, $email, $hashword, $salt);
+                    $null = null;
+                    $fileContents = file_get_contents('../images/profile.png');
+                    $stmt->bind_param('bsssss', $null ,$firstName, $lastName, $email, $hashword, $salt);
+                    $stmt->send_long_data(0, $fileContents);
+                    echo $fileContents;
                     $stmt->execute();
                     $uid = $stmt->insert_id;
-					$_SESSION["fName"] = $firstName;
-                    $data["uid"] = $uid;
+
+                    $_SESSION['user']= new User($uid, $firstName, $lastName);
+
+
                     $stmt->close();
                     header("Location: ../profile.php");
                     exit();
                 } else {
                     //email already exists in database
-                    $stmt->close();
-                    creationFailed("Email already registered.");
+                    throw new Exception();
                 }
             }
 
         } else {
+            throw new Exception();
             //user has entered invalid form data, including non matching passwords
         }
     }
 } catch (Exception $e) {
-    header("Location: ../login.php");
+    creationFailed("Email already registered.");
+
+}finally{
+    $mysqli->close();
     die();
 }
 ?>

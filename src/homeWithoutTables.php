@@ -2,11 +2,12 @@
 
 $headerSet = 1;
 include "includes/init.php";
-include "header.php";
+
 //include "includes/db_credentials.php";
 
 try{
 
+//    TODO this needs to be changed the query part doesnt have a trycatch
 $user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
 
 $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
@@ -38,7 +39,7 @@ catch (Exception $e) {
 <!--    Body-->
 
 <body>
-  <!-- Main Body -->
+<?php include "header.php";?>
 <main>
 	<div id="main">
 		<div id="browsecol">
@@ -374,8 +375,6 @@ catch (Exception $e) {
 	</div>
 </div>
 </main>
+<?php include "footer.php"; ?>
 </body>
 </html>
-<?php
-include "footer.php";
-?>
