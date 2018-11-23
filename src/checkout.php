@@ -2,7 +2,7 @@
 include "includes/init.php";
 $headerSet = 1;
 
-$_SESSION['userid'] = 2;
+$_SESSION['userid'] = 1;
 
 if (!isset($_SESSION['userid'])) {
     header('Location: http://localhost/the-project-qscu-merch/src/login.php');
@@ -143,7 +143,6 @@ $fullName = $firstName . " " . $lastName;
                                     <!--                                <input type="text" name="billingProvince" id="billingProvinceInput" required value="-->
 
                                     <select name="billingProvince" id="billingProvinceSelect">
-                                        <option value="International">International</option>
                                         <option value="AB">AB</option>
                                         <option value="BC">BC</option>
                                         <option value="MB">MB</option>
