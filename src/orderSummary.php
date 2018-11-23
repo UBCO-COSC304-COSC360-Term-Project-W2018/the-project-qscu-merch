@@ -150,8 +150,11 @@ if (!isset($_SESSION['userid'])) {
     console.log("hit the script tag");
 
     $('#editOrderButton').click(function() {
-        console.log("button click registered");
         location.replace("http://localhost/the-project-qscu-merch/src/viewcart.php");
+    });
+
+    $('#confirmOrderButton').click(function () {
+        location.replace("http://localhost/the-project-qscu-merch/src/action/checkout-action.php");
     });
 
 
