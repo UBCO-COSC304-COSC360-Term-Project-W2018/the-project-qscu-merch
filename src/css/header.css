@@ -11,10 +11,17 @@ html, body{
 }
 
 header{
-	z-index: -1;
-	padding-bottom: 1em;
+	/*z-index: -1;*/
+    z-index:99999;
+    padding-bottom: 1em;
 	color: white;
 	background-color: #183263;
+}
+
+
+header.sticky.top {
+    position:sticky;
+    top:0;
 }
 
 #htop{
@@ -22,10 +29,11 @@ header{
 	display: flex;
 	align-items: stretch;
 	flex-direction: row;
-	margin-bottom: 2em;
+	/*margin-bottom: 2em;*/
 	overflow-y: auto;
 	overflow-x: hidden;
 }
+
 
 #logo {
 	width: 80px;
@@ -37,11 +45,12 @@ header{
 	margin-left: 80px;
 }
 
-#hbot{	
+#hbot{
 	white-space: nowrap;
 	display: flex;
 	align-items: stretch;
 	flex-direction: row;
+    padding-top:2em;
 }
 
 .hbotline{

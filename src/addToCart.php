@@ -22,7 +22,7 @@ $uid = $_SESSION["userId"];
 //This is where I need you guys to somehow access this information
 $pNo = $_GET['pNo'];
 $size = $_GET['size'];
-$quantity $_GET['quantity'];
+$quantity =$_GET['quantity'];
 
 $sqlAdd = "INSERT INTO HasCart VALUES (".$uid.",".$pNo.",'".$size."',".$quantity.")";
 
