@@ -2,7 +2,22 @@
 include "init.php";
 include "header.php";
 
+<<<<<<< HEAD
+$user = $_SESSION["userId"];
+
+$databaseName = "db_40215162"; //database name
+$uID = "40215162"; //admin's ID
+$pw = "qscu42069!"; //admin's password
+$host = "cosc.360.ok.ubc.ca"; //host of database
+
+$con = new mysqli($host, $uID, $pw, $databaseName);
+
+if($con -> connect_errno){
+    die("Connection Failed: ".$con -> connect_errno);
+}
+=======
 ?>
+>>>>>>> 896314a680f4c4bffb5aa42a965e876c04c66643
 
 
 <form>

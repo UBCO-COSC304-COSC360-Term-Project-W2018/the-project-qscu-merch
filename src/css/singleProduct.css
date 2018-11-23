@@ -114,20 +114,32 @@ select.size {
 }
 
 #writeReviewButton {
-    font-size: 1.1em;
+    font-size: 0.95em;
     margin-left: 1em;
+}
+
+#addCommentButton{
+    margin-left: 0.5em;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 1.3em;
 }
 #reviews {
   padding: 0.5em;
   /*    margin: 2em;*/
   margin-top: 0;
-  border-top: 1px solid #18bfef;
+  /*border-top: 1px solid #18bfef;*/
   /*    background-color: #93daf0;*/
   /*    border: 1px solid black;*/
 }
 
 #reviews h3 {
   margin-top: 0;
+    border-top: 1px dashed tomato;
+    padding-top: 0.5em;
+    border-bottom: 1px dashed #18bfef;
+    padding-bottom: 0.5em;
+
 }
 
 #reviews h3 a {
@@ -318,4 +330,10 @@ padding-top: 1em;
     text-align: center;
   background-color: #183263;
   color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
 }
