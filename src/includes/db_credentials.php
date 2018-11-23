@@ -1,7 +1,8 @@
 <?php
 $dbcred = true;
 define("DBHOST","localhost");
-define("DBNAME", "QSCUShop");
-define("DBUSER", "james");
-define("DBPASS", "james");
+define("DBNAME", "qscu");
+define("DBUSER", "Parsa");
+define("DBPASS", "parsa");
+
 ?>

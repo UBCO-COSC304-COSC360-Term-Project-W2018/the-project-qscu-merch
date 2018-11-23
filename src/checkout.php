@@ -2,36 +2,34 @@
 include "includes/init.php";
 $headerSet = 1;
 
-$_SESSION['userid']=1;
+$_SESSION['userid'] = 1;
 
 if (!isset($_SESSION['userid'])) {
-    echo "<p>no user id is set</p>";
-//    redirect to login or create account
-}
-else {
+    header('Location: http://localhost/the-project-qscu-merch/src/login.php');
+    exit();
+} else {
     $userid = $_SESSION['userid'];
-//    echo "<p>you did it buddy!</p>";
 }
 
 //$userid = $_SESSION['userid'];
 //$userid = $user->userid;
 
-$firstName="";
-$lastName="";
-$fullName="";
-$addressLine="";
-$city="";
-$province="";
-$country="";
-$postalcode="";
-$creditCardName="";
-$creditCardNum="";
-$creditCardExpiryDate="";
-$ccv="";
+$firstName = "";
+$lastName = "";
+$fullName = "";
+$addressLine = "";
+$city = "";
+$province = "";
+$country = "";
+$postalcode = "";
+$creditCardName = "";
+$creditCardNum = "";
+$creditCardExpiryDate = "";
+$ccv = "";
 
 $mysqli = new mysqli ("localhost", "rachellegelden", "rachelle", "qscurachelle");
 
-if ($mysqli -> connect_errno) {
+if ($mysqli->connect_errno) {
 //    echo "<p> Unable to connect to database </p>";
     die();
 } else {
@@ -40,13 +38,13 @@ if ($mysqli -> connect_errno) {
 //get info user info if they exist
 $sql1 = "SELECT * FROM billinginfo WHERE uid = ?";
 
-if ($user_billing_info = $mysqli -> prepare($sql1)) {
-    $user_billing_info -> bind_param("s", $userid);
-    $user_billing_info -> execute();
+if ($user_billing_info = $mysqli->prepare($sql1)) {
+    $user_billing_info->bind_param("s", $userid);
+    $user_billing_info->execute();
 
     $result = $user_billing_info->get_result();
 
-    while ($row = $result -> fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $addressLine = $row['address'];
         $city = $row['city'];
         $province = $row['province'];
@@ -60,18 +58,18 @@ if ($user_billing_info = $mysqli -> prepare($sql1)) {
 
 $sql2 = "SELECT fname, lname FROM user WHERE uid= ?";
 
-if ($user_info = $mysqli -> prepare($sql2)) {
-    $user_info -> bind_param("s", $userid);
-    $user_info -> execute();
+if ($user_info = $mysqli->prepare($sql2)) {
+    $user_info->bind_param("s", $userid);
+    $user_info->execute();
 
-    $result = $user_info -> get_result();
+    $result = $user_info->get_result();
 
-    while($row = $result -> fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $firstName = $row['fname'];
         $lastName = $row['lname'];
     }
 }
-$fullName = $firstName." ".$lastName;
+$fullName = $firstName . " " . $lastName;
 
 ?>
 
@@ -79,71 +77,97 @@ $fullName = $firstName." ".$lastName;
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include "includes/headerFooterHead.php"?>
+    <?php include "includes/headerFooterHead.php" ?>
     <!--    always put my own stuff here below include :) -->
     <link rel="stylesheet" href="css/checkout.css">
+    <script src="libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="script/checkout-validation.js"></script>
 </head>
 
 <body>
-<?php include "header.php"?>
+<?php include "header.php" ?>
 <main>
-    <form method="post" action="checkout-action.php" id="checkOutForm">
+    <form method="post" action="orderSummary.php" id="checkOutForm">
 
         <fieldset>
             <legend id="checkOutFormTitle">Check Out</legend>
 
             <div id="checkoutFormElements">
                 <div id="checkoutFormInputElements">
-                    <div id="creditCardElementsContainer">
-                        <div id="ccNameContainer" class="checkoutContainer">
-                            <label id="ccNameLabel" for="ccName" class="elementLabel">Name on Card: </label>
-                            <input type="text" name="ccName" id="ccName" required value="<?php echo $fullName ?>">
-                        </div>
-                        <div id="ccNumContainer" class="checkoutContainer">
-                            <label id="ccNumLabel" for="ccNum" class="elementLabel">Credit Card Number: </label>
-                            <input type="number" name="ccNum" id="ccNum" required value="<?php echo $creditCardNum?>">
-                        </div>
+                    <div id="creditCardAndBillingAddressContainer">
+                        <div id="creditCardElementsContainer">
+                            <div id="ccNameContainer" class="checkoutContainer">
+                                <label id="ccNameLabel" for="ccName" class="elementLabel">Name on Card: </label>
+                                <input type="text" name="ccName" id="ccName" required value="<?php echo $fullName ?>">
+                            </div>
+                            <div id="ccNumContainer" class="checkoutContainer">
+                                <label id="ccNumLabel" for="ccNum" class="elementLabel">Credit Card Number: </label>
+                                <input type="number" name="ccNum" id="ccNum" required
+                                       value="<?php echo $creditCardNum ?>">
+                            </div>
 
-                        <div id="ccExpirationContainer" class="checkoutContainer">
-                            <label id="ccExpDateLabel" for="ccExpiration" class="elementLabel">Expiry Date
-                                (MMYY): </label>
-                            <input type="text" name="ccExpiration" required id="ccExpiration" value="<?php echo $creditCardExpiryDate?>">
-                        </div>
+                            <div id="ccExpirationContainer" class="checkoutContainer">
+                                <label id="ccExpDateLabel" for="ccExpiration" class="elementLabel">Expiry Date
+                                    (MMYY): </label>
+                                <input type="text" name="ccExpiration" required id="ccExpiration"
+                                       value="<?php echo $creditCardExpiryDate ?>">
+                            </div>
 
-                        <div id="ccCCVContainer" class="checkoutContainer">
-                            <label id="ccCCVLabel" for="ccCCV" class="elementLabel">CCV: </label>
-                            <input type="number" name="ccv" required id="ccCCV" value="<?php echo $ccv ?>">
+                            <div id="ccCCVContainer" class="checkoutContainer">
+                                <label id="ccCCVLabel" for="ccCCV" class="elementLabel">CCV: </label>
+                                <input type="number" name="ccv" required id="ccCCV" value="<?php echo $ccv ?>">
+                            </div>
+                        </div>
+                        <div id="addressContainer" class="checkoutContainer">
+                            <div id="billingAddressContainer">
+                                <label id="billingAddressLabel" class="elementLabel">Billing Address: </label>
+                                <div id="billingAddress" class="checkoutContainer">
+                                    <label class="elementLabel" for="billingAddressInput">Address Line: </label>
+                                    <input type="text" name="billingAddress" id="billingAddressInput" required
+                                           value="<?php echo $addressLine ?>">
+                                </div>
+
+                                <div id="billingCity" class="checkoutContainer">
+                                    <label class="elementLabel" for="billingCityInput">City: </label>
+                                    <input type="text" name="billingCity" id="billingCityInput" required
+                                           value="<?php echo $city ?>">
+                                </div>
+                                <div id="billingCountry" class="checkoutContainer">
+                                    <label class="elementLabel" for="billingCountryInput">Country: </label>
+                                    <select name="billingCountry" id="billingCountrySelect">
+                                        <option value="Canada">Canada</option>
+                                    </select>
+                                </div>
+                                <div id="billingProvince" class="checkoutContainer">
+                                    <label class="elementLabel" for="billingProvinceInput">Province/State: </label>
+                                    <!--                                <input type="text" name="billingProvince" id="billingProvinceInput" required value="-->
+
+                                    <select name="billingProvince" id="billingProvinceSelect">
+                                        <option value="AB">AB</option>
+                                        <option value="BC">BC</option>
+                                        <option value="MB">MB</option>
+                                        <option value="NB">NB</option>
+                                        <option value="NL">NL</option>
+                                        <option value="NS">NS</option>
+                                        <option value="NT">NT</option>
+                                        <option value="NU">NU</option>
+                                        <option value="ON">ON</option>
+                                        <option value="PE">PE</option>
+                                        <option value="QC">QC</option>
+                                        <option value="SK">SK</option>
+                                        <option value="YK">YK</option>
+                                    </select>
+                                </div>
+                                <div id="billingPostalCode" class="checkoutContainer">
+                                    <label class="elementLabel" for="billingPostalCodeInput">Postal Code: </label>
+                                    <input type="text" name="billingPostalCode" id="billingPostalCodeInput" required
+                                           value="<?php echo $postalcode ?>">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div id="addressContainer" class="checkoutContainer">
-                        <div id="billingAddressContainer" >
-                            <label id="billingAddressLabel" class="elementLabel">Billing Address: </label>
-                            <div id="billingAddress" class="checkoutContainer">
-                                <label class="elementLabel" for="billingAddressInput">Address Line: </label>
-                                <input type="text" name="billingAddress" id="billingAddressInput" required value="<?php echo $addressLine?>">
-                            </div>
 
-                            <div id="billingCity" class="checkoutContainer">
-                                <label class="elementLabel" for="billingCityInput">City: </label>
-                                <input type="text" name="billingCity" id="billingCityInput" required value="<?php echo $city ?>">
-                            </div>
 
-                            <div id="billingProvince" class="checkoutContainer">
-                                <label class="elementLabel" for="billingProvinceInput">Province/State: </label>
-                                <input type="text" name="billingProvince" id="billingProvinceInput" required value="<?php echo $province ?>">
-                            </div>
-                            <div id="billingCountry" class="checkoutContainer">
-                                <label class="elementLabel" for="billingCountryInput">Country: </label>
-                                <input type="text" name="billingCountry" id="billingCountryInput" required value="<?php echo $country ?>">
-                            </div>
-
-                            <div id="billingPostalCode" class="checkoutContainer">
-                                <label class="elementLabel" for="billingPostalCodeInput">Postal Code: </label>
-                                <input type="text" name="billingPostalCode" id="billingPostalCodeInput" required value="<?php echo $postalcode ?>">
-                            </div>
-                        </div>
-                    </div>
                     <div id="shippingAddressRadioGroup" class="checkoutContainer">
                         <label class="elementLabel" for="shippingAddressRadioGroup">Select a shipping address: </label>
                         <input type="radio" name="shippingAddress" id="billingAddressRadio" checked="checked" value="1">Billing
@@ -188,11 +212,19 @@ $fullName = $firstName." ".$lastName;
         </fieldset>
     </form>
 
+    <script>
+        $("#billingProvinceSelect").val("<?php echo $province ?>");
+        $("#billingCountrySelect").val("<?php echo $country ?>");
+    </script>
+
     <div id="paypalButtonContainer">
-        <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal" id="paypalButton"></a>
+        <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal"
+                                              id="paypalButton"></a>
     </div>
 </main>
-<?php include "footer.php"; ?>
+<?php include "footer.php";
+$mysqli->close();
+?>
 </body>
 </html>
 
