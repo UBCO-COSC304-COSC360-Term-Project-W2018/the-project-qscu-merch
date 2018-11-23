@@ -6,6 +6,8 @@ include '../includes/validateAdmin.php';
 
 validateAdminRequest($_SESSION);
 
+validateAdminRequest($_SESSION);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $inputFields = array('productName', 'productPrice');
 
@@ -22,6 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $productName = $_POST['productName'];
             $productPrice = $_POST['productPrice'];
             $productDescription = $_POST['productDescription'];
+            $size = $null;
+            if(isset($_POST['singleItem'])){
+                $size = "single";
+            }
 
             if (isset($_FILES['uploadImage'])) {
                 $file = $_FILES['uploadImage'];
@@ -56,7 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $query = "INSERT INTO Product (image, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?)";
             $stmt = $mysql->prepare($query);
 
-            $size = "small";
+            $size = ($size === "single")? $size:"small";
+
             $null = null;
 
 
@@ -66,19 +73,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $id = $stmt->insert_id;
 
-            $size = array('medium','large','xl');
-            $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?, ?)";
 
             if(isset($id)) {
-                $stmt = $mysql->prepare($query);
-                foreach ($size as $key => $value) {
+                if($size !== "single") {
+                    $size = array('medium', 'large', 'xl');
+                    $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?, ?)";
+                    $stmt = $mysql->prepare($query);
+                    foreach ($size as $key => $value) {
 
-                    $stmt->bind_param('bissds', $null, $id, $size[$key], $productName, $productPrice, $file['type']);
-                    $stmt->send_long_data(0, file_get_contents($targetFilePath));
-                    $stmt->execute();
+                        $stmt->bind_param('bissds', $null, $id, $size[$key], $productName, $productPrice, $file['type']);
+                        $stmt->send_long_data(0, file_get_contents($targetFilePath));
+                        $stmt->execute();
+                    }
+                    unlink($targetFilePath);
+                    array_push($size, "small");
+                }else{
+                    $size = array($size);
                 }
-                unlink($targetFilePath);
-                array_push($size,"small");
 
                 $query = "INSERT INTO HasInventory (wNo, pNo, size, quantity) VALUES (1, ?, ?, 0)";
                 $stmt = $mysql->prepare($query);
@@ -95,7 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         }finally{
-            $stmt->close();
+            $mysql->close();
+            die();
         }
     }
 }

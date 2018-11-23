@@ -6,12 +6,21 @@ main{
     flex-direction: column;
     align-content: stretch;
 }
-#container table tr{
+#productContent table tr{
     border: 1px solid black;
 }
-#container table th{
-    text-align: left;
+#productContent table td{
+    width: 50%
+}
+#productContent table .colspan2{
+    width: 1%
 }
 .hidden{
     display: none;
+}
+.productHead{
+    display: inline-block;
+}
+#addProduct {
+    float: right;
 }

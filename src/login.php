@@ -15,25 +15,23 @@ if(isset($_SESSION['hasError'])){
 }
 $headerSet = 0;
 
-include "header.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login/Sign-up</title>
+    <? include 'includes/headerFooterHead.php'?>
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="script/client-side-validation.js"></script>
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
+
 
 </head>
 <body>
+<?include "header.php"; ?>
 <main>
 <div id="forms">
-    <form id="loginForm" method="post" action="action/login.php">
+    <form id="loginForm" method="post" action="action/getLogin.php">
         <fieldset>
             <legend id="loginTitle">Login</legend>
             <div id="loginFormInputElements">
@@ -61,9 +59,7 @@ include "header.php";
         <p><a href="signup.php">Don't have an account?</a></p>
     </div>
 </main>
+<?php include "footer.php"; ?>
 </body>
 </html>
 
-<?php 
-include "footer.php";
-?>

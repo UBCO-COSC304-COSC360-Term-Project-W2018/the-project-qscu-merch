@@ -3,9 +3,7 @@ if (!isset($dbcred)) {
     include 'db_credentials.php';
 }
 
-function isAdmin($userid){
-
-
+function isAdmin($userid) {
     try {
         $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
         if ($mysql->errno) {
@@ -25,23 +23,32 @@ function isAdmin($userid){
     } catch (Exception $e) {
         return false;
     } finally {
-        $stmt->close();
+        $mysql->close();
     }
 }
 
-function validationFailed(){
+function validationFailed() {
     header('HTTP/1.1 404 Not Found');
     $_GET['e'] = 404;
     exit();
 }
 
-function validateAdminRequest($SESSION){
-    if (isset($SESSION['userId'])) {
-        if (!isAdmin($SESSION['userId'])) {
-            validationFailed();
+/**this checks to see if the user is admin, just call it before any code with the $_SESSION
+ * will return a 404 error if the user is not an admin.
+ * @param $_SESSION
+ */
+function validateAdminRequest($SESSION) {
+    try {
+        if (isset($SESSION['user'])) {
+            if (!isAdmin($SESSION['user']->id)) {
+                throw new Exception();
+            }
+        } else {
+            throw new Exception();
         }
-    } else {
+    }catch (Exception $e){
         validationFailed();
+        die();
     }
 }
 

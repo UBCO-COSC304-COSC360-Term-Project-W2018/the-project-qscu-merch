@@ -1,11 +1,11 @@
 <?php
-$user = isset($_SESSION["userId"]) ? $_SESSION['userId'] : null;
-$name = isset($_SESSION["fName"]) ? $_SESSION["fName"] : null;
-?>
-
-<!--HTML home page for shop.qscu.org-->
-<!DOCTYPE HTML>
-<html lang="en">
+$user = null;
+$name = null;
+if(isset($_SESSION['user'])){
+    $user = $_SESSION['user']->id;
+    $name = $_SESSION['user']->firstName;
+}
+	?>
 
 <header>
     <div id="htop">
@@ -31,6 +31,7 @@ $name = isset($_SESSION["fName"]) ? $_SESSION["fName"] : null;
         ?>
 
 
+
         <div id="searchbar" class="hbotline">
             <form id="searchform">
                 <label id="search" for="textinput">Search: </label>
@@ -43,7 +44,7 @@ $name = isset($_SESSION["fName"]) ? $_SESSION["fName"] : null;
             <a href="cart.php"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
 
             <?php
-            if (isset($_SESSION["fName"])) {
+            if (isset($user)) {
                 echo "<a href='profile.php'>" . $name . "</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
             } else {
                 echo "<a href='login.php'>Login</a>";
