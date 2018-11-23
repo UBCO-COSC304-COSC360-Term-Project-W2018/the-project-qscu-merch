@@ -14,6 +14,8 @@ $name = isset($_SESSION["fName"]) ? $_SESSION["fName"] : null;
         <h1 id="title">QSCU Merchandise Store</h1>
     </div>
 
+</header>
+<header class="sticky top">
     <div id="hbot"><?php
         if ($headerSet == 1) {
             echo '<div id="variablebutton" class="hbotline">
