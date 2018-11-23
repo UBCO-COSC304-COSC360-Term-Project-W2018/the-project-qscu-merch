@@ -1,4 +1,6 @@
 <?php
 include "../includes/session.php";
-$_SESSION['userId'] = null;
+if(isset($_SESSION['user'])){
+    $_SESSION['user'] = null;
+}
 header('location: ../homeWithoutTables.php');

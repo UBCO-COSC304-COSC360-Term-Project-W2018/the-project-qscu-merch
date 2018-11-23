@@ -7,8 +7,8 @@ include '../includes/db_credentials.php';
 //"getProductList.php?searchInput=&searchType=&buildType="
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $fieldArray = array("searchInput", "searchType", "buildType");
-    if (arrayExists($_GET, $fieldArray) && arrayIsValidInput($_GET, $fieldArray)) {
+    $fieldArray = array("searchType", "buildType");
+    if (arrayExists($_GET, $fieldArray) && isset($_GET['searchInput']) && arrayIsValidInput($_GET, $fieldArray)) {
         $searchInput = $_GET['searchInput'];
         $searchType = $_GET['searchType'];
         $buildType = $_GET['buildType'];
@@ -20,91 +20,101 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
 
 
-        $input = '%' . $searchInput . '%';
-        $stmt;
-        switch ($searchType) {
-            case "productName":
+        try {
 
-                $query = "SELECT pNo, size, pname, price, contentType, image, quantity FROM Product NATURAL JOIN HasInventory WHERE pname LIKE ? ORDER BY pNo ASC";
+            $input = '%' . $searchInput . '%';
+            $stmt;
+
+            if ($searchInput === "" && $searchType !== "productNameAndCategory") {
+                $query = "SELECT pNo, size, pname, price, contentType, image, description, quantity FROM Product NATURAL JOIN HasInventory ORDER BY pNo ASC";
                 $stmt = $mysql->prepare($query);
-                $stmt->bind_param('s', $input);
-                $stmt->bind_result($pno, $size, $pname, $price, $contentType, $image, $quantity);
-                break;
+            } else {
+                switch ($searchType) {
+                    case "productName":
 
-            case "productCategory":
+                        $query = "SELECT pNo, size, pname, price, contentType, image, description, quantity FROM Product NATURAL JOIN HasInventory WHERE pname LIKE ? ORDER BY pNo ASC";
+                        $stmt = $mysql->prepare($query);
+                        $stmt->bind_param('s', $input);
+                        break;
 
-                $query = "SELECT pNo, size, pname, price, contentType, image, quantity FROM HasInventory NATURAL JOIN Product NATURAL JOIN ProductInCategory WHERE cname LIKE ? ORDER BY pNo ASC";
-                $stmt = $mysql->prepare($query);
-                $stmt->bind_param('s', $input);
-                $stmt->bind_result($pno, $size, $pname, $price, $contentType, $image, $quantity);
-                break;
+                    case "productCategory":
 
-            case "productCategoryName":
+                        $query = "SELECT pNo, size, pname, price, contentType, image, description, quantity FROM HasInventory NATURAL JOIN Product NATURAL JOIN ProductInCategory WHERE cname LIKE ? ORDER BY pNo ASC";
+                        $stmt = $mysql->prepare($query);
+                        $stmt->bind_param('s', $input);
+                        break;
 
-                $query = "SELECT pNo, size, pname, price, contentType, image, quantity FROM HasInventory NATURAL JOIN Product NATURAL JOIN ProductInCategory WHERE pname LIKE ? OR cname LIKE ? ORDER BY pNo ASC";
-                $stmt = $mysql->prepare($query);
-                $stmt->bind_param('ss', $input, $input);
-                $stmt->bind_result($pno, $size, $pname, $price, $contentType, $image, $quantity);
-                break;
+                    case "productNameAndCategory":
 
-            default:
+                        $query = "SELECT Product.pNo, Product.size, pname, price, contentType, image, quantity FROM (SELECT pNo, size FROM Product WHERE pname LIKE ? UNION SELECT pNo,size FROM ProductInCategory NATURAL JOIN Category WHERE cname LiKE ?)AS cat NATURAL JOIN Product NATURAL JOIN HasInventory";
+                        $stmt = $mysql->prepare($query);
+                        $stmt->bind_param('ss', $input, $input);
+                        break;
+                    default:
+                        //invalid searchType
+                        throw new Exception();
 
-                //invalid searchType
-                $stmt->close();
-                echo "<script>alert('invalid searchType')</script>";
-                die();
+                }
+            }
 
-        }
+            $stmt->bind_result($pno, $size, $pname, $price, $contentType, $image, $description, $quantity);
+            $stmt->execute();
 
+            $data = [];
 
-        $stmt->execute();
+            switch ($buildType) {
+                case "grouped":
+                    $counter = -1;
+                    while ($stmt->fetch()) {
+                        if ($counter !== $pno) {
+                            if (isset($item)) {
+                                array_push($data, $item);
+                            }
 
-        $data = [];
+                            $item = [];
 
-        switch ($buildType) {
-            case "grouped":
+                            $item['productNumber'] = $pno;
+                            $item['productName'] = $pname;
+                            $item['productContentType'] = $contentType;
+                            $item['productImage'] = base64_encode($image);
 
-                $counter = -1;
-                while ($stmt->fetch()) {
-                    if ($counter === -1) {
-                        $counter = $pno;
+                            $item[$size] = array("productSize" => $size, "productPrice" => $price, "productQuantity" => $quantity, "productDescription" => $description);
+                            $counter = $pno;
+
+                        } else {
+                            $item[$size] = array("productSize" => $size, "productPrice" => $price, "productQuantity" => $quantity);
+                        }
+
                     }
-
-                    if ($counter !== $pno) {
-                        $item = array("productNumber" => $pno, "productName" => $pname, "productContentType" => $contentType, "productImage" => base64_encode($image));
-                        array_push($item, $list);
+                    if (isset($item)) {
                         array_push($data, $item);
-                        $counter = $pno;
-                    } else {
-
-                        $list[$size] = array("productSize" => $size, "productPrice" => $price, "productQuantity" => $quantity);
-
                     }
-                }
+                    header('Content-Type: application/json');
+                    echo json_encode($data);
+                    break;
 
+                case "individual":
+                    while ($stmt->fetch()) {
+                        $item = array("productNumber" => $pno, "productName" => $pname, "productSize" => $size, "productPrice" => $price, "productContentType" => $contentType, "productImage" => base64_encode($image), "productDescription" => $description, "productQuantity" => $quantity);
+                        array_push($data, $item);
+                    }
 
-//                header('Content-Type: application/json');
-//                echo json_encode($data);
-                $json = json_encode($data);
-                echo $json;
-                $stmt->close();
-                break;
-            case "individual":
-                while ($stmt->fetch()) {
-                    $item = array("productNumber" => $pno, "productName" => $pname, "productSize" => $size, "productPrice" => $price, "productContentType" => $contentType, "productImage" => $image);
-                    array_push($data, $item);
-                }
-                header('Content-Type: application/json');
-                echo json_encode($data);
-                break;
-            default:
-                //invalid searchType
-                $stmt->close();
-                echo "<script>alert('invalid buildType')</script>";
-                die();
+                    header('Content-Type: application/json');
+                    echo json_encode($data);
+                    break;
+
+                default:
+                    //invalid searchType
+                    throw new Exception();
+            }
+        } catch (Exception $e) {
+
+        } finally {
+            $mysql->close();
+            die();
         }
-
     } else {
-        echo "<script>alert('invalid form')</script>";
+        //invalid formdata
     }
+
 }
