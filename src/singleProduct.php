@@ -26,7 +26,7 @@ catch (Exception $e) {
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
     <link rel="stylesheet" href="../src/css/singleProduct.css">
-	<?php include 'includes/headerFooterHead.php'?>
+	<?php include 'includes/headerFooterHead.php'?>h
     <script type="text/javascript" src="../src/script/quantity.js"></script>
     <script type="text/javascript" src="../src/script/reviewModal.js"></script>
 </head>

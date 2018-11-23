@@ -31,6 +31,7 @@ catch (Exception $e) {
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
     <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/reviewsComments.css">
 	<?php include 'includes/headerFooterHead.php'?>
     <script type="text/javascript" src="script/profile_controller.js"></script>
 </head>
