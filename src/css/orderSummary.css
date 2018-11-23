@@ -6,9 +6,7 @@
 }
 
 .userOrderTableRow {
-    border-bottom-color: grey;
-    border-bottom-style: dotted;
-    border-bottom-width: thin;
+    border-bottom: thin dotted grey;
 }
 
 #userOrderTableFieldNames {
@@ -17,5 +15,10 @@
 
 td {
     text-align: center;
+}
+
+#orderSummaryBody {
+    margin-left: 1.5em;
+    margin-right: 1.5em;
 }
 

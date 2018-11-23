@@ -24,7 +24,7 @@ else {
 
 <body>
 <?php include "header.php"?>
-<main>
+<main id="orderSummaryBody">
 <h1>Your Order:</h1>
     <div id = "userOrderTableContainer">
         <table id="userOrderTable">

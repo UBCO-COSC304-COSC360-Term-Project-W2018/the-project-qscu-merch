@@ -81,6 +81,7 @@ $fullName = $firstName." ".$lastName;
     <?php include "includes/headerFooterHead.php"?>
     <!--    always put my own stuff here below include :) -->
     <link rel="stylesheet" href="css/checkout.css">
+    <script src="libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="script/checkout-validation.js"></script>
 </head>
 
@@ -129,16 +130,13 @@ $fullName = $firstName." ".$lastName;
                             </div>
                             <div id="billingCountry" class="checkoutContainer">
                                 <label class="elementLabel" for="billingCountryInput">Country: </label>
-                                <!--                                <input type="text" name="billingCountry" id="billingCountryInput" required value="--><?php //echo $country ?><!--">-->
-                                <select name="billingCountry">
-                                    <option value="Canada">Canada</option>
-                                    <option value="International">International</option>
-                                </select>
+                                <input type="text" name="billingCountry" id="billingCountryInput" required value="<?php echo $country ?>">
                             </div>
                             <div id="billingProvince" class="checkoutContainer">
                                 <label class="elementLabel" for="billingProvinceInput">Province/State: </label>
 <!--                                <input type="text" name="billingProvince" id="billingProvinceInput" required value="--><?php //echo $province ?><!--">-->
-                                <select name="billingProvince" >
+                                <select name="billingProvince" id="billingProvinceSelect" >
+                                    <option value="International">International</option>
                                     <option value="AB">AB</option>
                                     <option value="BC">BC</option>
                                     <option value="MB">MB</option>
@@ -203,6 +201,10 @@ $fullName = $firstName." ".$lastName;
             </div>
         </fieldset>
     </form>
+
+    <script>
+        $("#billingProvinceSelect").val("<?php echo $province ?>");
+    </script>
 
     <div id="paypalButtonContainer">
         <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal" id="paypalButton"></a>
