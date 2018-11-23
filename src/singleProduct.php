@@ -171,18 +171,18 @@ try {
 
             <h2> Overall Rating</h2>
             <!-- added drop down rating -->
-            <select class="ratingInput">
-                <!--TODO: change value of default selected option, how about null?-->
-                <option selected value="noStar">Select a rating</option>
-                <option value="1">1 Star</option>
-                <option value="2">2 Star</option>
-                <option value="3">3 Star</option>
-                <option value="4">4 Star</option>
-                <option value="5">5 Star</option>
-            </select>
 
+            <form id="reviewInputForm" method="POST" action="http://www.randyconnolly.com/tests/process.php">
 
-            <form id="contactForm" method="post" action="http://www.randyconnolly.com/tests/process.php">
+                <select class="ratingInput" required name="userRatingInput">
+                    <!--TODO: change value of default selected option, how about null?-->
+                    <option selected value="">Select a rating</option>
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Star</option>
+                    <option value="3">3 Star</option>
+                    <option value="4">4 Star</option>
+                    <option value="5">5 Star</option>
+                </select>
 
                 <!-- Review input -->
                 <h2>What did you like or dislike about it? What did you use this product for?</h2>
@@ -191,13 +191,15 @@ try {
                     <textarea id="reviewInput" name="userReviewInput" placeholder="Write your review" rows="8"
                               maxlength="400" required></textarea>
                 </div>
-            </form>
+
         </div>
         <div class="modal-footer">
             <div class="reivewInputSubmit">
-                <button title="Submit Form" formaction="http://www.randyconnolly.com/tests/process.php" type="submit"
-                        id="SubmitButton" onsubmit="alert('Thank you for your review!');">Submit
-                </button>
+                <input type="submit" value="Submit">
+                </form>
+                <!--                <input title="Submit Form" formaction="http://www.randyconnolly.com/tests/process.php" type="submit"-->
+                <!--                        id="SubmitButton">Submit-->
+                <!--                </input>-->
             </div>
             <h3 class="footerNote">We value your feedback!</h3>
 
