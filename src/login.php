@@ -56,43 +56,10 @@ include "header.php";
             </div>
         </fieldset>
     </form>
-
-    <form id="signUpForm" method="post" action="action/createUser.php">
-        <fieldset>
-            <legend id="signUpTitle">Sign-Up</legend>
-            <div id="signUpInputElements">
-                <div class="SUformElement">
-                    <label id="SUfnameLabel" class="signUpLabel" for="fnameInput">First name: </label>
-                    <input type="text" name="firstName" id="fnameInput" required>
-                </div>
-
-                <div class="SUformElement">
-                    <label id="SUlnameLabel" class="signUpLabel" for="lnameInput">Last name: </label>
-                    <input type="text" name="lastName" id="lnameInput" required>
-                </div>
-
-                <div class="SUformElement">
-                    <label id="SUemailLabel" class="signUpLabel" for="signUpEmailInput">Email: </label>
-                    <input type="email" name="email" id="signUpEmailInput" required>
-                </div>
-
-                <div class="SUformElement">
-                    <label id="SUpasswordLabel" class="signUpLabel" for="signUpPasswordInput">Password: </label>
-                    <input type="password" name="password" id="signUpPasswordInput" required>
-                </div>
-
-                <div class="SUformElement">
-                    <label id="SUconfirmPasswordLabel" class="signUpLabel" for="signUpPasswordConfirmationInput">Confirm Password: </label>
-                    <input type="password" name="confirmPassword" id="signUpPasswordConfirmationInput" required>
-                </div>
-            </div>
-
-            <div class="SUformElement">
-                <button type="submit">Sign-up</button>
-            </div>
-        </fieldset>
-    </form>
 </div>
+    <div id="createAccountLink">
+        <p><a href="signup.php">Don't have an account?</a></p>
+    </div>
 </main>
 </body>
 </html>

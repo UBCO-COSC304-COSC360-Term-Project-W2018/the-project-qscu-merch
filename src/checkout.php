@@ -1,16 +1,21 @@
 <?php
-//include "init.php";
-include "header.php";
-?>
-<?php
-/**
- * Created by PhpStorm.
- * User: Rachelle
- * Date: 2018-11-11
- * Time: 3:58 PM
- */
+include "includes/init.php";
+$headerSet = 1;
 
-$uid;
+$_SESSION['userid']=1;
+
+if (!isset($_SESSION['userid'])) {
+    echo "<p>no user id is set</p>";
+//    redirect to login or create account
+}
+else {
+    $userid = $_SESSION['userid'];
+//    echo "<p>you did it buddy!</p>";
+}
+
+//$userid = $_SESSION['userid'];
+//$userid = $user->userid;
+
 $firstName="";
 $lastName="";
 $fullName="";
@@ -24,17 +29,25 @@ $creditCardNum="";
 $creditCardExpiryDate="";
 $ccv="";
 
-$con = mysqli_connect("cosc304.ok.ubc.ca", "rgelden", "40215162", "db_rgelden");
+$mysqli = new mysqli ("localhost", "rachellegelden", "rachelle", "qscurachelle");
 
-if ( mysqli_connect_errno()) {
-    echo "Failed to connect to MySQL";
-}else
-    echo "we in bois";
+if ($mysqli -> connect_errno) {
+//    echo "<p> Unable to connect to database </p>";
+    die();
+} else {
+//    echo "<p> You are connected to the database</p>";
+}
+//get info user info if they exist
+$sql1 = "SELECT * FROM billinginfo WHERE uid = ?";
 
-$sql1 = "SELECT * FROM BillingInfo WHERE uid=".$uid;
-if ($result = mysqli_query($con, $sql1)) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $addressLine = $row['addressLine'];
+if ($user_billing_info = $mysqli -> prepare($sql1)) {
+    $user_billing_info -> bind_param("s", $userid);
+    $user_billing_info -> execute();
+
+    $result = $user_billing_info->get_result();
+
+    while ($row = $result -> fetch_assoc()) {
+        $addressLine = $row['address'];
         $city = $row['city'];
         $province = $row['province'];
         $country = $row['country'];
@@ -45,9 +58,15 @@ if ($result = mysqli_query($con, $sql1)) {
     }
 }
 
-$sql2 = "SELECT fname, lname FROM User WHERE uid=".$uid;
-if ($result = mysqli_query($con, $sql2)) {
-    while($row = mysqli_fetch_row($result)) {
+$sql2 = "SELECT fname, lname FROM user WHERE uid= ?";
+
+if ($user_info = $mysqli -> prepare($sql2)) {
+    $user_info -> bind_param("s", $userid);
+    $user_info -> execute();
+
+    $result = $user_info -> get_result();
+
+    while($row = $result -> fetch_assoc()) {
         $firstName = $row['fname'];
         $lastName = $row['lname'];
     }
@@ -56,30 +75,20 @@ $fullName = $firstName." ".$lastName;
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Check-Out</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script>
-        window.jQuery || document.write('<script type="text/javascript" src="libs/jquery-3.3.1.min.js">\x3C/script>')
-    </script>
-    <link rel="stylesheet" href="css/header.css">
+    <?php include "includes/headerFooterHead.php"?>
+    <!--    always put my own stuff here below include :) -->
     <link rel="stylesheet" href="css/checkout.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png"/>
     <script type="text/javascript" src="script/checkout-validation.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png"/>
-    <link rel="stylesheet" href="css/footer.css">
 </head>
 
 <body>
+<?php include "header.php"?>
 <main>
-    <form method="post" action="http://www.randyconnolly.com/tests/process.php" id="checkOutForm">
+    <form method="post" action="checkout-action.php" id="checkOutForm">
 
         <fieldset>
             <legend id="checkOutFormTitle">Check Out</legend>
@@ -89,53 +98,53 @@ $fullName = $firstName." ".$lastName;
                     <div id="creditCardElementsContainer">
                         <div id="ccNameContainer" class="checkoutContainer">
                             <label id="ccNameLabel" for="ccName" class="elementLabel">Name on Card: </label>
-                            <input type="text" name="ccName" id="ccName" required <?php echo "value=".$fullName ?>>
+                            <input type="text" name="ccName" id="ccName" required value="<?php echo $fullName ?>">
                         </div>
                         <div id="ccNumContainer" class="checkoutContainer">
                             <label id="ccNumLabel" for="ccNum" class="elementLabel">Credit Card Number: </label>
-                            <input type="number" name="ccNum" id="ccNum" required <?php echo "value=".$creditCardNum?>>
+                            <input type="number" name="ccNum" id="ccNum" required value="<?php echo $creditCardNum?>">
                         </div>
 
                         <div id="ccExpirationContainer" class="checkoutContainer">
                             <label id="ccExpDateLabel" for="ccExpiration" class="elementLabel">Expiry Date
                                 (MMYY): </label>
-                            <input type="text" name="ccExpiration" required id="ccExpiration" <?php echo "value=".$creditCardExpiryDate?>>
+                            <input type="text" name="ccExpiration" required id="ccExpiration" value="<?php echo $creditCardExpiryDate?>">
                         </div>
 
                         <div id="ccCCVContainer" class="checkoutContainer">
                             <label id="ccCCVLabel" for="ccCCV" class="elementLabel">CCV: </label>
-                            <input type="number" name="ccv" required id="ccCCV" <?php "value=".$ccv ?>>
+                            <input type="number" name="ccv" required id="ccCCV" value="<?php echo $ccv ?>">
                         </div>
                     </div>
                     <div id="addressContainer" class="checkoutContainer">
-                        <div id="billingAddressContainer" class="checkoutContainer">
+                        <div id="billingAddressContainer" >
                             <label id="billingAddressLabel" class="elementLabel">Billing Address: </label>
-                            <div id="billingAddress">
+                            <div id="billingAddress" class="checkoutContainer">
                                 <label class="elementLabel" for="billingAddressInput">Address Line: </label>
-                                <input type="text" name="billingAddress" id="billingAddressInput" required <?php echo "value=".$addressLine ?>>
+                                <input type="text" name="billingAddress" id="billingAddressInput" required value="<?php echo $addressLine?>">
                             </div>
 
-                            <div id="billingCity">
+                            <div id="billingCity" class="checkoutContainer">
                                 <label class="elementLabel" for="billingCityInput">City: </label>
-                                <input type="text" name="billingCity" id="billingCityInput" required <?php echo "value=".$city ?>>
+                                <input type="text" name="billingCity" id="billingCityInput" required value="<?php echo $city ?>">
                             </div>
 
-                            <div id="billingProvince">
+                            <div id="billingProvince" class="checkoutContainer">
                                 <label class="elementLabel" for="billingProvinceInput">Province/State: </label>
-                                <input type="text" name="billingProvince" id="billingProvinceInput" required <?php echo "value=".$province ?>>
+                                <input type="text" name="billingProvince" id="billingProvinceInput" required value="<?php echo $province ?>">
                             </div>
-                            <div id="billingCountry">
+                            <div id="billingCountry" class="checkoutContainer">
                                 <label class="elementLabel" for="billingCountryInput">Country: </label>
-                                <input type="text" name="billingCountry" id="billingCountryInput" required <?php echo "value=".$country ?>>
+                                <input type="text" name="billingCountry" id="billingCountryInput" required value="<?php echo $country ?>">
                             </div>
 
-                            <div id="billingPostalCode">
+                            <div id="billingPostalCode" class="checkoutContainer">
                                 <label class="elementLabel" for="billingPostalCodeInput">Postal Code: </label>
-                                <input type="text" name="billingPostalCode" id="billingPostalCodeInput" required <?php echo "value=".$postalcode ?>>
+                                <input type="text" name="billingPostalCode" id="billingPostalCodeInput" required value="<?php echo $postalcode ?>">
                             </div>
                         </div>
                     </div>
-                    <div id="shippingAddressRadioGroup">
+                    <div id="shippingAddressRadioGroup" class="checkoutContainer">
                         <label class="elementLabel" for="shippingAddressRadioGroup">Select a shipping address: </label>
                         <input type="radio" name="shippingAddress" id="billingAddressRadio" checked="checked" value="1">Billing
                         address<br>
@@ -180,12 +189,11 @@ $fullName = $firstName." ".$lastName;
     </form>
 
     <div id="paypalButtonContainer">
-        <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal"
-                                              id="paypalButton"></a>
+        <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal" id="paypalButton"></a>
     </div>
 </main>
+<?php include "footer.php"; ?>
 </body>
 </html>
-<?php
-include "footer.php";
-?>
+
+

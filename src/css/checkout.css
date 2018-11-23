@@ -13,7 +13,7 @@ centers form in middle of page
 }
 
 #checkOutFormTitle {
-    font-size: 1em;
+    font-size: 3em;
     text-align: center;
     color: #18bfef;
 }
@@ -22,8 +22,8 @@ centers form in middle of page
 sets font size for labels and input fields
  */
 .checkoutContainer {
-    /*margin-top: 1em;*/
-    /*margin-bottom: 1em;*/
+    margin-top: 1em;
+    margin-bottom: 1em;
     font-size:1em;
 }
 
