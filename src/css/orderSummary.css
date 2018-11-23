@@ -1,0 +1,21 @@
+#userOrderTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.userOrderTableRow {
+    border-bottom-color: grey;
+    border-bottom-style: dotted;
+    border-bottom-width: thin;
+}
+
+#userOrderTableFieldNames {
+    border-bottom: thin black solid;
+}
+
+td {
+    text-align: center;
+}
+

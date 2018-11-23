@@ -18,7 +18,7 @@ else {
 <head>
     <?php include "includes/headerFooterHead.php"?>
     <!--    always put my own stuff here below include :) -->
-    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="css/orderSummary.css">
     <script type="text/javascript" src="script/checkout-validation.js"></script>
 </head>
 
@@ -26,14 +26,17 @@ else {
 <?php include "header.php"?>
 <main>
 <h1>Your Order:</h1>
-    <div id = "userOrderTable">
-        <table>
-            <tr>
-                <th>Quantity</th>
-                <th>Product</th>
-                <th>Size</th>
-                <th>Price</th>
-            </tr>
+    <div id = "userOrderTableContainer">
+        <table id="userOrderTable">
+            <thead>
+                <tr class="userOrderTableRow" id="userOrderTableFieldNames">
+                    <th>Quantity</th>
+                    <th>Product</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
             <?php
             $cartTwoDimArray = array();
 
@@ -50,6 +53,7 @@ else {
                 $result = $user_cart -> get_result();
 
                 $count = 0;
+                $subtotal = 0;
                 while ( $row = $result -> fetch_assoc() ) {
                     $quantity = $row['quantity'];
                     $product_name = $row['pname'];
@@ -57,6 +61,7 @@ else {
                     $price = $row['price'];
 
                     $total_price = $price * $quantity;
+                    $subtotal = $subtotal + $total_price;
 
                     $cartTwoDimArray[$count] = array( 'quantity' => $quantity, 'productName' => $product_name,
                         'size' => $size, 'totalPrice' => $total_price);
@@ -64,7 +69,7 @@ else {
                 }
 
                 foreach ($cartTwoDimArray as $item) {
-                    echo "<tr>
+                    echo "<tr class=\"userOrderTableRow\">
                             <td>".$item['quantity']."</td>
                             <td>".$item['productName']."</td>
                             <td>".$item['size']."</td>
@@ -73,7 +78,12 @@ else {
                 }
             }
             ?>
+            </tbody>
         </table>
+    </div>
+    <div>
+        <p>Subtotal: $<?php echo $subtotal ?> </p>
+        <p>Taxes: $</p>
     </div>
 </main>
 <?php include "footer.php"; ?>
