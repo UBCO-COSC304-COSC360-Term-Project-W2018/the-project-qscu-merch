@@ -3,17 +3,16 @@ $headerSet = 0;
 include "includes/init.php";
 include "header.php";
 
-try{
-$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
+try {
+    $user = isset($_SESSION["userId"]) ? $_SESSION['userId'] : null;
 
-$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+    $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-if($con -> connect_errno){
-	die("Connection Failed: ".$con -> connect_errno);
-}
-}
-catch (Exception $e) {
-	die("Error with Cart. Session Terminated.");
+    if ($con->connect_errno) {
+        die("Connection Failed: " . $con->connect_errno);
+    }
+} catch (Exception $e) {
+    die("Error with Cart. Session Terminated.");
 }
 
 ?>
@@ -26,7 +25,7 @@ catch (Exception $e) {
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
     <link rel="stylesheet" href="../src/css/singleProduct.css">
-	<?php include 'includes/headerFooterHead.php'?>
+    <?php include 'includes/headerFooterHead.php' ?>
     <script type="text/javascript" src="../src/script/quantity.js"></script>
     <script type="text/javascript" src="../src/script/reviewModal.js"></script>
 </head>
@@ -62,16 +61,18 @@ catch (Exception $e) {
             <!--description-->
             <div class=pDesc>
                 <h3> Description</h3>
-                <p>These ping pongs are directly from south Tunisia. They are the authentic hollowed out eyes of the western red and blue zebras. Buy now, while supplies last. 100% guaranteed to improve your beer-pong game! </p>
+                <p>These ping pongs are directly from south Tunisia. They are the authentic hollowed out eyes of the
+                    western red and blue zebras. Buy now, while supplies last. 100% guaranteed to improve your beer-pong
+                    game! </p>
             </div>
             <!--quantity counter-->
             <div class="quant">
                 <p>Quantity</p>
                 <form id='myform' method='POST' action='#'>
                     <!--                    TODO: need to send this somwehere-->
-                    <input title="Decrease Quantity" type='button' value='-' class='qtyminus' field='quantity' />
-                    <input type='text' name='quantity' value='0' class='qty' />
-                    <input title="Increase Quantity" type='button' value='+' class='qtyplus' field='quantity' />
+                    <input title="Decrease Quantity" type='button' value='-' class='qtyminus' field='quantity'/>
+                    <input type='text' name='quantity' value='0' class='qty'/>
+                    <input title="Increase Quantity" type='button' value='+' class='qtyplus' field='quantity'/>
 
                     <!-- added drop down menu -->
                     <select class="size">
@@ -104,13 +105,16 @@ catch (Exception $e) {
         </h3> -->
         <!-- PLAYING WITH -->
         <h3>Reviews
-            <button title="Add Review" id="writeReviewButton" class="addCart">Write a Review <span class="fa fa-pencil"></button>
+            <button title="Add Review" id="writeReviewButton" class="addCart">Write a Review <span class="fa fa-pencil">
+            </button>
         </h3>
         <div class="review1">
             <p class=userProfile>
-                <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa R</a> <time datetime="2018-10-24">- October 24, 2018</time>
+                <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa R</a>
+                <time datetime="2018-10-24">- October 24, 2018</time>
 
-                <button title="Add Comment" id="addCommentButton" alt="Add Comment" class="addCart"><span class="fa fa-comments-o"></button>
+                <button title="Add Comment" id="addCommentButton" alt="Add Comment" class="addCart"><span
+                            class="fa fa-comments-o"></button>
             </p>
             <p class="userRating">
                 <span class="fa fa-star checked"></span>
@@ -128,7 +132,10 @@ catch (Exception $e) {
 
         <div class="review1">
             <p class="userProfile">
-                <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">User Name</a> <time datetime="2018-10-24">- Month Day, Year</time></p>
+                <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">User
+                    Name</a>
+                <time datetime="2018-10-24">- Month Day, Year</time>
+            </p>
             <p class="userRating">
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
@@ -166,12 +173,12 @@ catch (Exception $e) {
             <!-- added drop down rating -->
             <select class="ratingInput">
                 <!--TODO: change value of default selected option, how about null?-->
-                <option  selected value="noStar">Select a rating</option>
+                <option selected value="noStar">Select a rating</option>
                 <option value="1">1 Star</option>
                 <option value="2">2 Star</option>
                 <option value="3">3 Star</option>
                 <option value="4">4 Star</option>
-                <option  value="5">5 Star</option>
+                <option value="5">5 Star</option>
             </select>
 
 
@@ -181,13 +188,16 @@ catch (Exception $e) {
                 <h2>What did you like or dislike about it? What did you use this product for?</h2>
                 <div class="formElement">
                     <!-- max lenght is 200 chars and there are 3 rows -->
-                    <textarea id="reviewInput" name="userReviewInput" placeholder="Write your review" rows="8" maxlength="400" required></textarea>
+                    <textarea id="reviewInput" name="userReviewInput" placeholder="Write your review" rows="8"
+                              maxlength="400" required></textarea>
                 </div>
             </form>
         </div>
         <div class="modal-footer">
             <div class="reivewInputSubmit">
-                <button title="Submit Form" formaction="http://www.randyconnolly.com/tests/process.php" type="submit" id="SubmitButton" onsubmit="alert('Thank you for your review!');">Submit</button>
+                <button title="Submit Form" formaction="http://www.randyconnolly.com/tests/process.php" type="submit"
+                        id="SubmitButton" onsubmit="alert('Thank you for your review!');">Submit
+                </button>
             </div>
             <h3 class="footerNote">We value your feedback!</h3>
 
