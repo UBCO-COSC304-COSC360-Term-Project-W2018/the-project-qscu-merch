@@ -66,10 +66,9 @@ try {
                     $stmt->bind_param('sssss', $firstName, $lastName, $email, $hashword, $salt);
                     $stmt->execute();
                     $uid = $stmt->insert_id;
-
+					$_SESSION["fName"] = $firstName;
                     $data["uid"] = $uid;
                     $stmt->close();
-
                     header("Location: ../profile.php");
                     exit();
                 } else {

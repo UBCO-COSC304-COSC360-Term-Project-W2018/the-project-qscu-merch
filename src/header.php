@@ -41,7 +41,7 @@
                 <a href="cart.php"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
                 
 	                <?php 
-	                if(isset($_SESSION["userId"])){
+	                if(isset($_SESSION["fName"])){
 						echo "<a href='profile.php'>" . $name . "</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
 	        		}else{
 						echo "<a href='login.php'>Login</a>";

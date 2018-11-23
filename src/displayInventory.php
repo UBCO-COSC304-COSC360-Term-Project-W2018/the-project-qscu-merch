@@ -1,5 +1,4 @@
 <?php
-include "includes/session.php";
 
 //needs admin validation
 
@@ -10,10 +9,9 @@ include "includes/session.php";
 //this will require two queries. One for the warehouse, and one fro the products at each warehouse
 
 include "includes/init.php";
-include "includes/db_credentials.php";
 include "includes/validateAdmin.php";
-
 include "header.php";
+include "includes/headerFooterHead.php";
 
 validateAdminRequest($_SESSION);
 
@@ -25,14 +23,14 @@ if($con -> connect_errno){
     die("Connection Failed: ".$con -> connect_errno);
 }
 
-$sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory, Product WHERE HasInventory.pNo = Product.pNo AND HasInventory.size = Product.size AND wNO = ?";
+$sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory, Product WHERE HasInventory.pNo = Product.pNo AND HasInventory.size = Product.size AND wNo = ?";
 
 $sqlWH = "SELECT wNo, location FROM Warehouse";
 
 echo '<table border="1"><tr><th>Warehouse Number</th><th>Location</th></tr>';
 
 if($warehouses = $con->query($sqlWH)){
-
+	
 	while($WH = $warehouses->fetch_assoc()){
 
 		echo "<tr><td>".$WH['wNo']."</td>";
@@ -44,7 +42,7 @@ if($warehouses = $con->query($sqlWH)){
 
 		if($pstmt = msqli_prepare($con, $sqlProds)){
 
-			mysqli_stmt_bindm($pstmt, 'i', $WH['wNo']);
+			mysqli_stmt_bind_param($pstmt, 'i', $WH['wNo']);
 			mysqli_stmt_execute($pstmt);
 
 			mysqli_stmt_bind_result($pstmt, $pNo, $size, $quantity, $pname);
@@ -75,11 +73,11 @@ else{
 }
 
 echo "</table>";
-
+$con->close();
 ?>
 
 <?php
 include "footer.php";
-$con->close();
+
 
 ?>
