@@ -1,5 +1,6 @@
 <?php
 include "includes/init.php";
+
 if(!isset($_SESSION['user'])){
     header('location: login.php');
 }
@@ -7,9 +8,8 @@ if(!isset($_SESSION['user'])){
 $user = $_SESSION['user']->id;
 $name = $_SESSION['user']->firstName;
 $headerSet = 1;
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!--    Head-->

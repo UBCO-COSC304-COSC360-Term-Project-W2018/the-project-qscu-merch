@@ -35,7 +35,9 @@ try {
 
             $email = trim($_POST['email']);
 
-            $mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+//            $mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+            $mysqli = new mysqli("localhost", "rachellegelden", "rachelle", "qscurachelle");
+
             if (mysqli_connect_errno()) {
                 //connection failed
                 die();
@@ -70,8 +72,8 @@ try {
 
                     $_SESSION['user']= new User($uid, $firstName, $lastName);
 
-                    $stmt->close();
 
+                    $stmt->close();
                     header("Location: ../profile.php");
                     exit();
                 } else {
