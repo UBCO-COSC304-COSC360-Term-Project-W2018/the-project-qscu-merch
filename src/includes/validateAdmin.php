@@ -36,8 +36,8 @@ function validationFailed(){
 }
 
 function validateAdminRequest($SESSION){
-    if (isset($SESSION['userid'])) {
-        if (!isAdmin($SESSION['userid'])) {
+    if (isset($SESSION['userId'])) {
+        if (!isAdmin($SESSION['userId'])) {
             validationFailed();
         }
     } else {
