@@ -22,3 +22,22 @@ td {
     margin-right: 1.5em;
 }
 
+#orderSummary_totalCost {
+    font-weight: bold;
+}
+
+#orderSummaryCostInfo {
+    float: right;
+    display: block;
+}
+
+#orderSummaryButtons {
+    float:right;
+    display: block;
+}
+
+#orderSummaryCostInfoContainer {
+    width: 100%;
+    display: inline-block;
+}
+
