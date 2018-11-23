@@ -1,9 +1,6 @@
-<?php 
-include "init.php";
+<?php
 $headerSet = 0;
-include "header.php";
 ?>
-
 <html>
 <!--    Head-->
 
@@ -11,17 +8,14 @@ include "header.php";
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
     <link rel="stylesheet" href="css/searchpage.css"/>
-    <link rel="stylesheet" href="css/header.css"/>
-    <link rel="stylesheet" href="css/footer.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png"/>
+    <?php include 'includes/headerFooterHead.php'?>
 </head>
 
 
 <!--    Body-->
 
 <body>
-
+<?php include "header.php"?>
     <!-- Main Body -->
 <main>
 	<div id="main">
@@ -179,9 +173,7 @@ include "header.php";
 			</p>
 		</div>
 </main>
+<?php include "footer.php"; ?>
 </body>
 </html>
 
-<?php
-include "footer.php";
-?>

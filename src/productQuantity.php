@@ -1,11 +1,8 @@
 <?php
-//Ok so this will have shitty HTML in it, but it will be displaying all the products at each warehouse, kinda like the lab 7 listOrder form. Cool glad we got that out of the way...
-
-//this will require two queries. One for the warehouse, and one fro the products at each warehouse
-
 include "init.php";
 include "header.php";
 
+<<<<<<< HEAD
 $user = $_SESSION["userId"];
 
 $databaseName = "db_40215162"; //database name
@@ -18,53 +15,63 @@ $con = new mysqli($host, $uID, $pw, $databaseName);
 if($con -> connect_errno){
     die("Connection Failed: ".$con -> connect_errno);
 }
+=======
+?>
+>>>>>>> 896314a680f4c4bffb5aa42a965e876c04c66643
 
 
-$sqlWH = "SELECT wNo, location FROM Warehouse";
-
-echo "<table border=\"1\"><tr><th>Warehouse Number</th><th>Location</th></tr>";
-
-if($warehouses = $con->query($sqlWH)){
-
-	while($WH = $warehouses->fetch_assoc()){
-
-		echo "<tr><td>".$WH['wNo']."</td>";
-		echo "<td>".$WH['location']."</td>";
-
-		$sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory, Product WHERE wNO = ".$WH['wNo']." AND HasInventory.pNo = Product.pNo AND HasInventory.size = Product.size";
+<form>
+	First name:<br>
+	<input type="number" name="prodNum"><br>
+	<input type="submit" value="Submit"><br>
+</form>
 
 
-		echo "<tr align=\"right\"><td colspan=\"4\"><table border=\"1\">";
-		echo "<th>Product Id</th><th>Product Name</th> <th>Size</th> <th>Quantity</th></tr>";
+<?php
 
-		if($prodInv = $con->query($sqlProds)){
+//gotta check if its post, gotta check the user credentials... make sure that it's an admin page
 
-			while($prodList = $prodInv->fetch_assoc()){
+// if $_SERVER[] === POST.. check the login page
 
-				echo "<tr><td>".$prodList['pNo']."</td>";
-				echo "<td>".$prodList['pname']."</td>";
-				echo "<td>".$prodList['size']."</td>";
-				echo "<td>".$prodList['quantity']."</td>";
-				echo "</tr>";
+$prodNum = $_POST['prodNum']; //make sure this is set and non-empty
 
-			}
+include "includes/db_credentials.php";
 
-		}
-		else{
-			die();
-		}
+$user = $_SESSION["userId"];
 
-		echo "</table></td></tr>";
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-	}
+if($con -> connect_errno){
+    die("Connection Failed: ".$con -> connect_errno);
+}
+
+//gotta use a prepared statement
+
+$sql = "SELECT pname, size, quantity, wNo FROM HasInventory, Product WHERE HasInventory.".$prodNum." = Product.".$prodNum." AND HasInventory.size";
+
+if($result = mysqli_query($con, $sql)){
+    echo '<table border="1"><tr><th>Product Number</th></tr>';
+	echo "<tr><td>".$prodNum."</td>";
+
+	echo '<tr align="right"><td colspan="4"><table border="1">';
+	echo "<th>Product Name</th><th>Size</th> <th>Quantity</th> <th>Warehouse Number</th></tr>";
+	while($row = mysqli_fetch_assoc($result)){
 
 
+        echo "<tr><td>".$row['pname']."</td>";
+        echo "<tr><td>".$row['size']."</td>";
+        echo "<tr><td>".$row['quantity']."</td>";
+        echo "<tr><td>".$row['wNo']."</td>";
+
+    }
+	echo "</table>";
 }
 else{
-	die();
+    die();
 }
 
-echo "</table>";
+
+$con->close();
 
 ?>
 

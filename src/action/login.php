@@ -17,7 +17,7 @@ function loginFailed($input = null)
 }
 
 try {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ((isset($_POST["email"]) && isset($_POST["password"])) && ($_POST["email"] != "" && $_POST["password"] != "")) {
             $email = strtolower(trim($_POST['email']));
             $password = trim($_POST["password"]);
@@ -37,16 +37,18 @@ try {
 
                     if ($stmt->fetch()) {
                         $hashword = hash_pbkdf2("sha256", $password, $salt, 2500);
-                        $query = "SELECT uid FROM User WHERE uEmail = ? AND password = ?";
+                        $query = "SELECT uid, fname FROM User WHERE uEmail = ? AND password = ?";
 
                         $stmt->close();
                         $stmt = $mysqli->prepare($query);
                         $stmt->bind_param('ss', $email, $hashword);
                         $stmt->execute();
-                        $stmt->bind_result($uid);
+                        $stmt->bind_result($uid, $name);
 
                         if ($stmt->fetch()) {
                             $_SESSION['userId'] = $uid;
+                            $_SESSION['fName'] = $name;
+                            
                             $data['uid'] = $uid;
                             $stmt->close();
                             header("Location: ../homeWithoutTables.php");

@@ -36,7 +36,9 @@ try {
 
             $email = strtolower(trim($_POST['email']));
 
-            $mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+//            $mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+            $mysqli = new mysqli("localhost", "rachellegelden", "rachelle", "qscurachelle");
+
             if (mysqli_connect_errno()) {
                 //connection failed
                 die();
@@ -66,10 +68,9 @@ try {
                     $stmt->bind_param('sssss', $firstName, $lastName, $email, $hashword, $salt);
                     $stmt->execute();
                     $uid = $stmt->insert_id;
-
+					$_SESSION["fName"] = $firstName;
                     $data["uid"] = $uid;
                     $stmt->close();
-
                     header("Location: ../profile.php");
                     exit();
                 } else {

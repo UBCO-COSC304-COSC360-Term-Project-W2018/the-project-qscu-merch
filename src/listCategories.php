@@ -1,6 +1,6 @@
 
 <?php
-	include "../includes/init.php";
+	include "includes/init.php";
 
 try{
 
@@ -14,8 +14,6 @@ if($con -> connect_errno){
 catch (Exception $e) {
 	die("Error with Cart. Session Terminated.");
 }
-?>
-<?php
 					
 					$sqlCats = "SELECT cname FROM Category";
 
@@ -28,8 +26,8 @@ catch (Exception $e) {
 							array_push($list, $name);
 						}
 						
-// 						header('Content-Type: application/json');
-	//					echo json_encode($list);
+ 						header('Content-Type: application/json');
+						echo json_encode($list);
 						
 					} else {
 						echo "Category Query failed.";
@@ -37,4 +35,4 @@ catch (Exception $e) {
 					}
 					
 
-					?>	
+?>	

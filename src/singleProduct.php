@@ -25,12 +25,8 @@ catch (Exception $e) {
 <head lang="en">
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
-    <link rel="stylesheet" href="../src/css/header.css" />
-    <link rel="stylesheet" href="../src/css/footer.css" />
     <link rel="stylesheet" href="../src/css/singleProduct.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="icon" type="image/x-icon" href="../src/images/QSCU_favicon.png" />
-    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<?php include 'includes/headerFooterHead.php'?>
     <script type="text/javascript" src="../src/script/quantity.js"></script>
     <script type="text/javascript" src="../src/script/reviewModal.js"></script>
 </head>

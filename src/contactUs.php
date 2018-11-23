@@ -5,6 +5,7 @@
  * Date: 2018-11-12
  * Time: 1:37 PM
  */
+$headerSet = 1;
 include "header.php";
 
 ?>
@@ -17,11 +18,8 @@ include "header.php";
 <head lang="en">
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
-    <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" href="css/header.css" />
     <link rel="stylesheet" href="css/contact.css" />
-    <link rel="icon" type="image/x-icon" href="../src/images/QSCU_favicon.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<?php include 'includes/headerFooterHead.php'?>
 </head>
 
 <!--    Body-->

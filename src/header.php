@@ -1,15 +1,13 @@
+
 <?php 
 	$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
+	$name = isset($_SESSION["fName"])? $_SESSION["fName"]: null;
 	?>
 	
 <!--HTML home page for shop.qscu.org-->
 <!DOCTYPE HTML>
 <html lang="en">
 
-<!--    Body-->
-
-<body>
-    <!--    Header-->
     <header>
         <div id="htop">
             <a href="homeWithoutTables.php" id="logo"><img id="headerIcon" src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union"/> </a>
@@ -43,8 +41,8 @@
                 <a href="cart.php"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
                 
 	                <?php 
-	                if(isset($_SESSION["userId"])){
-						echo "<a href='profile.php'>" . $user . "</a>";
+	                if(isset($_SESSION["fName"])){
+						echo "<a href='profile.php'>" . $name . "</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
 	        		}else{
 						echo "<a href='login.php'>Login</a>";
 	        		}
@@ -53,10 +51,5 @@
             </div>
 
         </div>
-
     </header>
-</body>
-<script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="script/browsebar.js"></script>
-</html>
-<!-- Header end -->
+

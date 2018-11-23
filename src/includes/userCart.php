@@ -1,7 +1,6 @@
 <?php
 
-class userCart
-{
+class userCart{
     var $cart = [];
 
     function addItem($pno, $size, $qty = 1, $itemPrice = -1){
