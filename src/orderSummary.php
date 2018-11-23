@@ -21,7 +21,6 @@ if (!isset($_SESSION['userid'])) {
     <!--    always put my own stuff here below include :) -->
     <link rel="stylesheet" href="css/orderSummary.css">
     <script src="libs/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="script/checkout-validation.js"></script>
     <script type="text/javascript" src="script/orderSummary.js"></script>
 </head>
 
@@ -138,8 +137,8 @@ if (!isset($_SESSION['userid'])) {
             <p>Subtotal: $<?php echo $subtotal ?> </p>
             <p>Taxes: $<?php echo $taxTotal ?></p>
             <p id="orderSummary_totalCost">Total Cost: $<?php echo $netTotal ?></p>
-            <button type="button" id="#editOrderButton">Edit</button>
-            <button type="button" id="#confirmOrderButton">Confirm</button>
+            <button type="button" id="editOrderButton">Edit</button>
+            <button type="button" id="confirmOrderButton">Confirm</button>
         </div>
     </div>
 </main>
@@ -150,8 +149,9 @@ if (!isset($_SESSION['userid'])) {
 <script>
     console.log("hit the script tag");
 
-    $('button').click(function() {
-        <?php header("Location: http://localhost/the-project-qscu-merch/src/checkout.php") ?>
+    $('#editOrderButton').click(function() {
+        console.log("button click registered");
+        location.replace("http://localhost/the-project-qscu-merch/src/viewcart.php");
     });
 
 
