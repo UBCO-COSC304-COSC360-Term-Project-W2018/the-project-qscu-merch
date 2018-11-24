@@ -1,4 +1,5 @@
 <?php
+	include "includes/init.php";
 $headerSet = 0;
 ?>
 <html>
@@ -56,7 +57,9 @@ $headerSet = 0;
 	
 	<div id="categoryviews">
 		<div id="sortby">
+			<p id='searchResultsTitle'>Search Results</p> <!--could include what we searched for in this line. Simple Query, extra -->
 		<form id="sortform">
+			
 			<label id="sortlabel">Sort By:</label>
 			<select name="sort" id="sort">
 				<option value="liamspicks">Liam's Picks</option>

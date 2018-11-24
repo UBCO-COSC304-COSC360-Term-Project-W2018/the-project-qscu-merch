@@ -3,12 +3,15 @@
 $headerSet = 1;
 include "includes/init.php";
 
-//include "includes/db_credentials.php";
+if(isset($_SESSION['user'])){
+    $user = $_SESSION['user']->id;
+    $name = $_SESSION['user']->firstName;
+}
 
 try{
 
 //    TODO this needs to be changed the query part doesnt have a trycatch
-$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
+
 
 $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
@@ -20,8 +23,24 @@ if($con -> connect_errno){
 catch (Exception $e) {
 	die("Session Terminated.");
 }
+try{
+	$sqlCats = "SELECT cname FROM Category";
 
+	if($cats = $con->query($sqlCats)) {
+		$names = array();
+		while($catNames = $cats->fetch_assoc()) {
 
+			$name = $catNames['cname'];
+			array_push($names, $name);
+			
+		}
+	} else {
+		echo "Category Query failed.";
+		die();
+	}
+}catch(Exception $ex){
+		echo "Try failed";
+	}
 ?>
 
 <!DOCTYPE HTML>
@@ -46,24 +65,14 @@ catch (Exception $e) {
 			<nav id="browsenav">
 				<h4 id="browsetitle">Categories</h4>
 				<ul id="browselist">
-					<?php
-					
-					$sqlCats = "SELECT cname FROM Category";
-
-					if($cats = $con->query($sqlCats)) {
-
-						while($catNames = $cats->fetch_assoc()) {
-
-							$name = $catNames['cname'];
-
-							echo "<li class='browseitem'><a href='categorypage.php?cat=" . $name . "' class='browselink'>" . $name . "</a></li>";
+					<?php 
+						$len = count($names);
+						for($x = 0; $x < $len; $x++){
+							echo "<li class='browseitem'><a href='categorypage.php?cat=" . $names[$x] . "' class='browselink'>" . $names[$x] . "</a></li>";
 						}
-					} else {
-						echo "Category Query failed.";
-						die();
-					}
-
-					?>	
+						
+						
+						?>
 				</ul>
 	    	</nav>
 		</div>

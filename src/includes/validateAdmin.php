@@ -1,4 +1,7 @@
 <?php
+	
+	
+$isImportAdmin=true;
 if (!isset($dbcred)) {
     include 'db_credentials.php';
 }
