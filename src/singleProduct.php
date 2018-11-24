@@ -45,27 +45,25 @@ try {
                     <!--            name of product-->
                     <?php
 
-                    $sqlCats = "SELECT pname FROM Product";
+                    $sql = "SELECT pname FROM Product";
 
-                    if ($cats = $con->query($sqlCats)) {
+                    if ($query = $con->query($sql)) {
 
-                        while ($catNames = $cats->fetch_assoc()) {
+                        while ($field = $query->fetch_assoc()) {
 
-                            $pname = $catNames['pname'];
+                            $pname = $field['pname'];
 
-                            echo " <h1>$pname</h1>";
+                            echo " <h1 title='$pname'>$pname</h1>";
                         }
                     } else {
-                        echo "Category Query failed.";
+                        echo "Error - could not get product name .";
                         die();
                     }
 
                     ?>
-                    <!--                sub-title stuff -->
-                    <p>3 Balls per pack</p>
                 </div>
                 <!--rating-->
-                <div class="rating">
+                <div title="The average rating for this product" class="rating">
                     <p>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
@@ -79,10 +77,25 @@ try {
                 <!--description-->
                 <div class=pDesc>
                     <h3> Description</h3>
-                    <p>These ping pongs are directly from south Tunisia. They are the authentic hollowed out eyes of the
-                        western red and blue zebras. Buy now, while supplies last. 100% guaranteed to improve your
-                        beer-pong
-                        game! </p>
+                    <?php
+
+                    $sqlCats = "SELECT description FROM Product";
+
+                    if ($cats = $con->query($sqlCats)) {
+
+                        while ($catNames = $cats->fetch_assoc()) {
+
+                            $desc = $catNames['description'];
+
+                            echo " <p>$desc</p>";
+                        }
+                    } else {
+                        echo "Error - could not get description name .";
+                        die();
+                    }
+
+                    ?>
+
                 </div>
                 <!--quantity counter-->
                 <div class="quant">
@@ -112,9 +125,53 @@ try {
 
                 <!--            price-->
                 <div class="price">
-                    <p>Listed Price: <label class="oldPrice">CDN$299.99</label></p>
+                    <?php
 
-                    <p>Price: <label class="sale">CDN$199.99</label>
+
+                    $sqlOldPrice = "SELECT price+100 AS oldPrice FROM Product";
+
+                    if ($query = $con->query($sqlOldPrice)) {
+
+                        while ($field = $query->fetch_assoc()) {
+
+                            $OldPrice = $field['oldPrice'];
+
+                            echo "<p>Listed Price: <label class=\"oldPrice\">CDN$ $OldPrice</label>";
+                        }
+                    } else {
+                        echo "Error - could not get price.";
+                        die();
+                    }
+
+                    $sqlPrice = "SELECT price FROM Product";
+                    //                    $sqlOldPrice = "SELECT price+100 FROM Product";
+
+                    if ($query = $con->query($sqlPrice)) {
+
+                        while ($field = $query->fetch_assoc()) {
+
+                            $price = $field['price'];
+
+                            echo "<p>Price: <label class=\"sale\">CDN$$price</label>";
+                        }
+                    } else {
+                        echo "Error - could not get price.";
+                        die();
+                    }
+                    ?>
+
+<!--                    else  if ($query = $con->query($sqlOldPrice)) {-->
+<!---->
+<!--                    while ($field = $query->fetch_assoc()) {-->
+<!---->
+<!--                    $OldPrice = $field['price'];-->
+<!---->
+<!---->
+<!---->
+<!--                        }-->
+<!--                    <p>Listed Price: <label class="oldPrice">CDN$299.99</label></p>-->
+
+<!--                    <p>Price: <label class="sale">CDN$199.99</label>-->
 
 
                     </p>
