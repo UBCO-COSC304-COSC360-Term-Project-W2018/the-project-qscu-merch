@@ -10,12 +10,17 @@
 
 include "includes/init.php";
 include "includes/validateAdmin.php";
-include "header.php";
+
 include "includes/headerFooterHead.php";
+include "header.php";
 
 validateAdminRequest($_SESSION);
-
-$user = $_SESSION["userId"];
+$user = null;
+$name = null;
+if(isset($_SESSION['user'])){
+    $user = $_SESSION['user']->id;
+    $name = $_SESSION['user']->firstName;
+}
 
 $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
@@ -23,7 +28,7 @@ if($con -> connect_errno){
     die("Connection Failed: ".$con -> connect_errno);
 }
 
-$sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory, Product WHERE HasInventory.pNo = Product.pNo AND HasInventory.size = Product.size AND wNo = ?";
+
 
 $sqlWH = "SELECT wNo, location FROM Warehouse";
 
@@ -34,33 +39,35 @@ if($warehouses = $con->query($sqlWH)){
 	while($WH = $warehouses->fetch_assoc()){
 
 		echo "<tr><td>".$WH['wNo']."</td>";
-		echo "<td>".$WH['location']."</td>";
+		echo "<td>".$WH['location']."</td></tr>";
 
-
+		
 		echo '<tr align="right"><td colspan="4"><table border="1">';
 		echo '<th>Product Id</th><th>Product Name</th> <th>Size</th> <th>Quantity</th></tr>';
+		
+		$sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory, Product WHERE HasInventory.pNo = Product.pNo AND HasInventory.size = Product.size AND wNo = ?";
+		if($pstmt = $con->prepare($sqlProds)){
+			
 
-		if($pstmt = msqli_prepare($con, $sqlProds)){
+			$pstmt->bind_param('i', $ware);
+			$ware = $WH['wNo'];
+			$pstmt->execute();
 
-			mysqli_stmt_bind_param($pstmt, 'i', $WH['wNo']);
-			mysqli_stmt_execute($pstmt);
+			$pstmt>bind_result($pNo, $size, $quantity, $pname);
 
-			mysqli_stmt_bind_result($pstmt, $pNo, $size, $quantity, $pname);
-
-			while(mysqli_stmt_fetch($pstmt)){
+			while($pstmt->fetch()){
 
 				echo "<tr><td>".$pNo."</td>";
 				echo "<td>".$pname."</td>";
 				echo "<td>".$size."</td>";
-				echo "<td>".$quantity."</td>";
-				echo "</tr>";
-
-			}
-
+				echo "<td>".$quantity."</td></tr>";
 		}
-		else{
-			die();
+			
+
+		}else{
+			echo "FUCK";
 		}
+	
 
 		echo "</table></td></tr>";
 
