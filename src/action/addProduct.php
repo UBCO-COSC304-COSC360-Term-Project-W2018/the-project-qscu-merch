@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if(isset($id)) {
                 if($size !== "single") {
                     $size = array('medium', 'large', 'xl');
-                    $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?, ?)";
+                        $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt = $mysql->prepare($query);
                     foreach ($size as $key => $value) {
 
