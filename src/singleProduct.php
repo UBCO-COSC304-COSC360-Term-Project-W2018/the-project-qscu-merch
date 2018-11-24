@@ -28,6 +28,7 @@ try {
     <?php include 'includes/headerFooterHead.php' ?>
     <script type="text/javascript" src="../src/script/quantity.js"></script>
     <script type="text/javascript" src="../src/script/reviewModal.js"></script>
+    <script type="text/javascript" src="../src/script/commentModal.js"></script>
 </head>
 <!--    Body-->
 
@@ -68,22 +69,24 @@ try {
             <!--quantity counter-->
             <div class="quant">
                 <p>Quantity</p>
-                <form id='myform' method='POST' action='#'>
-                    <!--                    TODO: need to send this somwehere-->
+                <!--                    TODO: need to send this somwehere-->
+                <form id='myform' method='POST' action="http://www.randyconnolly.com/tests/process.php">
                     <input title="Decrease Quantity" type='button' value='-' class='qtyminus' field='quantity'/>
-                    <input type='text' name='quantity' value='0' class='qty'/>
+                    <input required type='text' name='quantity' value='' class='qty'/>
                     <input title="Increase Quantity" type='button' value='+' class='qtyplus' field='quantity'/>
 
                     <!-- added drop down menu -->
-                    <select class="size">
+
+                    <select name="size" class="size" required>
+                        <option selected value="">Select a size</option>
                         <option value="SML">Small (S)</option>
                         <option value="MED">Medium (M)</option>
                         <option value="LG">Large (L)</option>
                         <option value="XLG">Extra-Large (XL)</option>
                     </select>
 
+                    <button title="Add to Cart" class="pageButtons">Add to Cart <i class="fa fa-shopping-cart"></i></button>
                 </form>
-                <button title="Add to Cart" class="addCart">Add to Cart <i class="fa fa-shopping-cart"></i></button>
 
             </div>
 
@@ -100,20 +103,16 @@ try {
 
     </div>
     <section id="reviews">
-        <!-- ORIGINAL -->
-        <!-- <h3>Reviews <a href="login.html" class="fa fa-pencil"> Write a Review </a>
-        </h3> -->
-        <!-- PLAYING WITH -->
         <h3>Reviews
-            <button title="Add Review" id="writeReviewButton" class="addCart">Write a Review <span class="fa fa-pencil">
+            <button title="Add Review" id="writeReviewButton" class="pageButtons">Write a Review <span class="fa fa-pencil">
             </button>
         </h3>
         <div class="review1">
             <p class=userProfile>
                 <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa R</a>
                 <time datetime="2018-10-24">- October 24, 2018</time>
-
-                <button title="Add Comment" id="addCommentButton" alt="Add Comment" class="addCart"><span
+<!--                comment button-->
+                <button title="Add Comment" id="writeCommentButton" alt="Add Comment" class="pageButtons"><span
                             class="fa fa-comments-o"></button>
             </p>
             <p class="userRating">
@@ -149,17 +148,12 @@ try {
             </p>
             <p class="reviewDescription">Review Description Here</p>
         </div>
-        <!--
-          <div class="review2">
-              <p class="byline">By Parsa on <time datetime="2016-10-01">October 30, 2018</time></p>
-              <p class="userReview">10/10 would buy again.</p>
-          </div>
-  -->
     </section>
 </div>
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+
+<!-- The Modal FOR writeReviewButton-->
+<div id="reviewModal" class="modal">
 
     <!-- Modal content -->
     <div class="modal-content">
@@ -191,22 +185,43 @@ try {
                     <textarea id="reviewInput" name="userReviewInput" placeholder="Write your review" rows="8"
                               maxlength="400" required></textarea>
                 </div>
-
         </div>
         <div class="modal-footer">
-            <div class="reivewInputSubmit">
-                <input type="submit" value="Submit">
+            <div class="modal-submit">
+                <input title="Submit Form" type="submit" value="Submit">
                 </form>
-                <!--                <input title="Submit Form" formaction="http://www.randyconnolly.com/tests/process.php" type="submit"-->
-                <!--                        id="SubmitButton">Submit-->
-                <!--                </input>-->
             </div>
             <h3 class="footerNote">We value your feedback!</h3>
-
-
         </div>
     </div>
+</div>
 
+
+<!-- The Modal FOR writeCommentButton-->
+<div id="commentModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <h1>Add Comment</h1>
+        </div>
+        <div class="modal-body">
+                <!-- Review input -->
+                <h2>What's your comment?</h2>
+                <div class="formElement">
+                    <!-- max lenght is 200 chars and there are 3 rows -->
+                    <textarea id="reviewInput" name="userReviewInput" placeholder="Insert your comment here" rows="8"
+                              maxlength="400" required></textarea>
+                </div>
+        </div>
+        <div class="modal-footer">
+            <div class="modal-submit">
+                <input title="Submit Form" type="submit" value="Submit">
+                </form>
+            </div>
+            <h3 class="footerNote">Keep the conversation going!</h3>
+        </div>
+    </div>
 </div>
 
 <?php

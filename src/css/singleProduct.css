@@ -98,7 +98,7 @@ select.size {
 }
 
 /* button css */
-.addCart {
+.pageButtons {
     font-size: 1.5em;
     background-color: #18bfef;
     margin-left: 3em;
@@ -106,10 +106,10 @@ select.size {
     overflow: hidden;
     /*    background-color: orange;*/
     /*    color: white;*/
-    border-radius: 5em;
+    border-radius: 0.7em;
 }
 
-.addCart:hover {
+.pageButtons:hover {
     background-color: tomato;
     color: white;
 }
@@ -119,7 +119,7 @@ select.size {
     margin-left: 1em;
 }
 
-#addCommentButton {
+#writeCommentButton {
     margin-left: 0.5em;
     padding-left: 10px;
     padding-right: 10px;
@@ -137,7 +137,7 @@ select.size {
 
 #reviews h3 {
     margin-top: 0;
-    border-top: 1px dashed tomato;
+    border-top: 1px dashed #18bfef;
     padding-top: 0.5em;
     border-bottom: 1px dashed #18bfef;
     padding-bottom: 0.5em;
@@ -209,7 +209,7 @@ select.size {
     /* Hidden by default */
     position: fixed;
     /* Stay in place */
-    z-index: 1;
+    z-index: 9999;
     /* Sit on top */
     padding-top: 50px;
     /* Location of the box */
@@ -314,15 +314,12 @@ select.size {
     font-size: 18px;
 }
 
-/*.modal-footer .footerNote{*/
-/*display: inline;*/
-/*}*/
 .modal-footer .footerNote {
     margin: 0;
     padding-top: 0.5em;
 }
 
-.modal-footer .reivewInputSubmit {
+.modal-footer .modal-submit {
     padding-top: 1em;
 }
 
