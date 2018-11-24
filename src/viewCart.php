@@ -1,61 +1,79 @@
-This file will have be the view shopping cart. Again everything will be in php, so yeah... HTML will be very basic in the php section of this, so it will need some dope ass styling by you guys. Im guessing this is gonna be fairly similar to the listOrder part of Lab 7.... cool.
-
-Note: In sqlGetCart, customerID is something I assume we know and are able to get from the html stuff that you guys know how to do
-
 <?php
 
-try{
+//this file will need to have some hardcore HTML fun stuff, and will also have the ability to edit their cart... lets go with the query first
 
-$user = $_SESSION["userId"]
+include "includes/init.php";
+include "includes/user.php";
+include "includes/userCart.php";
+include "includes/headerFooterHead.php";
 
-$databaseName = "db_40215162"; //database name
-$uID = "40215162"; //admin's ID
-$pw = "qscu42069!"; //admin's password
-$host = "cosc.360.ok.ubc.ca"; //host of database
+echo("<h1>Your Shopping Cart</h1>");
+echo("<table><tr><th>Product Id</th><th>Product Name</th><th>Size</th><th>Quantity</th><th>Price</th>");
 
-$con = new mysqli($host, $uID, $pw, $databaseName);
+//So this will have two parts to it, depending on if the user is logged in or not
 
-if($con -> connect_errno){
-	die("Connection Failed: ".$con -> connect_errno);
-}
+if(isset($_SESSION['user'])){
+    //user logged in
+    //DB query to go through and display their cart
 
-$sqlGetCart = "SELECT pNo, size, quantity, pname FROM HasCart, Product WHERE uid = ".$user." and HasCart.pNo = Product.pNo";
+    $user = $_SESSION['user']->id;
 
+    try{
+        //make connection
 
-if($result = $con->query($sqlGetCart)){
+        $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-	echo"<table border=\"1\"><tr><th>Product Name</th><th>Size</th><th>Quantity</th>";
+        if ($con->connect_errno) {
+            die("Connection Failed: " . $con->connect_errno);
+        }
+        // make a query with prepared statement for the user's cart with their id, then iterate through the list
 
-	while($prod = $result->fetch_assoc()){
+        $qry = "SELECT pNo, pname, size, quantity, quantity*price AS priceQuant FROM  HasCart H, Product P WHERE uid = ?, H.pNo = P.pNo, H.size = P.size";
 
-		echo "<tr><td>".$prod['pname']."</td>";
-		echo "<td>".$prod['size']"</td>";
-		echo "<td>".$prod['quantity']"</td>");
-		echo "</tr>");
-	}
+        if($stmt = mysqli_prepare($con, $qry)){
 
-	echo "</table>"
+            mysqli_stmt_bindm($stmt, 'i', $user);
+            mysqli_stmt_execute($stmt);
+
+            while(mysqli_stmt_fetch($stmt)){
+
+                //HOORAY FOR GARBAGE HTML
+
+                echo("<tr><td>".$pNo. "</td>");
+                echo("<td>" .$pname. "</td>");
+                echo("<td>" .$size. "</td>");
+                echo("<td align=\"center\">".$quantity. "</td>");
+                echo("<td align=\"center\">".$priceQuant. "</td>");
+            }
+
+        }
+
+    }
+    catch(Exception $e){ die();}
 
 }
 else{
-	//error here with query, so we kill it
-	die();
+
+    //user not logged in
+    //cart is an object (in a cookie or something idk), must iterate through (look at Ramon's code Lab 7)
+
+    $uc = $_COOKIE['userCart'];
+
+    $cart = getCart();
+
+    //somehow iterate through the cart... idk how yet though so thats good
+
+    foreach($cart as $itemID => $item){
+
+        echo("<tr><td>".$item['pno']. "</td>");
+        echo("<td>" .$item['pname']. "</td>");
+        echo("<td>" .$item['size']. "</td>");
+        echo("<td align=\"center\">".$item['qty']. "</td>");
+        echo("<td align=\"center\">".$item['price']. "</td>");
+
+    }
 
 }
-
-//We want the price also
-
-
-
-
-
-
-
-}
-catch(Exception $e){
-	die();
-}
-
 
 ?>
 
