@@ -28,12 +28,12 @@ try {
     <?php include 'includes/headerFooterHead.php' ?>
     <script type="text/javascript" src="../src/script/quantity.js"></script>
     <script type="text/javascript" src="../src/script/reviewModal.js"></script>
-    <script type="text/javascript" src="../src/script/commentModal.js"></script>
+<!--    <script type="text/javascript" src="../src/script/commentModal.js"></script>-->
 </head>
 <!--    Body-->
 
 <body>
-
+<main>
 <!--    make sure all the files that we update have the same and CORRECT width/height -->
 <div class="bigboi">
     <div class="container">
@@ -41,7 +41,7 @@ try {
 
         <div class="sideContent">
             <!--            name of product-->
-            <div class="pName">
+            <div class="pName" name="pName">
                 <h1>Ping Pongs
                 </h1>
                 <!--                sub-title stuff -->
@@ -85,6 +85,7 @@ try {
                         <option value="XLG">Extra-Large (XL)</option>
                     </select>
 
+<!--                    TODO: Liam needs pName and price -->
                     <button title="Add to Cart" class="pageButtons">Add to Cart <i class="fa fa-shopping-cart"></i></button>
                 </form>
 
@@ -158,7 +159,7 @@ try {
     <!-- Modal content -->
     <div class="modal-content">
         <div class="modal-header">
-            <span class="close">&times;</span>
+            <span class="closeReview">&times;</span>
             <h1>Product Review</h1>
         </div>
         <div class="modal-body">
@@ -202,7 +203,7 @@ try {
     <!-- Modal content -->
     <div class="modal-content">
         <div class="modal-header">
-            <span class="close">&times;</span>
+            <span class="closeComment">&times;</span>
             <h1>Add Comment</h1>
         </div>
         <div class="modal-body">
@@ -223,7 +224,7 @@ try {
         </div>
     </div>
 </div>
-
+</main>
 <?php
 include "footer.php";
 ?>

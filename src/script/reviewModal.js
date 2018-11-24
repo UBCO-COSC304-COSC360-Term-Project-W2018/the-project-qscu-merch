@@ -1,58 +1,48 @@
 $(document).ready(function () {
-    var modal = document.getElementById('reviewModal');
-    var btn = document.getElementById("writeReviewButton");
-    var span = document.getElementsByClassName("close")[0];
-    btn.onclick = function () {
-        modal.style.display = "block";
+
+    // Get the reviewModal
+    var reviewModal = document.getElementById("reviewModal");
+    var commentModal = document.getElementById("commentModal");
+
+    // Get the button that opens the reviewModal
+    var reviewButton = document.getElementById("writeReviewButton");
+    var commentButton = document.getElementById("writeCommentButton");
+
+    // Get the <spanReview> element that closes the reviewModal
+    var spanReview = document.getElementsByClassName("closeReview")[0];
+    var spanComment = document.getElementsByClassName("closeComment")[0];
+
+    // When the user clicks the button, open the reviewModal
+    commentButton.onclick = function () {
+        commentModal.style.display = "block";
     };
-    span.onclick = function () {
-        modal.style.display = "none";
+    reviewButton.onclick = function () {
+        reviewModal.style.display = "block";
     };
+
+
+    // When the user clicks on <spanReview> (x), close the reviewModal
+    spanReview.onclick = function () {
+        reviewModal.style.display = "none";
+
+    };
+
+    spanComment.onclick = function () {
+        commentModal.style.display = "none";
+
+    };
+
+    // When the user clicks anywhere outside of the reviewModal, close it
     window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+        if (event.target == reviewModal) {
+            reviewModal.style.display = "none";
+        }
+        if (event.target == commentModal) {
+            commentModal.style.display = "none";
         }
     }
+
+    // $("#writeReviewButton").click(function(){
+    //     $("#reviewModal").reviewModal({backdrop: true});
+    // });
 });
-// $(document).ready(function () {
-//
-//     // Get the modal
-//     var reviewModal = document.getElementById('reviewModal');
-//     // var commentModal = document.getElementById('commentModal');
-//
-//     // Get the button that opens the modal
-//     var writeReviewButton = document.getElementById("writeReviewButton");
-//     // var writeCommentButton = document.getElementById("writeCommentButton");
-//
-//     // Get the <span> element that closes the modal
-//     var span = document.getElementsByClassName("close")[0];
-//
-//     // When the user clicks the button, open the modal
-//     writeReviewButton.onclick = function () {
-//         reviewModal.style.display = "block";
-//     };
-//
-//     // writeCommentButton.onclick= function (){
-//     //     commentModal.style.display = "block"
-//     // };
-//
-//     // When the user clicks on <span> (x), close the modal
-//     span.onclick = function () {
-//         // commentModal.style.display = "none";
-//         reviewModal.style.display = "none";
-//     };
-//
-//     // When the user clicks anywhere outside of the modal, close it
-//     window.onclick = function (event) {
-//         if (event.target == reviewModal) {
-//             // commentModal.style.display = "none";
-//             reviewModal.style.display = "none";
-//         }
-//     }
-// });
-// Get the modal
-// Get the button that opens the modal
-// Get the <span> element that closes the modal
-// When the user clicks the button, open the modal
-// When the user clicks on <span> (x), close the modal
-// When the user clicks anywhere outside of the modal, close it
