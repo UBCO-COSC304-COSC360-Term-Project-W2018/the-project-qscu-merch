@@ -1,6 +1,6 @@
 <?php
 function isValidInput($input){
-    $regex ='/^(?!\s*$)[a-zA-Z0-9 ._()\':,\n@]+$/';
+    $regex ='/^(?!\s*$)[a-zA-Z0-9 ._()\'\-:,\n@]+$/';
     if(preg_match_all($regex, $input)){
         return true;
     }else{

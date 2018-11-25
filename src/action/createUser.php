@@ -2,6 +2,7 @@
 include '../includes/init.php';
 
 
+
 //TODO if user has cart set it in db
 
 function generateSalt()
@@ -66,7 +67,6 @@ try {
                     $fileContents = file_get_contents('../images/profile.png');
                     $stmt->bind_param('bsssss', $null ,$firstName, $lastName, $email, $hashword, $salt);
                     $stmt->send_long_data(0, $fileContents);
-                    echo $fileContents;
                     $stmt->execute();
                     $uid = $stmt->insert_id;
 

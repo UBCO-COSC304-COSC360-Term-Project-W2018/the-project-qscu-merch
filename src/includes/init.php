@@ -1,7 +1,7 @@
 <?php
-include "includes/session.php";
-include "includes/inputValidation.php";
-include "includes/db_credentials.php";
-
+include "session.php";
+include "inputValidation.php";
+include "db_credentials.php";
+$null = null;
 
 ?>
