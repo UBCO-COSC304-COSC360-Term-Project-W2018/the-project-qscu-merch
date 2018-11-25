@@ -4,8 +4,10 @@ include "includes/init.php";
 include "header.php";
 
 try {
-    $user = isset($_SESSION["userId"]) ? $_SESSION['userId'] : null;
-
+    if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user']->id;
+        $name = $_SESSION['user']->firstName;
+    }
     $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
     if ($con->connect_errno) {
@@ -15,6 +17,9 @@ try {
     die("Error with Cart. Session Terminated.");
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $pNo = $_GET['pNo'];
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -42,30 +47,100 @@ try {
 
             <div class="sideContent">
                 <div class="pName" name="pName">
-                    <!--            name of product-->
+                    <!--                    name of product - THIS WORKS!-->
                     <?php
 
-                    $sqlCats = "SELECT pname FROM Product";
+                    $sql = "SELECT pname FROM Product WHERE pNo = ?";
 
-                    if ($cats = $con->query($sqlCats)) {
+                    if ($stmt = $con->prepare($sql)) {
 
-                        while ($catNames = $cats->fetch_assoc()) {
+                        $stmt->bind_param('i', $pNo);
+                        $stmt->execute();
+                        $stmt->bind_result($pname);
+                        while ($stmt->fetch()) {
 
-                            $pname = $catNames['pname'];
-
-                            echo " <h1>$pname</h1>";
+                            echo " <h1 title=' " . $pname . " ' >" . $pname . "</h1>";
                         }
                     } else {
-                        echo "Category Query failed.";
-                        die();
-                    }
 
+                    }
                     ?>
-                    <!--                sub-title stuff -->
-                    <p>3 Balls per pack</p>
                 </div>
                 <!--rating-->
-                <div class="rating">
+                <div title="The average rating for this product" class="rating">
+
+
+                    <!--                    TODO: THIS NEEDS TO BE CHECKED-->
+                    <?php
+
+                    $sql = "SELECT AVG(rating) FROM Reviews WHERE pNo=?";
+
+                    if ($stmt = $con->prepare($sql)) {
+
+                        $stmt->bind_param('i', $pNo);
+                        $stmt->execute();
+                        $stmt->bind_result($ratingAvg);
+                        while ($stmt->fetch()) {
+
+                            echo " <h1 title='" . $ratingAvg . "'>" . $ratingAvg . "</h1>";
+                        }
+                    } else {
+
+                    }
+
+                    switch ($ratingAvg) {
+                        case 0:
+                            echo "<p>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                    </p>";
+                        case 1:
+                            echo "<p>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                    </p>";
+                        case 2:
+                            echo "<p>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                    </p>";
+                        case 3:
+                            echo "<p>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                    </p>";
+                        case 4:
+                            echo "<p>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star\"></span>
+                    </p>";
+                        case 5:
+                            echo "<p>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                    </p>";
+                    }
+                    ?>
+
+<!--                    default html-->
                     <p>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
@@ -79,10 +154,28 @@ try {
                 <!--description-->
                 <div class=pDesc>
                     <h3> Description</h3>
-                    <p>These ping pongs are directly from south Tunisia. They are the authentic hollowed out eyes of the
-                        western red and blue zebras. Buy now, while supplies last. 100% guaranteed to improve your
-                        beer-pong
-                        game! </p>
+
+                    <?php
+
+                    $sql = "SELECT description FROM Product WHERE pNo=?";
+
+                    if ($stmt = $con->prepare($sql)) {
+
+                        $stmt->bind_param('i', $pNo);
+                        $stmt->execute();
+                        $stmt->bind_result($desc);
+                        while ($stmt->fetch()) {
+
+                            echo " <p>" . $desc . "</p>";
+//                            echo " <h1 title=' " . $pname . " ' >" . $pname . "</h1>";
+
+                        }
+                    } else {
+
+                    }
+
+                    ?>
+
                 </div>
                 <!--quantity counter-->
                 <div class="quant">
@@ -112,9 +205,55 @@ try {
 
                 <!--            price-->
                 <div class="price">
-                    <p>Listed Price: <label class="oldPrice">CDN$299.99</label></p>
 
-                    <p>Price: <label class="sale">CDN$199.99</label>
+
+                    <?php
+
+
+                    $sqlOldPrice = "SELECT price*1.5 AS oldPrice FROM Product";
+
+                    if ($query = $con->query($sqlOldPrice)) {
+
+                        while ($field = $query->fetch_assoc()) {
+
+                            $OldPrice = $field['oldPrice'];
+
+                            echo "<p>Listed Price: <label class=\"oldPrice\">CDN$ $OldPrice</label>";
+                        }
+                    } else {
+                        echo "Error - could not get price.";
+                        die();
+                    }
+
+                    $sqlPrice = "SELECT price FROM Product";
+                    //                    $sqlOldPrice = "SELECT price+100 FROM Product";
+
+                    if ($query = $con->query($sqlPrice)) {
+
+                        while ($field = $query->fetch_assoc()) {
+
+                            $price = $field['price'];
+
+                            echo "<p>Price: <label class=\"sale\">CDN$$price</label>";
+                        }
+                    } else {
+                        echo "Error - could not get price.";
+                        die();
+                    }
+                    ?>
+
+                    <!--                    else  if ($query = $con->query($sqlOldPrice)) {-->
+                    <!---->
+                    <!--                    while ($field = $query->fetch_assoc()) {-->
+                    <!---->
+                    <!--                    $OldPrice = $field['price'];-->
+                    <!---->
+                    <!---->
+                    <!---->
+                    <!--                        }-->
+                    <!--                    <p>Listed Price: <label class="oldPrice">CDN$299.99</label></p>-->
+
+                    <!--                    <p>Price: <label class="sale">CDN$199.99</label>-->
 
 
                     </p>
