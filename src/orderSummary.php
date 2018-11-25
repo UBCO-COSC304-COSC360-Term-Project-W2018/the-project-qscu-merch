@@ -209,6 +209,20 @@ else {
 
             $taxTotal = number_format((float)($total_price * $tax), 2, '.', '');
             $netTotal = number_format((float)($subtotal + $taxTotal), 2, '.', '');
+
+            $fullShippingAddress = $shippingAddressLine.",".$shippingCity.",".$shippingProvince.",".$shippingCountry.",".$shippingPostalCode;
+
+            if (isset($_SESSION['fullShippingAddress'])) {
+                $_SESSION['fullShippingAddress'] = $fullShippingAddress;
+
+            }
+            else {
+                $_SESSION['fullShippingAddress'] = $fullShippingAddress;
+
+            }
+
+
+
             ?>
             </tbody>
         </table>
@@ -235,8 +249,7 @@ else {
     });
 
     $('#confirmOrderButton').click(function () {
-        // location.replace("http://localhost/the-project-qscu-merch/src/action/checkout-action.php");
-        <?php echo "<p>hello</p>" ?>
+        location.replace("http://localhost/the-project-qscu-merch/src/action/checkout-action.php");
 
         //call the ajax function which will link to the action php file
 

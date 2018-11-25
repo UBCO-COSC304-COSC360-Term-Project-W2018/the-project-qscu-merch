@@ -1,4 +1,13 @@
 <?php
+
+include '../includes/init.php';
+
+if (isset($_SESSION['fullShippingAddress'])) {
+    echo $_SESSION['fullShippingAddress'];
+}
+else {
+    echo "<p>encountered error</p>";
+}
 ///*
 // * get everything from cart
 // * move info from cart and create order in orders table
