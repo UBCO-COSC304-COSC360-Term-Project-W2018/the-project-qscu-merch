@@ -109,7 +109,7 @@ $headerSet = 1;
                 <img id="profileImage" src="images/profile.png">
                 <input type="file" value="Upload  Image" name="uploadImage" id="uploadImage" required>
                 <input type="hidden" name="action" value="uploadImage">
-                <input type="submit" value="Upload">
+                <input id="uploadButton" type="submit" value="Upload">
             </form>
         </div>
         <div id="infoContent">
