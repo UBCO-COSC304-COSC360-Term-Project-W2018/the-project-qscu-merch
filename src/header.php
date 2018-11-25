@@ -50,7 +50,7 @@ if(isset($_SESSION['user'])){
             <?php
             if (isset($user)) {
 	            if(isAdmin($user)){
-		            echo "<a href='profile.php'>" . $name . "</a><a href='adminList.php'>Admin</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
+		            echo "<a href='profile.php'>" . $name . "</a><a id='admin' href='adminList.php'>Admin</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
 	            }else{
 		            echo "<a href='profile.php'>" . $name . "</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
 	            }
