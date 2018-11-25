@@ -2,6 +2,7 @@
 include '../includes/init.php';
 
 
+
 //TODO if user has cart set it in db
 
 function generateSalt()
