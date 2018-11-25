@@ -1,46 +1,37 @@
- <?php 
+ <?php
 
 $headerSet = 1;
 include "includes/init.php";
 
-if(isset($_SESSION['user'])){
+if(isset($_SESSION['user'])) {
     $user = $_SESSION['user']->id;
     $name = $_SESSION['user']->firstName;
 }
 
-try{
+try {
+  //    TODO this needs to be changed the query part doesnt have a trycatch
 
-//    TODO this needs to be changed the query part doesnt have a trycatch
+  $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-
-$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-
-if($con -> connect_errno){
-	die("Connection Failed: ".$con -> connect_errno);
-}
-
-}
-catch (Exception $e) {
+  if($con -> connect_errno){
+  	die("Connection Failed: ".$con -> connect_errno);
+  }
+} catch (Exception $e) {
 	die("Session Terminated.");
 }
-try{
+try {
 	$sqlCats = "SELECT cname FROM Category";
-
-	if($cats = $con->query($sqlCats)) {
-		$names = array();
-		while($catNames = $cats->fetch_assoc()) {
-
-			$name = $catNames['cname'];
-			array_push($names, $name);
-			
-		}
-	} else {
-		echo "Category Query failed.";
-		die();
+  if(!($cats = $con->query($sqlCats))) {
+		die("Category Query failed.");
 	}
-}catch(Exception $ex){
-		echo "Try failed";
-	}
+  $sqlProdsBestSell = "SELECT Product.pNo, pname, image, contentType, Product.price, description, AVG(rating) AS rating, COUNT(quantity) AS numSold FROM (Product LEFT JOIN Reviews ON (Product.pNo = Reviews.pNo AND Product.size = Reviews.size)) LEFT JOIN HasOrder ON (Product.pNo = HasOrder.pNo AND Product.size = HasOrder.size) GROUP BY Product.pNo ORDER BY numSold DESC, rating DESC, pname ASC";
+  if (!($productsBestSell = $con->query($sqlProdsBestSell))) {
+    die("Product Query Failed.");
+  }
+  
+} catch(Exception $ex) {
+	echo "Try failed";
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -65,14 +56,11 @@ try{
 			<nav id="browsenav">
 				<h4 id="browsetitle">Categories</h4>
 				<ul id="browselist">
-					<?php 
-						$len = count($names);
-						for($x = 0; $x < $len; $x++){
-							echo "<li class='browseitem'><a href='categorypage.php?cat=" . $names[$x] . "' class='browselink'>" . $names[$x] . "</a></li>";
+					<?php
+						foreach($cats as $cat) {
+							echo "<li class='browseitem'><a href='categorypage.php?cat=" . $cat['cname'] . "' class='browselink'>" . $cat['cname'] . "</a></li>";
 						}
-						
-						
-						?>
+					?>
 				</ul>
 	    	</nav>
 		</div>
@@ -81,304 +69,92 @@ try{
 	        <div class="viewnamediv">
             <p class="viewname">Top Selling Products</p></div>
             <div class="productlist">
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
+              <?php
+                $counter = 0;
+                foreach ($productsBestSell as $product) {
+                  $counter++;
+                  echo "<div class=\"item\">";
+                    echo "<p class=\"pname\">".$product['pname']."</p>";
+                    echo "<div class=\"extraStuff\">";
+                      echo "<a href=\"singleProduct.php\">";
+                      echo "<img src=\"data:".$product['contentType'].";base64,".base64_encode($product['image'])."\" alt=\"".$product['pname']." Image\" />";
+                      echo "</a>";
+                      echo "<div class=\"itemInfo\">";
+                        echo "<p class=\"itemPrice\">\$".$product['price']."</p>";
+                        echo "<p class=\"numberOfLiams\">Rated ".($product['rating']==NULL||$product['rating']==""?"0":$product['rating'])." / 5</p>";
+                  echo "</div></div></div>";
+                  if ($counter>4) break; //top 5 best selling products finished displaying
+                }
+              ?>
             </div>
         </div>
 		<div id="liamspicks" class="products">
 			<div class="viewnamediv">
             <p class="viewname">Liam's Picks</p></div>
             <div class="productlist">
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
+              <?php
+                $counter = 0;
+                foreach ($productsBestSell as $product) {
+                  $counter++;
+                  echo "<div class=\"item\">";
+                    echo "<p class=\"pname\">".$product['pname']."</p>";
+                    echo "<div class=\"extraStuff\">";
+                      echo "<a href=\"singleProduct.php\">";
+                      echo "<img src=\"data:".$product['contentType'].";base64,".base64_encode($product['image'])."\" alt=\"".$product['pname']." Image\" />";
+                      echo "</a>";
+                      echo "<div class=\"itemInfo\">";
+                        echo "<p class=\"itemPrice\">\$".$product['price']."</p>";
+                        echo "<p class=\"numberOfLiams\">Rated ".($product['rating']==NULL||$product['rating']==""?"0":$product['rating'])." / 5</p>";
+                  echo "</div></div></div>";
+                  if ($counter>4) break; //top 5 best selling products finished displaying
+                }
+              ?>
             </div>
         </div>
         <div id="staffpicks" class="products">
 	        <div class="viewnamediv">
             <p class="viewname">Staff Picks</p></div>
             <div class="productlist">
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
+              <?php
+                $counter = 0;
+                foreach ($productsBestSell as $product) {
+                  $counter++;
+                  echo "<div class=\"item\">";
+                    echo "<p class=\"pname\">".$product['pname']."</p>";
+                    echo "<div class=\"extraStuff\">";
+                      echo "<a href=\"singleProduct.php\">";
+                      echo "<img src=\"data:".$product['contentType'].";base64,".base64_encode($product['image'])."\" alt=\"".$product['pname']." Image\" />";
+                      echo "</a>";
+                      echo "<div class=\"itemInfo\">";
+                        echo "<p class=\"itemPrice\">\$".$product['price']."</p>";
+                        echo "<p class=\"numberOfLiams\">Rated ".($product['rating']==NULL||$product['rating']==""?"0":$product['rating'])." / 5</p>";
+                  echo "</div></div></div>";
+                  if ($counter>4) break; //top 5 best selling products finished displaying
+                }
+              ?>
             </div>
         </div>
         <div id="onsale" class="products">
 	        <div class="viewnamediv">
             <p class="viewname">On Sale</p></div>
             <div class="productlist">
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <p class="pname">Ping Pong Balls</p>
-                    <div class="extraStuff">
-                        <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                        <div class="itemInfo">
-                            <p class="itemPrice">$200</p>
-                            <p class="numberOfLiams">5/5 Liams</p>
-                        </div>
-                    </div>
-                </div>
+              <?php
+                $counter = 0;
+                foreach ($productsBestSell as $product) {
+                  $counter++;
+                  echo "<div class=\"item\">";
+                    echo "<p class=\"pname\">".$product['pname']."</p>";
+                    echo "<div class=\"extraStuff\">";
+                      echo "<a href=\"singleProduct.php\">";
+                      echo "<img src=\"data:".$product['contentType'].";base64,".base64_encode($product['image'])."\" alt=\"".$product['pname']." Image\" />";
+                      echo "</a>";
+                      echo "<div class=\"itemInfo\">";
+                        echo "<p class=\"itemPrice\">\$".$product['price']."</p>";
+                        echo "<p class=\"numberOfLiams\">Rated ".($product['rating']==NULL||$product['rating']==""?"0":$product['rating'])." / 5</p>";
+                  echo "</div></div></div>";
+                  if ($counter>4) break; //top 5 best selling products finished displaying
+                }
+              ?>
             </div>
         </div>
 	</div>

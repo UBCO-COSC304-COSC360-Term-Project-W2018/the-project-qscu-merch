@@ -106,7 +106,7 @@ $headerSet = 1;
 
             <!--TODO for brandon make action page-->
             <form method="post" action="action/editUser.php" enctype="multipart/form-data">
-                <img id="profileImage" src="images/profile.png">
+              <img id="profileImage"<?php echo 'src="data:' + $contentType + ';base64,' + base64_encode($profileImage)+ '" alt="User Profile Image"';?>>
                 <input type="file" value="Upload  Image" name="uploadImage" id="uploadImage" required>
                 <input type="hidden" name="action" value="uploadImage">
                 <input type="submit" value="Upload">
