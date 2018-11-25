@@ -47,55 +47,100 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
             <div class="sideContent">
                 <div class="pName" name="pName">
-                    <!--            name of product-->
+                    <!--                    name of product - THIS WORKS!-->
                     <?php
 
                     $sql = "SELECT pname FROM Product WHERE pNo = ?";
 
                     if ($stmt = $con->prepare($sql)) {
 
-
                         $stmt->bind_param('i', $pNo);
                         $stmt->execute();
                         $stmt->bind_result($pname);
                         while ($stmt->fetch()) {
 
-                            echo " <h1 title='" . $pname . "'>" . $pname . "</h1>";
+                            echo " <h1 title=' " . $pname . " ' >" . $pname . "</h1>";
                         }
-//                    if ($con->connect_error) {
-//                        echo "Error - could not get product name .";
-//                        die();
-//                    }
-
                     } else {
 
                     }
-
-
                     ?>
                 </div>
                 <!--rating-->
                 <div title="The average rating for this product" class="rating">
 
+
+                    <!--                    TODO: THIS NEEDS TO BE CHECKED-->
                     <?php
 
                     $sql = "SELECT AVG(rating) FROM Reviews WHERE pNo=?";
 
-                    if ($query = $con->query($sql)) {
+                    if ($stmt = $con->prepare($sql)) {
 
-                        while ($field = $query->fetch_assoc()) {
+                        $stmt->bind_param('i', $pNo);
+                        $stmt->execute();
+                        $stmt->bind_result($ratingAvg);
+                        while ($stmt->fetch()) {
 
-                            $pname = $field['pname'];
-
-                            echo " <h1 title='$pname'>$pname</h1>";
+                            echo " <h1 title='" . $ratingAvg . "'>" . $ratingAvg . "</h1>";
                         }
                     } else {
-                        echo "Error - could not get product name .";
-                        die();
+
                     }
 
+                    switch ($ratingAvg) {
+                        case 0:
+                            echo "<p>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                    </p>";
+                        case 1:
+                            echo "<p>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                    </p>";
+                        case 2:
+                            echo "<p>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                    </p>";
+                        case 3:
+                            echo "<p>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star\"></span>
+                        <span class=\"fa fa-star\"></span>
+                    </p>";
+                        case 4:
+                            echo "<p>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star\"></span>
+                    </p>";
+                        case 5:
+                            echo "<p>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                        <span class=\"fa fa-star checked\"></span>
+                    </p>";
+                    }
                     ?>
 
+<!--                    default html-->
                     <p>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
@@ -109,21 +154,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 <!--description-->
                 <div class=pDesc>
                     <h3> Description</h3>
+
                     <?php
 
-                    $sqlCats = "SELECT description FROM Product";
+                    $sql = "SELECT description FROM Product WHERE pNo=?";
 
-                    if ($cats = $con->query($sqlCats)) {
+                    if ($stmt = $con->prepare($sql)) {
 
-                        while ($catNames = $cats->fetch_assoc()) {
+                        $stmt->bind_param('i', $pNo);
+                        $stmt->execute();
+                        $stmt->bind_result($desc);
+                        while ($stmt->fetch()) {
 
-                            $desc = $catNames['description'];
+                            echo " <p>" . $desc . "</p>";
+//                            echo " <h1 title=' " . $pname . " ' >" . $pname . "</h1>";
 
-                            echo " <p>$desc</p>";
                         }
                     } else {
-                        echo "Error - could not get description name .";
-                        die();
+
                     }
 
                     ?>
@@ -157,6 +205,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                 <!--            price-->
                 <div class="price">
+
+
                     <?php
 
 
