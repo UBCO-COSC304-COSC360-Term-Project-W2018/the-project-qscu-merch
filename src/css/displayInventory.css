@@ -1,0 +1,17 @@
+main{
+display: inline-block;
+	
+}
+.warehousetables{
+	display: inline-block;
+	margin: 2em;
+	border: solid #183263;
+}
+.warehousetables th, td{
+	border: thin solid #183263;
+}
+
+.producttables {
+	border-collapse: collapse;
+
+}
