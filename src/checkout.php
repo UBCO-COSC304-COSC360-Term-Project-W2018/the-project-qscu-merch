@@ -170,9 +170,9 @@ $fullName = $firstName . " " . $lastName;
 
                     <div id="shippingAddressRadioGroup" class="checkoutContainer">
                         <label class="elementLabel" for="shippingAddressRadioGroup">Select a shipping address: </label>
-                        <input type="radio" name="shippingAddress" id="billingAddressRadio" checked="checked" value="1">Billing
+                        <input type="radio" name="shippingAddressRadio" id="billingAddressRadio" checked="checked" value="1">Billing
                         address<br>
-                        <input type="radio" name="shippingAddress" id="shippingAddressRadio" value="2">New shipping
+                        <input type="radio" name="shippingAddressRadio" id="shippingAddressRadio" value="2">New shipping
                         address <br>
                     </div>
                     <!-- note these inputs do not have required class -->
@@ -206,7 +206,7 @@ $fullName = $firstName . " " . $lastName;
                 </div>
                 <div id="checkoutButtonContainer" class="checkoutContainer">
                     <!--<button type="submit" id="checkOutButton">Confirm</button>-->
-                    <input type="submit" id="checkOutButton">
+                    <input type="submit" name="submit" id="checkOutButton">
                 </div>
             </div>
         </fieldset>
@@ -227,5 +227,7 @@ $mysqli->close();
 ?>
 </body>
 </html>
+
+
 
 

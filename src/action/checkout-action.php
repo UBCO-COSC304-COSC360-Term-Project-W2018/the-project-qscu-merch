@@ -14,4 +14,16 @@
 //else {
 //    $userid = $_SESSION['userid'];
 //}
+//
+//if( isset($_POST['submit'])) {
+//    echo "first if";
+//    if (isset($_POST['shippingAddress'])) {
+//        $shippingAddress = $_POST['shippingAddress'];
+//        echo $shippingAddress;
+//    }
+//}
+//
+//else {
+//    echo "you encountered an error";
+//}
 

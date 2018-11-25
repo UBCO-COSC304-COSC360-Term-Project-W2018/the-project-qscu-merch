@@ -1,7 +1,7 @@
 <?php
 include "includes/init.php";
 
-$province = 'AB';
+$province = $_POST['billingProvince'];
 $headerSet = 1;
 
 $_SESSION['userid'] = 1;
@@ -12,6 +12,17 @@ if (!isset($_SESSION['userid'])) {
 } else {
     $userid = $_SESSION['userid'];
 }
+
+//use $_POST to get the right info
+
+if (isset($_POST['shippingAddressRadio'])) {
+    echo "<p>".$_POST['shippingAddressRadio']."</p>";
+    echo "say what";
+}
+else {
+    echo "<p>it didn't work</p>";
+}
+echo "<p>hellooooooooo</p>";
 ?>
 
 <!DOCTYPE html>
@@ -154,8 +165,10 @@ if (!isset($_SESSION['userid'])) {
     });
 
     $('#confirmOrderButton').click(function () {
-        location.replace("http://localhost/the-project-qscu-merch/src/action/checkout-action.php");
+        // location.replace("http://localhost/the-project-qscu-merch/src/action/checkout-action.php");
+        <?php echo "<p>hello</p>" ?>
+
+        //call the ajax function which will link to the action php file
+
     });
-
-
 </script>
