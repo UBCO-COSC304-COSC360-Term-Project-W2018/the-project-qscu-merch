@@ -40,7 +40,8 @@ try {
 
             if (mysqli_connect_errno()) {
                 //connection failed
-                die();
+                echo "something went wrong yikes";
+//                die();
             } else {
                 $data["email"] = $email;
 
@@ -66,7 +67,7 @@ try {
                     $fileContents = file_get_contents('../images/profile.png');
                     $stmt->bind_param('bsssss', $null ,$firstName, $lastName, $email, $hashword, $salt);
                     $stmt->send_long_data(0, $fileContents);
-                    echo $fileContents;
+//                    echo $fileContents;
                     $stmt->execute();
                     $uid = $stmt->insert_id;
 
