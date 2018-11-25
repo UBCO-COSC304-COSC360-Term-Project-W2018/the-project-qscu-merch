@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $null = null;
 
-
+//                                if string = s, if blob b, if decimal d, int i
             $stmt->bind_param('bssds',$null, $size, $productName, $productPrice, $file['type']);
             $stmt->send_long_data(0, file_get_contents($targetFilePath));
             $stmt->execute();
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if(isset($id)) {
                 if($size !== "single") {
                     $size = array('medium', 'large', 'xl');
-                    $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?, ?)";
+                        $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt = $mysql->prepare($query);
                     foreach ($size as $key => $value) {
 

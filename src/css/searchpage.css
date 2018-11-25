@@ -24,20 +24,28 @@
 #refinefieldset{
 	color: white;
 }
-
+#searchResultsTitle{
+	white-space: nowrap;
+	float: left;
+	margin:0em;
+	color: white;
+}
 #sortby{
 	background-color: #183263;
 	padding: 0.2em;
 	margin: 1em;
+	white-space: nowrap;
 }
 
 #sortform{
 	float: right;
 	margin-bottom: 0em;
+	white-space: nowrap;
 }
 
 #sortlabel{
 	color: white;
+	white-space: nowrap;
 }
 #categoryviews{
 	white-space: nowrap;

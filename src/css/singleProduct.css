@@ -268,15 +268,15 @@ select.size {
 }
 
 /* The Close Button */
-.close {
+.closeComment, .closeReview {
     color: white;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.closeComment:hover, .closeReview:hover,
+.closeComment:focus, .closeReview:focus {
     color: tomato;
     text-decoration: none;
     cursor: pointer;
