@@ -4,8 +4,10 @@ include "includes/init.php";
 include "header.php";
 
 try {
-    $user = isset($_SESSION["userId"]) ? $_SESSION['userId'] : null;
-
+    if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user']->id;
+        $name = $_SESSION['user']->firstName;
+    }
     $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
     if ($con->connect_errno) {
@@ -15,6 +17,9 @@ try {
     die("Error with Cart. Session Terminated.");
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $pNo = $_GET['pNo'];
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -45,7 +50,36 @@ try {
                     <!--            name of product-->
                     <?php
 
-                    $sql = "SELECT pname FROM Product";
+                    $sql = "SELECT pname FROM Product WHERE pNo = ?";
+
+                    if ($stmt = $con->prepare($sql)) {
+
+
+                        $stmt->bind_param('i', $pNo);
+                        $stmt->execute();
+                        $stmt->bind_result($pname);
+                        while ($stmt->fetch()) {
+
+                            echo " <h1 title='" . $pname . "'>" . $pname . "</h1>";
+                        }
+//                    if ($con->connect_error) {
+//                        echo "Error - could not get product name .";
+//                        die();
+//                    }
+
+                    } else {
+
+                    }
+
+
+                    ?>
+                </div>
+                <!--rating-->
+                <div title="The average rating for this product" class="rating">
+
+                    <?php
+
+                    $sql = "SELECT AVG(rating) FROM Reviews WHERE pNo=?";
 
                     if ($query = $con->query($sql)) {
 
@@ -61,9 +95,7 @@ try {
                     }
 
                     ?>
-                </div>
-                <!--rating-->
-                <div title="The average rating for this product" class="rating">
+
                     <p>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
@@ -128,7 +160,7 @@ try {
                     <?php
 
 
-                    $sqlOldPrice = "SELECT price+100 AS oldPrice FROM Product";
+                    $sqlOldPrice = "SELECT price*1.5 AS oldPrice FROM Product";
 
                     if ($query = $con->query($sqlOldPrice)) {
 
@@ -160,18 +192,18 @@ try {
                     }
                     ?>
 
-<!--                    else  if ($query = $con->query($sqlOldPrice)) {-->
-<!---->
-<!--                    while ($field = $query->fetch_assoc()) {-->
-<!---->
-<!--                    $OldPrice = $field['price'];-->
-<!---->
-<!---->
-<!---->
-<!--                        }-->
-<!--                    <p>Listed Price: <label class="oldPrice">CDN$299.99</label></p>-->
+                    <!--                    else  if ($query = $con->query($sqlOldPrice)) {-->
+                    <!---->
+                    <!--                    while ($field = $query->fetch_assoc()) {-->
+                    <!---->
+                    <!--                    $OldPrice = $field['price'];-->
+                    <!---->
+                    <!---->
+                    <!---->
+                    <!--                        }-->
+                    <!--                    <p>Listed Price: <label class="oldPrice">CDN$299.99</label></p>-->
 
-<!--                    <p>Price: <label class="sale">CDN$199.99</label>-->
+                    <!--                    <p>Price: <label class="sale">CDN$199.99</label>-->
 
 
                     </p>
