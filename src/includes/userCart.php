@@ -3,8 +3,8 @@
 class userCart{
     var $cart = [];
 
-    function addItem($pno, $size, $qty = 1, $itemPrice = -1){
-        $item = array('pno' => $pno, 'size' => $size, 'qty' => $qty, 'price' => $itemPrice);
+    function addItem($pno, $pname, $size, $qty = 1, $itemPrice = -1){
+        $item = array('pno' => $pno, 'pname' => $pname,'size' => $size, 'qty' => $qty, 'price' => $itemPrice);
         array_push($this->cart, $item);
     }
 
