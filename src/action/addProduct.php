@@ -6,8 +6,6 @@ include '../includes/validateAdmin.php';
 
 validateAdminRequest($_SESSION);
 
-validateAdminRequest($_SESSION);
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $inputFields = array('productName', 'productPrice');
 
@@ -16,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['hasError'] = true;
         $_SESSION['errorType'] = "Form";
         $_SESSION['errorMsg'] = "invalid form data";
-        header('location: ../newProduct.php');
+        header('location: ../adminList.php');
         exit();
     }else{
 
@@ -56,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
             if ($mysql->connect_error) {
                 //connection failed
-                die();
+                throw new Exception();
             }
 
             $query = "INSERT INTO Product (image, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?)";
