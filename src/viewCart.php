@@ -1,5 +1,6 @@
 <?php
-include "includes/headerFooterHead.php";
+include "includes/init.php";
+include "includes/userCart.php";
 
 
 //need to have arrays (2D array?) here to store the row results as strings
@@ -9,6 +10,8 @@ include "includes/headerFooterHead.php";
 //then depending on the button clicks we are gonna have to update the cart
 
 $cartRows = [];
+
+//
 
 
 ?>
@@ -29,9 +32,6 @@ $cartRows = [];
     <?php
 
     //this file will need to have some hardcore HTML fun stuff, and will also have the ability to edit their cart... lets go with the query first
-
-    include "includes/init.php";
-    include "includes/userCart.php";
 
     echo("<h1>Your Shopping Cart</h1>");
     echo("<table><tr><th>Product Id</th><th>Product Name</th><th>Size</th><th>Quantity</th><th>Price</th>");

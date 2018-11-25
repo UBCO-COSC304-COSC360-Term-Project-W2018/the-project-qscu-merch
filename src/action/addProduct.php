@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $null = null;
 
-
+//                                if string = s, if blob b, if decimal d, int i
             $stmt->bind_param('bssds',$null, $size, $productName, $productPrice, $file['type']);
             $stmt->send_long_data(0, file_get_contents($targetFilePath));
             $stmt->execute();
