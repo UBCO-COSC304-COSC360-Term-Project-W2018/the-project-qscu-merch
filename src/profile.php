@@ -20,7 +20,7 @@ $province = "";
 $country = "";
 $postalCode = "";
 $hiddenCardNumber = "";
-$creditCard = "";
+$creditCardNum = "";
 $creditCardExpiryDate = "";
 $ccv = "";
 
