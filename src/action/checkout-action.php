@@ -3,6 +3,7 @@ Assumptions:
 -address is comma delimited
 -orders are placed and shipped on the same day
 -every shipment is coming from warehouse 1
+-price in HasOrder is the cost of quantity * price
 */
 <?php
 
@@ -71,6 +72,7 @@ try {
             }
         }
 
+        //create an order and populate it with items from user's cart
         $user_cart_sql = "SELECT * FROM HasCart WHERE uid = ?";
         if ( $user_cart = $mysqli -> prepare($user_cart_sql) ) {
             $user_cart -> bind_param("s",$userid);
@@ -98,17 +100,28 @@ try {
                     }
                 }
 
+                //watch out for case where user tries to buy something we don't have in inventory
+                $update_inv_sql = "UPDATE HasInventory SET quantity = quantity - ? WHERE wNo = ? AND pNo = ? AND size = ? WHERE (quantity - ?) >= 0";
+                if ( $update_inv = $mysqli -> prepare($update_inv_sql) ) {
+                    $update_inv -> bind_param("ssss", $quantity, $warehouseId, $pNo, $size);
+                    $update_inv -> execute();
+                }
+                //we don't enough of this product in inventory, skip this item, go to next
+                else {
+                    continue;
+                }
+
+                //create order product
                 $productNetCost = $singularProductCost * $quantity;
                 $hasOrder_insert_sql = "INSERT INTO HasOrder(oNo, pNo, size, quantity, price) VALUES (?,?,?,?,?)";
                 if ( $hasOrder_insert = $mysqli -> prepare($hasOrder_insert_sql) ) {
                     $hasOrder_insert -> bind_param("sssss", $oNo, $pNo, $size, $quantity, $productNetCost);
                     $hasOrder_insert -> execute();
                 }
-
-                echo "<p>Finished while loop</p>";
-
             }
         }
+
+
     }
     else {
         die();
