@@ -51,7 +51,7 @@ $headerSet = 1;
                         <table>
                             <tr>
                                 <td rowspan="3" colspan="3">
-                                    <img id="imagePreview" src="" alt="image preview">
+                                    <img id="imagePreview" height="100px" width="100px" src="" alt="image preview">
                                 </td>
                                 <td>
                                     <label for="productName">Product Name:</label>
