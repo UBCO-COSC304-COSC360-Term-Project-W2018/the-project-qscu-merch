@@ -1,7 +1,5 @@
 <?php
-include 'includes/session.php';
-include 'includes/db_credentials.php';
-include 'includes/inputValidation.php';
+include 'includes/init.php';
 include 'includes/validateAdmin.php';
 
 validateAdminRequest($_SESSION);
@@ -81,15 +79,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno'])) {
 <body>
 <?php include 'header.php'?>
 <main>
+	<div id="innerContent">
     <div class="editProductContent">
-        <table>
+        <table id="productTable">
             <tr>
                 <td rowspan="4" colspan="2">
                     <form method="post" action="action/changeProduct.php" enctype="multipart/form-data">
-                        <table>
+                        <table id="imageTable">
                             <tr>
-                                <td rowspan="2">
-                                    <img id="imagePreview" src="<?php echo 'data:' . $product['contentType'] . ';base64,' . base64_encode($product['image']) ?>" alt="Product image">
+	                            <th>Product Image:</th>
+                            
+                            <tr>
+                                <td>
+                                    <img id="imagePreview"  width="100px" height="100px" src="<?php echo 'data:' . $product['contentType'] . ';base64,' . base64_encode($product['image']) ?>" alt="Product image">
                                 </td>
                             </tr>
                             <tr>
@@ -100,46 +102,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno'])) {
                             <tr>
                                 <td>
                                     <input type="hidden" name="pno" value="<?php echo $_GET['pno'] ?>">
-                                    <input type="submit" value="Upload">
+                                    <input class="button" type="submit" value="Upload">
                                 </td>
                             </tr>
                         </table>
                     </form>
                 </td>
-                <td colspan="2">
-                    <label for="productName">Product Name</label>
+                <td>
+                    <label for="productName">Product Name:</label>
                 </td>
-                <td colspan="3">
-                    <label for="productDescription">Description:</label>
+                <td>
+	                <input type="text" name="productName" id="productName" maxlength="254" placeholder="Enter Product Name" required value="<?php echo $product['pname'] ?>">
+                    
                 </td>
             </tr>
             <form method="post" action="action/changeProduct.php">
-                <tr>
-                    <td colspan="2">
-                        <input type="text" name="productName" id="productName" maxlength="254" required value="<?php echo $product['pname'] ?>">
-                    </td>
-                    <td rowspan="4" colspan="3">
-                        <textarea rows="4" cols="50" name="productDescription" id="productDescription" maxlength="254"><?php echo $product['description'] ?></textarea>
-                    </td>
-                </tr>
                 <tr>
                     <td>
                         <label for="productPrice">Price:</label>
                     </td>
                     <td>
-                        <input type="Number" step="0.01" name="productPrice" id="productPrice" value="<?php echo $product['price'] ?>">
+                        <input type="Number" step="0.01" name="productPrice" id="productPrice" placeholder="$" value="<?php echo $product['price'] ?>">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="hidden" name="pno" value="<?php echo $_GET['pno'] ?>">
-                        <input type="submit">
+                        <label for="productDescription">Description:</label>
                     </td>
-
                     <td>
-                        <label for="isEnabled">Product Enabled</label>
+                        <textarea rows="4" cols="50" name="productDescription" id="productDescription" maxlength="254" placeholder="Enter Description..."><?php echo $product['description'] ?></textarea>
+                    </td>
+                </tr>
+                
+                <tr>
+	                <td>
+                        <label for="isEnabled">Product Enabled:</label>
                         <input type="checkbox" name="isEnable" id="isEnabled" <?php if ($product['isEnabled']) {echo 'checked="checked"';} ?>>
                     </td>
+                    <td>
+                        <input type="hidden" name="pno" value="<?php echo $_GET['pno'] ?>">
+                        <input id="submitProduct" class="button" type="submit">
+                    </td>
+
+                    
                 </tr>
             </form>
         </table>
@@ -152,19 +157,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno'])) {
             } ?>
         </div>
         <div class="categoryOptions">
-            <input type="text" name="newCategoryName" data-pno="<?php echo $_GET['pno']?>" id="newCategoryName">
-            <button id="newCategoryNameBtn" onclick="newCategory()">New Category</button>
-            <button id="deleteCategory" onclick="deleteCategory()">Delete Category</button>
-            <button id="addCategory" onclick="addCategory()">Add Category &gt;&gt;</button>
-            <button id="removeCategory" onclick="removeCategory()">&lt;&lt; Remove Category</button>
+	        <div id="deleteButtons">
+		        <div id="removeCategory">
+	        		<button class="button"  onclick="removeCategory()">&lt;&lt; Remove Category From Product</button>
+		        </div>
+		        <div id="deleteCategory">
+					<button class="button" onclick="deleteCategory()">Delete Category</button>
+		        </div>
+	        </div>
+	        <div id="newCategoryName">
+           		<input type="text" name="newCategoryName"  placeholder="Enter Category Name" data-pno="<?php echo $_GET['pno']?>" >
+	       	</div>
+            <div id="addButtons">
+	            <div id="addCategory">
+					<button class="button" onclick="addCategory()">Add Category To Product &gt;&gt;</button>
+            	</div>
+	            <div id="createCategory">
+            		<button class="button" onclick="newCategory()">Create Category</button>
+            	</div>
+            	
+            </div>
         </div>
-        <div class=" hasCategorys
-            ">
+        <div class="hasCategorys">
             <?php foreach ($hasCategorys AS $key2 => $value2) {
                 echo '<div class="categoryItem" data-pno="' . $_GET['pno'] . '" data-cid="' . $hasCategorys[$key2]['cid'] . '"><p>' . $hasCategorys[$key2]['cname'] . '</p></div>';
             } ?>
 
         </div>
+    </div>
     </div>
 </main>
 <?php include 'footer.php'?>
