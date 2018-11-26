@@ -87,6 +87,7 @@ $headerSet = 1;
     <link rel="stylesheet" href="css/reviewsComments.css">
     <?php include 'includes/headerFooterHead.php' ?>
     <script type="text/javascript" src="script/profile_controller.js"></script>
+    <script src="script/imagePreview.js"></script>
 </head>
 
 
@@ -106,8 +107,8 @@ $headerSet = 1;
 
             <!--TODO for brandon make action page-->
             <form method="post" action="action/editUser.php" enctype="multipart/form-data">
-                <img id="profileImage" src="images/profile.png">
-                <input type="file" value="Upload  Image" name="uploadImage" id="uploadImage" required>
+                <img id="imagePreview"  src="<?php  echo 'data:' . $contentType . ';base64,' . base64_encode($profileImage) ?>" alt="User Profile Image" >
+                <input type="file" name="uploadImage" id="uploadImage" required>
                 <input type="hidden" name="action" value="uploadImage">
                 <input type="submit" value="Upload">
             </form>
