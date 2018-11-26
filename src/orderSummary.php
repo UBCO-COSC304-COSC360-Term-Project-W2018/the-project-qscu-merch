@@ -78,9 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
             //TODO: Take these out when you are done testing
-//            $province = $_POST['billingProvince'];
             $headerSet = 1;
-            $_SESSION['userid'] = 1;
 
         }
         catch (Exception $exception) {

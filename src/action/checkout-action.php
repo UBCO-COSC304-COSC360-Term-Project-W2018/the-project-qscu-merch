@@ -35,14 +35,16 @@ try {
             throw new Exception();
         }
 
+        //get the shipping number of the shipment that was just made
+        $sNo_column_name = "sNo";
+        $sNo_table_name = "Shipment";
         $sNo;
-        $get_sNo = "SELECT MAX(sNo) AS recent FROM Shipment";
-        if ($result = $mysqli -> query($get_sNo)) {
+        $get_max_sNo = "SELECT MAX(sNo) AS recent FROM Shipment";
+        if ($maxSno = $mysqli -> query($get_max_sNo)) {
 
-            while ( $row = $result -> fetch_assoc() ) {
+            while ( $row = $maxSno -> fetch_assoc() ) {
                 $sNo = $row['recent'];
             }
-            $result -> free();
         }
 
         echo "<p>".$sNo."</p>";
@@ -59,48 +61,58 @@ try {
             throw new Exception();
         }
 
-//        $hasOrderInsert = "INSERT INTO HasOrder(oNo, pNo, size, quantity, price) VALUES (?,?,?,?,?)";
-        //oNo, gonna have to query orders table
-        //pNo, in cart
-        //size, in cart
-        //quantity, in cart
-        //price,
+        //get max order number (most recent one)
+        $oNo;
+        $get_max_oNo = "SELECT MAX(oNo) AS recent FROM Orders";
+        if ( $maxOno = $mysqli -> query($get_max_oNo)) {
 
+            while ( $row = $maxOno -> fetch_assoc() ) {
+                $oNo = $row['recent'];
+            }
+        }
 
+        $user_cart_sql = "SELECT * FROM HasCart WHERE uid = ?";
+        if ( $user_cart = $mysqli -> prepare($user_cart_sql) ) {
+            $user_cart -> bind_param("s",$userid);
+            $user_cart -> execute();
 
+            $result = $user_cart -> get_result();
+
+            echo "<p>".$result -> num_rows."</p>";
+
+            while ( $row = $result -> fetch_assoc() ) {
+                $pNo = $row['pNo'];
+                $size = $row['size'];
+                $quantity = $row['quantity'];
+
+                $singluarProductCost;
+                $product_cost_sql = "SELECT price FROM Product WHERE pNo = ? AND size = ?";
+                if ( $product_cost = $mysqli -> prepare($product_cost_sql) ) {
+                    $product_cost -> bind_param("ss", $pNo, $size );
+                    $product_cost -> execute();
+
+                    $product_cost_result = $product_cost -> get_result();
+
+                    while ( $product_cost_row = $product_cost_result -> fetch_assoc() ) {
+                        $singularProductCost = $product_cost_row['price'];
+                    }
+                }
+
+                $productNetCost = $singularProductCost * $quantity;
+                $hasOrder_insert_sql = "INSERT INTO HasOrder(oNo, pNo, size, quantity, price) VALUES (?,?,?,?,?)";
+                if ( $hasOrder_insert = $mysqli -> prepare($hasOrder_insert_sql) ) {
+                    $hasOrder_insert -> bind_param("sssss", $oNo, $pNo, $size, $quantity, $productNetCost);
+                    $hasOrder_insert -> execute();
+                }
+
+                echo "<p>Finished while loop</p>";
+
+            }
+        }
     }
     else {
         die();
     }
-///*
-// * get everything from cart
-// * move info from cart and create order in orders table
-// */
-//
-//include "includes/init.php";
-//
-//$_SESSION['userid'] = 1;
-//
-//if (!isset($_SESSION['userid'])) {
-//    die();
-//}
-//else {
-//    $userid = $_SESSION['userid'];
-//}
-//
-//if( isset($_POST['submit'])) {
-//    echo "first if";
-//    if (isset($_POST['shippingAddress'])) {
-//        $shippingAddress = $_POST['shippingAddress'];
-//        echo $shippingAddress;
-//    }
-//}
-//
-//else {
-//    echo "you encountered an error";
-//}
-
-
 }
 
 catch (Exception $exception) {
