@@ -81,7 +81,7 @@ try {
             $result = $user_cart -> get_result();
 
             echo "<p>".$result -> num_rows."</p>";
-
+            //go thru each item in cart and update db
             while ( $row = $result -> fetch_assoc() ) {
                 $pNo = $row['pNo'];
                 $size = $row['size'];
@@ -126,6 +126,31 @@ try {
                     $hasOrder_insert -> bind_param("sssss", $oNo, $pNo, $size, $quantity, $productNetCost);
                     $hasOrder_insert -> execute();
                 }
+            }
+
+            //check to make sure that an order has products in it
+            $order_product_count_sql = "SELECT COUNT(oNo) as prodCount FROM HasOrder WHERE oNo = ? GROUP BY oNo";
+            if ( $order_product_error_check = $mysqli -> prepare($order_product_count_sql) ) {
+                echo "<p>the if statement executed</p>";
+                $order_product_error_check -> bind_param("s", $oNo);
+                $order_product_error_check -> execute();
+
+                $order_product_error_check_result = $order_product_error_check -> get_result();
+
+                if ( $order_product_error_check_result -> num_rows === 0 ) {
+                    echo "<p>".$oNo."</p>";
+                    $remove_order_sql = "DELETE FROM Orders WHERE oNo = ?";
+
+                    if ( $remove_order = $mysqli -> prepare($remove_order_sql) ) {
+                        $remove_order -> bind_param("s", $oNo);
+                        $remove_order -> execute();
+                    }
+                    echo "<p>Our apologies! We do not have the products that you want to order in our inventory</p>";
+                    echo "<p><a href = \"../homeWithoutTables.php\" >Return Home</a></p>";
+                }
+            }
+            else {
+                echo "<p>it hits the else and skips the if </p>";
             }
         }
 
