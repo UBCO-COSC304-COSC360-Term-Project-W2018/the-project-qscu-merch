@@ -99,6 +99,7 @@ try {
                         $singularProductCost = $product_cost_row['price'];
                     }
                 }
+                $productNetCost = $singularProductCost * $quantity;
 
                 //watch out for case where user tries to buy something we don't have in inventory
                 $update_inv_sql = "UPDATE HasInventory SET quantity = quantity - ? WHERE wNo = ? AND pNo = ? AND size = ? WHERE (quantity - ?) >= 0";
@@ -108,11 +109,18 @@ try {
                 }
                 //we don't enough of this product in inventory, skip this item, go to next
                 else {
+                    $update_order_sql = "UPDATE Orders SET totalPrice = totalPrice - ? WHERE shippingAddress = ? AND dateOrdered = CURRENT_DATE  AND uid = ? AND sNo = ?";
+                    if ( $update_order = $mysqli -> prepare($update_order_sql) ) {
+                        $update_order -> bind_param("ssss", $productNetCost, $fullShippingAddress, $userid, $sNo);
+                        $update_order -> execute();
+                    }
+                    else {
+                        throw new Exception();
+                    }
                     continue;
                 }
 
                 //create order product
-                $productNetCost = $singularProductCost * $quantity;
                 $hasOrder_insert_sql = "INSERT INTO HasOrder(oNo, pNo, size, quantity, price) VALUES (?,?,?,?,?)";
                 if ( $hasOrder_insert = $mysqli -> prepare($hasOrder_insert_sql) ) {
                     $hasOrder_insert -> bind_param("sssss", $oNo, $pNo, $size, $quantity, $productNetCost);
