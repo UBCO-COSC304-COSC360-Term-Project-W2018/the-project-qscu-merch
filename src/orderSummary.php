@@ -8,10 +8,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         //getting the user object
 //        $userid = $_SESSION['userid'];
-        //TODO: uncomment this when you pull from dev
-        $userid = 1;
-//        $user = $_SESSION['user'];
-//        $userid = $user->userid;
+        //TODO: RACHELLE REMEMBER TO UNCOMMENT THIS WHEN YOU ARE DONE TESTING
+//        $userid = 1;
+        $user = $_SESSION['user'];
+        $userid = $user->id;
 //        or
 //        $userid = $_SESSION['user']->userid
     }
@@ -207,7 +207,7 @@ else {
                     $tax = 0;
             }
 
-            $taxTotal = number_format((float)($total_price * $tax), 2, '.', '');
+            $taxTotal = number_format((float)($subtotal * $tax), 2, '.', '');
             $netTotal = number_format((float)($subtotal + $taxTotal), 2, '.', '');
 
             $fullShippingAddress = $shippingAddressLine.",".$shippingCity.",".$shippingProvince.",".$shippingCountry.",".$shippingPostalCode;

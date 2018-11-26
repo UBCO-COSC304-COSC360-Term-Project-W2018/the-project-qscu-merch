@@ -4,7 +4,10 @@ include "includes/init.php";
 try {
     $headerSet = 1;
 
-    $_SESSION['userid'] = 1;
+    //TODO: Uncomment this once i merge onto dev
+    $user = $_SESSION['user'];
+    $userid = $user->id;
+//    $_SESSION['userid'] = 1;          //PURELY FOR TESTING
 
     if (!isset($_SESSION['userid'])) {
         header('Location: http://localhost/the-project-qscu-merch/src/login.php');
@@ -13,9 +16,7 @@ try {
         $userid = $_SESSION['userid'];
     }
 
-    //TODO: Uncomment this once i merge onto dev
-//$userid = $_SESSION['userid'];
-//$userid = $user->userid;
+
 
     $firstName = "";
     $lastName = "";
