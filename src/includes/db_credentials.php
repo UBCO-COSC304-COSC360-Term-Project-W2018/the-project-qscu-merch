@@ -1,8 +1,8 @@
 <?php
 $dbcred = true;
-define("DBHOST","localhost");
-define("DBNAME", "QSCU");
-define("DBUSER", "Parsa");
-define("DBPASS", "parsa");
+define("DBHOST","cosc304.ok.ubc.ca");
+define("DBNAME", "db_rgelden");
+define("DBUSER", "rgelden");
+define("DBPASS", "40215162");
 
 ?>
