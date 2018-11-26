@@ -46,18 +46,18 @@ try {
         }
 
         echo "<p>".$sNo."</p>";
-//
-//        //insert into orders
-//        $orderInsertSQL = "INSERT INTO Orders(shippingAddress, totalPrice, dateOrdered, uid, sNo ) VALUES (?,?,?,?,?)";
-//        if ( $user_order = $mysqli -> prepare($orderInsertSQL) ) {
-//            $user_order -> bind_param("sssss", $fullShippingAddress, $totalPrice, $dateShipped, $userid, $sNo);
-//            $user_order -> execute();
-//            echo "<p>You successfully made the order</p>";
-//        }
-//
-//        else {
-//            throw new Exception();
-//        }
+
+        //insert into orders
+        $orderInsertSQL = "INSERT INTO Orders(shippingAddress, totalPrice, dateOrdered, uid, sNo ) VALUES (?,?,CURRENT_DATE ,?,?)";
+        if ( $user_order = $mysqli -> prepare($orderInsertSQL) ) {
+            $user_order -> bind_param("ssss", $fullShippingAddress,$totalPrice, $userid, $sNo);
+            $user_order -> execute();
+            echo "<p>You successfully made the order</p>";
+        }
+
+        else {
+            throw new Exception();
+        }
 
 //        $hasOrderInsert = "INSERT INTO HasOrder(oNo, pNo, size, quantity, price) VALUES (?,?,?,?,?)";
         //oNo, gonna have to query orders table
