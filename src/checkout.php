@@ -16,8 +16,6 @@ try {
         $userid = $_SESSION['userid'];
     }
 
-
-
     $firstName = "";
     $lastName = "";
     $fullName = "";

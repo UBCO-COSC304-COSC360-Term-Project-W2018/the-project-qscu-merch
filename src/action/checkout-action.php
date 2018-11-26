@@ -15,9 +15,9 @@ try {
         $totalPrice = $_SESSION['totalCost'];
 
         //TODO: fix this before merging onto dev
-        $userid = 1;
-//        $user = $_SESSION['user'];
-//        $userid = $user->userid;
+//        $userid = 1;
+        $user = $_SESSION['user'];
+        $userid = $user->userid;
 
         $mysqli = new mysqli (DBHOST, DBUSER, DBPASS, DBNAME);
 
