@@ -56,18 +56,21 @@ $cartRows = [];
 
             $qry = "SELECT pNo, pname, size, quantity, quantity*price AS priceQuant FROM  HasCart H, Product P WHERE uid = ?, H.pNo = P.pNo, H.size = P.size";
 
+
             if($stmt = mysqli_prepare($con, $qry)){
 
-                mysqli_stmt_bindm($stmt, 'i', $user);
-                mysqli_stmt_execute($stmt);
+                $stmt ->bind_param('i', $user);
+                $stmt -> execute();
 
-                while(mysqli_stmt_fetch($stmt)){
+                $result = $stmt->get_result();
 
-                    $prod = ['pNo'] = $pNo;
-                    $prod = ['pname'] = $pname;
-                    $prod = ['size'] = $size;
-                    $prod = ['quantity'] = $quantity;
-                    $prod = ['priceQuant'] = $priceQuant;
+                while($row = $result->fetch_assoc()){
+
+                    $prod = ['pNo'] = $row['pNo'];
+                    $prod = ['pname'] = $row['pname'];
+                    $prod = ['size'] = $row['size'];
+                    $prod = ['quantity'] = $row['quantity'];
+                    $prod = ['priceQuant'] = $row['priceQuant'];
 
                     array_push($cartRows, $prod);
 
