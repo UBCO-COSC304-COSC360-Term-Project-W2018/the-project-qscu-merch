@@ -214,11 +214,16 @@ else {
 
             if (isset($_SESSION['fullShippingAddress'])) {
                 $_SESSION['fullShippingAddress'] = $fullShippingAddress;
-
             }
             else {
                 $_SESSION['fullShippingAddress'] = $fullShippingAddress;
+            }
 
+            if (isset($_SESSION['totalCost']) ) {
+                $_SESSION['totalCost'] = $netTotal;
+            }
+            else {
+                $_SESSION['totalCost'] = $netTotal;
             }
 
 
