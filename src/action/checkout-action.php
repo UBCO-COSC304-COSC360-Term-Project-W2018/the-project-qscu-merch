@@ -17,7 +17,7 @@ try {
         //TODO: fix this before merging onto dev
 //        $userid = 1;
         $user = $_SESSION['user'];
-        $userid = $user->userid;
+        $userid = $user->id;
 
         $mysqli = new mysqli (DBHOST, DBUSER, DBPASS, DBNAME);
 
@@ -35,15 +35,17 @@ try {
             throw new Exception();
         }
 
-//        $sNo;
-//        $get_sNo = "SELECT MAX(sNo) AS recent FROM Shipment";
-//        if ($result = $mysqli -> query($get_sNo)) {
-//
-//            while ( $row = $result -> fetch_assoc() ) {
-//                $sNo = $row['recent'];
-//            }
-//            $result -> free();
-//        }
+        $sNo;
+        $get_sNo = "SELECT MAX(sNo) AS recent FROM Shipment";
+        if ($result = $mysqli -> query($get_sNo)) {
+
+            while ( $row = $result -> fetch_assoc() ) {
+                $sNo = $row['recent'];
+            }
+            $result -> free();
+        }
+
+        echo "<p>".$sNo."</p>";
 //
 //        //insert into orders
 //        $orderInsertSQL = "INSERT INTO Orders(shippingAddress, totalPrice, dateOrdered, uid, sNo ) VALUES (?,?,?,?,?)";
