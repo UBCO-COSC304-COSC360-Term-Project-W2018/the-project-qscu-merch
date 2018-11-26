@@ -56,7 +56,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
             //add to object cart
 
-            $uCartObj = $_COOKIE['userCart'];
+            $uCartObj = $_SESSION['userCart'];
 
             $uCartObj -> addItem($pNo, $pname, $size, $quantity, $price);
 
