@@ -36,7 +36,7 @@ if($con -> connect_errno){
 <body>
 <?php include "header.php";?>
 <main>
-	
+	<p id="warehousepagetitle">Warehouse Product Inventory List</p>
 <?php
 
 $sqlWH = "SELECT wNo, location FROM Warehouse";
@@ -61,7 +61,7 @@ if($WH = $con->prepare($sqlWH)){
 			echo '<table class="warehousetables"><tr><th>Warehouse Number</th><th>Location</th></tr>';
 			echo "<tr><td>".$warehouses[$x] ."</td>";
 			echo "<td>".$locs[$x]."</td></tr>";
-			echo '<tr align="right"><td colspan="4"><table  class="producttables" >';
+			echo '<tr><td colspan="4"><table  class="producttables" >';
 			echo '<th>Product Id</th><th>Product Name</th> <th>Size</th> <th>Quantity</th></tr>';
 		if($prods = $con->prepare($sqlProds)){
 			$prods->bind_param('i', $warehouses[$x]);
@@ -79,7 +79,7 @@ if($WH = $con->prepare($sqlWH)){
 			
 
 		}else{
-			echo "FUCK";
+			die();
 		}
 	
 

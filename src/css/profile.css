@@ -8,6 +8,8 @@
 	margin-bottom: 0.5em;
 	width: 90%;
 }
+
+
 #userProfile{
     margin: 1em;
     display: flex;
@@ -24,7 +26,7 @@
 #imageContent form{
 	max-width: 17em;
 }
-#imageContent input{
+#uploadImage{
 	max-width: 17em;
 	margin-left: 1.45em;
 	padding:0.5em 4.2em 0.5em 0.5em;
@@ -34,7 +36,32 @@
 	overflow: hidden;
 	}
 
+
+#uploadButton{
+	max-width: 8em;
+	margin-left: 8em;
+	margin-right: 8em;
+	border: thin solid black;
+	background-color: #18bfef;
+	border-radius: 1em;
+	
+}
+[type~=button] {
+	max-width: 4em;
+	border: thin solid black;
+	background-color: #18bfef;
+	border-radius: 1em;
+}
+
+[value~=Save]{
+		max-width: 4em;
+	border: thin solid black;
+	background-color: tomato;
+	border-radius: 1em;
+}
+
 #imagePreview {
+
 	padding: 1em 1em 0em 1em;
     width: 240px;
     height: 240px;

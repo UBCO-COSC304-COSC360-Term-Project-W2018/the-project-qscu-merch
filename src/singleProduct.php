@@ -1,7 +1,7 @@
 <?php
 $headerSet = 0;
 include "includes/init.php";
-include "header.php";
+
 
 try {
     if (isset($_SESSION['user'])) {
@@ -23,21 +23,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 ?>
 
 <!DOCTYPE HTML>
-<html lang="en">
+<html>
 
 <!--    Head-->
-<head lang="en">
+<head>
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
-    <link rel="stylesheet" href="../src/css/singleProduct.css">
-    <?php include 'includes/headerFooterHead.php' ?>
-    <script type="text/javascript" src="../src/script/quantity.js"></script>
-    <script type="text/javascript" src="../src/script/reviewModal.js"></script>
+    <link rel="stylesheet" href="css/singleProduct.css">
+    <?php include 'includes/headerFooterHead.php'; ?>
+    <script type="text/javascript" src="script/quantity.js"></script>
+    <script type="text/javascript" src="script/reviewModal.js"></script>
     <!--    <script type="text/javascript" src="../src/script/commentModal.js"></script>-->
 </head>
 <!--    Body-->
 
 <body>
+	<?php include "header.php"; ?>
 <main>
     <!--    make sure all the files that we update have the same and CORRECT width/height -->
     <div class="bigboi">
