@@ -1,12 +1,13 @@
 <?php 
 include "includes/init.php";
-include "header.php";
 
-$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
 
-try{
-
-$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
+$user = null;
+$name = null;
+if(isset($_SESSION['user'])){
+    $user = $_SESSION['user']->id;
+    $name = $_SESSION['user']->firstName;
+}
 
 $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
@@ -14,23 +15,18 @@ if($con -> connect_errno){
 	die("Connection Failed: ".$con -> connect_errno);
 }
 
-}
-catch (Exception $e) {
-	die("Session Terminated.");
-}
-
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="css/cart.css">
-	<?php include 'includes/headerFooterHead.php'?>
+	<?php include 'includes/headerFooterHead.php';?>
     <script type="text/javascript" src="script/cart_controller.js"></script>
 </head>
 
 <body>
+	<?php include "header.php"; ?>
     <main>
         <div id="cartHeader">
             <p>Your Cart</p>
