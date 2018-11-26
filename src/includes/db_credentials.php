@@ -5,4 +5,5 @@ define("DBNAME", "QSCUShop");
 define("DBUSER", "james");
 define("DBPASS", "james");
 
+
 ?>

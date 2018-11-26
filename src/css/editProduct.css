@@ -1,0 +1,13 @@
+.categoryContainer{
+    display: flex;
+    flex-direction: row;
+}
+.categoryOptions > *{
+    display: block;
+}
+.categoryOptions form > *{
+    display: block;
+}
+.selected{
+    background-color: lawngreen;
+}

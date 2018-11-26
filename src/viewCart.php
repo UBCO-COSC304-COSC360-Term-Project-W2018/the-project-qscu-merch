@@ -50,6 +50,7 @@ $cartRows = array();
 
         
             // make a query with prepared statement for the user's cart with their id, then iterate through the list
+
 // 			$sql = "SELECT pNo, pname, size, quantity FROM HasInventory NATURAL JOIN Product";
              $sql = "SELECT pNo, pname, size, quantity, price FROM HasCart NATURAL JOIN Product WHERE uid = ?";
 			
@@ -61,15 +62,15 @@ $cartRows = array();
 				$pstmt->bind_result($pNo, $pname, $size, $quantity, $price);
 
                 while($pstmt->fetch()){
-					$prod = array();
-					$prod["pNo"] = $pNo;
-					$prod["pname"] =  $pname;
-					$prod["size"] =  $size;
-					$prod["quantity"] =  $quantity;
-					$total = $price*$quantity;
-					$prod["total"] =   $total;
-					
-                    array_push($cartRows, $prod);
+                   $prod = array();
+                   $prod["pNo"] = $pNo;
+                   $prod["pname"] =  $pname;
+                   $prod["size"] =  $size;
+                   $prod["quantity"] =  $quantity;
+                   $total = $price*$quantity;
+                   $prod["total"] =   $total;
+                    
+                  array_push($cartRows, $prod);
                     $len = count($cartRows);
 
                 }

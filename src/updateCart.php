@@ -20,8 +20,8 @@ if(isset($_POST['pid']) && isset($_POST['quantity']) && isset($_POST['size'])){
 
 
         $pno = $_POST['pid'];
-        $size = $_POST['pid'];
-        $quantity = $_POST['pid'];
+        $size = $_POST['size'];
+        $quantity = $_POST['quantity'];
 
 
         if(isset($_SESSION['user'])){
@@ -46,11 +46,10 @@ if(isset($_POST['pid']) && isset($_POST['quantity']) && isset($_POST['size'])){
 
                     $pstmt = $con->prepare($qry);
 
-                    $pstmt-> bindValue(1,$user);
-                    $pstmt-> bindValue(2,$pno);
-                    $pstmt-> bindValue(3,$size);
+                    $pstmt -> bind_param('iis', $user, $pno, $size);
 
                     $pstmt -> execute();
+                    $pstmt -> close();
 
                 }else{
 
@@ -60,13 +59,11 @@ if(isset($_POST['pid']) && isset($_POST['quantity']) && isset($_POST['size'])){
 
                     $pstmt = $con->prepare($qry);
 
-                    $pstmt-> bindValue(1,$quantity);
-                    $pstmt-> bindValue(2,$user);
-                    $pstmt-> bindValue(3,$pno);
-                    $pstmt-> bindValue(4,$size);
+                    $pstmt -> bind_param('iiis', $quantity, $user, $pno, $size);
 
 
                     $pstmt -> execute();
+                    $pstmt -> close();
 
                 }
 

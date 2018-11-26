@@ -9,14 +9,45 @@ include "includes/init.php";
 //can do a hidden field or form
 //have a bunch of hidden buttons that will come up when the form is submitted
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    if(arrayExists($_POST, array('pNo', 'pname', 'size', 'quantity', 'price'))){
+    if(arrayExists($_POST, array('pNo', 'size', 'quantity'))){
 
         //This is where I need you guys to somehow access this information
         $pNo = $_POST['pNo'];
         $size = $_POST['size'];
-        $name = $_POST['pname'];
         $quantity = $_POST['quantity'];
-        $price = $_POST['price'];
+
+        //need to query for price and pname, so LETS DO THAT
+
+        try{
+
+            $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+
+            if ($con->connect_errno) {
+                die("Connection Failed: " . $con->connect_errno);
+            }
+
+            $getPriceName = "SELECT pname, price FROM Product WHERE pNo = ? AND size = ?";
+
+            $pstmt1 = $con->prepare($getPriceName);
+            $pstmt1 ->bind_param('id', $pNo, $size);
+
+            $pstmt1 -> execute();
+
+            $result = $pstmt1 ->get_result();
+
+            while($row = $result->fetch_assoc()){
+                //should only be one row
+                $pname = $row['pname'];
+                $price = $row['price'];
+
+            }
+
+            $pstmt1 -> close();
+            $con -> close();
+
+        }
+        catch (Exception $e){die();}
+
 
 
     //So this will have two parts to it, depending on if the user is logged in or not
@@ -38,12 +69,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
                 $pstmt = $con->prepare($addProd);
 
-                $pstmt->bindValue(1, $user);
-                $pstmt->bindValue(2, $pNo);
-                $pstmt->bindValue(3, $size);
-                $pstmt->bindValue(4, $quantity);
+                $pstmt ->bind_param('iisi',$user,$pNo,$size,$quantity);
+
 
                 $pstmt->execute();
+                $pstmt -> close();
 
                 $con->close();
 
@@ -54,12 +84,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
         } else {
 
-            //add to object cart
+            if(isset($price) && isset($pname)) {
+                //add to object cart
 
-            $uCartObj = $_COOKIE['userCart'];
+                $uCartObj = $_SESSION['userCart'];
 
-            $uCartObj -> addItem($pNo, $pname, $size, $quantity, $price);
-
+                $uCartObj->addItem($pNo, $pname, $size, $quantity, $price);
+            }
 
         }
     }

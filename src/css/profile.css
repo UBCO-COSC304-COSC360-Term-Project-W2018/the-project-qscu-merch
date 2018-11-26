@@ -36,6 +36,7 @@
 	overflow: hidden;
 	}
 
+
 #uploadButton{
 	max-width: 8em;
 	margin-left: 8em;
@@ -59,7 +60,8 @@
 	border-radius: 1em;
 }
 
-#profileImage {
+#imagePreview {
+
 	padding: 1em 1em 0em 1em;
     width: 240px;
     height: 240px;
