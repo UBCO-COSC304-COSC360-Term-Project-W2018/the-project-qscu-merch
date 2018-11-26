@@ -1,58 +1,71 @@
-.aCart{
-    text-decoration: none;
-}
-
-
 main{
-    padding: 2em;
-    width: 90%;
-    margin: auto;
+	width: 905;
 }
 
 #cartHeader{
-    margin: 0.5em 0;
+    margin: 1em;
+    padding-bottom: 0.2em;
     font-size: 2em;
     font-weight: bold;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #183263;
 }
 
-#cartHeader p{
-    margin: 0;
-    margin-bottom: 0.5em;
+#cartTable{
+	border-collapse: collapse;
+	margin: 0em 2em 2em 2em;
+	white-space: nowrap;
 }
 
-#cartMain{
-    margin: 0 3em;
 
+#cartTable th{
+	background-color: #183263;
+	font-size: 1.1em;
+	color: white;
+}
+
+#cartTable td, #cartTable th{
+border-bottom: 2px solid #183263;
+
+padding: 0.4em 1em 0.4em 0.4em;
+
+}
+
+.removeCol, .updateCol{
+	text-align: center;
+}
+
+.button{
+	background-color: #18bfef;
+	border-radius: 1em;
+	border-color: black;
+}
+
+#sumTotal{
+	text-align: right;
 }
 
 #cartFooter{
-    border-top: 2px solid black;
-    margin: 1em 0;
-    padding-top: .5em;
-
+	clear: left;
+	 margin: 0.5em 0em 2em 8em;
+}
+.centerContents{
+	text-align: center;
+}
+.quant{
+	width:40%;
+}
+#cartTable a{
+	text-decoration: none;
+	color: #183263;
 }
 
-.product{
-    font-size: 1em;
-    margin: .5em;
-}
-.product input{
-    width: 17px;
+#cartTable a:hover{
+	color: tomato;
 }
 
-#cartMain span{
-    margin: 0 1em;
+#cartTable a:visited{
+	color:#18bfef;
 }
-#cartFooter span{
-    margin: 0 1em;
+footer{
+	clear: left;
 }
-#cartFooter button{
-    margin: 0.25em;
-}
-
-#cartMain #productPrice{
-    margin-left: 22em;
-}
-
-

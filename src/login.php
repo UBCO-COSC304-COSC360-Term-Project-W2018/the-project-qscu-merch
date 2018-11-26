@@ -20,14 +20,14 @@ $headerSet = 0;
 <head>
     <meta charset="UTF-8">
     <title>Login/Sign-up</title>
-    <? include 'includes/headerFooterHead.php';?>
+    <?php include 'includes/headerFooterHead.php';?>
     <link rel="stylesheet" href="css/login.css">
     <script type="text/javascript" src="script/client-side-validation.js"></script>
 
 
 </head>
 <body>
-<?include "../header.php"; ?>
+<?php include "header.php"; ?>
 <main>
 <div id="forms">
     <form id="loginForm" method="post" action="action/getLogin.php">

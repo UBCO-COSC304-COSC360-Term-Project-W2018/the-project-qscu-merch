@@ -45,7 +45,7 @@ if(isset($_SESSION['user'])){
         </div>
 
         <div id="profile" class="hbotline">
-            <a href="cart.php"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
+            <a href="viewCart.php"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
 
             <?php
             if (isset($user)) {

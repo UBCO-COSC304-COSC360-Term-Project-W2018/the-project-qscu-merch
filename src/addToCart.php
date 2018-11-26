@@ -2,8 +2,8 @@
 
 
 include "includes/init.php";
-include "includes/user.php";
-include "includes/userCart.php";
+// include "includes/user.php";
+// include "includes/userCart.php";
 
 
 //can do a hidden field or form
