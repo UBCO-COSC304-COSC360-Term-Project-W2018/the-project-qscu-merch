@@ -31,13 +31,15 @@ $cartRows = array();
         <?php include 'includes/headerFooterHead.php'; ?>
         <script type="text/javascript" src="script/cart_controller.js"></script>
 
-    <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a>Your Cart</a>
-    </ul>
+
 </head>
 
 <body>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a>Your Cart</a>
+</ul>
 	<?php include "header.php"; ?>
 <main>
 

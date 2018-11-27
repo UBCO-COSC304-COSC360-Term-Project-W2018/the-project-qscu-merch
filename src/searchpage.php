@@ -17,7 +17,14 @@ $headerSet = 0;
 <!--    Body-->
 
 <body>
-<?php include "header.php";?>
+
+<?php include "header.php"?>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a>Search</a>
+</ul>
+
     <!-- Main Body -->
 <main>
 	<div id="main">
