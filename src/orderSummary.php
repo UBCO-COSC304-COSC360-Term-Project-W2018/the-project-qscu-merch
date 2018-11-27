@@ -103,15 +103,16 @@ else {
     <script src="libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="script/orderSummary.js"></script>
 
-    <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a href="viewCart.php.php">Cart</a> &gt; &gt; >>
-        <a>Your Order</a>
-    </ul>
 </head>
 
 <body>
 <?php include "header.php" ?>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a href="viewCart.php">Cart</a> &gt; &gt;
+    <a>Your Order</a>
+</ul>
 <main id="orderSummaryBody">
     <h1>Your Order:</h1>
     <div id="userOrderTableContainer">

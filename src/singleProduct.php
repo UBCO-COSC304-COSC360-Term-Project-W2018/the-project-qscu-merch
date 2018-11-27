@@ -101,7 +101,7 @@ if ($stmt = $con->prepare($sql)) {
                 <div class="quant">
                     <p>Quantity</p>
                     <!--                    TODO: need to send this somwehere-->
-                    <form id='myform' method='POST' action="http://www.randyconnolly.com/tests/process.php">
+                    <form id='myform' method='POST' action="action/addToCart.php">
                         <input title="Decrease Quantity" type='button' value='-' class='qtyminus' field='quantity'/>
                         <input required type='text' name='quantity' value='' class='qty'/>
                         <input title="Increase Quantity" type='button' value='+' class='qtyplus' field='quantity'/>
@@ -110,14 +110,15 @@ if ($stmt = $con->prepare($sql)) {
 
                         <select name="size" class="size" required>
                             <option selected value="">Select a size</option>
-                            <option value="SML">Small (S)</option>
-                            <option value="MED">Medium (M)</option>
+                            <option value="single">single</option>
+                            <option value="one">one</option>
                             <option value="LG">Large (L)</option>
                             <option value="XLG">Extra-Large (XL)</option>
                         </select>
 
                         <!--                    TODO: Liam needs pName and price -->
-                        <button title="Add to Cart" class="pageButtons">Add to Cart <i class="fa fa-shopping-cart"></i>
+                        <?php echo "<input type='hidden' value='1' name='prodNum' />" ?>
+                        <button type="submit" title="Add to Cart" class="pageButtons">Add to Cart <i class="fa fa-shopping-cart"></i>
                         </button>
                     </form>
 
@@ -125,6 +126,74 @@ if ($stmt = $con->prepare($sql)) {
 
                 <!--            price-->
                 <div class="price">
+
+
+
+                    <?php
+
+
+                    $sqlOldPrice = "SELECT price*1.5 AS oldPrice FROM Product";
+
+                    if ($query = $con->query($sqlOldPrice)) {
+
+                        while ($field = $query->fetch_assoc()) {
+
+                            $OldPrice = $field['oldPrice'];
+
+                            echo "<p>Listed Price: <label class=\"oldPrice\">CDN$ $OldPrice</label>";
+                        }
+                    } else {
+                        echo "Error - could not get price.";
+                        die();
+                    } ?>
+
+
+
+<!--    make sure all the files that we update have the same and CORRECT width/height -->
+<div class="bigboi">
+    <div class="container">
+        <img src="../src/images/pingpong.jpg" alt="Product Picture">
+
+        <div class="sideContent">
+            <!--            name of product-->
+            <div class="pName">
+                <h1>Ping Pongs
+                </h1>
+                <!--                sub-title stuff -->
+                <p>3 Balls per pack</p>
+                    <?php
+                    $sqlPrice = "SELECT price FROM Product";
+                    //                    $sqlOldPrice = "SELECT price+100 FROM Product";
+
+                    if ($query = $con->query($sqlPrice)) {
+
+                        while ($field = $query->fetch_assoc()) {
+
+                            $price = $field['price'];
+
+                            echo "<p>Price: <label class=\"sale\">CDN$$price</label>";
+                        }
+                    } else {
+                        echo "Error - could not get price.";
+                        die();
+                    }
+                    ?>
+
+                    <!--                    else  if ($query = $con->query($sqlOldPrice)) {-->
+                    <!---->
+                    <!--                    while ($field = $query->fetch_assoc()) {-->
+                    <!---->
+                    <!--                    $OldPrice = $field['price'];-->
+                    <!---->
+                    <!---->
+                    <!---->
+                    <!--                        }-->
+                    <!--                    <p>Listed Price: <label class="oldPrice">CDN$299.99</label></p>-->
+
+                    <!--                    <p>Price: <label class="sale">CDN$199.99</label>-->
+
+
+                    </p>
                   <p>Listed Price: <label class="oldPrice"CDN$<?php echo ($product['price']*1.5);?></label></p>
                   <p>Price: <label class="sale">CDN$<?php echo $product['price'];?></label></p>
                 </div>

@@ -21,16 +21,19 @@ include "header.php";
     <link rel="stylesheet" href="css/contact.css" />
 	<?php include 'includes/headerFooterHead.php'?>
 
-    <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a >Contact Us</a>
-    </ul>
+
 </head>
 
 <!--    Body-->
 
 <body>
 <!-- Inseart Header Here-->
+
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a >Contact Us</a>
+</ul>
 
 
 <div class="bigboi">

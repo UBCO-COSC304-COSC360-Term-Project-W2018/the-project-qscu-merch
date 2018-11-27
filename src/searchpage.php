@@ -13,6 +13,7 @@ try {
 }
 $headerSet = 0;
 ?>
+<!DOCTYPE HTML>
 <html>
 <!--    Head-->
 
@@ -20,14 +21,21 @@ $headerSet = 0;
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
     <link rel="stylesheet" href="css/searchpage.css"/>
-    <?php include 'includes/headerFooterHead.php'?>
+    <?php include 'includes/headerFooterHead.php';?>
 </head>
 
 
 <!--    Body-->
 
 <body>
+
 <?php include "header.php"?>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a>Search</a>
+</ul>
+
     <!-- Main Body -->
 <main>
 	<div id="main">
@@ -141,6 +149,5 @@ $headerSet = 0;
 		</div>
 </main>
 <?php include "footer.php"; ?>
-</body>
-</html>
+
 
