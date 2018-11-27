@@ -4,14 +4,13 @@ include '../includes/inputValidation.php';
 include '../includes/db_credentials.php';
 
 
-//"getProductList.php?searchInput=&searchType=&buildType="
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input = json_decode(file_get_contents('php://input'), true);
+    if(isset($input['searchType']) && isset($input['searchInput'])){
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $fieldArray = array("searchType", "buildType");
-    if (arrayExists($_GET, $fieldArray) && isset($_GET['searchInput']) && arrayIsValidInput($_GET, $fieldArray)) {
-        $searchInput = $_GET['searchInput'];
-        $searchType = $_GET['searchType'];
-        $buildType = $_GET['buildType'];
+        $searchInput = $input['searchInput'];
+        $searchType = $input['searchType'];
+        $buildType = 'grouped';
 
 
         $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
@@ -39,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
                     case "productCategory":
 
-                        $query = "SELECT pNo, size, pname, price, contentType, image, description, quantity FROM HasInventory NATURAL JOIN Product NATURAL JOIN ProductInCategory WHERE cname LIKE ? ORDER BY pNo ASC";
+                        $query = 'SELECT pNo, size, pname, price, contentType, image, description, quantity FROM HasInventory NATURAL JOIN Product NATURAL JOIN ProductInCategory NATURAL JOIN Category WHERE cname LIKE ? ORDER BY pNo ASC';
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('s', $input);
                         break;
@@ -108,7 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     throw new Exception();
             }
         } catch (Exception $e) {
-
         } finally {
             $mysql->close();
             die();
