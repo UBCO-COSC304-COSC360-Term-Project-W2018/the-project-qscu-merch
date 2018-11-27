@@ -30,15 +30,17 @@ try {
     <script type="text/javascript" src="../src/script/reviewModal.js"></script>
     <script type="text/javascript" src="../src/script/commentModal.js"></script>
 
-    <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a href="categorypage.php">Categories</a> &gt; &gt;
-        <a>Product</a>
-    </ul>
+
 </head>
 <!--    Body-->
 
 <body>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a href="categorypage.php">Categories</a> &gt; &gt;
+    <a>Product</a>
+</ul>
 
 <!--    make sure all the files that we update have the same and CORRECT width/height -->
 <div class="bigboi">

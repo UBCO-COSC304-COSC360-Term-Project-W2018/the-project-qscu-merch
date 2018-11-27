@@ -23,10 +23,7 @@ $headerSet = 1;
 	<?php include 'includes/headerFooterHead.php'?>
     <script type="text/javascript" src="script/profile_controller.js"></script>
 
-    <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a>Profile</a>
-    </ul>
+
 </head>
 
 
@@ -34,6 +31,11 @@ $headerSet = 1;
 
 <body>
 <?php include "header.php"?>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a>Profile</a>
+</ul>
 <main>
 	<h2 id="welcome">
 	     <?php echo "Welcome " . $name . "!"; ?>

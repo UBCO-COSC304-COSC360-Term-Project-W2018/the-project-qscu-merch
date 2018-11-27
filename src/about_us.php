@@ -16,15 +16,17 @@ include "header.php";
     <link rel="icon" type="image/x-icon" href="../src/images/QSCU_favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a>About Us</a>
-    </ul>
+
 </head>
 
 <!--    Body-->
 
 <body>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a>About Us</a>
+</ul>
 <main>
     <div class="bigboi">
         <div class="container">
