@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $stmt->execute();
                 }
 
-                header("location: ../editProduct.php?pid=".$id);
+                header("location: ../editProduct.php?pno=".$id);
             }else{
                 throw new Exception();
             }

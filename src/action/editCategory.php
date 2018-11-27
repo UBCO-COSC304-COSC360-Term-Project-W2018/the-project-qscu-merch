@@ -48,8 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
             $stmt->bind_param('s', $input['cname']);
             $stmt->execute();
         }
-
-        if($input['action'] === 'deleteCategory'){
+        $protectedCategorys = [];
+        //protected category array add cid to array to protect it
+//        $protectedCategorys = array('7',);
+        if($input['action'] === 'deleteCategory' && !in_array($input['cid'],$protectedCategorys)){
             $query = 'DELETE FROM ProductInCategory WHERE cid = ?';
             $stmt = $mysql->prepare($query);
             $stmt->bind_param('i',$input['cid']);

@@ -25,19 +25,19 @@ $headerSet = 1;
                 <button id="btnPosts">Posts</button>
                 <button id="btnAdminJunk">Admin Junk</button>
                 <input id="subSearch" name="subSearch" type="text">
-                <button id="btnSearch">Search</button>
+                <button id="btnSearch" onclick="onSearch()">Search</button>
                 <label for="rbProductName">Product Name:</label>
-                <input id="rbProductName" checked name="rbgroup" type="radio">
+                <input id="rbProductName" value="0" checked name="rbgroup" type="radio">
                 <label for="rbProductCategory">Product Category:</label>
-                <input id="rbProductCategory" value="0" name="rbgroup" type="radio">
+                <input id="rbProductCategory" value="1" name="rbgroup" type="radio">
                 <label for="rbUserName">Users Name:</label>
-                <input id="rbUserName" value="1" name="rbgroup" type="radio" disabled>
+                <input id="rbUserName" value="2" name="rbgroup" type="radio" disabled>
                 <label for="rbUserEmail">Users Email:</label>
-                <input id="rbUserEmail" value="2" name="rbgroup" type="radio" disabled>
+                <input id="rbUserEmail" value="3" name="rbgroup" type="radio" disabled>
                 <label for="rbPostTitle">Post Title:</label>
-                <input id="rbPostTitle" value="3" name="rbgroup" type="radio" disabled>
+                <input id="rbPostTitle" value="4" name="rbgroup" type="radio" disabled>
                 <label for="rbPost">Post Body:</label>
-                <input id="rbPost" value="4" name="rbgroup" type="radio" disabled>
+                <input id="rbPost" value="5" name="rbgroup" type="radio" disabled>
             </div>
 
 
