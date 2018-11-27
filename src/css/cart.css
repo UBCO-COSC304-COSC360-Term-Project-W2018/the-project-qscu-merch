@@ -52,16 +52,13 @@
 }
 #cartTable a{
 	text-decoration: none;
-	color: #183263;
+		color:#18bfef;
 }
 
 #cartTable a:hover{
 	color: tomato;
 }
 
-#cartTable a:visited{
-	color:#18bfef;
-}
 footer{
 	clear: left;
 }

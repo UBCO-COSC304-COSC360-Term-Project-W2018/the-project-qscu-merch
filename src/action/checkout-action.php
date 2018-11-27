@@ -1,9 +1,11 @@
-/*
+<!--
+
 Assumptions:
 -address is comma delimited
 -orders are placed and shipped on the same day
 -every shipment is coming from warehouse 1
-*/
+
+-->
 <?php
 
 include '../includes/session.php';

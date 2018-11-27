@@ -123,13 +123,13 @@ $cartRows = array();
             echo '<input type = "hidden" name = "pno" value = "'.$prod['pNo'].'">';
             echo '<input type = "hidden" name = "size" value = "'.$prod['size'].'">';
             echo '<input type = "hidden" name = "quantity" value = "'.$prod['quantity'].'">';
-            echo '<td class="centerContents" class="removeCol"><input type="submit" class="button" name="productBtn" value="Remove"></td>';
-            echo '<td class="centerContents" class="updateCol"><input type="submit" class="button" name="productBtn" value="Update Item"></td></form></tr>';
+            echo '<td class="centerContents" class="updateCol"><input type="submit" class="button" name="productBtn" value="Update Item"></td>';
+            echo '<td class="centerContents" class="removeCol"><input type="submit" class="button" name="productBtn" value="Remove"></td></form></tr>';
 			$sumtotal += $prod['total'];
 			
         }
         
-        echo '<tr><td id="sumTotal" colspan="4">Your Subtotal: $' .$sumtotal . '</td><td class="centerContents"><button id="checkoutButton" class="button">Check-out</button></td></tr>';
+        echo '<tr><td id="sumTotal" colspan="4">Your Subtotal: $' .$sumtotal . '</td><td class="centerContents"><form method="POST" action="checkout.php"><input type="submit" id="checkoutButton" class="button" value="Check-out"></form></td></tr>';
 			echo '</table></div>';
         ?>
 </main>
