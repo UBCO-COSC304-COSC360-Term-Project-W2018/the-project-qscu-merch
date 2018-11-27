@@ -1,3 +1,5 @@
+
+<?php
 /*
 Assumptions:
 -address is comma delimited
@@ -5,8 +7,6 @@ Assumptions:
 -every shipment is coming from warehouse 1
 -price in HasOrder is the cost of quantity * price
 */
-<?php
-
 include '../includes/session.php';
 include '../includes/db_credentials.php';
 
@@ -30,7 +30,7 @@ try {
         if ($shipment = $mysqli -> prepare($createShipment)) {
             $shipment -> bind_param("ss",$userid, $warehouseId );
             $shipment -> execute();
-            echo "<p>Shipment successfully created</p>";
+//            echo "<p>Shipment successfully created</p>";
         }
         else {
             throw new Exception();
@@ -48,14 +48,14 @@ try {
             }
         }
 
-        echo "<p>".$sNo."</p>";
+//        echo "<p>".$sNo."</p>";
 
         //insert into orders
         $orderInsertSQL = "INSERT INTO Orders(shippingAddress, totalPrice, dateOrdered, uid, sNo ) VALUES (?,?,CURRENT_DATE ,?,?)";
         if ( $user_order = $mysqli -> prepare($orderInsertSQL) ) {
             $user_order -> bind_param("ssss", $fullShippingAddress,$totalPrice, $userid, $sNo);
             $user_order -> execute();
-            echo "<p>You successfully made the order</p>";
+//            echo "<p>You successfully made the order</p>";
         }
 
         else {
@@ -80,7 +80,7 @@ try {
 
             $result = $user_cart -> get_result();
 
-            echo "<p>".$result -> num_rows."</p>";
+//            echo "<p>".$result -> num_rows."</p>";
             //go thru each item in cart and update db
             while ( $row = $result -> fetch_assoc() ) {
                 $pNo = $row['pNo'];
@@ -102,9 +102,9 @@ try {
                 $productNetCost = $singularProductCost * $quantity;
 
                 //watch out for case where user tries to buy something we don't have in inventory
-                $update_inv_sql = "UPDATE HasInventory SET quantity = quantity - ? WHERE wNo = ? AND pNo = ? AND size = ? WHERE (quantity - ?) >= 0";
+                $update_inv_sql = "UPDATE HasInventory SET quantity = quantity - ? WHERE wNo = ? AND pNo = ? AND size = ? AND (quantity - ?) >= 0";
                 if ( $update_inv = $mysqli -> prepare($update_inv_sql) ) {
-                    $update_inv -> bind_param("ssss", $quantity, $warehouseId, $pNo, $size);
+                    $update_inv -> bind_param("sssss", $quantity, $warehouseId, $pNo, $size, $quantity);
                     $update_inv -> execute();
                 }
                 //we don't enough of this product in inventory, skip this item, go to next
@@ -125,32 +125,49 @@ try {
                 if ( $hasOrder_insert = $mysqli -> prepare($hasOrder_insert_sql) ) {
                     $hasOrder_insert -> bind_param("sssss", $oNo, $pNo, $size, $quantity, $productNetCost);
                     $hasOrder_insert -> execute();
+//                    echo "<p>Inserted an order into HasOrder</p>";
                 }
             }
 
-            //check to make sure that an order has products in it
+//            check to make sure that an order has products in it
             $order_product_count_sql = "SELECT COUNT(oNo) as prodCount FROM HasOrder WHERE oNo = ? GROUP BY oNo";
             if ( $order_product_error_check = $mysqli -> prepare($order_product_count_sql) ) {
-                echo "<p>the if statement executed</p>";
+//                echo "<p>the if statement executed</p>";
                 $order_product_error_check -> bind_param("s", $oNo);
                 $order_product_error_check -> execute();
 
                 $order_product_error_check_result = $order_product_error_check -> get_result();
+//                echo "<p>".$order_product_error_check_result -> num_rows."</p>";
 
+                //if there are no products associated with this order number, then we are gonna delete the order from Orders
                 if ( $order_product_error_check_result -> num_rows === 0 ) {
-                    echo "<p>".$oNo."</p>";
+//                    echo "<p>".$oNo."</p>";
                     $remove_order_sql = "DELETE FROM Orders WHERE oNo = ?";
 
                     if ( $remove_order = $mysqli -> prepare($remove_order_sql) ) {
                         $remove_order -> bind_param("s", $oNo);
                         $remove_order -> execute();
                     }
-                    echo "<p>Our apologies! We do not have the products that you want to order in our inventory</p>";
-                    echo "<p><a href = \"../homeWithoutTables.php\" >Return Home</a></p>";
+                    //TODO: REPLACE WITH REDIRECT
+                    //TODO: REPLACE WITH ACTUAL URL REDIRECt RACHELLE USE RELATIVE
+                    header("Location: http://localhost/the-project-qscu-merch/src/orderError.php");
+//                    echo "<p>Our apologies! We do not have the products that you want to order in our inventory</p>";
+//                    echo "<p><a href = \"../homeWithoutTables.php\" >Return Home</a></p>";
+                }
+
+                //its all good to delete their cart
+                else {
+                    $remove_cart_sql = "DELETE FROM HasCart WHERE uid = ?";
+                    if ( $remove_cart = $mysqli -> prepare($remove_cart_sql) ) {
+                        $remove_cart -> bind_param("s", $userid);
+                        $remove_cart -> execute();
+                    }
+                    header("Location: http://localhost/the-project-qscu-merch/src/orderPlaced.php");
+//                    echo "<p>redirecting user</p>";
                 }
             }
             else {
-                echo "<p>it hits the else and skips the if </p>";
+//                echo "<p>it hits the else and skips the if </p>";
             }
         }
 
@@ -162,7 +179,7 @@ try {
 }
 
 catch (Exception $exception) {
-    echo "<p>An exception was thrown</p>";
+    die();
 }
 finally {
     $mysqli -> close();
