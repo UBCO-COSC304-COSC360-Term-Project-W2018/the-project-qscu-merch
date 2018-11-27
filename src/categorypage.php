@@ -28,16 +28,20 @@ $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
     <link rel="stylesheet" href="css/categorypage.css" />
 	<?php include 'includes/headerFooterHead.php';?>
 
-    <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a >Categories</a>
-    </ul>
+
 
 
 </head>
 <!--    Body-->
 
 <body>
+
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a >Categories</a>
+</ul>
+
 	<?php include "header.php"; ?>
 <main>
 	<div id="main">
