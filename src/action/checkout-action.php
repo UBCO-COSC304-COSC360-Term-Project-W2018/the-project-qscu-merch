@@ -38,8 +38,14 @@ try {
         }
 
         if ( $isBanned_user_status ) {
-            $_SESSION['user'] = null;
-            header('Location: http://localhost/the-project-qscu-merch/src/bannedUser.php');
+            if (isset($_SESSION['kicked_out']) ) {
+                $_SESSION['kicked_out'] = true;
+            }
+            else {
+                $_SESSION['kicked_out'] = true;
+            }
+            //TODO: change the URL
+            header('Location: http://localhost/the-project-qscu-merch/src/action/logout.php');
             exit();
         }
         $warehouseId = 1;
