@@ -33,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <?php include 'includes/headerFooterHead.php' ?>
     <script type="text/javascript" src="../src/script/quantity.js"></script>
     <script type="text/javascript" src="../src/script/reviewModal.js"></script>
-    <!--    <script type="text/javascript" src="../src/script/commentModal.js"></script>-->
 </head>
 <!--    Body-->
 
@@ -385,6 +384,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         </div>
     </div>
 </main>
+
+
 <?php
 include "footer.php";
 ?>
+</body>
+</html>
