@@ -22,11 +22,13 @@ try {
 
         $mysqli = new mysqli (DBHOST, DBUSER, DBPASS, DBNAME);
 
+        //TODO: do this
+        //check to make sure that user isn't banned
+
         $warehouseId = 1;
 
         //create shipment- a new shipment will be created for each order (:
         $createShipment = "INSERT INTO shipment(dateShipped, uid, shippedFrom) VALUES (CURRENT_DATE ,?,?)";
-
         if ($shipment = $mysqli -> prepare($createShipment)) {
             $shipment -> bind_param("ss",$userid, $warehouseId );
             $shipment -> execute();
@@ -72,7 +74,7 @@ try {
             }
         }
 
-        //create an order and populate it with items from user's cart
+        //populate order with items from user's cart
         $user_cart_sql = "SELECT * FROM HasCart WHERE uid = ?";
         if ( $user_cart = $mysqli -> prepare($user_cart_sql) ) {
             $user_cart -> bind_param("s",$userid);
@@ -87,6 +89,7 @@ try {
                 $size = $row['size'];
                 $quantity = $row['quantity'];
 
+                //get the cost of that product and size from db
                 $singluarProductCost;
                 $product_cost_sql = "SELECT price FROM Product WHERE pNo = ? AND size = ?";
                 if ( $product_cost = $mysqli -> prepare($product_cost_sql) ) {
@@ -107,7 +110,8 @@ try {
                     $update_inv -> bind_param("sssss", $quantity, $warehouseId, $pNo, $size, $quantity);
                     $update_inv -> execute();
                 }
-                //we don't enough of this product in inventory, skip this item, go to next
+
+                //we don't enough of this product in inventory, update order cost and skip this item, go to next
                 else {
                     $update_order_sql = "UPDATE Orders SET totalPrice = totalPrice - ? WHERE shippingAddress = ? AND dateOrdered = CURRENT_DATE  AND uid = ? AND sNo = ?";
                     if ( $update_order = $mysqli -> prepare($update_order_sql) ) {
@@ -118,6 +122,23 @@ try {
                         throw new Exception();
                     }
                     continue;
+                }
+                //check that the product that user wants to buy isn't disabled
+                $product_enabled_sql = "SELECT isEnabled FROM Product WHERE pNo = ? AND size = ?";
+                if ( $product_enabled = $mysqli -> prepare($product_enabled_sql) ) {
+                    $product_enabled -> bind_param("ss", $pNo, $size);
+                    $product_enabled -> execute();
+
+                    $product_enabled_result = $product_enabled -> get_result();
+
+                    $product_enabled_status = false;
+                    while ( $product_enabled_row = $product_enabled_result ->fetch_assoc() ) {
+                        $product_enabled_status = $product_enabled_row['isEnabled'];
+                    }
+                    //item is removed from cart in finally statement
+                    if ( !$product_enabled_status ) {
+                        continue;
+                    }
                 }
 
                 //create order product
@@ -157,11 +178,7 @@ try {
 
                 //its all good to delete their cart
                 else {
-                    $remove_cart_sql = "DELETE FROM HasCart WHERE uid = ?";
-                    if ( $remove_cart = $mysqli -> prepare($remove_cart_sql) ) {
-                        $remove_cart -> bind_param("s", $userid);
-                        $remove_cart -> execute();
-                    }
+
                     header("Location: http://localhost/the-project-qscu-merch/src/orderPlaced.php");
 //                    echo "<p>redirecting user</p>";
                 }
@@ -170,7 +187,6 @@ try {
 //                echo "<p>it hits the else and skips the if </p>";
             }
         }
-
 
     }
     else {
@@ -182,6 +198,13 @@ catch (Exception $exception) {
     die();
 }
 finally {
+
+    $remove_cart_sql = "DELETE FROM HasCart WHERE uid = ?";
+    if ( $remove_cart = $mysqli -> prepare($remove_cart_sql) ) {
+        $remove_cart -> bind_param("s", $userid);
+        $remove_cart -> execute();
+    }
+
     $mysqli -> close();
 }
 
