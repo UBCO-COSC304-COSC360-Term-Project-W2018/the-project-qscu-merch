@@ -34,6 +34,8 @@ if(isset($_POST['email'])){
 				
 				$sql2 = "UPDATE User SET (authToken = '".$randstring."') WHERE uid = '".$uid."'";
 				$con->query($sql2);
+				
+				
 					
 				//Send email to user
 				$to = $uEmail;
