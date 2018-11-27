@@ -20,6 +20,11 @@ include "header.php";
     <title>QSCU Merch Store</title>
     <link rel="stylesheet" href="css/contact.css" />
 	<?php include 'includes/headerFooterHead.php'?>
+
+    <ul class="breadcrumb">
+        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+        <a >Contact Us</a>
+    </ul>
 </head>
 
 <!--    Body-->
