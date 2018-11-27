@@ -109,30 +109,28 @@ $cartRows = array();
 		$len = count($cartRows);
 		    echo "<div id='cartDiv'><h1 id='cartHeader'>Your Shopping Cart</h1>";
 		    
-			echo "<form method='POST' action='updateCart.php'><table id='cartTable'><tr><th>Product Name</th><th>Quantity</th><th>Size</th><th>Price</th></tr>";
+			echo "<table id='cartTable'><tr><th>Product Name</th><th>Quantity</th><th>Size</th><th>Price</th></tr>";
 
         foreach ($cartRows as $prod) {
-
-
             //for each row in cartRows
-            echo '<tr>';
+            echo "<tr><form method='POST' action='action/updateCart.php'>";
             
             echo '<td><a href="singleProduct.php?pNo='.$prod['pNo'].'">'.$prod['pname'].'</a></td>';
         
-            echo '<td class="centerContents"><input class="quant" type="number" name="amount" pattern="\d+" value="' .$prod['quantity']. '"></td>';
+            echo '<td class="centerContents"><input class="quant" type="number" name="newQuantity" pattern="\d+" value="' .$prod['quantity']. '"></td>';
             echo '<td class="centerContents">'.$prod['size'].'</td>';
             echo '<td>$' .$prod['total']. '</td>';
-            echo '<input type = "hidden" name = "pid" value = "'.$prod['pNo'].'">';
+            echo '<input type = "hidden" name = "pno" value = "'.$prod['pNo'].'">';
             echo '<input type = "hidden" name = "size" value = "'.$prod['size'].'">';
             echo '<input type = "hidden" name = "quantity" value = "'.$prod['quantity'].'">';
-            echo '<td class="centerContents" class="removeCol"><button class="button">Remove</button></td>';
-            echo '<td class="centerContents" class="updateCol"><input class="button" type="submit" value="Update Item"></td></tr>';
+            echo '<td class="centerContents" class="removeCol"><input type="submit" class="button" name="productBtn" value="Remove"></td>';
+            echo '<td class="centerContents" class="updateCol"><input type="submit" class="button" name="productBtn" value="Update Item"></td></form></tr>';
 			$sumtotal += $prod['total'];
 			
         }
         
         echo '<tr><td id="sumTotal" colspan="4">Your Subtotal: $' .$sumtotal . '</td><td class="centerContents"><button id="checkoutButton" class="button">Check-out</button></td></tr>';
-			echo '</table></form></div>';
+			echo '</table></div>';
         ?>
 </main>
 <?php  
