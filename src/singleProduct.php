@@ -156,6 +156,7 @@ if ($stmt = $con->prepare($sql)) {
                         echo "<a href='#'>".$review['fname']." ".substr($review['lname'], 0, 1)."</a>";
                         echo "<time datetime='".$review['date']."'>".$review['date']."</time>";
                         echo "<button title='Add Comment' id='writeCommentButton' alt='Add Comment' class='pageButtons'><span class='fa fa-comments-o'></span></button>";
+						//TODO: change the id in the line above to something like a class so that multiple comments wont fuck it up
                       echo "</p>";
                       echo "<p class='userRating'>";
                         for ($i = 0; $i < 5; $i++) {
