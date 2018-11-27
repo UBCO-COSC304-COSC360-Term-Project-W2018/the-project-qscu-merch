@@ -1,4 +1,8 @@
 <?php
+
+if(!isset($isImportAdmin)){
+	include 'includes/validateAdmin.php';
+}
 $user = null;
 $name = null;
 if(isset($_SESSION['user'])){
@@ -41,11 +45,16 @@ if(isset($_SESSION['user'])){
         </div>
 
         <div id="profile" class="hbotline">
-            <a href="cart.php"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
+            <a href="viewCart.php"><img src="images/shoppingcart.png" alt="shopping cart icon" id="shoppingcart"/></a>
 
             <?php
             if (isset($user)) {
-                echo "<a href='profile.php'>" . $name . "</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
+	            if(isAdmin($user)){
+		            echo "<a href='profile.php'>" . $name . "</a><a id='admin' href='adminList.php'>Admin</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
+	            }else{
+		            echo "<a href='profile.php'>" . $name . "</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
+	            }
+                
             } else {
                 echo "<a href='login.php'>Login</a>";
             }

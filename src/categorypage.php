@@ -1,7 +1,7 @@
  <?php 
 $headerSet = 1;
 include "includes/init.php";
-include "header.php";
+
 
 try{
 
@@ -26,7 +26,7 @@ $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
     <link rel="stylesheet" href="css/categorypage.css" />
-	<?php include 'includes/headerFooterHead.php'?>
+	<?php include 'includes/headerFooterHead.php';?>
 
 
 
@@ -36,10 +36,13 @@ $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 <body>
 
+
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
     <a >Categories</a>
 </ul>
+
+	<?php include "header.php"; ?>
 <main>
 	<div id="main">
 		<div id="browsecol">
