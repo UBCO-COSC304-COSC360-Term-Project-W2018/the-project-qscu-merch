@@ -24,8 +24,26 @@ try {
 
         //TODO: do this
         //check to make sure that user isn't banned
+        $banned_user_sql = "SELECT customerBanned FROM User WHERE uid = ?";
+        if ( $isBanned_user = $mysqli -> prepare($banned_user_sql) ) {
+            $isBanned_user -> bind_param("s", $userid);
+            $isBanned_user -> execute();
 
+            $isBanned_user_result = $isBanned_user -> get_result();
+            $isBanned_user_status = false;
+
+            while ( $isBanned_user_row = $isBanned_user_result -> fetch_assoc() ) {
+                $isBanned_user_status = $isBanned_user_row['customerBanned'];
+            }
+        }
+
+        if ( $isBanned_user_status ) {
+            $_SESSION['user'] = null;
+            header('Location: http://localhost/the-project-qscu-merch/src/bannedUser.php');
+            exit();
+        }
         $warehouseId = 1;
+        $items_not_available = array();
 
         //create shipment- a new shipment will be created for each order (:
         $createShipment = "INSERT INTO shipment(dateShipped, uid, shippedFrom) VALUES (CURRENT_DATE ,?,?)";
@@ -117,7 +135,9 @@ try {
                     if ( $update_order = $mysqli -> prepare($update_order_sql) ) {
                         $update_order -> bind_param("ssss", $productNetCost, $fullShippingAddress, $userid, $sNo);
                         $update_order -> execute();
+                        //TODO: add to array here
                     }
+                    //something really went wrong lol
                     else {
                         throw new Exception();
                     }
