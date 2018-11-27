@@ -1,5 +1,16 @@
 <?php
-	include "includes/init.php";
+include "includes/init.php";
+try {
+  //    TODO this needs to be changed the query part doesnt have a trycatch
+
+  $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+
+  if($con -> connect_errno){
+  	die("Connection Failed: ".$con -> connect_errno);
+  }
+} catch (Exception $e) {
+	die("Session Terminated.");
+}
 $headerSet = 0;
 ?>
 <html>
@@ -69,101 +80,54 @@ $headerSet = 0;
 			</select>
 		</form>
 		</div>
-			<div class="item">
-				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
-				</div>
-				<div class="iteminfo">
-					<p class="pname"><a href="#">Ping Pong Balls</a></p>
-					<p class="itemprice">$200</p>
-					<p class="numberofliams">
-                    	<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-                    	<span class="fa fa-star"></span>
-                	</p>
-                	<p class="addtocart">
-	                	<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-	                </p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
-				</div>
-				<div class="iteminfo">
-					<p class="pname"><a href="#">Ping Pong Balls</a></p>
-					<p class="itemprice">$200</p>
-					<p class="numberofliams">
-                    	<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-                    	<span class="fa fa-star"></span>
-                	</p>
-                	<p class="addtocart">
-	                	<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-	                </p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
-				</div>
-				<div class="iteminfo">
-					<p class="pname"><a href="#">Ping Pong Balls</a></p>
-					<p class="itemprice">$200</p>
-					<p class="numberofliams">
-                    	<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-                    	<span class="fa fa-star"></span>
-                	</p>
-                	<p class="addtocart">
-	                	<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-	                </p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
-				</div>
-				<div class="iteminfo">
-					<p class="pname"><a href="#">Ping Pong Balls</a></p>
-					<p class="itemprice">$200</p>
-					<p class="numberofliams">
-                    	<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-                    	<span class="fa fa-star"></span>
-                	</p>
-                	<p class="addtocart">
-	                	<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-	                </p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
-				</div>
-				<div class="iteminfo">
-					<p class="pname"><a href="#">Ping Pong Balls</a></p>
-					<p class="itemprice">$200</p>
-					<p class="numberofliams">
-                    	<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-                    	<span class="fa fa-star"></span>
-                	</p>
-                	<p class="addtocart">
-	                	<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-	                </p>
-				</div>
-			</div>
+			<?php
+				if (isset($_GET['Search'])&&$_GET['Search']!=null&&!empty($_GET['Search']&&$_GET['Search']!="")) {
+					$searchFor = sanitizeInput($_GET['Search']);
+					$sql = "SELECT Product.pNo, pname, AVG(rating) AS rating, image, contentType, description, price FROM Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo WHERE Product.pname LIKE ? GROUP BY Product.pNo";
+					$k = 0;
+				} else {
+					$sql = "SELECT Product.pNo, pname, AVG(rating) AS rating, image, contentType, description, price FROM Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo GROUP BY Product.pNo";
+					$k = 1;
+				}
+				if ($stmt = $con->prepare($sql)) {
+					if ($k == 0) $pname = "%".$searchFor."%";
+					if ($k == 0) $stmt->bind_param('i', $pname);
+					$stmt->execute();
+					$stmt->bind_result($product['pNo'],$product['pname'],$product['rating'],$product['image'],$product['contentType'],$product['description'],$product['price']);
+					$hasChanged = false;
+					for ($i = 0; $i < 6; $i++)  {
+						if ($stmt->fetch()):?>
+							
+							<?php $hasChanged = true;?>
+							<div class="item">
+								<div class="itempicture">
+									<a href="singleProduct.php?pNo=<?php echo $product['pNo'];?>"><img src="data:<?php echo $product['contentType'];?>;base64,<?php echo base64_encode($product['image']);?>" alt="<?php echo $product['pname'];?> Picture"/></a>
+								</div>
+								<div class="iteminfo">
+									<p class="pname"><a href="singleProduct.php?pNo=<?php echo $product['pNo'];?>"><?php echo $product['pname'];?></a></p>
+									<p class="itemprice">$<?php echo $product['price'];?></p>
+									<p class="numberofliams">
+									<?php 
+										for ($j = 0; j < $product['rating']; $j++) {
+											echo "<span class='fa fa-star";
+											if ($j < $product['rating']) echo " checked";
+											echo "'></span>";
+										}
+									?>
+									</p>
+									<p class="addtocart">
+										<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
+									</p>
+								</div>
+							</div>
+							
+						<?php endif;
+					}
+					if (!$hasChanged) echo "<p>No results found for &quot;".$searchFor."&quot;. Please try searching something else.</p>";
+				} else {
+				  die(mysqli_error($con));
+				}
+			?>
 		</div>
 	</div>
 		<div id="pagenumber">

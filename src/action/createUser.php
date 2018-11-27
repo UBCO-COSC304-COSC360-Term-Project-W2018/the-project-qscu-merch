@@ -72,8 +72,11 @@ try {
                     $uid = $stmt->insert_id;
 
                     $_SESSION['user']= new User($uid, $firstName, $lastName);
-
-
+					
+					$headers = "From: QSCUStoreRegistrationSystem@qscu.shop";
+					$subj = "Welcome, ".$firstName." ".$lastName."!";
+					$txt = "Thank you for your registration, ".$firstName." ".$lastName."!\nWe hope that our wide variety of ping pong balls suits your taste for balls just fine!\n\nSincerely, the QSCU Store";
+					mail($email, $subj, $txt, $headers);
                     $stmt->close();
                     header("Location: ../profile.php");
                     exit();

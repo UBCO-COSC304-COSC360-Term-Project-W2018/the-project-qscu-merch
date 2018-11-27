@@ -19,42 +19,37 @@ $headerSet = 0;
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login/Sign-up</title>
+    <title>Forgot Password</title>
     <?php include 'includes/headerFooterHead.php';?>
     <link rel="stylesheet" href="css/login.css">
-    <script type="text/javascript" src="script/client-side-validation.js"></script>
-
-    <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a>Login</a>
-    </ul>
-
-
+    <script type="text/javascript" src="libs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="script/forgot-password-validation.js"></script>
 </head>
 <body>
 <?php include "header.php"; ?>
+<ul class="breadcrumb">
+	<a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+	<a href = "login.php">Login</a> &gt; &gt;
+	<a>Forgot Password</a>
+</ul>
 <main>
 <div id="forms">
-    <form id="loginForm" method="post" action="action/getLogin.php">
+    <form id="passForgetForm" method="post">
         <fieldset>
-            <legend id="loginTitle">Login</legend>
+            <legend id="loginTitle">Forgot Password</legend>
+			<div id="statusHolder"></div>
             <div id="loginFormInputElements">
                 <div class="loginFormElements">
                     <label id="loginEmailLabel" class="loginLabel">Email: </label>
-                    <input type="email" name="email" id="loginEmailInput" placeholder="your@email.com" required>
-                </div>
-
-                <div class="loginFormElement">
-                    <label id="loginPasswordLabel" class="loginLabel">Password: </label>
-                    <input type="password" name="password" id="loginPasswordInput" placeholder="********" required>
+                    <input type="email" name="email" id="forgetPassEmailInput" placeholder="your@email.com" required>
                 </div>
             </div>
             <div class="loginFormElement">
-                <button type="submit" id="loginSubmitButton">Login</button>
+                <button id="sendResetEmailButton">Send Reset Email</button>
             </div>
 
             <div class="loginFormElement">
-                <a href="forgotPass.php">Forgot Password?</a>
+                <a href="login.php">&lt; Back to login</a>
             </div>
         </fieldset>
     </form>

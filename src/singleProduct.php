@@ -2,7 +2,6 @@
 $headerSet = 0;
 include "includes/init.php";
 
-
 try {
     if (isset($_SESSION['user'])) {
         $user = $_SESSION['user']->id;
@@ -146,7 +145,7 @@ if ($stmt = $con->prepare($sql)) {
               $sqlReviews = "SELECT User.uid, rating, comment, date, isEnabled, profilePicture, contentType, fname, lname FROM Reviews LEFT JOIN User ON Reviews.uid = User.uid WHERE Reviews.pNo = ?";
               if ($stmt = $con->prepare($sqlReviews)) {
 
-                  $stmt->bind_param('i', $pNo);
+                  $stmt->bind_param('i', sanitizeInput($pNo));
                   $stmt->execute();
                   $stmt->bind_result($review['uid'],$review['rating'],$review['comment'],$review['date'],$review['isEnabled'], $review['profilePicture'], $review['contentType'], $review['fname'], $review['lname']);
                   while($stmt->fetch()) {
