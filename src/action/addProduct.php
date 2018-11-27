@@ -7,9 +7,9 @@ include '../includes/validateAdmin.php';
 validateAdminRequest($_SESSION);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $inputFields = array('productName', 'productPrice');
+    $inputFields = array('productName', 'productPrice', 'productDescription');
 
-    if (!(arrayExists($_POST, $inputFields) && arrayIsValidInput($_POST, $inputFields) && isset($_POST['productDescription']))) {
+    if (!(arrayExists($_POST, $inputFields) && arrayIsValidInput($_POST, $inputFields))) {
         //invalid data entry
         $_SESSION['hasError'] = true;
         $_SESSION['errorType'] = "Form";
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $validMine = array("image/jpeg", "image/png", "image/gif");
                 if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 100 * 1000))) {
                     if (!move_uploaded_file($file['tmp_name'], $targetFilePath)) {
-                        //file failed to move;
+                        throw new Exception();
                     }
 
                 } else {
@@ -45,8 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $_SESSION['hasError'] = true;
                     $_SESSION['errorType'] = "upload";
                     $_SESSION['errorMsg'] = "invalid file";
-                    header('location: ../newProduct.php');
-                    exit();
+                    throw new Exception();
                 }
             }
 
@@ -57,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 throw new Exception();
             }
 
-            $query = "INSERT INTO Product (image, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?)";
+            $query = "INSERT INTO Product (image, size, pname, price, contentType, description, isEnabled) VALUES (?, ?, ?, ?, ?, ?, 1)";
             $stmt = $mysql->prepare($query);
 
             $size = ($size === "single")? $size:"small";
@@ -65,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $null = null;
 
 //                                if string = s, if blob b, if decimal d, int i
-            $stmt->bind_param('bssds',$null, $size, $productName, $productPrice, $file['type']);
+            $stmt->bind_param('bssdss',$null, $size, $productName, $productPrice, $file['type'], $productDescription);
             $stmt->send_long_data(0, file_get_contents($targetFilePath));
             $stmt->execute();
 
@@ -75,11 +74,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if(isset($id)) {
                 if($size !== "single") {
                     $size = array('medium', 'large', 'xl');
-                        $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType) VALUES (?, ?, ?, ?, ?, ?)";
+                        $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType, description, isEnabled) VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
                     $stmt = $mysql->prepare($query);
                     foreach ($size as $key => $value) {
 
-                        $stmt->bind_param('bissds', $null, $id, $size[$key], $productName, $productPrice, $file['type']);
+                        $stmt->bind_param('bissdss', $null, $id, $size[$key], $productName, $productPrice, $file['type'], $productDescription);
                         $stmt->send_long_data(0, file_get_contents($targetFilePath));
                         $stmt->execute();
                     }
@@ -96,12 +95,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $stmt->execute();
                 }
 
-                header("location: ../editProduct.php");
+                header("location: ../editProduct.php?pno=".$id);
             }else{
-                //failed to add item
+                throw new Exception();
             }
         }catch (Exception $e){
-
+            header('location: ../adminList.php');
 
         }finally{
             $mysql->close();

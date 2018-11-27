@@ -2,6 +2,7 @@
 $headerSet = 0;
 include "includes/init.php";
 
+
 try {
     if (isset($_SESSION['user'])) {
         $user = $_SESSION['user']->id;
@@ -34,22 +35,37 @@ if ($stmt = $con->prepare($sql)) {
 ?>
 
 <!DOCTYPE HTML>
-<html lang="en">
+<html>
 
 <!--    Head-->
-<head lang="en">
+<head>
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
+
     <link rel="stylesheet" href="../src/css/singleProduct.css">
     <?php include 'includes/headerFooterHead.php' ?>
     <script type="text/javascript" src="../src/script/quantity.js"></script>
     <script type="text/javascript" src="../src/script/reviewModal.js"></script>
+    <script type="text/javascript" src="../src/script/commentModal.js"></script>
+    <link rel="stylesheet" href="css/singleProduct.css">
+    <?php include 'includes/headerFooterHead.php'; ?>
+    <script type="text/javascript" src="script/quantity.js"></script>
+    <script type="text/javascript" src="script/reviewModal.js"></script>
     <!--    <script type="text/javascript" src="../src/script/commentModal.js"></script>-->
+
+  
+  <ul class="breadcrumb">
+        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+        <a href="categorypage.php">Categories</a> &gt; &gt;
+        <a>Product</a>
+    </ul>
 </head>
 <!--    Body-->
 
 <body>
+
 <?php include "header.php";?>
+
 <main>
     <!--    make sure all the files that we update have the same and CORRECT width/height -->
     <div class="bigboi">

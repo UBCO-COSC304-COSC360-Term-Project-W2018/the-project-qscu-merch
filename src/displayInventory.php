@@ -1,18 +1,7 @@
 <?php
-
-//needs admin validation
-
-
-
-//Ok so this will have shitty HTML in it, but it will be displaying all the products at each warehouse, kinda like the lab 7 listOrder form. Cool glad we got that out of the way...
-
-//this will require two queries. One for the warehouse, and one fro the products at each warehouse
-
+$headerSet = 1;
 include "includes/init.php";
 include "includes/validateAdmin.php";
-
-include "includes/headerFooterHead.php";
-include "header.php";
 
 validateAdminRequest($_SESSION);
 $user = null;
@@ -28,34 +17,59 @@ if($con -> connect_errno){
     die("Connection Failed: ".$con -> connect_errno);
 }
 
+?>
+<!DOCTYPE HTML>
+<html>
+<!--    Head-->
 
+<head lang="en">
+    <meta charset="utf-8">
+    <title>QSCU Merch Store</title>
+    <link rel="stylesheet" href="css/home.css"/>
+    <link rel="stylesheet" href="css/displayInventory.css"/>
+    <?php include 'includes/headerFooterHead.php'?>
+</head>
+
+
+<!--    Body-->
+
+<body>
+<?php include "header.php";?>
+<main>
+	<p id="warehousepagetitle">Warehouse Product Inventory List</p>
+<?php
 
 $sqlWH = "SELECT wNo, location FROM Warehouse";
 
-echo '<table border="1"><tr><th>Warehouse Number</th><th>Location</th></tr>';
 
-if($warehouses = $con->query($sqlWH)){
-	
-	while($WH = $warehouses->fetch_assoc()){
+$warehouses = array();
+$locs = array();
+if($WH = $con->prepare($sqlWH)){
+	$WH ->execute();
+	$WH->bind_result($wNo, $loc);
+	while($WH->fetch()){
+		array_push($warehouses, $wNo);
+		array_push($locs, $loc);
 
-		echo "<tr><td>".$WH['wNo']."</td>";
-		echo "<td>".$WH['location']."</td></tr>";
+		}
 
 		
-		echo '<tr align="right"><td colspan="4"><table border="1">';
-		echo '<th>Product Id</th><th>Product Name</th> <th>Size</th> <th>Quantity</th></tr>';
+		$sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory NATURAL JOIN Product WHERE wNo = ?";
+		$len = count($warehouses);
 		
-		$sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory, Product WHERE HasInventory.pNo = Product.pNo AND HasInventory.size = Product.size AND wNo = ?";
-		if($pstmt = $con->prepare($sqlProds)){
-			
+		for($x = 0; $x < $len; $x++){
+			echo '<table class="warehousetables"><tr><th>Warehouse Number</th><th>Location</th></tr>';
+			echo "<tr><td>".$warehouses[$x] ."</td>";
+			echo "<td>".$locs[$x]."</td></tr>";
+			echo '<tr><td colspan="4"><table  class="producttables" >';
+			echo '<th>Product Id</th><th>Product Name</th> <th>Size</th> <th>Quantity</th></tr>';
+		if($prods = $con->prepare($sqlProds)){
+			$prods->bind_param('i', $warehouses[$x]);
+			$prods->execute();
 
-			$pstmt->bind_param('i', $ware);
-			$ware = $WH['wNo'];
-			$pstmt->execute();
+			$prods->bind_result($pNo, $size, $quantity, $pname);
 
-			$pstmt>bind_result($pNo, $size, $quantity, $pname);
-
-			while($pstmt->fetch()){
+			while($prods->fetch()){
 
 				echo "<tr><td>".$pNo."</td>";
 				echo "<td>".$pname."</td>";
@@ -65,16 +79,14 @@ if($warehouses = $con->query($sqlWH)){
 			
 
 		}else{
-			echo "FUCK";
+			die();
 		}
 	
 
 		echo "</table></td></tr>";
 
 	}
-
-
-}
+	}
 else{
 	die();
 }
@@ -82,9 +94,11 @@ else{
 echo "</table>";
 $con->close();
 ?>
+</main>
 
 <?php
 include "footer.php";
-
-
 ?>
+
+</body>
+</html>

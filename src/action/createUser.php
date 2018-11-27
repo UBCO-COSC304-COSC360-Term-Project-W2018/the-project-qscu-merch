@@ -37,7 +37,6 @@ try {
             $email = trim($_POST['email']);
 
             $mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-//            $mysqli = new mysqli("localhost", "rachellegelden", "rachelle", "qscurachelle");
 
             if (mysqli_connect_errno()) {
                 //connection failed

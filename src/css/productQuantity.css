@@ -1,0 +1,46 @@
+
+.inventoryTables{
+	border-collapse: collapse;
+	display: inline-block;
+	margin: 2em;
+	border: 2px solid #183263;
+}
+.inventoryTables th, td{
+	border: thin solid #183263;
+}
+
+#productInventoryForm{
+	padding: 0.5em 0em 0.5em 0.5em;
+	font-size: 1.5em;
+	margin: 0em;
+}
+
+.inventoryTables th, td{
+	text-align: center;
+	padding: 0.3em;
+	border: thin solid #183263;
+}
+
+
+
+.inventoryTables th{
+	background-color:#183263;
+	color: white;
+	
+}
+
+.warehousetables td{
+	font-size: 1.1em;
+
+}
+
+.producttables th{
+	color: white;
+	background-color: #18bfef;
+	font-size: 0.9em;
+
+}
+
+.producttables td{
+	font-size: 0.9em;
+}

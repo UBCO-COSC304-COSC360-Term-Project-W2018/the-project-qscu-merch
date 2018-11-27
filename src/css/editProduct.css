@@ -1,0 +1,95 @@
+#innerContent{
+	width:80%;
+	margin: auto;
+	white-space: nowrap;
+}
+
+.categoryContainer{
+	margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+.categoryOptions > *{
+    display: block;
+}
+.categoryOptions form > *{
+    display: block;
+}
+.selected{
+    background-color: lawngreen;
+}
+
+.editProductContent{
+	white-space: nowrap;
+	overflow: auto;
+	margin: 2em;
+	border: 2px solid #183263;
+}
+
+#imagePreview{
+	text-align: center;
+	background: grey;
+}
+
+
+.button{
+	background-color: #18bfef;
+	border-radius: 1em;
+	border-color: black;
+}
+
+#submitProduct{
+	float: right;
+}
+
+#productTable{
+	
+}
+
+#imageTable{
+	text-align: left;
+	border-collapse: collapse;
+}
+
+.categoryOptions{
+	display: flex;
+	flex-direction: row;
+	white-space: nowrap;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 1em;
+	margin-bottom: 2em;
+}
+
+#deleteButtons{
+	display: inline-block;
+	float: left;
+}
+
+#removeCategory{
+	margin:0.2em;
+	float:left;
+}
+
+#deleteCategory{
+	margin:0.2em;
+	clear:left;
+	float:right;
+}
+#newCategoryName{
+	margin: 0em 1em 0em 1em;
+	display: inline-block;
+}
+#addButtons{
+	display: inline-block;
+
+}
+#addCategory{
+	margin:0.2em;
+	float: right;
+}
+#createCategory{
+	margin:0.2em;
+	clear: right;
+	float: left;
+}

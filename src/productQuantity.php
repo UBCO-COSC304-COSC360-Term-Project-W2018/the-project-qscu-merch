@@ -1,29 +1,47 @@
 <?php
-include "init.php";
-include "header.php";
+$headerSet = 1;
+include "includes/init.php";
+include "includes/validateAdmin.php";
 
-<<<<<<< HEAD
-$user = $_SESSION["userId"];
+validateAdminRequest($_SESSION);
+$user = null;
+$name = null;
+if(isset($_SESSION['user'])){
+    $user = $_SESSION['user']->id;
+    $name = $_SESSION['user']->firstName;
+}
 
-$databaseName = "db_40215162"; //database name
-$uID = "40215162"; //admin's ID
-$pw = "qscu42069!"; //admin's password
-$host = "cosc.360.ok.ubc.ca"; //host of database
 
-$con = new mysqli($host, $uID, $pw, $databaseName);
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 if($con -> connect_errno){
     die("Connection Failed: ".$con -> connect_errno);
 }
-=======
 ?>
->>>>>>> 896314a680f4c4bffb5aa42a965e876c04c66643
 
+<!DOCTYPE HTML>
+<html>
+<!--    Head-->
 
-<form>
-	First name:<br>
-	<input type="number" name="prodNum"><br>
-	<input type="submit" value="Submit"><br>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>QSCU Merch Store</title>
+    <link rel="stylesheet" href="css/home.css"/>
+    <link rel="stylesheet" href="css/productQuantity.css"/>
+    <?php include 'includes/headerFooterHead.php'?>
+</head>
+
+<!--    Body-->
+
+<body>
+<?php include "header.php";?>
+<main>
+	
+
+<form id="productInventoryForm" method="POST" action="productQuantity.php">
+	Product Number (Enter 0 to display all products): <br>
+	<input id="numberInput" type="number" name="pNo">
+	<input id="submitButton" type="submit" value="Submit">
 </form>
 
 
@@ -32,38 +50,31 @@ if($con -> connect_errno){
 //gotta check if its post, gotta check the user credentials... make sure that it's an admin page
 
 // if $_SERVER[] === POST.. check the login page
-
-$prodNum = $_POST['prodNum']; //make sure this is set and non-empty
-
-include "includes/db_credentials.php";
-
-$user = $_SESSION["userId"];
-
-$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-
-if($con -> connect_errno){
-    die("Connection Failed: ".$con -> connect_errno);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $prodNum = $_POST['pNo'];
 }
 
 //gotta use a prepared statement
-
-$sql = "SELECT pname, size, quantity, wNo FROM HasInventory, Product WHERE HasInventory.".$prodNum." = Product.".$prodNum." AND HasInventory.size";
-
-if($result = mysqli_query($con, $sql)){
-    echo '<table border="1"><tr><th>Product Number</th></tr>';
-	echo "<tr><td>".$prodNum."</td>";
-
-	echo '<tr align="right"><td colspan="4"><table border="1">';
-	echo "<th>Product Name</th><th>Size</th> <th>Quantity</th> <th>Warehouse Number</th></tr>";
-	while($row = mysqli_fetch_assoc($result)){
+if($prodNum == 0){
+	$sql = "SELECT pNo, pname, size, quantity FROM HasInventory NATURAL JOIN Product";
+}else{
+	$sql = "SELECT pNo, pname, size, quantity FROM HasInventory NATURAL JOIN Product WHERE pNo = ?";
+}
 
 
-        echo "<tr><td>".$row['pname']."</td>";
-        echo "<tr><td>".$row['size']."</td>";
-        echo "<tr><td>".$row['quantity']."</td>";
-        echo "<tr><td>".$row['wNo']."</td>";
-
-    }
+if($pstmt = $con->prepare($sql)){
+	$pstmt->bind_param('i', $prodNum);
+	$pstmt->execute();
+	$pstmt->bind_result($pNo, $pname, $size, $quantity);
+	echo "<table class='inventoryTables'>";
+	echo "<tr><th>Product Number</th><th>Product Name</th><th>Size</th> <th>Quantity</th></tr>";
+	
+	while($pstmt->fetch()){
+		echo "<tr><td>".$pNo."</td>";
+		echo "<td>".$pname."</td>";
+        echo "<td>".$size."</td>";
+        echo "<td>".$quantity."</td></tr>";
+	}
 	echo "</table>";
 }
 else{
@@ -77,6 +88,5 @@ $con->close();
 
 <?php
 include "footer.php";
-$con->close();
 
 ?>
