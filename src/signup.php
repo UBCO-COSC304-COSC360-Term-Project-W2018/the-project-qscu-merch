@@ -11,9 +11,17 @@ $headerSet = 1;
     <link rel="stylesheet" href="css/login.css">
     <script type="text/javascript" src="script/client-side-validation.js"></script>
 
+
+
 </head>
 <body>
 <?php include "header.php"?>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a href="login.php">Login</a> &gt; &gt;
+    <a>Sign Up</a>
+</ul>
 <main>
 <div id="forms">
 

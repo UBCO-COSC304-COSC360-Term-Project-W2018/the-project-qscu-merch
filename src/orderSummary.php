@@ -78,9 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
             //TODO: Take these out when you are done testing
-//            $province = $_POST['billingProvince'];
             $headerSet = 1;
-            $_SESSION['userid'] = 1;
 
         }
         catch (Exception $exception) {
@@ -104,10 +102,17 @@ else {
     <link rel="stylesheet" href="css/orderSummary.css">
     <script src="libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="script/orderSummary.js"></script>
+
 </head>
 
 <body>
 <?php include "header.php" ?>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a href="viewCart.php">Cart</a> &gt; &gt;
+    <a>Your Order</a>
+</ul>
 <main id="orderSummaryBody">
     <h1>Your Order:</h1>
     <div id="userOrderTableContainer">

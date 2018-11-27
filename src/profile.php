@@ -3,6 +3,7 @@ include "includes/init.php";
 
 if (!isset($_SESSION['user'])) {
     header('location: login.php');
+    exit();
 }
 
 $email = "";
@@ -87,13 +88,31 @@ $headerSet = 1;
     <link rel="stylesheet" href="css/reviewsComments.css">
     <?php include 'includes/headerFooterHead.php' ?>
     <script type="text/javascript" src="script/profile_controller.js"></script>
+
+
+    <script src="script/imagePreview.js"></script>
+  
+  <ul class="breadcrumb">
+        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+        <a>Profile</a>
+    </ul>
+
 </head>
 
 
 <!--    Body-->
 
 <body>
+<<<<<<< HEAD
+<?php include "header.php"?>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a>Profile</a>
+</ul>
+=======
 <?php include "header.php" ?>
+>>>>>>> 3ff1ebd037bc423f1f2dd85d742eabb82f6d9a6f
 <main>
     <h2 id="welcome">
         <?php echo "Welcome " . $name . "!"; ?>
@@ -106,10 +125,10 @@ $headerSet = 1;
 
             <!--TODO for brandon make action page-->
             <form method="post" action="action/editUser.php" enctype="multipart/form-data">
-                <img id="profileImage" src="images/profile.png">
-                <input type="file" value="Upload  Image" name="uploadImage" id="uploadImage" required>
+                <img id="imagePreview"  src="<?php  echo 'data:' . $contentType . ';base64,' . base64_encode($profileImage) ?>" alt="User Profile Image" >
+                <input type="file" name="uploadImage" id="uploadImage" required>
                 <input type="hidden" name="action" value="uploadImage">
-                <input type="submit" value="Upload">
+                <input id="uploadButton" type="submit" value="Upload">
             </form>
         </div>
         <div id="infoContent">

@@ -1,6 +1,6 @@
 <?php
 include "includes/init.php";
-include "includes/userCart.php";
+
 
 
 //need to have arrays (2D array?) here to store the row results as strings
@@ -9,10 +9,18 @@ include "includes/userCart.php";
 
 //then depending on the button clicks we are gonna have to update the cart
 
-$cartRows = [];
+if(isset($_SESSION['user'])){
+    $user = $_SESSION['user']->id;
+}
 
-//
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
+if ($con->connect_errno) {
+    die("Connection Failed: " . $con->connect_errno);
+}
+
+
+$cartRows = array();
 
 ?>
 
@@ -20,68 +28,62 @@ $cartRows = [];
 <html lang="en">
 <head>
     <link rel="stylesheet" href="css/cart.css">
-        <?php include 'includes/headerFooterHead.php'?>
+        <?php include 'includes/headerFooterHead.php'; ?>
         <script type="text/javascript" src="script/cart_controller.js"></script>
+
+
 </head>
 
 <body>
-<main>
 
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a>Your Cart</a>
+</ul>
+	<?php include "header.php"; ?>
+<main>
 
 
     <?php
 
     //this file will need to have some hardcore HTML fun stuff, and will also have the ability to edit their cart... lets go with the query first
 
-    echo("<h1>Your Shopping Cart</h1>");
-    echo("<table><tr><th>Product Id</th><th>Product Name</th><th>Size</th><th>Quantity</th><th>Price</th>");
 
     //So this will have two parts to it, depending on if the user is logged in or not
 
-    if(isset($_SESSION['user'])){
+    if(isset($user)){
         //user logged in
         //DB query to go through and display their cart
 
-        $user = $_SESSION['user']->id;
-
-        try{
-            //make connection
-
-            $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-
-            if ($con->connect_errno) {
-                die("Connection Failed: " . $con->connect_errno);
-            }
+        
             // make a query with prepared statement for the user's cart with their id, then iterate through the list
 
-            $qry = "SELECT pNo, pname, size, quantity, quantity*price AS priceQuant FROM  HasCart H, Product P WHERE uid = ?, H.pNo = P.pNo, H.size = P.size";
+// 			$sql = "SELECT pNo, pname, size, quantity FROM HasInventory NATURAL JOIN Product";
+             $sql = "SELECT pNo, pname, size, quantity, price FROM HasCart NATURAL JOIN Product WHERE uid = ?";
+			
+            if($pstmt = $con->prepare($sql)){
 
+                $pstmt->bind_param('i', $user);
+                
+                $pstmt->execute();
+				$pstmt->bind_result($pNo, $pname, $size, $quantity, $price);
 
-            if($stmt = mysqli_prepare($con, $qry)){
-
-                $stmt ->bind_param('i', $user);
-                $stmt -> execute();
-
-                $result = $stmt->get_result();
-
-                while($row = $result->fetch_assoc()){
-
-                    $prod = ['pNo'] = $row['pNo'];
-                    $prod = ['pname'] = $row['pname'];
-                    $prod = ['size'] = $row['size'];
-                    $prod = ['quantity'] = $row['quantity'];
-                    $prod = ['priceQuant'] = $row['priceQuant'];
-
-                    array_push($cartRows, $prod);
+                while($pstmt->fetch()){
+                   $prod = array();
+                   $prod["pNo"] = $pNo;
+                   $prod["pname"] =  $pname;
+                   $prod["size"] =  $size;
+                   $prod["quantity"] =  $quantity;
+                   $total = $price*$quantity;
+                   $prod["total"] =   $total;
+                    
+                  array_push($cartRows, $prod);
+                    $len = count($cartRows);
 
                 }
 
             }
-
-        }
-        catch(Exception $e){ die();}
-        finally{mysqli_close($con);}
-
+			$con->close();
     }
     else{
 
@@ -95,14 +97,15 @@ $cartRows = [];
         //somehow iterate through the cart... idk how yet though so thats good
 
         foreach($cart as $itemID => $item){
-
+			$prod = array();
             //add to the array
-
-            $prod = ['pNo'] = $cart[$itemID]['pNo'];
-            $prod = ['pname'] = $cart[$itemID]['pname'];
-            $prod = ['size'] = $cart[$itemID]['size'];
-            $prod = ['quantity'] = $cart[$itemID]['qty'];
-            $prod = ['priceQuant'] = $cart[$itemID]['price'];
+            $prod = array();
+			$prod["pNo"] = $cart[$itemID]['pNo'];
+			$prod["pname"] =  $cart[$itemID]['pname'];
+			$prod["size"] =  $cart[$itemID]['size'];
+			$prod["quantity"] =  $cart[$itemID]['qty'];
+			$total = $cart[$itemID]['price']*$quantity;
+			$prod["total"] =   $cart[$itemID]['price'];
 
             array_push($cartRows, $prod);
 
@@ -110,43 +113,34 @@ $cartRows = [];
 
     }
 
-    ?>
-
-    <div id = mainCart>
-
-
-
-        <?php
+		$len = count($cartRows);
+		    echo "<div id='cartDiv'><h1 id='cartHeader'>Your Shopping Cart</h1>";
+		    
+			echo "<table id='cartTable'><tr><th>Product Name</th><th>Quantity</th><th>Size</th><th>Price</th></tr>";
 
         foreach ($cartRows as $prod) {
-
-
             //for each row in cartRows
-            echo '<form method="post" action="updateCart.php">';
-            echo '<div class = "product">';
-            echo '<input type="text" class="cartProductAmount" name="amount" placeholder="' .$prod['quantity']. '" maxlength="2">';
-            echo '<span class="productName"><a class="aCart" href="singleProduct.php?pNo='.$prod['pNo'].'">'.$prod['pname'].'</a></span>';
-            echo '<span class="productSize"><a class="aCart">'.$prod['size'].'</a></span>';
-            echo '<span class = "priceLabel">Price: $</span>';
-            echo '<span class = "productPrice">' .$prod['priceQuant']. '</span>';
-            echo '<input type = "hidden" name = "pid" value = "'.$prod['pNo'].'">';
+            echo "<tr><form method='POST' action='action/updateCart.php'>";
+            
+            echo '<td><a href="singleProduct.php?pNo='.$prod['pNo'].'">'.$prod['pname'].'</a></td>';
+        
+            echo '<td class="centerContents"><input class="quant" type="number" name="newQuantity" pattern="\d+" value="' .$prod['quantity']. '"></td>';
+            echo '<td class="centerContents">'.$prod['size'].'</td>';
+            echo '<td>$' .$prod['total']. '</td>';
+            echo '<input type = "hidden" name = "pno" value = "'.$prod['pNo'].'">';
             echo '<input type = "hidden" name = "size" value = "'.$prod['size'].'">';
             echo '<input type = "hidden" name = "quantity" value = "'.$prod['quantity'].'">';
-            echo '<span><a class=""aCart" href="">remove</a></span>';
-            echo '<input type="submit" value="Update Item">';
-            echo '</form>';
-
+            echo '<td class="centerContents" class="updateCol"><input type="submit" class="button" name="productBtn" value="Update Item"></td>';
+            echo '<td class="centerContents" class="removeCol"><input type="submit" class="button" name="productBtn" value="Remove"></td></form></tr>';
+			$sumtotal += $prod['total'];
+			
         }
-
+        
+        echo '<tr><td id="sumTotal" colspan="4">Your Subtotal: $' .$sumtotal . '</td><td class="centerContents"><form method="POST" action="checkout.php"><input type="submit" id="checkoutButton" class="button" value="Check-out"></form></td></tr>';
+			echo '</table></div>';
         ?>
-
-
-    </div>
-
-    <div id="cartFooter">
-            <button>Check-out</button>
-    </div>
-
 </main>
+<?php  
+	include "footer.php"; ?>
 </body>
 </html>

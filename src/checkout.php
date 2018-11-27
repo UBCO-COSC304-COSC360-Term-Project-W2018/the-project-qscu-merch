@@ -9,7 +9,7 @@ try {
     $userid = $user->id;
 //    $_SESSION['userid'] = 1;          //PURELY FOR TESTING
 
-    if (!isset($_SESSION['userid'])) {
+    if (!isset($_SESSION['user'])) {
         header('Location: http://localhost/the-project-qscu-merch/src/login.php');
         exit();
     } else {
@@ -93,10 +93,19 @@ finally {
     <link rel="stylesheet" href="css/checkout.css">
     <script src="libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="script/checkout-validation.js"></script>
+
+
 </head>
 
 <body>
 <?php include "header.php" ?>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a href="viewCart.php">Cart</a> &gt; &gt;
+    <a href="orderSummary.php">Order Summary</a> &gt; &gt;
+    <a>Checkout</a>
+</ul>
 <main>
     <form method="post" action="orderSummary.php" id="checkOutForm">
 
