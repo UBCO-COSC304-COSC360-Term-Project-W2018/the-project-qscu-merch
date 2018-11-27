@@ -5,8 +5,14 @@ include '../includes/validateAdmin.php';
 validateAdminRequest($_SESSION);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
-    $input = json_decode(file_get_contents('php://input'));
-    if ($input['action'] && $input['uid']) {
+    $input = json_decode(file_get_contents('php://input'), true);
+    if (isset($input['action']) && isset($input['userid'])) {
+
+
+        $mysql;
+        try{
+
+
 
         $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
         if ($mysql->errno) {
@@ -19,50 +25,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
             $query = "UPDATE User SET profilePicture = ?, contentType = ? WHERE uid = ?";
 
             $stmt = $mysql->prepare($query);
-            $null = null;
 
             $targetFilePath = '../images/profile.png';
             $contentType = 'image/png';
             $fileContents = file_get_contents('../images/profile.png');
-            $stmt->bind_param('bss', $null, $contentType, $input['uid']);
+            $stmt->bind_param('bss', $null, $contentType, $input['userid']);
             $stmt->send_long_data(0, $fileContents);
             if ($rst = $stmt->execute()) {
-                $return = array("userid" => $uid, "contentType" => $contentType, "profilePic" => base64_encode($fileContents));
+                $return = array("userid" => $input['userid'], "contentType" => $contentType, "profilePic" => base64_encode($fileContents));
             }
             header('Content-Type: application/json');
             echo json_encode($return);
-            exit();
         }
 
-        if($input['action'] === 'setBan' || $input['action'] === 'unsetBan'){
+        if($input['action'] === 'setBan' || $input['action'] === 'unSetBan'){
             $return = [];
-            $query = "UPDATE User SET customerBanned = ? WHERE uid = ?";
+            $query = "UPDATE User SET customerBanned = ?, isAdmin = 0 WHERE uid = ?";
             $stmt = $mysql->prepare($query);
-            $action = ($input['action'] === 'unsetBan')? 0: 1;
-            $stmt->bind_param('is', $action, $input['uid']);
+            $action = ($input['action'] === 'unSetBan')? 0: 1;
+            $stmt->bind_param('is', $action, $input['userid']);
             if ($rst = $stmt->execute()) {
-                $return = array("userid" => $uid, "isBanned" => $action);
+                $return = array("userid" => $input['userid'], "isBanned" => $action);
             }
             header('Content-Type: application/json');
             echo json_encode($return);
+            $stmt->close();
             exit();
         }
 
-        if($input['action'] === 'setAdmin' || $input['action'] === 'unsetAdmin'){
+        if($input['action'] === 'setAdmin' || $input['action'] === 'unSetAdmin'){
             $return = [];
 
-            $query = "UPDATE User SET isAdmin = ? WHERE uid = ?";
+            $query = "UPDATE User SET isAdmin = ?, customerBanned = 0 WHERE uid = ?";
             $stmt = $mysql->prepare($query);
             $action = ($input['action'] === 'setAdmin')? 1: 0;
-            $stmt->bind_param('is', $action, $input['uid']);
+            $stmt->bind_param('is', $action, $input['userid']);
             if ($rst = $stmt->execute()) {
-                $return = array("userid" => $uid, "isAdmin" => $action);
+                $return = array("userid" => $input['userid'], "isAdmin" => $action);
             }
             header('Content-Type: application/json');
             echo json_encode($return);
-            exit();
         }
-
+        }catch (Exception $e){
+            http_response_code(404);
+        }finally{
+            $mysql->close();
+        }
 
     }
 }

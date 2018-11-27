@@ -30,6 +30,11 @@ $cartRows = array();
     <link rel="stylesheet" href="css/cart.css">
         <?php include 'includes/headerFooterHead.php'; ?>
         <script type="text/javascript" src="script/cart_controller.js"></script>
+
+    <ul class="breadcrumb">
+        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+        <a>Your Cart</a>
+    </ul>
 </head>
 
 <body>

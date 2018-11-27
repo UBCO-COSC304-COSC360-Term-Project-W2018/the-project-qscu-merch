@@ -18,7 +18,19 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    $pNo = $_GET['pNo'];
+  if (isset($_GET['pNo'])) $pNo = $_GET['pNo'];
+  else die("Please use a pNo when connecting to this page."); //TODO do something better in this case. -Jasper
+}
+$sql = "SELECT pname, AVG(rating) AS rating, image, contentType, description, price FROM Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo WHERE Product.pNo = ? GROUP BY Product.pNo";
+if ($stmt = $con->prepare($sql)) {
+
+    $stmt->bind_param('i', $pNo);
+    $stmt->execute();
+    $stmt->bind_result($product['pname'],$product['rating'],$product['image'],$product['contentType'],$product['description'],$product['price']);
+    $stmt->fetch();
+
+} else {
+  die(mysqli_error($con));
 }
 ?>
 
@@ -29,154 +41,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 <head>
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
+
+    <link rel="stylesheet" href="../src/css/singleProduct.css">
+    <?php include 'includes/headerFooterHead.php' ?>
+    <script type="text/javascript" src="../src/script/quantity.js"></script>
+    <script type="text/javascript" src="../src/script/reviewModal.js"></script>
+    <script type="text/javascript" src="../src/script/commentModal.js"></script>
     <link rel="stylesheet" href="css/singleProduct.css">
     <?php include 'includes/headerFooterHead.php'; ?>
     <script type="text/javascript" src="script/quantity.js"></script>
     <script type="text/javascript" src="script/reviewModal.js"></script>
     <!--    <script type="text/javascript" src="../src/script/commentModal.js"></script>-->
+
+  
+  <ul class="breadcrumb">
+        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+        <a href="categorypage.php">Categories</a> &gt; &gt;
+        <a>Product</a>
+    </ul>
 </head>
 <!--    Body-->
 
 <body>
-	<?php include "header.php"; ?>
+
+<?php include "header.php";?>
+
 <main>
     <!--    make sure all the files that we update have the same and CORRECT width/height -->
     <div class="bigboi">
         <div class="container">
             <!--        TODO: find product src-->
-            <img src="../src/images/pingpong.jpg" alt="Product Picture">
+            <img src="data:<?php echo $product['contentType'];?>;base64,<?php echo base64_encode($product['image']);?>" alt="Product Picture">
 
             <div class="sideContent">
                 <div class="pName" name="pName">
-                    <!--                    name of product - THIS WORKS!-->
-                    <?php
-
-                    $sql = "SELECT pname FROM Product WHERE pNo = ?";
-
-                    if ($stmt = $con->prepare($sql)) {
-
-                        $stmt->bind_param('i', $pNo);
-                        $stmt->execute();
-                        $stmt->bind_result($pname);
-                        while ($stmt->fetch()) {
-
-                            echo " <h1 title=' " . $pname . " ' >" . $pname . "</h1>";
-                        }
-                    } else {
-
-                    }
-                    ?>
+                  <h1 title="<?php echo $product['pname'];?>"><?php echo $product['pname'];?></h1>
                 </div>
                 <!--rating-->
                 <div title="The average rating for this product" class="rating">
-
-
+                  <p>
                     <!--                    TODO: THIS NEEDS TO BE CHECKED-->
                     <?php
 
-                    $sql = "SELECT AVG(rating) FROM Reviews WHERE pNo=?";
-
-                    if ($stmt = $con->prepare($sql)) {
-
-                        $stmt->bind_param('i', $pNo);
-                        $stmt->execute();
-                        $stmt->bind_result($ratingAvg);
-                        while ($stmt->fetch()) {
-
-                            echo " <h1 title='" . $ratingAvg . "'>" . $ratingAvg . "</h1>";
-                        }
+                    $ratingAvg = $product['rating'];
+                    if ($ratingAvg && $ratingAvg != NULL) {
+                      for ($i = 0; $i < 5; $i++) {
+                        echo "<span class=\"fa fa-star";
+                        if ($i <= $ratingAvg) echo "checked";
+                        echo "\"></span>";
+                      }
                     } else {
-
+                      echo "Rating for this product not available.";
                     }
 
-                    switch ($ratingAvg) {
-                        case 0:
-                            echo "<p>
-                        <span class=\"fa fa-star\"></span>
-                        <span class=\"fa fa-star\"></span>
-                        <span class=\"fa fa-star\"></span>
-                        <span class=\"fa fa-star\"></span>
-                        <span class=\"fa fa-star\"></span>
-                    </p>";
-                        case 1:
-                            echo "<p>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star\"></span>
-                        <span class=\"fa fa-star\"></span>
-                        <span class=\"fa fa-star\"></span>
-                        <span class=\"fa fa-star\"></span>
-                    </p>";
-                        case 2:
-                            echo "<p>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star\"></span>
-                        <span class=\"fa fa-star\"></span>
-                        <span class=\"fa fa-star\"></span>
-                    </p>";
-                        case 3:
-                            echo "<p>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star\"></span>
-                        <span class=\"fa fa-star\"></span>
-                    </p>";
-                        case 4:
-                            echo "<p>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star\"></span>
-                    </p>";
-                        case 5:
-                            echo "<p>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star checked\"></span>
-                        <span class=\"fa fa-star checked\"></span>
-                    </p>";
-                    }
                     ?>
-
-<!--                    default html-->
-                    <p>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star "></span>
-                        <span class="fa fa-star"></span>
-
-                        <!--                <a href="#reviews">Reviews</a>-->
-                    </p>
+                  </p>
                 </div>
                 <!--description-->
-                <div class=pDesc>
+                <div class="pDesc">
                     <h3> Description</h3>
-
-                    <?php
-
-                    $sql = "SELECT description FROM Product WHERE pNo=?";
-
-                    if ($stmt = $con->prepare($sql)) {
-
-                        $stmt->bind_param('i', $pNo);
-                        $stmt->execute();
-                        $stmt->bind_result($desc);
-                        while ($stmt->fetch()) {
-
-                            echo " <p>" . $desc . "</p>";
-//                            echo " <h1 title=' " . $pname . " ' >" . $pname . "</h1>";
-
-                        }
-                    } else {
-
-                    }
-
-                    ?>
-
+                    <p><?php echo $product['description'];?></p>
                 </div>
                 <!--quantity counter-->
                 <div class="quant">
@@ -207,58 +131,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
                 <!--            price-->
                 <div class="price">
-
-
-                    <?php
-
-
-                    $sqlOldPrice = "SELECT price*1.5 AS oldPrice FROM Product";
-
-                    if ($query = $con->query($sqlOldPrice)) {
-
-                        while ($field = $query->fetch_assoc()) {
-
-                            $OldPrice = $field['oldPrice'];
-
-                            echo "<p>Listed Price: <label class=\"oldPrice\">CDN$ $OldPrice</label>";
-                        }
-                    } else {
-                        echo "Error - could not get price.";
-                        die();
-                    }
-
-                    $sqlPrice = "SELECT price FROM Product";
-                    //                    $sqlOldPrice = "SELECT price+100 FROM Product";
-
-                    if ($query = $con->query($sqlPrice)) {
-
-                        while ($field = $query->fetch_assoc()) {
-
-                            $price = $field['price'];
-
-                            echo "<p>Price: <label class=\"sale\">CDN$$price</label>";
-                        }
-                    } else {
-                        echo "Error - could not get price.";
-                        die();
-                    }
-                    ?>
-
-                    <!--                    else  if ($query = $con->query($sqlOldPrice)) {-->
-                    <!---->
-                    <!--                    while ($field = $query->fetch_assoc()) {-->
-                    <!---->
-                    <!--                    $OldPrice = $field['price'];-->
-                    <!---->
-                    <!---->
-                    <!---->
-                    <!--                        }-->
-                    <!--                    <p>Listed Price: <label class="oldPrice">CDN$299.99</label></p>-->
-
-                    <!--                    <p>Price: <label class="sale">CDN$199.99</label>-->
-
-
-                    </p>
+                  <p>Listed Price: <label class="oldPrice"CDN$<?php echo ($product['price']*1.5);?></label></p>
+                  <p>Price: <label class="sale">CDN$<?php echo $product['price'];?></label></p>
                 </div>
             </div>
 
@@ -269,48 +143,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                             class="fa fa-pencil">
                 </button>
             </h3>
-            <div class="review1">
-                <p class=userProfile>
-                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa
-                        R</a>
-                    <time datetime="2018-10-24">- October 24, 2018</time>
-                    <!--                comment button-->
-                    <button title="Add Comment" id="writeCommentButton" alt="Add Comment" class="pageButtons"><span
-                                class="fa fa-comments-o"></button>
-                </p>
-                <p class="userRating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star "></span>
-                    <span class="fa fa-star"></span>
-                </p>
+            <?php
+              $sqlReviews = "SELECT User.uid, rating, comment, date, isEnabled, profilePicture, contentType, fname, lname FROM Reviews LEFT JOIN User ON Reviews.uid = User.uid WHERE Reviews.pNo = ?";
+              if ($stmt = $con->prepare($sqlReviews)) {
 
-                <p class="reviewTitle">
-                    Great product!
-                </p>
-                <p class="reviewDescription">Those are some dank ping pongs!</p>
-            </div>
+                  $stmt->bind_param('i', $pNo);
+                  $stmt->execute();
+                  $stmt->bind_result($review['uid'],$review['rating'],$review['comment'],$review['date'],$review['isEnabled'], $review['profilePicture'], $review['contentType'], $review['fname'], $review['lname']);
+                  while($stmt->fetch()) {
+                    echo "<div class='review1'>";
+                      echo "<p class='userProfile'>";
+                        echo "<img src='data:".$review['contentType'].";base64,".$review['profilePicture']."' alt='".$review['fname']." ".$review['lname']." Profile Picture' align='middle'>";
+                        echo "<a href='#'>".$review['fname']." ".substr($review['lname'], 0, 1)."</a>";
+                        echo "<time datetime='".$review['date']."'>".$review['date']."</time>";
+                        echo "<button title='Add Comment' id='writeCommentButton' alt='Add Comment' class='pageButtons'><span class='fa fa-comments-o'></span></button>";
+						//TODO: change the id in the line above to something like a class so that multiple comments wont fuck it up
+                      echo "</p>";
+                      echo "<p class='userRating'>";
+                        for ($i = 0; $i < 5; $i++) {
+                          echo "<span class=\"fa fa-star";
+                          if ($i <= $review['rating']) echo " checked";
+                          echo "\"></span>";
+                        }
+                      echo "<p class='reviewTitle'>".$review['fname']." ".substr($review['lname'],0,1)." says:</p>";
+                      echo "<p class='reviewDescription'>".$review['comment']."</p>";
+                    echo "</div>";
+                  }
 
-            <div class="review1">
-                <p class="userProfile">
-                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">User
-                        Name</a>
-                    <time datetime="2018-10-24">- Month Day, Year</time>
-                </p>
-                <p class="userRating">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star "></span>
-                    <span class="fa fa-star"></span>
-                </p>
-
-                <p class="reviewTitle">
-                    Review Title Here
-                </p>
-                <p class="reviewDescription">Review Description Here</p>
-            </div>
+              }
+            ?>
         </section>
     </div>
 
