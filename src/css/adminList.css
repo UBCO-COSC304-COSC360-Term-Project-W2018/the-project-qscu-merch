@@ -22,5 +22,49 @@ main{
     display: inline-block;
 }
 #addProduct {
+	margin: 2.5em 2em 2.5em 2em;
     float: right;
+}
+
+/* buttons */
+
+button, submit{
+	background-color: #18bfef;
+	border-radius: 1em;
+}
+
+
+.productItem, .userTable{
+	border-collapse: collapse;
+	margin-bottom: 1em;
+}
+
+.userTable td{
+	padding: 0em 1em 0em 1em;
+	font-size: 1.5em;
+	border: thin solid black;
+
+	text-align: center;
+}
+
+.productNameTitle, .productQuantityTitle, .productPriceTitle, .productSizeTitle{
+	padding: 0em 1em 0em 1em;
+	font-size: 1.5em;
+	border-bottom: thin solid black;
+	border-right: thin solid black;
+	text-align: center;
+}
+.productName, .productQuantity, .productPrice, .productSize {
+	text-align: center;
+	border-left: thin solid black;
+}
+
+.editProduct{
+	text-align: right;
+	padding: 0.5em;
+}
+
+.editProduct input{
+	background-color: #18bfef;
+	border-radius: 1em;
 }

@@ -1,17 +1,97 @@
 <?php
 include "includes/init.php";
 
-$province = 'AB';
-$headerSet = 1;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (!isset($_SESSION['userid'])) {
+        header('Location: http://localhost/the-project-qscu-merch/src/login.php');
+        exit();
+    } else {
+        //getting the user object
+//        $userid = $_SESSION['userid'];
+        //TODO: RACHELLE REMEMBER TO UNCOMMENT THIS WHEN YOU ARE DONE TESTING
+//        $userid = 1;
+        $user = $_SESSION['user'];
+        $userid = $user->id;
+//        or
+//        $userid = $_SESSION['user']->userid
+    }
+    if (!isset($_POST['ccName']) || !isset($_POST['ccNum']) || !isset($_POST['ccExpiration'])
+            || !isset($_POST['ccv']) || !isset($_POST['billingAddress']) || !isset($_POST['billingCity'])
+            || !isset($_POST['billingProvince']) || !isset($_POST['billingCountry']) || !isset($_POST['billingPostalCode'])
+            || !isset($_POST['shippingAddressRadio']) || !isset($_POST['shippingAddress']) || !isset($_POST['shippingCity'])
+            || !isset($_POST['shippingProvince']) || !isset($_POST['shippingCountry']) || !isset($_POST['shippingPostalCode'])) {
+        die();
+    }
+    //all variables set
+    else {
+        $mysqli;
+        try {
+            $ccName = $_POST['ccName'];
+            $ccNum = $_POST['ccNum'];
+            $ccExp = $_POST['ccExpiration'];
+            $ccCCV = $_POST['ccv'];
 
-$_SESSION['userid'] = 1;
+            $radio = $_POST['shippingAddressRadio'];
+            $billingAddressLine = $_POST['billingAddress'];
+            $billingCity = $_POST['billingCity'];
+            $billingProvince = $_POST['billingProvince'];
+            $billingCountry = $_POST['billingCountry'];
+            $billingPostalCode = $_POST['billingPostalCode'];
 
-if (!isset($_SESSION['userid'])) {
-    header('Location: http://localhost/the-project-qscu-merch/src/login.php');
-    exit();
-} else {
-    $userid = $_SESSION['userid'];
+            $mysqli = new mysqli (DBHOST, DBUSER, DBPASS, DBNAME);
+
+            $sql = "UPDATE billinginfo SET country = ?, province = ?, city = ?, address = ?,
+                        postalCode = ?, creditCardNumber = ?, cardExpiryDate = ?, ccv=?
+                         WHERE uid = ?";
+
+            //update DB with billing info
+            if ( $user_billing_info = $mysqli -> prepare($sql) ) {
+                $user_billing_info -> bind_param("sssssssss", $billingCountry, $billingProvince, $billingCity,
+                    $billingAddressLine, $billingPostalCode, $ccNum, $ccExp, $ccCCV, $userid );
+                $user_billing_info -> execute();
+            }
+            else {
+                throw new Exception();
+            }
+
+            $shippingAddressLine;
+            $shippingCity;
+            $shippingProvince;
+            $shippingCountry;
+            $shippingPostalCode;
+
+            //case where billing address = shipping address
+            if ( $radio == 1 ) {
+                $shippingAddressLine = $billingAddressLine;
+                $shippingCity = $billingCity;
+                $shippingProvince = $billingProvince;
+                $shippingCountry = $billingCountry;
+                $shippingPostalCode = $billingPostalCode;
+
+            }
+            else if ( $radio == 2 ) {
+                $shippingAddressLine = $_POST['shippingAddress'];
+                $shippingCity = $_POST['shippingCity'];
+                $shippingProvince = $_POST['shippingProvince'];
+                $shippingCountry = $_POST['shippingCountry'];
+                $shippingPostalCode = $_POST['shippingPostalCode'];
+            }
+
+            //TODO: Take these out when you are done testing
+            $headerSet = 1;
+
+        }
+        catch (Exception $exception) {
+            die();
+        }
+
+    }
 }
+//a POST method wasn't used
+else {
+    die();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +128,6 @@ if (!isset($_SESSION['userid'])) {
             <?php
             $cartTwoDimArray = array();
 
-            $mysqli = new mysqli ("localhost", "rachellegelden", "rachelle", "qscurachelle");
 
             $sql = "SELECT hascart.quantity, product.pname, hascart.size, product.price " .
                 "FROM hascart JOIN product ON hascart.pno = product.pno AND hascart.size = product.size " .
@@ -88,7 +167,7 @@ if (!isset($_SESSION['userid'])) {
 
             $taxTotal = 0;
             $tax = 0;
-            switch ($province) {
+            switch ($shippingProvince) {
                 case 'AB' :
                     $tax = 0.05;
                     break;
@@ -132,8 +211,27 @@ if (!isset($_SESSION['userid'])) {
                     $tax = 0;
             }
 
-            $taxTotal = number_format((float)($total_price * $tax), 2, '.', '');
+            $taxTotal = number_format((float)($subtotal * $tax), 2, '.', '');
             $netTotal = number_format((float)($subtotal + $taxTotal), 2, '.', '');
+
+            $fullShippingAddress = $shippingAddressLine.",".$shippingCity.",".$shippingProvince.",".$shippingCountry.",".$shippingPostalCode;
+
+            if (isset($_SESSION['fullShippingAddress'])) {
+                $_SESSION['fullShippingAddress'] = $fullShippingAddress;
+            }
+            else {
+                $_SESSION['fullShippingAddress'] = $fullShippingAddress;
+            }
+
+            if (isset($_SESSION['totalCost']) ) {
+                $_SESSION['totalCost'] = $netTotal;
+            }
+            else {
+                $_SESSION['totalCost'] = $netTotal;
+            }
+
+
+
             ?>
             </tbody>
         </table>
@@ -161,7 +259,8 @@ if (!isset($_SESSION['userid'])) {
 
     $('#confirmOrderButton').click(function () {
         location.replace("http://localhost/the-project-qscu-merch/src/action/checkout-action.php");
+
+        //call the ajax function which will link to the action php file
+
     });
-
-
 </script>

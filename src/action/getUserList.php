@@ -8,10 +8,11 @@ include '../includes/validateAdmin.php';
 
 validateAdminRequest($_SESSION);
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['searchType']) && isset($_GET['searchInput']) && $_GET['searchType'] != "") {
-        $searchInput = $_GET['searchInput'];
-        $searchType = $_GET['searchType'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input = json_decode(file_get_contents('php://input'), true);
+    if (isset($input['searchType']) && isset($input['searchInput'])) {
+        $searchInput = $input['searchInput'];
+        $searchType = $input['searchType'];
         try {
 
 
@@ -21,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             }
 
             $input = '%' . $searchInput . '%';
-            $stmt;
 
 
             if ($searchInput === "") {
@@ -33,12 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         $query = "SELECT uid, fname, lname, uEmail, contentType, profilePicture, customerBanned, isAdmin FROM User WHERE fname LIKE ? OR lname LIKE ?";
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('ss', $input, $input);
-
+                        break;
                     case "userEmail":
                         $query = "SELECT uid, fname, lname, uEmail, contentType, profilePicture, customerBanned, isAdmin FROM User WHERE uEmail Like ?";
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('s', $input);
-
+                        break;
                     default:
                         throw new Exception;
                 }
@@ -54,9 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             }
             header('Content-Type: application/json');
             echo json_encode($data);
-        }catch (Exception $e){
+        } catch (Exception $e) {
 
-        }finally{
+        } finally {
             $mysql->close();
             die();
         }

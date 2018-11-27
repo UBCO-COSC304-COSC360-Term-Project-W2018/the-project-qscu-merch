@@ -75,7 +75,7 @@ $(document).ready(function (e) {
         if (billingEditSave.val() === "Edit") {
             billingAddressInput.prop("readonly", false);
             billingCityInput.prop("readonly", false);
-            billingProvinceInput.prop("readonly", false);
+            billingProvinceInput.prop("disabled", false);
             billingCountryInput.prop("readonly", false);
             billingPostalCodeInput.prop("readonly", false);
             cardNumberInput.prop("readonly", false);

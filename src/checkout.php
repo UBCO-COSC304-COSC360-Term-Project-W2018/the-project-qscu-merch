@@ -1,75 +1,86 @@
 <?php
 include "includes/init.php";
-$headerSet = 1;
 
-$_SESSION['userid'] = 1;
+try {
+    $headerSet = 1;
 
-if (!isset($_SESSION['userid'])) {
-    header('Location: http://localhost/the-project-qscu-merch/src/login.php');
-    exit();
-} else {
-    $userid = $_SESSION['userid'];
-}
+    //TODO: Uncomment this once i merge onto dev
+    $user = $_SESSION['user'];
+    $userid = $user->id;
+//    $_SESSION['userid'] = 1;          //PURELY FOR TESTING
 
-//$userid = $_SESSION['userid'];
-//$userid = $user->userid;
+    if (!isset($_SESSION['user'])) {
+        header('Location: http://localhost/the-project-qscu-merch/src/login.php');
+        exit();
+    } else {
+        $userid = $_SESSION['userid'];
+    }
 
-$firstName = "";
-$lastName = "";
-$fullName = "";
-$addressLine = "";
-$city = "";
-$province = "";
-$country = "";
-$postalcode = "";
-$creditCardName = "";
-$creditCardNum = "";
-$creditCardExpiryDate = "";
-$ccv = "";
+    $firstName = "";
+    $lastName = "";
+    $fullName = "";
+    $addressLine = "";
+    $city = "";
+    $province = "";
+    $country = "";
+    $postalcode = "";
+    $creditCardName = "";
+    $creditCardNum = "";
+    $creditCardExpiryDate = "";
+    $ccv = "";
 
-$mysqli = new mysqli ("localhost", "rachellegelden", "rachelle", "qscurachelle");
+    $mysqli = new mysqli (DBHOST, DBUSER, DBPASS, DBNAME);
 
-if ($mysqli->connect_errno) {
+    if ($mysqli->connect_errno) {
 //    echo "<p> Unable to connect to database </p>";
-    die();
-} else {
+        die();
+    } else {
 //    echo "<p> You are connected to the database</p>";
-}
+    }
 //get info user info if they exist
-$sql1 = "SELECT * FROM billinginfo WHERE uid = ?";
+    $sql1 = "SELECT * FROM billinginfo WHERE uid = ?";
 
-if ($user_billing_info = $mysqli->prepare($sql1)) {
-    $user_billing_info->bind_param("s", $userid);
-    $user_billing_info->execute();
+    if ($user_billing_info = $mysqli->prepare($sql1)) {
+        $user_billing_info->bind_param("s", $userid);
+        $user_billing_info->execute();
 
-    $result = $user_billing_info->get_result();
+        $result = $user_billing_info->get_result();
 
-    while ($row = $result->fetch_assoc()) {
-        $addressLine = $row['address'];
-        $city = $row['city'];
-        $province = $row['province'];
-        $country = $row['country'];
-        $postalcode = $row['postalCode'];
-        $creditCardNum = $row['creditCardNumber'];
-        $creditCardExpiryDate = $row['cardExpiryDate'];
-        $ccv = $row['CCV'];
+        while ($row = $result->fetch_assoc()) {
+            $addressLine = $row['address'];
+            $city = $row['city'];
+            $province = $row['province'];
+            $country = $row['country'];
+            $postalcode = $row['postalCode'];
+            $creditCardNum = $row['creditCardNumber'];
+            $creditCardExpiryDate = $row['cardExpiryDate'];
+            $ccv = $row['CCV'];
+        }
     }
+
+    $sql2 = "SELECT fname, lname FROM user WHERE uid= ?";
+
+    if ($user_info = $mysqli->prepare($sql2)) {
+        $user_info->bind_param("s", $userid);
+        $user_info->execute();
+
+        $result = $user_info->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $firstName = $row['fname'];
+            $lastName = $row['lname'];
+        }
+    }
+    $fullName = $firstName . " " . $lastName;
 }
 
-$sql2 = "SELECT fname, lname FROM user WHERE uid= ?";
-
-if ($user_info = $mysqli->prepare($sql2)) {
-    $user_info->bind_param("s", $userid);
-    $user_info->execute();
-
-    $result = $user_info->get_result();
-
-    while ($row = $result->fetch_assoc()) {
-        $firstName = $row['fname'];
-        $lastName = $row['lname'];
-    }
+catch (Exception $exception) {
+    die();
 }
-$fullName = $firstName . " " . $lastName;
+finally {
+    $mysqli -> close();
+}
+
 
 ?>
 
@@ -147,8 +158,6 @@ $fullName = $firstName . " " . $lastName;
                                 </div>
                                 <div id="billingProvince" class="checkoutContainer">
                                     <label class="elementLabel" for="billingProvinceInput">Province/State: </label>
-                                    <!--                                <input type="text" name="billingProvince" id="billingProvinceInput" required value="-->
-
                                     <select name="billingProvince" id="billingProvinceSelect">
                                         <option value="AB">AB</option>
                                         <option value="BC">BC</option>
@@ -174,12 +183,11 @@ $fullName = $firstName . " " . $lastName;
                         </div>
                     </div>
 
-
                     <div id="shippingAddressRadioGroup" class="checkoutContainer">
                         <label class="elementLabel" for="shippingAddressRadioGroup">Select a shipping address: </label>
-                        <input type="radio" name="shippingAddress" id="billingAddressRadio" checked="checked" value="1">Billing
+                        <input type="radio" name="shippingAddressRadio" id="billingAddressRadio" checked="checked" value="1">Billing
                         address<br>
-                        <input type="radio" name="shippingAddress" id="shippingAddressRadio" value="2">New shipping
+                        <input type="radio" name="shippingAddressRadio" id="shippingAddressRadio" value="2">New shipping
                         address <br>
                     </div>
                     <!-- note these inputs do not have required class -->
@@ -197,14 +205,28 @@ $fullName = $firstName . " " . $lastName;
 
                         <div id="shippingProvince">
                             <label class="elementLabel" for="shippingProvinceInput">Province/State: </label>
-                            <input type="text" name="shippingProvince" id="shippingProvinceInput">
-                        </div>
+                            <select name="shippingProvince" id="shippingProvinceSelect">
+                                <option value="AB">AB</option>
+                                <option value="BC">BC</option>
+                                <option value="MB">MB</option>
+                                <option value="NB">NB</option>
+                                <option value="NL">NL</option>
+                                <option value="NS">NS</option>
+                                <option value="NT">NT</option>
+                                <option value="NU">NU</option>
+                                <option value="ON">ON</option>
+                                <option value="PE">PE</option>
+                                <option value="QC">QC</option>
+                                <option value="SK">SK</option>
+                                <option value="YK">YK</option>
+                            </select>                        </div>
 
                         <div id="shippingCountry">
                             <label class="elementLabel" for="shippingCountryInput">Country: </label>
-                            <input type="text" name="shippingCountry" id="shippingCountryInput">
+                            <select name="shippingCountry" id="shippingCountrySelect">
+                                <option value="Canada">Canada</option>
+                            </select>
                         </div>
-
                         <div id="shippingPostalCode">
                             <label class="elementLabel" for="shippingPostalCodeInput">Postal Code: </label>
                             <input type="text" name="shippingPostalCode" id="shippingPostalCodeInput">
@@ -212,8 +234,7 @@ $fullName = $firstName . " " . $lastName;
                     </div>
                 </div>
                 <div id="checkoutButtonContainer" class="checkoutContainer">
-                    <!--<button type="submit" id="checkOutButton">Confirm</button>-->
-                    <input type="submit" id="checkOutButton">
+                    <input type="submit" name="submit" id="checkOutButton" value="Check-Out">
                 </div>
             </div>
         </fieldset>
@@ -229,10 +250,10 @@ $fullName = $firstName . " " . $lastName;
                                               id="paypalButton"></a>
     </div>
 </main>
-<?php include "footer.php";
-$mysqli->close();
-?>
+<?php include "footer.php"; ?>
 </body>
 </html>
+
+
 
 
