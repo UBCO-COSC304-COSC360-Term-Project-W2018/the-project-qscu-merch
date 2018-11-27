@@ -22,6 +22,11 @@ $headerSet = 1;
     <link rel="stylesheet" href="css/reviewsComments.css">
 	<?php include 'includes/headerFooterHead.php'?>
     <script type="text/javascript" src="script/profile_controller.js"></script>
+
+    <ul class="breadcrumb">
+        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+        <a>Profile</a>
+    </ul>
 </head>
 
 

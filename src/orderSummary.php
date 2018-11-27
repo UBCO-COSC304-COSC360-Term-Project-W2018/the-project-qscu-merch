@@ -22,6 +22,12 @@ if (!isset($_SESSION['userid'])) {
     <link rel="stylesheet" href="css/orderSummary.css">
     <script src="libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="script/orderSummary.js"></script>
+
+    <ul class="breadcrumb">
+        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+        <a href="viewCart.php.php">Cart</a> &gt; &gt; >>
+        <a>Your Order</a>
+    </ul>
 </head>
 
 <body>
