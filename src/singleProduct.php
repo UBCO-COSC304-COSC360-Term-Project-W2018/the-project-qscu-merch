@@ -2,7 +2,6 @@
 $headerSet = 0;
 include "includes/init.php";
 
-
 try {
     if (isset($_SESSION['user'])) {
         $user = $_SESSION['user']->id;
@@ -44,6 +43,7 @@ if ($stmt = $con->prepare($sql)) {
 
     <link rel="stylesheet" href="../src/css/singleProduct.css">
     <?php include 'includes/headerFooterHead.php' ?>
+<<<<<<< HEAD
 <!--    <script type="text/javascript" src="libs/jquery-3.3.1.min.js"></script>-->
     <script type="text/javascript" src="script/reviewModal.js"></script>
 <!--    <script type="text/javascript" src="../src/script/quantity.js"></script>-->
@@ -52,20 +52,25 @@ if ($stmt = $con->prepare($sql)) {
     <link rel="stylesheet" href="css/singleProduct.css">
 <!--    --><?php //include 'includes/headerFooterHead.php'; ?>
 <!--    <script type="text/javascript" src="script/quantity.js"></script>-->
+=======
+    <script type="text/javascript" src="script/quantity.js"></script>
+    <script type="text/javascript" src="script/reviewModal.js"></script>
+    <!--<script type="text/javascript" src="script/commentModal.js"></script>-->
+    <link rel="stylesheet" href="css/singleProduct.css">
+>>>>>>> 9ad80de4f61a139c000d1930b774566e871db333
     <!--    <script type="text/javascript" src="../src/script/commentModal.js"></script>-->
 
-  
-  <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a href="categorypage.php">Categories</a> &gt; &gt;
-        <a>Product</a>
-    </ul>
 </head>
 <!--    Body-->
 
 <body>
 
 <?php include "header.php";?>
+<ul class="breadcrumb">
+	<a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+	<a href="categorypage.php">Categories</a> &gt; &gt;
+	<a>Product</a>
+</ul>
 
 <main>
     <!--    make sure all the files that we update have the same and CORRECT width/height -->
@@ -132,6 +137,74 @@ if ($stmt = $con->prepare($sql)) {
 
                 <!--            price-->
                 <div class="price">
+
+
+
+                    <?php
+
+
+                    $sqlOldPrice = "SELECT price*1.5 AS oldPrice FROM Product";
+
+                    if ($query = $con->query($sqlOldPrice)) {
+
+                        while ($field = $query->fetch_assoc()) {
+
+                            $OldPrice = $field['oldPrice'];
+
+                            echo "<p>Listed Price: <label class=\"oldPrice\">CDN$ $OldPrice</label>";
+                        }
+                    } else {
+                        echo "Error - could not get price.";
+                        die();
+                    } ?>
+
+
+
+<!--    make sure all the files that we update have the same and CORRECT width/height -->
+<div class="bigboi">
+    <div class="container">
+        <img src="../src/images/pingpong.jpg" alt="Product Picture">
+
+        <div class="sideContent">
+            <!--            name of product-->
+            <div class="pName">
+                <h1>Ping Pongs
+                </h1>
+                <!--                sub-title stuff -->
+                <p>3 Balls per pack</p>
+                    <?php
+                    $sqlPrice = "SELECT price FROM Product";
+                    //                    $sqlOldPrice = "SELECT price+100 FROM Product";
+
+                    if ($query = $con->query($sqlPrice)) {
+
+                        while ($field = $query->fetch_assoc()) {
+
+                            $price = $field['price'];
+
+                            echo "<p>Price: <label class=\"sale\">CDN$$price</label>";
+                        }
+                    } else {
+                        echo "Error - could not get price.";
+                        die();
+                    }
+                    ?>
+
+                    <!--                    else  if ($query = $con->query($sqlOldPrice)) {-->
+                    <!---->
+                    <!--                    while ($field = $query->fetch_assoc()) {-->
+                    <!---->
+                    <!--                    $OldPrice = $field['price'];-->
+                    <!---->
+                    <!---->
+                    <!---->
+                    <!--                        }-->
+                    <!--                    <p>Listed Price: <label class="oldPrice">CDN$299.99</label></p>-->
+
+                    <!--                    <p>Price: <label class="sale">CDN$199.99</label>-->
+
+
+                    </p>
                   <p>Listed Price: <label class="oldPrice"CDN$<?php echo ($product['price']*1.5);?></label></p>
                   <p>Price: <label class="sale">CDN$<?php echo $product['price'];?></label></p>
                 </div>
@@ -148,7 +221,7 @@ if ($stmt = $con->prepare($sql)) {
               $sqlReviews = "SELECT User.uid, rating, comment, date, isEnabled, profilePicture, contentType, fname, lname FROM Reviews LEFT JOIN User ON Reviews.uid = User.uid WHERE Reviews.pNo = ?";
               if ($stmt = $con->prepare($sqlReviews)) {
 
-                  $stmt->bind_param('i', $pNo);
+                  $stmt->bind_param('i', sanitizeInput($pNo));
                   $stmt->execute();
                   $stmt->bind_result($review['uid'],$review['rating'],$review['comment'],$review['date'],$review['isEnabled'], $review['profilePicture'], $review['contentType'], $review['fname'], $review['lname']);
                   while($stmt->fetch()) {
@@ -249,8 +322,14 @@ if ($stmt = $con->prepare($sql)) {
         </div>
     </div>
 </main>
+
+
 <?php
 include "footer.php";
 ?>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 9ad80de4f61a139c000d1930b774566e871db333

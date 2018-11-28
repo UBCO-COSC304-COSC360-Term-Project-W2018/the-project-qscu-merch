@@ -105,16 +105,18 @@ finally {
     <script src="libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="script/checkout-validation.js"></script>
 
-    <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a href="viewCart.php">Cart</a> &gt; &gt;
-        <a href="orderSummary.php">Order Summary</a> &gt; &gt;
-        <a>Checkout</a>
-    </ul>
+
 </head>
 
 <body>
 <?php include "header.php" ?>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a href="viewCart.php">Cart</a> &gt; &gt;
+    <a href="orderSummary.php">Order Summary</a> &gt; &gt;
+    <a>Checkout</a>
+</ul>
 <main>
     <form method="post" action="orderSummary.php" id="checkOutForm">
 
