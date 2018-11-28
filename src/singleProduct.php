@@ -22,6 +22,7 @@ if ($stmt = $con->prepare($sql)) {
     $stmt->execute();
     $stmt->bind_result($product['pname'],$product['rating'],$product['image'],$product['contentType'],$product['description'],$product['price']);
     $stmt->fetch();
+	$stmt->close();
 } else {
   die(mysqli_error($con));
 }
@@ -90,25 +91,36 @@ if ($stmt = $con->prepare($sql)) {
                 <div class="quant">
                     <p>Quantity</p>
                     <!--                    TODO: need to send this somwehere-->
-                    <form id='myform' method='POST' action="http://www.randyconnolly.com/tests/process.php">
+                    <form id='myform' method='POST' action="action/addToCart.php">
                         <input title="Decrease Quantity" type='button' value='-' class='qtyminus' field='quantity'/>
                         <input required type='text' name='quantity' value='' class='qty'/>
                         <input title="Increase Quantity" type='button' value='+' class='qtyplus' field='quantity'/>
 
                         <!-- added drop down menu -->
-
+						<!-- TODO: MAKE THIS TABLE DYNAMIC BASED ON PRODUCT -->
                         <select name="size" class="size" required>
                             <option selected value="">Select a size</option>
-                            <option value="SML">Small (S)</option>
+						<?php 
+						$sql2 = "SELECT size FROM Product WHERE pNo = ?";
+						if ($stmt2 = $con->prepare($sql2)) {
+							$stmt2->bind_param('i', $pNo);
+							$stmt2->execute();
+							$stmt2->bind_result($product['size']);
+							while($stmt2->fetch()) {
+								echo "<option value='".$product['size'].">".$product['size']."</option>";
+							}
+						}
+						?>
+                        <!--    <option value="SML">Small (S)</option>
                             <option value="MED">Medium (M)</option>
                             <option value="LG">Large (L)</option>
-                            <option value="XLG">Extra-Large (XL)</option>
+                            <option value="XLG">Extra-Large (XL)</option> -->
                         </select>
 
                         <!--                    TODO: Liam needs pName and price -->
 
-                        <?php echo "<input type='hidden' value='1' name='pNo' />" ?>
-                        <button type="submit" title="Add to Cart" class="pageButtons">Add to Cart <i class="fa fa-shopping-cart"></i>
+						            <input type="hidden" value="<?php echo $pNo;?>" name="pNo">
+                        <button title="Add to Cart" class="pageButtons" type="submit">Add to Cart <i class="fa fa-shopping-cart"></i>
 
                         </button>
                     </form>
@@ -117,7 +129,7 @@ if ($stmt = $con->prepare($sql)) {
 
                 <!--            price-->
                 <div class="price">
-                  <p>Listed Price: <label class="oldPrice"CDN$<?php echo ($product['price']*1.5);?></label></p>
+                  <p>Listed Price: <label class="oldPrice">CDN$<?php echo (floatval($product['price'])*1.5);?></label></p>
                   <p>Price: <label class="sale">CDN$<?php echo $product['price'];?></label></p>
                 </div>
             </div>
@@ -139,7 +151,7 @@ if ($stmt = $con->prepare($sql)) {
                   while($stmt->fetch()) {
                     echo "<div class='review1'>";
                       echo "<p class='userProfile'>";
-                        echo "<img src='data:".$review['contentType'].";base64,".$review['profilePicture']."' alt='".$review['fname']." ".$review['lname']." Profile Picture' align='middle'>";
+                        echo "<img src='data:".$review['contentType'].";base64,".base64_encode($review['profilePicture'])."' alt='".$review['fname']." ".$review['lname']." Profile Picture' align='middle'>";
                         echo "<a href='#'>".$review['fname']." ".substr($review['lname'], 0, 1)."</a>";
                         echo "<time datetime='".$review['date']."'>".$review['date']."</time>";
                         echo "<button title='Add Comment' id='writeCommentButton' alt='Add Comment' class='pageButtons'><span class='fa fa-comments-o'></span></button>";
