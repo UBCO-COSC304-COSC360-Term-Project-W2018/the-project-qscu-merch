@@ -143,14 +143,11 @@ $cartRows = array();
 			$sumtotal += $prod['total'];
 			
         }
-<<<<<<< HEAD
+
         if($len==0){
             $sumtotal=0;
         }
-=======
-        
 
->>>>>>> b44f281d8445e934f81b03f9f2d7fc4cb8500a18
         echo '<tr><td id="sumTotal" colspan="4">Your Subtotal: $' .$sumtotal . '</td><td class="centerContents"><form method="POST" action="checkout.php"><input type="submit" id="checkoutButton" class="button" value="Check-out"></form></td></tr>';
 			echo '</table></div>';
 			}
