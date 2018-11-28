@@ -91,11 +91,6 @@ $headerSet = 1;
 
 
     <script src="script/imagePreview.js"></script>
-  
-  <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a>Profile</a>
-    </ul>
 
 </head>
 
@@ -103,16 +98,13 @@ $headerSet = 1;
 <!--    Body-->
 
 <body>
-<<<<<<< HEAD
 <?php include "header.php"?>
 
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
     <a>Profile</a>
 </ul>
-=======
-<?php include "header.php" ?>
->>>>>>> 3ff1ebd037bc423f1f2dd85d742eabb82f6d9a6f
+
 <main>
     <h2 id="welcome">
         <?php echo "Welcome " . $name . "!"; ?>
