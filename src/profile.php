@@ -279,62 +279,64 @@ $headerSet = 1;
         <?php
         //TODO: MAKE SURE THIS ALL WORKS WITH CUURRENT DB, WAS SIZE DROPPED???
         $userid = $_SESSION['user']->id;
+        $mysqli;
 
         //TODO: put this in a try catch before brandon yells at you
-        $mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+        try {
+            $mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-        //ok so get each review from database
-        $get_review_sql = "SELECT * FROM Reviews WHERE uid = ?";
+            //ok so get each review from database
+            $get_review_sql = "SELECT * FROM Reviews WHERE uid = ?";
 
-        if ($get_review = $mysqli->prepare($get_review_sql)) {
-            $get_review->bind_param("s", $userid);
-            $get_review->execute();
+            if ($get_review = $mysqli->prepare($get_review_sql)) {
+                $get_review->bind_param("s", $userid);
+                $get_review->execute();
 
-            $get_review_result = $get_review->get_result();
+                $get_review_result = $get_review->get_result();
 
-            while ($get_review_row = $get_review_result->fetch_assoc()) {
-                $uid = $userid;
-                $pNo = $get_review_row['pNo'];
-                $size = $get_review_row['size'];
-                $rating = $get_review_row['rating'];
-                $body = $get_review_row['comment'];
-                $date = $get_review_row['date'];
-                $isEnabled = $get_review_row['isEnabled'];
-                $pname = "";
-                $profile_image = "";
-                $content_type = "";
-                $formatted_date = date("M-d-y", strtotime($date));
+                while ($get_review_row = $get_review_result->fetch_assoc()) {
+                    $uid = $userid;
+                    $pNo = $get_review_row['pNo'];
+                    $size = $get_review_row['size'];
+                    $rating = $get_review_row['rating'];
+                    $body = $get_review_row['comment'];
+                    $date = $get_review_row['date'];
+                    $isEnabled = $get_review_row['isEnabled'];
+                    $pname = "";
+                    $profile_image = "";
+                    $content_type = "";
+                    $formatted_date = date("M-d-y", strtotime($date));
 
-                //TODO: Rachelle check if the review disabled. If yes, then ABORT MISSION
+                    //TODO: Rachelle check if the review disabled. If yes, then ABORT MISSION
 
-                //get name of product
-                $product_name_sql = "SELECT pname FROM Product WHERE pNo = ? AND size = ?";
-                if ($product_name = $mysqli->prepare($product_name_sql)) {
-                    $product_name->bind_param("ss", $pNo, $size);
-                    $product_name->execute();
+                    //get name of product
+                    $product_name_sql = "SELECT pname FROM Product WHERE pNo = ? AND size = ?";
+                    if ($product_name = $mysqli->prepare($product_name_sql)) {
+                        $product_name->bind_param("ss", $pNo, $size);
+                        $product_name->execute();
 
-                    $product_name_result = $product_name->get_result();
+                        $product_name_result = $product_name->get_result();
 
-                    while ($product_name_row = $product_name_result->fetch_assoc()) {
-                        $pname = $product_name_row['pname'];
+                        while ($product_name_row = $product_name_result->fetch_assoc()) {
+                            $pname = $product_name_row['pname'];
+                        }
                     }
-                }
 
-                $image_details_sql = "SELECT profilePicture, contentType FROM User WHERE uid = ?";
-                if ( $image_details = $mysqli -> prepare($image_details_sql) ) {
-                    $image_details -> bind_param("s", $uid);
-                    $image_details -> execute();
+                    $image_details_sql = "SELECT profilePicture, contentType FROM User WHERE uid = ?";
+                    if ( $image_details = $mysqli -> prepare($image_details_sql) ) {
+                        $image_details -> bind_param("s", $uid);
+                        $image_details -> execute();
 
-                    $image_details_result = $image_details -> get_result();
+                        $image_details_result = $image_details -> get_result();
 
-                    while ( $image_details_row = $image_details_result -> fetch_assoc() ) {
-                        $profile_image = $image_details_row['profilePicture'];
-                        $content_type = $image_details_row['contentType'];
+                        while ( $image_details_row = $image_details_result -> fetch_assoc() ) {
+                            $profile_image = $image_details_row['profilePicture'];
+                            $content_type = $image_details_row['contentType'];
+                        }
                     }
-                }
 
 
-                echo "<div class=\"review\">
+                    echo "<div class=\"review\">
                         <p class=\"userProfile\">
                             <img src=\"<?php  echo 'data:'.$content_type.';base64,'.base64_encode($profile_image) ?>\" alt=\"User's profile picture\" align=\"middle\">
                             <span>".$firstName." ".$lastName."</span>
@@ -342,72 +344,72 @@ $headerSet = 1;
                         </p>
                         <p class=\"productName\">".$pname."</p>";
 
-                echo "<p class=\"userRating\">";
-                for ($x = 0; $x < 5; $x++) {
-                    if ($x < $rating) {
-                        echo "<span class=\"fa fa-star checked\"></span>";
-                    } else {
-                        echo "<span class=\"fa fa-star \"></span>";
+                    echo "<p class=\"userRating\">";
+                    for ($x = 0; $x < 5; $x++) {
+                        if ($x < $rating) {
+                            echo "<span class=\"fa fa-star checked\"></span>";
+                        } else {
+                            echo "<span class=\"fa fa-star \"></span>";
+                        }
                     }
-                }
-                echo "</p>
+                    echo "</p>
                       <p class=\"reviewDescription\">".$body."</p>
                     </div>";
 
-                $comment_on_review_sql = "SELECT * FROM Comment WHERE pNo = ? AND size = ? AND uid = ?";
-                if ( $comment_on_review = $mysqli -> prepare($comment_on_review_sql) ) {
-                    $comment_on_review -> bind_param("sss", $pNo, $size, $uid);
-                    $comment_on_review -> execute();
+                    $comment_on_review_sql = "SELECT * FROM Comment WHERE pNo = ? AND size = ? AND uid = ?";
+                    if ( $comment_on_review = $mysqli -> prepare($comment_on_review_sql) ) {
+                        $comment_on_review -> bind_param("sss", $pNo, $size, $uid);
+                        $comment_on_review -> execute();
 
-                    $comment_on_review_result = $comment_on_review -> get_result();
+                        $comment_on_review_result = $comment_on_review -> get_result();
 
-                    while ( $comment_on_review_row = $comment_on_review_result -> fetch_assoc() ) {
-                        $left_by = $comment_on_review_row['leftBy'];
-                        $comment_date = $comment_on_review_row['date'];
-                        $comment_text = $comment_on_review_row['comment'];
-                        $comment_enabled = $comment_on_review_row['isEnabled'];
-                        $commenter_profile_image = "";
-                        $commenter_content_type = "";
-                        $commenter_fname = "";
-                        $commenter_lname = "";
-                        //format date
-                        $comment_formatted_date = date("M-d-y", strtotime($comment_date));
+                        while ( $comment_on_review_row = $comment_on_review_result -> fetch_assoc() ) {
+                            $left_by = $comment_on_review_row['leftBy'];
+                            $comment_date = $comment_on_review_row['date'];
+                            $comment_text = $comment_on_review_row['comment'];
+                            $comment_enabled = $comment_on_review_row['isEnabled'];
+                            $commenter_profile_image = "";
+                            $commenter_content_type = "";
+                            $commenter_fname = "";
+                            $commenter_lname = "";
+                            //format date
+                            $comment_formatted_date = date("M-d-y", strtotime($comment_date));
 
-                        if ( !$comment_enabled ) {
-                            continue;
-                        }
-                        else {
-                            //get commenter's first and last name
-                            $commenter_name_details_sql = "SELECT fname, lname FROM User WHERE uid = ?";
-                            if ( $commenter_name_details = $mysqli -> prepare($commenter_name_details_sql) ) {
-                                $commenter_name_details -> bind_param("s", $left_by);
-                                $commenter_name_details -> execute();
-
-                                $commenter_name_details_result = $commenter_name_details -> get_result();
-
-                                while ( $commenter_name_details_row = $commenter_name_details_result -> fetch_assoc() ) {
-                                    $commenter_fname = $commenter_name_details_row['fname'];
-                                    $commenter_lname = $commenter_name_details_row['lname'];
-                                }
+                            if ( !$comment_enabled ) {
+                                continue;
                             }
                             else {
-                                echo "<p>something really went wrong getting the commenter's name lol</p>";
-                            }
-                            if ( $commenter_image_details = $mysqli -> prepare($image_details_sql) ) {
-                                $commenter_image_details -> bind_param("s", $left_by);
-                                $commenter_image_details -> execute();
+                                //get commenter's first and last name
+                                $commenter_name_details_sql = "SELECT fname, lname FROM User WHERE uid = ?";
+                                if ( $commenter_name_details = $mysqli -> prepare($commenter_name_details_sql) ) {
+                                    $commenter_name_details -> bind_param("s", $left_by);
+                                    $commenter_name_details -> execute();
 
-                                $commenter_image_details_result = $commenter_image_details -> get_result();
+                                    $commenter_name_details_result = $commenter_name_details -> get_result();
 
-                                while ( $commenter_image_details_row = $commenter_image_details_result -> fetch_assoc() ) {
-                                    $commenter_profile_image = $commenter_image_details_row['profilePicture'];
-                                    $commenter_content_type = $commenter_image_details_row['contentType'];
+                                    while ( $commenter_name_details_row = $commenter_name_details_result -> fetch_assoc() ) {
+                                        $commenter_fname = $commenter_name_details_row['fname'];
+                                        $commenter_lname = $commenter_name_details_row['lname'];
+                                    }
                                 }
-                            }
-                            else {
-                                echo "ok something went wrong getting commenter's image yikes lol";
-                            }
-                            echo "<div class=\"comment\">
+                                else {
+                                    echo "<p>something really went wrong getting the commenter's name lol</p>";
+                                }
+                                if ( $commenter_image_details = $mysqli -> prepare($image_details_sql) ) {
+                                    $commenter_image_details -> bind_param("s", $left_by);
+                                    $commenter_image_details -> execute();
+
+                                    $commenter_image_details_result = $commenter_image_details -> get_result();
+
+                                    while ( $commenter_image_details_row = $commenter_image_details_result -> fetch_assoc() ) {
+                                        $commenter_profile_image = $commenter_image_details_row['profilePicture'];
+                                        $commenter_content_type = $commenter_image_details_row['contentType'];
+                                    }
+                                }
+                                else {
+                                    echo "ok something went wrong getting commenter's image yikes lol";
+                                }
+                                echo "<div class=\"comment\">
                                         <p class=\"userProfile\">
                                             <img src=\" <?php  echo 'data:'.$commenter_content_type.';base64,'.base64_encode($commenter_profile_image)?>\" alt=\"User's profile picture\" align=\"middle\">
                                             <span>".$commenter_fname." ".$commenter_lname."</span>
@@ -415,14 +417,23 @@ $headerSet = 1;
                                         </p>
                                         <p class=\"reviewDescription\">".$comment_text."</p>
                                   </div>";
-                        }
+                            }
 
 
 //
+                        }
                     }
                 }
             }
+
         }
+        catch ( Exception $exception ) {
+            header('Location: login.php');
+        }
+        finally {
+            $mysqli -> close();
+        }
+
         ?>
 
 
@@ -472,7 +483,7 @@ $headerSet = 1;
 <!--        </p>-->
 <!--        <p class="reviewDescription">Review Description Here</p>-->
 <!--    </div>-->
-        <h3>Your Reviews & Comments</h3>-->
+<!--        <h3>Your Reviews & Comments</h3>-->-->
 <!--        -->
 <!--            <!--TODO put this in a include file-->-->
 <!--            <div class="reviewBlock">-->
