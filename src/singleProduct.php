@@ -45,10 +45,7 @@ if ($stmt = $con->prepare($sql)) {
     <?php include 'includes/headerFooterHead.php' ?>
     <script type="text/javascript" src="script/quantity.js"></script>
     <script type="text/javascript" src="script/reviewModal.js"></script>
-    <!--<script type="text/javascript" src="script/commentModal.js"></script>-->
     <link rel="stylesheet" href="css/singleProduct.css">
-    <!--    <script type="text/javascript" src="../src/script/commentModal.js"></script>-->
-
 </head>
 <!--    Body-->
 
@@ -209,8 +206,8 @@ if ($stmt = $con->prepare($sql)) {
             <?php
               $sqlReviews = "SELECT User.uid, rating, comment, date, isEnabled, profilePicture, contentType, fname, lname FROM Reviews LEFT JOIN User ON Reviews.uid = User.uid WHERE Reviews.pNo = ?";
               if ($stmt = $con->prepare($sqlReviews)) {
-
-                  $stmt->bind_param('i', sanitizeInput($pNo));
+                  $pNo = sanitizeInput($pNo);
+                  $stmt->bind_param('i', $pNo);
                   $stmt->execute();
                   $stmt->bind_result($review['uid'],$review['rating'],$review['comment'],$review['date'],$review['isEnabled'], $review['profilePicture'], $review['contentType'], $review['fname'], $review['lname']);
                   while($stmt->fetch()) {
