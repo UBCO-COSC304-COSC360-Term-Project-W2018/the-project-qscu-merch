@@ -60,14 +60,14 @@ try {
             $ccv = $row['CCV'];
         }
     }
-    echo "<p>".$addressLine."</p>";
-    echo "<p>".$city."</p>";
-    echo "<p>".$province."</p>";
-    echo "<p>".$country."</p>";
-    echo "<p>".$postalcode."</p>";
-    echo "<p>".$creditCardNum."</p>";
-    echo "<p>".$creditCardExpiryDate."</p>";
-    echo "<p>".$ccv."</p>";
+//    echo "<p>".$addressLine."</p>";
+//    echo "<p>".$city."</p>";
+//    echo "<p>".$province."</p>";
+//    echo "<p>".$country."</p>";
+//    echo "<p>".$postalcode."</p>";
+//    echo "<p>".$creditCardNum."</p>";
+//    echo "<p>".$creditCardExpiryDate."</p>";
+//    echo "<p>".$ccv."</p>";
 
     $sql2 = "SELECT fname, lname FROM user WHERE uid= ?";
 
@@ -164,6 +164,14 @@ finally {
                                 <div id="billingCountry" class="checkoutContainer">
                                     <label class="elementLabel" for="billingCountryInput">Country: </label>
                                     <select name="billingCountry" id="billingCountrySelect">
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
                                         <option value="Canada">Canada</option>
                                     </select>
                                 </div>
