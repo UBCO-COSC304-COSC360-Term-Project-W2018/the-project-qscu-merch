@@ -24,12 +24,10 @@ $headerSet = 0;
     <link rel="stylesheet" href="css/login.css">
     <script type="text/javascript" src="script/client-side-validation.js"></script>
 
-
-
-
 </head>
 <body>
-<?include "header.php"; ?>
+
+<?php include "header.php"; ?>
 
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
