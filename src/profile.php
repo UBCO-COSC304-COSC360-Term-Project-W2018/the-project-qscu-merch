@@ -298,6 +298,8 @@ $headerSet = 1;
                 $date = $get_review_row['date'];
                 $isEnabled = $get_review_row['isEnabled'];
                 $pname = "";
+                $profile_image = "";
+                $content_type = "";
                 $formatted_date = date("M-d-y", strtotime($date));
 
 
@@ -314,11 +316,24 @@ $headerSet = 1;
                     }
                 }
 
-//                echo "<img src=\"../src/images/profile.png\" alt=\"User's profile picture\" align=\"middle\"><a href=\"#\">".$firstName." ".$lastName."</a>";
+                $image_details_sql = "SELECT profilePicture, contentType FROM User WHERE uid = ?";
+                if ( $image_details = $mysqli -> prepare($image_details_sql) ) {
+                    $image_details -> bind_param("s", $uid);
+                    $image_details -> execute();
+
+                    $image_details_result = $image_details -> get_result();
+
+                    while ( $image_details_row = $image_details_result -> fetch_assoc() ) {
+                        $profile_image = $image_details_row['profilePicture'];
+                        $content_type = $image_details_row['contentType'];
+                    }
+                }
+
 
                 echo "<div class=\"review\">
                         <p class=\"userProfile\">
-                            <span>".$firstName." ".$lastName."</span>
+                            <img src=\"<?php  echo 'data:'.$content_type.';base64,'.base64_encode($profile_image) ?>\" alt=\"User's profile picture\" align=\"middle\">
+//                          <span>".$firstName." ".$lastName."</span>
                             <span class='time'>".$formatted_date."</span>
                         </p>
                         <p class=\"productName\">".$pname."</p>";
@@ -336,8 +351,6 @@ $headerSet = 1;
                     </div>";
             }
         }
-
-
         ?>
 
 

@@ -44,6 +44,7 @@
 #reviewsComments .userProfile .time {
     /*    color: lightblue;*/
     font-size: 0.85em;
+    font-weight: bold;
 }
 
 #reviewsComments img {
