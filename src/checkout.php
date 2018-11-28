@@ -14,7 +14,7 @@ try {
         exit();
     } else {
         $userid = $_SESSION['userid'];
-        echo $userid;
+//        echo $userid;
     }
 
     $firstName = "";
@@ -36,7 +36,7 @@ try {
 //    echo "<p> Unable to connect to database </p>";
         die();
     } else {
-    echo "<p> You are connected to the database</p>";
+//    echo "<p> You are connected to the database</p>";
     }
 //get info user info if they exist
     $sql1 = "SELECT * FROM BillingInfo WHERE uid = ?";
@@ -45,7 +45,7 @@ try {
         $user_billing_info->bind_param("s", $userid);
         $user_billing_info->execute();
 
-        echo "<p>getting billing info</p>";
+//        echo "<p>getting billing info</p>";
 
         $result = $user_billing_info->get_result();
 
