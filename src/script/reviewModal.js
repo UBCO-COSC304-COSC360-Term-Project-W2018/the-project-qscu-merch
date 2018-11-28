@@ -9,13 +9,13 @@ $(document).ready(function () {
 
         $("reviewSubmitButton").attr("disabled", "disabled");
         e.preventDefault();
+
         // $sql = "INSERT INTO Reviews( uid, pNo, size, rating, comment, date, isEnabled) VALUES (?, ?, ?, ?, ?, ?, 1)";
 
         $.ajax({
             url: "action/setReview.php",
             method: "post",
-            data: {
-                "userRatingInput":$("#ratingInput").val(),
+            data: {"userRatingInput":$("#ratingInput").val(),
                 "userReviewInput":$("#reviewInput").val(),
                 "pNo": productNum,
                 "date": utcDate
