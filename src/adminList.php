@@ -131,7 +131,7 @@ validateAdminRequest($_SESSION);
                                             <span>Jeff Bridges</span>
                                         </td>
                                         <td>
-                                            <button>Search User</button>
+                                            <button onclick="onSearchUser(1)">Search User</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -154,10 +154,10 @@ validateAdminRequest($_SESSION);
                                             <span>Review Status:</span>
                                         </td>
                                         <td>
-                                            <span>Enabled</span>
+                                            <span class="17PostStatus" data-status="setPost" >Enabled</span>
                                         </td>
                                         <td>
-                                            <button>disable Review</button>
+                                            <button class="17PostChange" onclick="onChangePostStatus(1,7)">Disable</button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -182,7 +182,7 @@ validateAdminRequest($_SESSION);
                                                         <span>scarlett johansson</span>
                                                     </td>
                                                     <td>
-                                                        <button>Search User</button>
+                                                        <button onclick="onSearchUser(2)">Search User</button>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -202,10 +202,10 @@ validateAdminRequest($_SESSION);
                                                         <span>Review Status:</span>
                                                     </td>
                                                     <td>
-                                                        <span>Enabled</span>
+                                                        <span class="171PostStatus" data-status="unsetPost" >Enabled</span>
                                                     </td>
                                                     <td>
-                                                        <button>disable Review</button>
+                                                        <button class="171PostChange" onclick="onChangePostStatus(1,7,1)">Disable</button>
                                                     </td>
                                                 </tr>
                                                 <tr>

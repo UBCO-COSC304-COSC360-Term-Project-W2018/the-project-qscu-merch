@@ -30,7 +30,7 @@ if(isset($_SESSION['user'])){
 		</div>
 
         <div id="searchbar" class="hbotline">
-            <form id="searchform">
+            <form id="searchform" action="searchpage.php" method="get">
                 <label id="search" for="textinput">Search: </label>
                 <input type="text" name="Search" id="textinput"/>
                 <a href="searchpage.php" id="searchicon"><i class="fa fa-search"></i></a>

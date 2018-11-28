@@ -192,3 +192,10 @@ header.sticky.top {
 	margin-left: 0.1em;
 }
 
+.breadcrumb {
+	margin:0;
+	background-color:#183263;
+	color:#ffffff;
+	padding-bottom:0.5em;
+}
+

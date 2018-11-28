@@ -20,7 +20,6 @@ $city = "";
 $province = "";
 $country = "";
 $postalCode = "";
-$hiddenCardNumber = "";
 $creditCardNum = "";
 $creditCardExpiryDate = "";
 $ccv = "";
@@ -48,21 +47,21 @@ try {
     $profileImage = $profileImage1;
     $stmt->close();
 
-    $query = 'SELECT address, city, province, country, postalCode, creditCardNumber, cardExpiryDate FROM BillingInfo WHERE uid = ?';
+    $query = 'SELECT address, city, province, country, postalCode, creditCardNumber, cardExpiryDate, CCV FROM BillingInfo WHERE uid = ?';
     mysqli_report(MYSQLI_REPORT_ALL);
     $stmt = $mysql->prepare($query);
     $stmt->bind_param('i', $_SESSION['user']->id);
     $stmt->execute();
-    $stmt->bind_result($address1, $city1, $province1, $country1, $postalCode1, $creditCardNum1, $creditCardExpiryDate1);
+    $stmt->bind_result($address1, $city1, $province1, $country1, $postalCode1, $creditCardNum1, $creditCardExpiryDate1, $ccv1);
     if ($stmt->fetch()) {
         $address = $address1;
         $city = $city1;
         $province = $province1;
         $country = $country1;
         $postalCode = $postalCode1;
-        $hiddenCardNumber = $creditCardNum1;
-        $creditCardNum = str_repeat('*', strlen($creditCardNum1)) . substr($creditCardNum1, -4);
+        $creditCardNum = $creditCardNum1;
         $creditCardExpiryDate = $creditCardExpiryDate1;
+        $ccv = $ccv1;
     }
 
 
@@ -91,11 +90,6 @@ $headerSet = 1;
 
 
     <script src="script/imagePreview.js"></script>
-  
-  <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a>Profile</a>
-    </ul>
 
 </head>
 
@@ -103,16 +97,13 @@ $headerSet = 1;
 <!--    Body-->
 
 <body>
-<<<<<<< HEAD
 <?php include "header.php"?>
 
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
     <a>Profile</a>
 </ul>
-=======
-<?php include "header.php" ?>
->>>>>>> 3ff1ebd037bc423f1f2dd85d742eabb82f6d9a6f
+
 <main>
     <h2 id="welcome">
         <?php echo "Welcome " . $name . "!"; ?>
@@ -251,14 +242,13 @@ $headerSet = 1;
                     <input type="text" name="billingPostalCode" id="billingPostalCodeInput" maxlength="10" placeholder="" value="<?php echo $postalCode ?>" readonly>
 
                     <label for="cardNumberInput">Credit Card Number:</label>
-                    <input class="numberOnly" name="cardNumber" id="cardNumberInput" type="text" maxlength="19" placeholder="" value="<?php echo $creditCardNum ?>" readonly>
-                    <input type="hidden" name="hiddenCarNumber" value="<?php echo $hiddenCardNumber?>">
+                    <input class="numberOnly" name="cardNumber" id="cardNumberInput" type="password" maxlength="19" placeholder="" value="<?php echo $creditCardNum ?>" readonly>
 
                     <label for="expiryInput">Expiry Date:</label>
                     <input type="month" name="expiryInput" id="expiryInput" value="<?php echo $creditCardExpiryDate ?>" readonly>
 
                     <label for="securityCodeInput">Security Code:</label>
-                    <input class="numberOnly" type="text" name="securityCode" id="securityCodeInput" maxlength="4" placeholder="***" readonly>
+                    <input class="numberOnly" type="password" name="securityCode" id="securityCodeInput" maxlength="4" placeholder="***" value="<?php echo $ccv?>" readonly>
 
 
                     <input type="hidden" name="action" value="billingInfo">

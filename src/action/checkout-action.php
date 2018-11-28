@@ -197,7 +197,7 @@ try {
                     }
                     //TODO: REPLACE WITH REDIRECT
                     //TODO: REPLACE WITH ACTUAL URL REDIRECt RACHELLE USE RELATIVE
-                    header("Location: http://localhost/the-project-qscu-merch/src/orderError.php");
+                    header("Location: ../orderError.php");
 //                    echo "<p>Our apologies! We do not have the products that you want to order in our inventory</p>";
 //                    echo "<p><a href = \"../homeWithoutTables.php\" >Return Home</a></p>";
                 }
@@ -205,7 +205,7 @@ try {
                 //its all good to delete their cart
                 else {
 
-                    header("Location: http://localhost/the-project-qscu-merch/src/orderPlaced.php");
+                    header("Location: ../orderPlaced.php");
 //                    echo "<p>redirecting user</p>";
                 }
             }
