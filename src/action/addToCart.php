@@ -9,18 +9,14 @@ if(isset($_SESSION['user'])){
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-	$inputFields = array('pNo', 'size', 'quantity');
-	if(!(arrayExists($_POST, $inputFields) && arrayIsValidInput($_POST, $inputFields))){
-        //This is where I need you guys to somehow access this information
-        $_SESSION['hasError'] = true;
-        $_SESSION['errorType'] = "Form";
-        $_SESSION['errorMsg'] = "invalid form data";
-        header('location: ../homeWithoutTables.php');
-    }else{
+	$input = json_decode(file_get_contents('php://input'), true);
+	if(isset($input['pNo'])&&isset($input['size'])&&isset($input['quantity'])){
+		header('Content-Type: application/json');
+ 		echo json_encode($data);
 	    try{
-		   $pNo = $_POST["pNo"];
-		   $size = $_POST['size'];
-		   $quantity = $_POST['quantity'];
+		   $pNo = $input["pNo"];
+		   $size = $input['size'];
+		   $quantity = $input['quantity'];
 		   $pname = null;
 		   $cost = 0;
 		   
@@ -74,7 +70,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
 		                $pstmt->execute();
 
-		                header('location: ../singleProduct.php?pNo=' . $pNo);  
+		                //header('location: ../singleProduct.php?pNo=' . $pNo);  
 					}
 				}else{
 					$upd = "UPDATE HasCart SET quantity = ? WHERE pNo = ? AND size = ? AND uid = ?";
@@ -84,7 +80,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		                $updStmt ->bind_param('iisi', $quantity, $pNo, $size, $user);
 		                $updStmt->execute();
 	
-		                header('location: ../singleProduct.php?pNo=' . $pNo);  
+		                //header('location: ../singleProduct.php?pNo=' . $pNo);  
 
 					}
 	            }
@@ -98,9 +94,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	        }
 	        }
-	          header('location: ../singleProduct.php?pNo=' . $pNo);
+	          //header('location: ../singleProduct.php?pNo=' . $pNo);
 		}catch (Exception $e){
-            header('location: ../singleProduct.php?pNo=' . $pNo);      
+            //header('location: ../singleProduct.php?pNo=' . $pNo);      
         }finally{
 	       
             $con->close();
