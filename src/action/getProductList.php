@@ -6,11 +6,15 @@ include '../includes/db_credentials.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
-    if(isset($input['searchType']) && isset($input['searchInput'])){
+
+    $validSearchType = array('productName', 'productCategory', "");
+    $validBuildType = array('grouped','individual');
+    if(isset($input['searchType'])&& isset($input['searchInput']) && in_array($input['searchType'], $validSearchType)){
+
 
         $searchInput = $input['searchInput'];
         $searchType = $input['searchType'];
-        $buildType = 'grouped';
+        $buildType = (isset($input['buildType']) && in_array($input['buildType'], $validBuildType))? $input['buildType']: 'grouped';
 
 
         $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);

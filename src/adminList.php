@@ -3,7 +3,7 @@ include 'includes/init.php';
 include 'includes/validateAdmin.php';
 
 validateAdminRequest($_SESSION);
-$headerSet = 1;
+
 
 ?>
     <!DOCTYPE html>
@@ -11,6 +11,7 @@ $headerSet = 1;
     <head>
         <?php include 'includes/headerFooterHead.php' ?>
         <link rel="stylesheet" href="css/adminList.css">
+         <link rel="stylesheet" href="css/adminPosts.css">
         <script src="script/admin_controller.js"></script>
         <script src="script/imagePreview.js"></script>
     </head>
@@ -101,30 +102,33 @@ $headerSet = 1;
                 <div id="userContent">
                 </div>
             </div>
+            
+            
             <div class="hidden" id="postList">
                 <div>
-                    <h1>Reviews and Comments</h1>
+                    <h1 class="adminListHeaders">Reviews and Comments</h1>
                 </div>
+                <!-- TODO use a new postContent div for each product's reviews/comments -->
                 <div class="postContent">
                     <table class="productReview">
-                        <tr>
-                            <td colspan="5">
-                                <span>Product Name: <a href="">Product Name</a></span>
+	                    <tr>
+                            <td class="reviewFor" colspan="5">
+                                <span>Reviews for: <a href="">Product Name</a></span>
                             </td>
                         </tr>
                         <tr>
                             <td>
                                 <table class="userReview">
-                                    <tr>
-                                        <td>
+                                    <tr class="userInfo">
+                                        <th>
                                             <span>User Email:</span>
-                                        </td>
+                                        </th>
                                         <td>
                                             <span>Email@email.com</span>
                                         </td>
-                                        <td>
+                                        <th>
                                             <span>User Name:</span>
-                                        </td>
+                                        </th>
                                         <td>
                                             <span>Jeff Bridges</span>
                                         </td>
@@ -132,14 +136,7 @@ $headerSet = 1;
                                             <button onclick="onSearchUser(1)">Search User</button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <span>Review Tile:</span>
-                                        </td>
-                                        <td colspan="4">
-                                            <span>This is a product</span>
-                                        </td>
-                                    </tr>
+                                    
                                     <tr>
                                         <td>
                                             <span>Rating: 5/5</span>
@@ -159,36 +156,40 @@ $headerSet = 1;
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="5">
-                                            This is a product review, is good products
+                                        <td>
+                                            <span>Review Title:</span>
+                                        </td>
+                                        <td colspan="4">
+                                            <span>This is a product</span>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td class="longText" colspan="5">
+                                            <span>This is a product review, is good products. I'm making this review longer, since I need to test to see how the wrapping of the text works. Hi mom.</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+	                                    <td colspan="5" class="commentsFor">Review Comments:</td>
+                                    </tr>
+                                    <!-- TODO use a new row for each comment -->
                                     <tr>
                                         <td colspan="5">
                                             <table class="userComment">
                                                 <tr>
-                                                    <td>
+                                                    <th>
                                                         <span>User Email:</span>
-                                                    </td>
+                                                    </th>
                                                     <td>
                                                         <span>notemail@email.com</span>
                                                     </td>
-                                                    <td>
+                                                    <th>
                                                         <span>User Name:</span>
-                                                    </td>
+                                                    </th>
                                                     <td>
                                                         <span>scarlett johansson</span>
                                                     </td>
                                                     <td>
                                                         <button onclick="onSearchUser(2)">Search User</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span>Comment Tile:</span>
-                                                    </td>
-                                                    <td colspan="4">
-                                                        <span>Your Review sucks</span>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -206,6 +207,15 @@ $headerSet = 1;
                                                         <button class="171PostChange" onclick="onChangePostStatus(1,7,1)">Disable</button>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>
+                                                        <span>Comment Title:</span>
+                                                    </td>
+                                                    <td class="longText" colspan="4">
+                                                        <span>Your Review sucks</span>
+                                                    </td>
+                                                </tr>
+                                                
                                                 <tr>
                                                     <td rowspan="3" colspan="5">
                                                         write more in your review
