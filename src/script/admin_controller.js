@@ -179,19 +179,19 @@ function onChangePostStatus(uid, pno, cid = null) {
 
             if (status.data('status') === 'setPost') {
                 action = 'unsetPost';
-                btnName = 'Enable';
-                statusName = 'Disabled'
-            } else {
-                action = 'setPost';
                 btnName = 'Disable';
                 statusName = 'Enabled';
+            } else {
+                action = 'setPost';
+                btnName = 'Enable';
+                statusName = 'Disabled';
             }
 
             status.data('status', action);
             status.text(statusName);
             btn.text(btnName);
         }).fail(function (jqXHR) {
-            console.log(jqXHR);
+        console.log(jqXHR);
 
     })
 
@@ -325,9 +325,13 @@ function getPostList(search = "", searchType = "") {
     $.post('action/getPostList.php', JSON.stringify(obj))
         .done(function (data) {
             console.log(data);
+            let commentTable = $('#postContent');
+            commentTable.empty();
 
-            // let userTable = $("#postContent");
-            // userTable.empty();
+            data.forEach(function (item, index, array) {
+                commentTable.append(buildReview(item));
+            })
+
         }).fail(function (jqXHR) {
         console.log("Error: " + jqXHR.status);
     })
@@ -370,7 +374,7 @@ function buildUserItem(json) {
 
     let name = $('<td>Name:</td><td colspan="2">' + json.firstName + ' ' + json.lastName + '</td>');
     //     <td>Name:</td>    <td colspan="2">Rachelle Gelden</td>
-    let email = $('<td>Email:</td><td>' + json.userEmail + '</td>')
+    let email = $('<td>Email:</td><td> ' + json.userEmail + '</td>')
     // <td>Email:</td>      <td>rachelle@gelden.com</td>
 
 
@@ -488,7 +492,6 @@ function fixJsonBecausePhp(json) {
 
 function buildProductItem(json) {
 
-
     let table = $("<table class='productItem'>");
     //<table class="productItem">
     let row = $('<tr class="productHeaders"></tr>');
@@ -595,6 +598,350 @@ function buildProductItem(json) {
     table.append(row);
 
     return table;
-
 }
 
+
+function buildReview(json) {
+    let head = json.review.uid+''+json.review.pno;
+
+    let ptable = $('<table class="productReview"></table>');
+    // <table class="productReview">
+
+    let prow = $('<tr></tr>');
+    //  <tr>
+
+    let pcell = $('<td class="reviewFor" colspan="5"><span>Reviews for: <a href="">'+json.review.pname+'</a></span></td>');
+    //  <td class="reviewFor" colspan="5"><span>Reviews for: <a href="">Product Name</a></span></td>
+
+    prow.append(pcell);
+
+    ptable.append(prow);
+    // </tr>
+
+    prow = $('<tr></tr>');
+    // <tr>
+    pcell = $('<td></td>');
+    // <td>
+
+    let table = $('<table class="userReview"></table>');
+    //     <table class="userReview">
+
+    let row = $('<tr class="userInfo">');
+    //  <tr class="userInfo">
+
+
+    let cell1 = $('<th><span>User Email:</span></th>');
+    //  <th><span>User Email:</span></th>
+
+    let cell2 = $('<td><span>'+json.review.email+'</span></td>');
+    //      <td><span>Email@email.com</span></td>
+    let cell3 = $('<th><span>User Name:</span></th>');
+    //<th><span>User Name:</span></th>
+    let cell4 = $('<td><span>'+json.review.fname+' '+json.review.lname+'</span></td>');
+    //      <td><span>Jeff Bridges</span></td>
+
+    let cell5 = $('<td><button onclick="onSearchUser('+json.review.uid+')">Search User</button></td>');
+//    <td><button onclick="onSearchUser(1)">Search User</button></td>
+
+
+    row.append(cell1);
+    row.append(cell2);
+    row.append(cell3);
+    row.append(cell4);
+    row.append(cell5);
+
+    table.append(row);
+    //      </tr>
+
+
+
+
+    let statusTextbtn = (json.isEnabled)?'Enable':'Disable';
+    let statusText = (json.isEnabled)?'Disabled':'Enabled';
+
+    row = $('<tr></tr>');
+    // <tr>
+
+    cell1 = $('<td><span>Rating: '+json.review.rating+'/5</span></td>');
+    //<td><span>Rating: 5/5</span></td>
+    cell2 = $('<td><span>Date Posted: '+json.review.date+'</span></td>');
+    //<td><span>Date Posted: 2018-11-23</span></td>
+    cell3 = $('<td><span>Review Status:</span></td>');
+    //      <td><span>Review Status:</span></td>
+
+    let status = (json.isEnabled)?'unsetPost':'setPost';
+    cell4 = $('<td><span class="'+head+'PostStatus" data-status="'+status+'" >'+statusText+'</span></td>');
+    //<td><span class="17PostStatus" data-status="setPost" >Enabled</span></td>
+    cell5 = $('<td><button class="'+head+'PostChange" onclick="onChangePostStatus('+json.review.uid+','+json.review.pno+')">'+statusTextbtn+'</button></td>');
+    //      <td><button class="17PostChange" onclick="onChangePostStatus(1,7)">Disable</button></td>
+
+
+    row.append(cell1);
+    row.append(cell2);
+    row.append(cell3);
+    row.append(cell4);
+    row.append(cell5);
+
+
+    table.append(row);
+    //      </tr>
+
+
+
+    row = $('<tr></tr>');
+    //      <tr>
+
+
+    cell1 = $('<td><span>Review Title:</span></td>');
+    //      <td><span>Review Title:</span></td>
+
+
+    cell2 = $('<td colspan="4"><span>'+json.review.title+'</span></td>');
+    //      <td colspan="4"><span>This is a product</span></td>
+
+
+    row.append(cell1);
+    row.append(cell2);
+
+
+    table.append(row);
+    //      </tr>
+
+
+    row = $('<tr></tr>');
+    //      <tr>
+
+    cell1 = $('<td class="longText" colspan="5"><span>'+json.review.comment+'</span></td>');
+//      <td class="longText" colspan="5"><span> to see how the wra</span></td>
+
+
+    row.append(cell1);
+
+    table.append(row);
+//      </tr>
+
+
+    row = $('<tr></tr>');
+    //      <tr>
+
+
+    cell1 = $('<td colspan="5" class="commentsFor"><span>Review Comments:</span></td>');
+//      <td colspan="5" class="commentsFor"><span>Review Comments:</span></td>
+
+
+    row.append(cell1);
+    table.append(row);
+//      </tr>
+
+
+    //new row foreach comment
+    //  <tr class="addMoreUserCommentsHere">
+    //  <td colspan="5">
+    json.comments.forEach(function (item,index,array) {
+        table.append(buildComment(item))
+    });
+    //<td></td>
+    //<tr></tr>
+
+    pcell.append(table);
+
+    prow.append(pcell);
+    //  </td>
+
+    ptable.append(prow);
+    //  </tr>
+
+    return ptable
+    //  </table>
+}
+
+
+
+
+
+
+// <table class="productReview">
+
+//  <tr>
+//  <td class="reviewFor" colspan="5"><span>Reviews for: <a href="">Product Name</a></span></td>
+//  </tr>
+//  <tr>
+//  <td>
+//     <table class="userReview">
+//      <tr class="userInfo">
+//      <th><span>User Email:</span></th>
+//      <td><span>Email@email.com</span></td>
+//      <th><span>User Name:</span></th>
+//      <td><span>Jeff Bridges</span></td>
+//      <td><button onclick="onSearchUser(1)">Search User</button></td>
+//      </tr>
+//      <tr>
+//      <td><span>Rating: 5/5</span></td>
+//      <td><span>Date Posted: 2018-11-23</span></td>
+//      <td><span>Review Status:</span></td>
+//      <td><span class="17PostStatus" data-status="setPost" >Enabled</span></td>
+//      <td><button class="17PostChange" onclick="onChangePostStatus(1,7)">Disable</button></td>
+//      </tr>
+//      <tr>
+//      <td><span>Review Title:</span></td>
+//      <td colspan="4"><span>This is a product</span></td>
+//      </tr>
+//      <tr>
+//      <td class="longText" colspan="5"><span> to see how the wra</span></td>
+//      </tr>
+//      <tr>
+//      <td colspan="5" class="commentsFor"><span>Review Comments:</span></td>
+//      </tr>
+    //row will be returned by comment builder
+//      </table>
+
+
+//  </td>
+//  </tr>
+//  </table>
+
+
+
+
+
+function buildComment(json) {
+
+    let prow = $('<tr class="addMoreUserCommentsHere">');
+    //  <tr class="addMoreUserCommentsHere">
+    let pcell = $('<td  colspan="5"></td>');
+    //<td  colspan="5"></td>
+
+    let table = $('<table class="userComment"></table>');
+// <table class="userComment">
+
+
+    let head = json.uid+''+json.pno+''+json.commentId;
+    let row = $('<tr></tr>');
+    // <tr>
+
+    let cell1 = $('<th><span>User Email:</span></th>');
+    // <th><span>User Email:</span></th>
+
+    let cell2 = $('<td><span>'+json.email+'</span></td>');
+    // <td><span>notemail@email.com</span></td>
+
+    let cell3 = $('<th><span>User Name:</span></th>');
+    // <th><span>User Name:</span></th>
+
+    let cell4 = $('<td><span>'+json.fname+' '+json.lname+'</span></td>');
+    // <td><span>scarlett johansson</span></td>
+
+    let cell5 = $('<td><button onclick="onSearchUser('+json.leftby+')">Search User</button></td>');
+    // <td><button onclick="onSearchUser(2)">Search User</button></td>
+
+
+
+    row.append(cell1);
+    row.append(cell2);
+    row.append(cell3);
+    row.append(cell4);
+    row.append(cell5);
+
+    // </tr>
+    table.append(row);
+
+
+    row = $('<tr></tr>');
+    // <tr>
+
+
+    cell1 = $('<td colspan="2"><span>Date Posted: '+json.date+'</span></td>');
+    // <td colspan="2"><span>Date Posted: 2018-11-24</span></td>
+
+    cell2 = $('<td><span>Review Status:</span></td>');
+    // <td><span>Review Status:</span></td>
+
+    let status = (json.isEnabled)?'unsetPost':'setPost';
+
+
+    let statusText = (json.isEnabled)?'Enabled':'Disabled';
+    cell3 = $('<td><span class="'+head+'PostStatus" data-status="'+status+'" >'+statusText+'</span></td>');
+    // <td><span class="171PostStatus" data-status="unsetPost" >Enabled</span></td>
+
+    let statusTextbtn = (json.isEnabled)?'Disable':'Enable';
+    cell4 = $('<td><button class="'+head+'PostChange" onclick="onChangePostStatus('+json.uid+','+json.pno+','+json.commentId+')">'+statusTextbtn+'</button></td>');
+    // <td><button class="171PostChange" onclick="onChangePostStatus(1,7,1)">Disable</button></td>
+
+
+    row.append(cell1);
+    row.append(cell2);
+    row.append(cell3);
+    row.append(cell4);
+
+    // </tr>
+    table.append(row);
+
+
+    row = $('<tr></tr>');
+    // <tr>
+
+    cell1 = $('<td><span>Comment Title:</span></td>');
+    // <td><span>Comment Title:</span></td>
+
+
+    cell2 = $('<td class="longText" colspan="4"><span>'+json.title+'</span></td>');
+    // <td class="longText" colspan="4"><span>Your Review sucks</span></td>
+
+
+    row.append(cell1);
+    row.append(cell2);
+
+
+    // </tr>
+    table.append(row);
+
+
+    row = $('<tr></tr>');
+    // <tr>
+
+    cell1 = $('<td rowspan="3" colspan="5"><span>'+json.comment+'</span></td>');
+    // <td rowspan="3" colspan="5"><span>this is a comment</span></td>
+
+    row.append(cell1);
+    table.append(row);
+    // </tr>
+
+
+    pcell.append(table);
+    // </table>
+
+    prow.append(pcell);
+    //</td>
+
+    return prow;
+    //</tr>
+}
+
+
+
+//  <tr class="addMoreUserCommentsHere">
+//  <td colspan="5">
+//      <table class="userComment">
+//      <tr>
+//      <th><span>User Email:</span></th>
+//      <td><span>notemail@email.com</span></td>
+//      <th><span>User Name:</span></th>
+//      <td><span>scarlett johansson</span></td>
+//      <td><button onclick="onSearchUser(2)">Search User</button></td>
+//      </tr>
+//      <tr>
+//      <td colspan="2"><span>Date Posted: 2018-11-24</span></td>
+//      <td><span>Review Status:</span></td>
+//      <td><span class="171PostStatus" data-status="unsetPost" >Enabled</span></td>
+//      <td><button class="171PostChange" onclick="onChangePostStatus(1,7,1)">Disable</button></td>
+//      </tr>
+//      <tr>
+//      <td><span>Comment Title:</span></td>
+//      <td class="longText" colspan="4"><span>Your Review sucks</span></td>
+//      </tr>
+//      <tr>
+//      <td rowspan="3" colspan="5"> write more in your review</td>
+//      </tr>
+//      </table>
+//  </td>
+//  </tr>
