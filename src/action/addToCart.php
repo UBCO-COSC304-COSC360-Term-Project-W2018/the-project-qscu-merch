@@ -9,7 +9,7 @@ if(isset($_SESSION['user'])){
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-	$inputFields = array('prodNum', 'size', 'quantity');
+	$inputFields = array('pNo', 'size', 'quantity');
 	if(!(arrayExists($_POST, $inputFields) && arrayIsValidInput($_POST, $inputFields))){
         //This is where I need you guys to somehow access this information
         $_SESSION['hasError'] = true;
@@ -18,11 +18,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         header('location: ../homeWithoutTables.php');
     }else{
 	    try{
-		   $pNo = $_POST["prodNum"];
+		   $pNo = $_POST["pNo"];
 		   $size = $_POST['size'];
 		   $quantity = $_POST['quantity'];
 		   $pname = null;
-		   $price = null;
+		   $cost = 0;
 		   
 		   $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
@@ -40,12 +40,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				$pstmt1->bind_result($name, $cost);
 
 	            while($pstmt1->fetch()){
+		            $pname = $name;
+		            $price = $cost;
 	                //should only be one row
-	                $pname = $name;
-	                $price = $cost;
 	            }
+	        
 	            
-            }
+            
             $numRows;
             $quantityToUpdate;
             
@@ -88,19 +89,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 					}
 	            }
 	        } else {
-	            if(isset($price) && isset($pname)) {
+	          
 	                //add to object cart
-	
-	                $uCartObj = $_SESSION['userCart'];
-	
+	                $uCartObj = $_SESSION['cart'];
+					
 	                $uCartObj->addItem($pNo, $pname, $size, $quantity, $price);
-	                
-	            }
-	            header('location: ../singleProduct.php?pNo=' . $pNo);  
+	              
+
 	        }
+	        }
+	          header('location: ../singleProduct.php?pNo=' . $pNo);
 		}catch (Exception $e){
             header('location: ../singleProduct.php?pNo=' . $pNo);      
         }finally{
+	       
             $con->close();
             die();
         }
