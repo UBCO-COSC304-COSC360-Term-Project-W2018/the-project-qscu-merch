@@ -1,12 +1,16 @@
 <?php
 include "../includes/session.php";
+
+$cart = new userCart();
 if(isset($_SESSION['user'])){
     $_SESSION['user'] = null;
+    if(isset($_SESSION['cart'])){
+        $cart = $_SESSION['cart'];
+    }
 }
+session_destroy();
+session_start();
 
-if (isset($_SESSION['kicked_out']) and $_SESSION['kicked_out'] === true ) {
-    header('Location: http://localhost/the-project-qscu-merch/src/bannedUser.php');
-    exit();
-}
+$_SESSION['cart'] = $cart;
 
 header('location: ../homeWithoutTables.php');
