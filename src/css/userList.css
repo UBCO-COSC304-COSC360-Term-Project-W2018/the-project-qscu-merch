@@ -1,0 +1,36 @@
+.profileImage{
+	max-height: 100px;
+	max-width: 100px;
+	margin-top:0.2em;
+}
+
+.userTable{
+	text-align: center;
+		white-space: nowrap;
+}
+
+.userTable button{
+	margin:0.5em;
+}
+
+.userTable td{
+	border-right: 3px solid #183263;
+	border-bottom: 3px solid #183263;
+	
+}
+
+.userTable th{
+	padding: 0em 0.4em 0em 0.4em;
+	border-right: 0px solid #183263;
+	border-bottom: 3px solid #183263;
+
+	}
+.userTable{
+	border: 3px solid #183263;
+	border-collapse: collapse;
+	margin-bottom: 1em;
+}
+
+.onLeft{
+	text-align: left;
+}

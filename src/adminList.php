@@ -12,6 +12,7 @@ validateAdminRequest($_SESSION);
         <?php include 'includes/headerFooterHead.php' ?>
         <link rel="stylesheet" href="css/adminList.css">
          <link rel="stylesheet" href="css/adminPosts.css">
+         <link rel="stylesheet" href="css/userList.css">
         <script src="script/admin_controller.js"></script>
         <script src="script/imagePreview.js"></script>
     </head>
