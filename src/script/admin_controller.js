@@ -179,19 +179,19 @@ function onChangePostStatus(uid, pno, cid = null) {
 
             if (status.data('status') === 'setPost') {
                 action = 'unsetPost';
-                btnName = 'Enable';
-                statusName = 'Disabled'
-            } else {
-                action = 'setPost';
                 btnName = 'Disable';
                 statusName = 'Enabled';
+            } else {
+                action = 'setPost';
+                btnName = 'Enable';
+                statusName = 'Disabled';
             }
 
             status.data('status', action);
             status.text(statusName);
             btn.text(btnName);
         }).fail(function (jqXHR) {
-            console.log(jqXHR);
+        console.log(jqXHR);
 
     })
 
@@ -325,9 +325,13 @@ function getPostList(search = "", searchType = "") {
     $.post('action/getPostList.php', JSON.stringify(obj))
         .done(function (data) {
             console.log(data);
+            let commentTable = $('#postContent');
+            commentTable.empty();
 
-            // let userTable = $("#postContent");
-            // userTable.empty();
+            data.forEach(function (item, index, array) {
+                commentTable.append(buildReview(item));
+            })
+
         }).fail(function (jqXHR) {
         console.log("Error: " + jqXHR.status);
     })
@@ -363,14 +367,15 @@ function buildUserItem(json) {
     let row = $('<tr></tr>');
     //     <tr>
 
-    let image = $('<td class="' + json.userid + 'ProfileImageRow" rowspan="2" colspan="2"><img class="' + json.userid + 'ProfileImage" src="data:' + json.contentType + ';base64,' + json.profilePic + '" alt="User Profile Image"></td>');
+    let image = $('<td class="' + json.userid + 'ProfileImageRow" rowspan="2" ><img class="profileImage" class="' + json.userid + 'ProfileImage" src="data:' + json.contentType + ';base64,' + json.profilePic + '" alt="User Profile Image"></td>');
     //     <td class="<uid>ProfileImage" rowspan="2" colspan="2">
     //     <img class="<uid>ProfileImage" src="data:image/jpeg;base64,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" alt="User Profile Image">
 
 
-    let name = $('<td>Name:</td><td colspan="2">' + json.firstName + ' ' + json.lastName + '</td>');
+    let name = $('<th>Name:</th><td class="onLeft" colspan="2">' + json.firstName + ' ' + json.lastName + '</td>');
     //     <td>Name:</td>    <td colspan="2">Rachelle Gelden</td>
-    let email = $('<td>Email:</td><td>' + json.userEmail + '</td>')
+    let email = $('<th>Email:</th><td class="onLeft">' + json.userEmail + '</td>')
+
     // <td>Email:</td>      <td>rachelle@gelden.com</td>
 
 
@@ -393,7 +398,7 @@ function buildUserItem(json) {
         text = "Admin"
     }
 
-    let stat = $('<td>Account Status:</td><td><span class="' + json.userid + 'UserStatus">' + text + '</span></td>');
+    let stat = $('<th>Account Status:</th><td class="onLeft"><span class="' + json.userid + 'UserStatus">' + text + '</span></td>');
     // <td>Account Status:</td>   <td><span class="<uid>UserStatus">Admin</span></td>
 
 
@@ -415,7 +420,7 @@ function buildUserItem(json) {
     row = $('<tr></tr>');
     // <tr>
 
-    cells1 = $('<td colspan="2"><button onclick="onRemoveImage(' + json.userid + ')">Remove Image</button></td>');
+    cells1 = $('<td><button onclick="onRemoveImage(' + json.userid + ')">Remove Image</button></td>');
     // <td colspan="2"><button onclick="onRemoveImage(<uid>)">Remove Image</button></td>
 
     text = (json.isBanned) ? 'Unban User' : 'Ban User';
@@ -487,7 +492,6 @@ function fixJsonBecausePhp(json) {
 }
 
 function buildProductItem(json) {
-
 
     let table = $("<table class='productItem'>");
     //<table class="productItem">
@@ -595,6 +599,350 @@ function buildProductItem(json) {
     table.append(row);
 
     return table;
-
 }
 
+
+function buildReview(json) {
+    let head = json.review.uid+''+json.review.pno;
+
+    let ptable = $('<table class="productReview"></table>');
+    // <table class="productReview">
+
+    let prow = $('<tr></tr>');
+    //  <tr>
+
+    let pcell = $('<td class="reviewFor" colspan="5"><span>Reviews for: <a href="">'+json.review.pname+'</a></span></td>');
+    //  <td class="reviewFor" colspan="5"><span>Reviews for: <a href="">Product Name</a></span></td>
+
+    prow.append(pcell);
+
+    ptable.append(prow);
+    // </tr>
+
+    prow = $('<tr></tr>');
+    // <tr>
+    pcell = $('<td></td>');
+    // <td>
+
+    let table = $('<table class="userReview"></table>');
+    //     <table class="userReview">
+
+    let row = $('<tr class="userInfo">');
+    //  <tr class="userInfo">
+
+
+    let cell1 = $('<th><span>User Email:</span></th>');
+    //  <th><span>User Email:</span></th>
+
+    let cell2 = $('<td><span>'+json.review.email+'</span></td>');
+    //      <td><span>Email@email.com</span></td>
+    let cell3 = $('<th><span>User Name:</span></th>');
+    //<th><span>User Name:</span></th>
+    let cell4 = $('<td><span>'+json.review.fname+' '+json.review.lname+'</span></td>');
+    //      <td><span>Jeff Bridges</span></td>
+
+    let cell5 = $('<td><button onclick="onSearchUser('+json.review.uid+')">Search User</button></td>');
+//    <td><button onclick="onSearchUser(1)">Search User</button></td>
+
+
+    row.append(cell1);
+    row.append(cell2);
+    row.append(cell3);
+    row.append(cell4);
+    row.append(cell5);
+
+    table.append(row);
+    //      </tr>
+
+
+
+
+    let statusTextbtn = (json.isEnabled)?'Enable':'Disable';
+    let statusText = (json.isEnabled)?'Disabled':'Enabled';
+
+    row = $('<tr></tr>');
+    // <tr>
+
+    cell1 = $('<td><span>Rating: '+json.review.rating+'/5</span></td>');
+    //<td><span>Rating: 5/5</span></td>
+    cell2 = $('<td><span>Date Posted: '+json.review.date+'</span></td>');
+    //<td><span>Date Posted: 2018-11-23</span></td>
+    cell3 = $('<td><span>Review Status:</span></td>');
+    //      <td><span>Review Status:</span></td>
+
+    let status = (json.isEnabled)?'unsetPost':'setPost';
+    cell4 = $('<td><span class="'+head+'PostStatus" data-status="'+status+'" >'+statusText+'</span></td>');
+    //<td><span class="17PostStatus" data-status="setPost" >Enabled</span></td>
+    cell5 = $('<td><button class="'+head+'PostChange" onclick="onChangePostStatus('+json.review.uid+','+json.review.pno+')">'+statusTextbtn+'</button></td>');
+    //      <td><button class="17PostChange" onclick="onChangePostStatus(1,7)">Disable</button></td>
+
+
+    row.append(cell1);
+    row.append(cell2);
+    row.append(cell3);
+    row.append(cell4);
+    row.append(cell5);
+
+
+    table.append(row);
+    //      </tr>
+
+
+
+    row = $('<tr></tr>');
+    //      <tr>
+
+
+    cell1 = $('<td><span>Review Title:</span></td>');
+    //      <td><span>Review Title:</span></td>
+
+
+    cell2 = $('<td colspan="4"><span>'+json.review.title+'</span></td>');
+    //      <td colspan="4"><span>This is a product</span></td>
+
+
+    row.append(cell1);
+    row.append(cell2);
+
+
+    table.append(row);
+    //      </tr>
+
+
+    row = $('<tr></tr>');
+    //      <tr>
+
+    cell1 = $('<td class="longText" colspan="5"><span>'+json.review.comment+'</span></td>');
+//      <td class="longText" colspan="5"><span> to see how the wra</span></td>
+
+
+    row.append(cell1);
+
+    table.append(row);
+//      </tr>
+
+
+    row = $('<tr></tr>');
+    //      <tr>
+
+
+    cell1 = $('<td colspan="5" class="commentsFor"><span>Review Comments:</span></td>');
+//      <td colspan="5" class="commentsFor"><span>Review Comments:</span></td>
+
+
+    row.append(cell1);
+    table.append(row);
+//      </tr>
+
+
+    //new row foreach comment
+    //  <tr class="addMoreUserCommentsHere">
+    //  <td colspan="5">
+    json.comments.forEach(function (item,index,array) {
+        table.append(buildComment(item))
+    });
+    //<td></td>
+    //<tr></tr>
+
+    pcell.append(table);
+
+    prow.append(pcell);
+    //  </td>
+
+    ptable.append(prow);
+    //  </tr>
+
+    return ptable
+    //  </table>
+}
+
+
+
+
+
+
+// <table class="productReview">
+
+//  <tr>
+//  <td class="reviewFor" colspan="5"><span>Reviews for: <a href="">Product Name</a></span></td>
+//  </tr>
+//  <tr>
+//  <td>
+//     <table class="userReview">
+//      <tr class="userInfo">
+//      <th><span>User Email:</span></th>
+//      <td><span>Email@email.com</span></td>
+//      <th><span>User Name:</span></th>
+//      <td><span>Jeff Bridges</span></td>
+//      <td><button onclick="onSearchUser(1)">Search User</button></td>
+//      </tr>
+//      <tr>
+//      <td><span>Rating: 5/5</span></td>
+//      <td><span>Date Posted: 2018-11-23</span></td>
+//      <td><span>Review Status:</span></td>
+//      <td><span class="17PostStatus" data-status="setPost" >Enabled</span></td>
+//      <td><button class="17PostChange" onclick="onChangePostStatus(1,7)">Disable</button></td>
+//      </tr>
+//      <tr>
+//      <td><span>Review Title:</span></td>
+//      <td colspan="4"><span>This is a product</span></td>
+//      </tr>
+//      <tr>
+//      <td class="longText" colspan="5"><span> to see how the wra</span></td>
+//      </tr>
+//      <tr>
+//      <td colspan="5" class="commentsFor"><span>Review Comments:</span></td>
+//      </tr>
+    //row will be returned by comment builder
+//      </table>
+
+
+//  </td>
+//  </tr>
+//  </table>
+
+
+
+
+
+function buildComment(json) {
+
+    let prow = $('<tr class="addMoreUserCommentsHere">');
+    //  <tr class="addMoreUserCommentsHere">
+    let pcell = $('<td  colspan="5"></td>');
+    //<td  colspan="5"></td>
+
+    let table = $('<table class="userComment"></table>');
+// <table class="userComment">
+
+
+    let head = json.uid+''+json.pno+''+json.commentId;
+    let row = $('<tr></tr>');
+    // <tr>
+
+    let cell1 = $('<th><span>User Email:</span></th>');
+    // <th><span>User Email:</span></th>
+
+    let cell2 = $('<td><span>'+json.email+'</span></td>');
+    // <td><span>notemail@email.com</span></td>
+
+    let cell3 = $('<th><span>User Name:</span></th>');
+    // <th><span>User Name:</span></th>
+
+    let cell4 = $('<td><span>'+json.fname+' '+json.lname+'</span></td>');
+    // <td><span>scarlett johansson</span></td>
+
+    let cell5 = $('<td><button onclick="onSearchUser('+json.leftby+')">Search User</button></td>');
+    // <td><button onclick="onSearchUser(2)">Search User</button></td>
+
+
+
+    row.append(cell1);
+    row.append(cell2);
+    row.append(cell3);
+    row.append(cell4);
+    row.append(cell5);
+
+    // </tr>
+    table.append(row);
+
+
+    row = $('<tr></tr>');
+    // <tr>
+
+
+    cell1 = $('<td colspan="2"><span>Date Posted: '+json.date+'</span></td>');
+    // <td colspan="2"><span>Date Posted: 2018-11-24</span></td>
+
+    cell2 = $('<td><span>Review Status:</span></td>');
+    // <td><span>Review Status:</span></td>
+
+    let status = (json.isEnabled)?'unsetPost':'setPost';
+
+
+    let statusText = (json.isEnabled)?'Enabled':'Disabled';
+    cell3 = $('<td><span class="'+head+'PostStatus" data-status="'+status+'" >'+statusText+'</span></td>');
+    // <td><span class="171PostStatus" data-status="unsetPost" >Enabled</span></td>
+
+    let statusTextbtn = (json.isEnabled)?'Disable':'Enable';
+    cell4 = $('<td><button class="'+head+'PostChange" onclick="onChangePostStatus('+json.uid+','+json.pno+','+json.commentId+')">'+statusTextbtn+'</button></td>');
+    // <td><button class="171PostChange" onclick="onChangePostStatus(1,7,1)">Disable</button></td>
+
+
+    row.append(cell1);
+    row.append(cell2);
+    row.append(cell3);
+    row.append(cell4);
+
+    // </tr>
+    table.append(row);
+
+
+    row = $('<tr></tr>');
+    // <tr>
+
+    cell1 = $('<td><span>Comment Title:</span></td>');
+    // <td><span>Comment Title:</span></td>
+
+
+    cell2 = $('<td class="longText" colspan="4"><span>'+json.title+'</span></td>');
+    // <td class="longText" colspan="4"><span>Your Review sucks</span></td>
+
+
+    row.append(cell1);
+    row.append(cell2);
+
+
+    // </tr>
+    table.append(row);
+
+
+    row = $('<tr></tr>');
+    // <tr>
+
+    cell1 = $('<td rowspan="3" colspan="5"><span>'+json.comment+'</span></td>');
+    // <td rowspan="3" colspan="5"><span>this is a comment</span></td>
+
+    row.append(cell1);
+    table.append(row);
+    // </tr>
+
+
+    pcell.append(table);
+    // </table>
+
+    prow.append(pcell);
+    //</td>
+
+    return prow;
+    //</tr>
+}
+
+
+
+//  <tr class="addMoreUserCommentsHere">
+//  <td colspan="5">
+//      <table class="userComment">
+//      <tr>
+//      <th><span>User Email:</span></th>
+//      <td><span>notemail@email.com</span></td>
+//      <th><span>User Name:</span></th>
+//      <td><span>scarlett johansson</span></td>
+//      <td><button onclick="onSearchUser(2)">Search User</button></td>
+//      </tr>
+//      <tr>
+//      <td colspan="2"><span>Date Posted: 2018-11-24</span></td>
+//      <td><span>Review Status:</span></td>
+//      <td><span class="171PostStatus" data-status="unsetPost" >Enabled</span></td>
+//      <td><button class="171PostChange" onclick="onChangePostStatus(1,7,1)">Disable</button></td>
+//      </tr>
+//      <tr>
+//      <td><span>Comment Title:</span></td>
+//      <td class="longText" colspan="4"><span>Your Review sucks</span></td>
+//      </tr>
+//      <tr>
+//      <td rowspan="3" colspan="5"> write more in your review</td>
+//      </tr>
+//      </table>
+//  </td>
+//  </tr>
