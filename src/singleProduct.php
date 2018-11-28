@@ -169,6 +169,7 @@ if ($stmt = $con->prepare($sql)) {
             </div>
             <div class="modal-body">
                 <input type="hidden" id="reviewPNO" value="<?php echo $pNo; ?>">
+                <input type="hidden" id="reviewUID" value="<?php echo $user; ?>">
                 <h2> Overall Rating</h2>
                 <!-- added drop down rating -->
 
@@ -194,7 +195,8 @@ if ($stmt = $con->prepare($sql)) {
             </div>
             <div class="modal-footer">
                 <div class="modal-submit">
-                    <input title="Submit Form" id="reviewSubmitButton" value="Submit">
+                    <div id="statusHolder"></div>
+                    <button title="Submit Form" id="reviewSubmitButton" value="Submit">Submit</button>
                     </form>
                 </div>
                 <h3 class="footerNote">We value your feedback!</h3>

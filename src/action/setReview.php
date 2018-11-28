@@ -2,7 +2,6 @@
 include("../includes/init.php");
 if(isset($_SESSION['user'])){
     $user = sanitizeInput($_SESSION['user']->id);
-
 }
 if(isset($_POST['userRatingInput']) && isset($_POST['userReviewInput']) ){
     $json = new stdClass();

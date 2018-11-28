@@ -1,6 +1,9 @@
 $(document).ready(function () {
 
     var productNum = $("#reviewPNO").val();
+    var userId = $("#reviewUID").val();
+    var utcDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+
 
     $("#reviewSubmitButton").on('click', function (e) {
 
@@ -8,15 +11,17 @@ $(document).ready(function () {
         e.preventDefault();
         var ratingField = document.getElementsByClassName("ratingInput");
         var reviewField = document.getElementsByClassName("reviewInput");
+        // $sql = "INSERT INTO Reviews( uid, pNo, size, rating, comment, date, isEnabled) VALUES (?, ?, ?, ?, ?, ?, 1)";
 
         $.ajax({
             url:"action/setReview.php",
             method:"post",
-            data: "pNo="+productNum,
-            "rating="+$(ratingField).val(),
-            "review="+$(reviewField).val(),
-
-            // data:"pNo="+$(emailField).val(),
+            data: "pNo="+userId + "&" +
+                "pNo="+productNum + "&" +
+                "rating="+$(ratingField).val() + "&" +
+                "review="+$(reviewField).val() + "&" +
+                "date="+$(utcDate).val(), //TODO: is this date format okay? @jasper
+            // "size="+NULL + "&" + TODO: Is size a thing?
             beforeSend:function() {
 
                 $("#statusHolder").html("<p>Sending...</p>");
@@ -30,11 +35,11 @@ $(document).ready(function () {
                 var results = JSON.parse(res);
                 if (results.status == "success") {
                     $("#statusHolder").addClass("success");
-                    $("#statusHolder").html("<p>Email sent! Please check your email.</p>");
+                    $("#statusHolder").html("<p>Your review has been posted!</p>");
                 } else {
                     $("#statusHolder").addClass("fail");
-                    $("#statusHolder").html("<p>Error, this email is not in our user database.</p>");
-                    $("sendResetEmailButton").removeAttr("disabled");
+                    $("#statusHolder").html("<p>Error, your review was not posted :( </p>");
+                    $("reviewSubmitButton").removeAttr("disabled");
                 }
 
             }
@@ -84,8 +89,4 @@ $(document).ready(function () {
         //     commentModal.style.display = "none";
         // }
     }
-
-    // $("#writeReviewButton").click(function(){
-    //     $("#reviewModal").reviewModal({backdrop: true});
-    // });
 });
