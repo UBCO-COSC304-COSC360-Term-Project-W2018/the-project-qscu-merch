@@ -45,7 +45,7 @@ try {
                 $_SESSION['kicked_out'] = true;
             }
             //TODO: change the URL
-            header('Location: http://localhost/the-project-qscu-merch/src/action/logout.php');
+            header('Location: logout.php');
             exit();
         }
         $warehouseId = 1;

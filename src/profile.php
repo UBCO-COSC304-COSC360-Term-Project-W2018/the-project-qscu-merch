@@ -308,6 +308,9 @@ $headerSet = 1;
                     $formatted_date = date("M-d-y", strtotime($date));
 
                     //TODO: Rachelle check if the review disabled. If yes, then ABORT MISSION
+                    if ( !$isEnabled ) {
+                        continue;
+                    }
 
                     //get name of product
                     $product_name_sql = "SELECT pname FROM Product WHERE pNo = ? AND size = ?";
