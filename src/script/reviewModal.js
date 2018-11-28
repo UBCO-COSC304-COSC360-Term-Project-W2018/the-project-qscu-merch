@@ -9,18 +9,20 @@ $(document).ready(function () {
 
         $("reviewSubmitButton").attr("disabled", "disabled");
         e.preventDefault();
-        var ratingField = document.getElementsByClassName("ratingInput");
-        var reviewField = document.getElementsByClassName("reviewInput");
         // $sql = "INSERT INTO Reviews( uid, pNo, size, rating, comment, date, isEnabled) VALUES (?, ?, ?, ?, ?, ?, 1)";
 
         $.ajax({
             url: "action/setReview.php",
             method: "post",
-            data: "pNo=" + userId + "&" +
-                "pNo=" + productNum + "&" +
-                "rating=" + $(ratingField).val() + "&" +
-                "review=" + $(reviewField).val() + "&" +
-                "date=" + $(utcDate).val(), //TODO: is this date format okay? @jasper
+            data: {
+                "userRatingInput":$("#ratingInput").val(),
+                "userReviewInput":$("#reviewInput").val(),
+                "pNo": productNum,
+                "date": utcDate
+            },
+
+                // "review=" + $(reviewField).val() + "&" +
+                // "date=" + $(utcDate).val(), //TODO: is this date format okay? @jasper
             // "size="+NULL + "&" + TODO: Is size a thing?
             beforeSend: function () {
 
@@ -30,7 +32,7 @@ $(document).ready(function () {
             },
             success: function (res) {
 
-                console.log(res);
+                console.log("res is " + res);
                 $("#statusHolder").removeClass("loading");
                 var results = JSON.parse(res);
                 if (results.status == "success") {

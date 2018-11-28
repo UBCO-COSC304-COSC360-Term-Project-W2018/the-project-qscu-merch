@@ -174,13 +174,13 @@ if ($stmt = $con->prepare($sql)) {
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="reviewPNO" value="<?php echo $pNo; ?>">
-                    <input type="hidden" id="reviewUID" value="<?php echo $user; ?>">
+<!--                    <input type="hidden" id="reviewUID" value="--><?php //echo $user; ?><!--">-->
                     <h2> Overall Rating</h2>
                     <!-- added drop down rating -->
 
                     <form id="reviewInputForm">
 
-                        <select class="ratingInput" required name="userRatingInput">
+                        <select id="ratingInput" required name="userRatingInput">
                             <!--TODO: change value of default selected option, how about null?-->
                             <option selected value="">Select a rating</option>
                             <option value="1">1 Star</option>
@@ -201,7 +201,7 @@ if ($stmt = $con->prepare($sql)) {
                 <div class="modal-footer">
                     <div class="modal-submit">
                         <div id="statusHolder"></div>
-                        <button title="Submit Form" id="reviewSubmitButton" value="Submit">Submit</button>
+                        <button title="Submit Form" id="reviewSubmitButton">Submit</button>
                         </form>
                     </div>
                     <h3 class="footerNote">We value your feedback!</h3>

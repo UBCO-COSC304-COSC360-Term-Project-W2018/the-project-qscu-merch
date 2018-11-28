@@ -6,7 +6,7 @@ if (isset($_SESSION['user'])) {
 if (isset($_POST['userRatingInput']) && isset($_POST['userReviewInput'])) {
     $json = new stdClass();
     $json->status = "fail";
-    $json->msg = "Failed to connect to the database.";
+    $json->msg = "Failed to connect to the database!!!";
     try {
 
         $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
@@ -23,7 +23,7 @@ if (isset($_POST['userRatingInput']) && isset($_POST['userReviewInput'])) {
 //        $sql = "SELECT uid, fname, lname, uEmail FROM User WHERE uEmail = ? LIMIT 1";
         if ($stmt = $con->prepare($sql)) {
 
-            $stmt->bind_param('iis', $user, $raitng, $comment);
+            $stmt->bind_param('iis', $user, $rating, $comment);
             $stmt->execute();
             $stmt->close();
         } else {
@@ -36,4 +36,5 @@ if (isset($_POST['userRatingInput']) && isset($_POST['userReviewInput'])) {
         $json->msg = "Failed to connect to the database.";
     }
     print json_encode($json);
-}
+}else
+    print json_encode("Please set rating and review");

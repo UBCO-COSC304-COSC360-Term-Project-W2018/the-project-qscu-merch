@@ -51,7 +51,7 @@ if (isset($_POST['email'])) {
                     $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . "?uid=" . $uid . "&token=" . $randstring;
                     $url = str_replace("action/resetPass.php", "confirmResetPass.php", $url);
                     $txt .= "<a href=" . $url . ">" . $url . "</a>";
-                    $txt .= "<br><br><p>Sincerly, the QSCU Team</p></body></html>";
+                    $txt .= "<br><br><p>Sincerely, the QSCU Team</p></body></html>";
 
                     mail($to, $subject, $txt, $headers);
                     $json->status = "success";
