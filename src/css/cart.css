@@ -62,3 +62,7 @@
 footer{
 	clear: left;
 }
+
+#emptyCart{
+	margin: 0em 2em 2em 2em;
+}

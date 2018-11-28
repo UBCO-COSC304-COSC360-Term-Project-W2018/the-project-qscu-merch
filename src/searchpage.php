@@ -98,8 +98,8 @@ $headerSet = 0;
 					$k = 1;
 				}
 				if ($stmt = $con->prepare($sql)) {
-				if ($k == 0) $pname = "%{".$searchFor."}%";
-					if ($k == 0) $stmt->bind_param('i', $pname);
+					if ($k == 0) $pname = "%".$searchFor."%";
+					if ($k == 0) $stmt->bind_param('s', $pname);
 					$stmt->execute();
 					$stmt->bind_result($product['pNo'],$product['pname'],$product['rating'],$product['image'],$product['contentType'],$product['description'],$product['price']);
 					$hasChanged = false;
@@ -133,7 +133,6 @@ $headerSet = 0;
 							</div>
 							
 						<?php endif;
-					}
 					if (!$hasChanged) echo "<p>No results found for &quot;".$searchFor."&quot;. Please try searching something else.</p>";
 				} else {
 					die(mysqli_error($con));

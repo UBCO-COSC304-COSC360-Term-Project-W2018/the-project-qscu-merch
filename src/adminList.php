@@ -3,7 +3,7 @@ include 'includes/init.php';
 include 'includes/validateAdmin.php';
 
 validateAdminRequest($_SESSION);
-$headerSet = 1;
+
 
 ?>
     <!DOCTYPE html>
@@ -101,6 +101,8 @@ $headerSet = 1;
                 <div id="userContent">
                 </div>
             </div>
+            
+            
             <div class="hidden" id="postList">
                 <div>
                     <h1>Reviews and Comments</h1>
@@ -114,7 +116,7 @@ $headerSet = 1;
                         </tr>
                         <tr>
                             <td>
-                                <table class="userReview">
+                                <table class="userReview" border="1">
                                     <tr>
                                         <td>
                                             <span>User Email:</span>
@@ -165,7 +167,7 @@ $headerSet = 1;
                                     </tr>
                                     <tr>
                                         <td colspan="5">
-                                            <table class="userComment">
+                                            <table class="userComment" border="1">
                                                 <tr>
                                                     <td>
                                                         <span>User Email:</span>

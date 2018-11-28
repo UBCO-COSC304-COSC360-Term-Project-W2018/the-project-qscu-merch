@@ -598,9 +598,3 @@ function buildProductItem(json) {
 
 }
 
-
-
-
-
-
-
