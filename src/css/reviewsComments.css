@@ -33,6 +33,7 @@
 
 #reviewsComments .reviewDescription {
     padding-bottom: 0.5em;
+    padding-top: 0.5em;
     border-bottom: 1px dashed #18bfef;
 }
 
@@ -40,7 +41,7 @@
     margin: 0;
 }
 
-#reviewsComments .userProfile time {
+#reviewsComments .userProfile .time {
     /*    color: lightblue;*/
     font-size: 0.85em;
 }
