@@ -61,7 +61,8 @@ class userCart{
     function getItemKey($pNo, $size){
         $index = -1;
         foreach ($this->cart as $key => $item) {
-            if ($item[$key] == $pNo && $item[$key] == $size) {
+
+            if ($this->cart[$key]['pNo'] == $pNo && $this->cart[$key]['size'] == $size) {
                 $index = $key;
                 break;
             }
