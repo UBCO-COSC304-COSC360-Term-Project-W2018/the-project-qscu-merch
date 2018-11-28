@@ -194,8 +194,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_
                         <button class="button" onclick="deleteCategory()">Delete Category</button>
                     </div>
                 </div>
-                <div id="newCategoryName">
-                    <input type="text" name="newCategoryName" placeholder="Enter Category Name" data-pno="<?php echo $_GET['pno'] ?>">
+                <div>
+                    <input type="text" id="newCategoryName" placeholder="Enter Category Name" data-pno="<?php echo $_GET['pno'] ?>">
                 </div>
                 <div id="addButtons">
                     <div id="addCategory">

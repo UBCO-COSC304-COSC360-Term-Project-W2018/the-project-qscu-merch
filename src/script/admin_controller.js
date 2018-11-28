@@ -3,40 +3,25 @@ let showAddProduct = false;
 
 
 $(document).ready(function () {
-    let rbProductName = $("#rbProductName");
-    let rbProductCategory = $("#rbProductCategory");
+
     let newProduct = $("#newProduct");
-
-    let rbUserName = $("#rbUserName");
-    let rbEmail = $("#rbUserEmail");
-
-    let rbPostTitle = $("#rbPostTitle");
-    let rbPost = $("#rbPost");
-    let productList = $("#productList");
-
-    let userList = $("#userList");
-    let postList = $("#postList");
 
 
     $("#btnProducts").on('click', function () {
-        if (page != 0) {
-            setProductPanel();
-        }
+        setProductPanel();
     });
 
     $("#btnUsers").on('click', function () {
-        if (page != 1) {
-            setUserPanel();
 
-        }
+        setUserPanel();
+
 
     });
 
     $("#btnPosts").on('click', function () {
-        if (page != 2) {
-            setPostPanel();
 
-        }
+        setPostPanel();
+
     });
 
     $("#addProduct").on('click', function () {
@@ -54,93 +39,175 @@ $(document).ready(function () {
         }
     });
 
-    function changePanel(nextPage) {
-        switch (nextPage) {
-            case "productList": {
-                page = 0;
-                break;
-            }
-            case "userList": {
-                page = 1;
-                break;
-            }
-            case "postList": {
-                page = 2;
-                break;
-            }
-        }
-        if (page === 0) {
-            productList.show();
-            searchProduct(true);
-        } else {
-            productList.hide();
-            newProduct.hide();
-            $("#addProduct").html("Add Product");
-            searchProduct(false);
-        }
-
-        if (page === 1) {
-            userList.show();
-            searchUserRB(true);
-        } else {
-            userList.hide();
-            searchUserRB(false);
-        }
-
-        if (page === 2) {
-            postList.show();
-            searchPostRB(true);
-        } else {
-            postList.hide();
-            searchPostRB(false);
-        }
-    }
 
     getProductList();
 
-    function searchProduct(enable) {
-        rbProductName.prop('disabled', !enable);
-        rbProductName.prop('checked', enable);
-        rbProductCategory.prop('disabled', !enable);
-        rbProductCategory.prop('checked', false);
-    }
-
-    function searchUserRB(enable) {
-        rbUserName.prop('disabled', !enable);
-        rbUserName.prop('checked', enable);
-        rbEmail.prop('disabled', !enable);
-        rbEmail.prop('checked', false);
-    }
-
-    function searchPostRB(enable) {
-        rbPostTitle.prop('disabled', !enable);
-        rbPostTitle.prop('checked', enable);
-        rbPost.prop('disabled', !enable);
-        rbPost.prop('checked', false);
-    }
-
-
-    function setProductPanel(input = "") {
-        getProductList(input);
-        changePanel("productList");
-
-    }
-
-    function setUserPanel(input = "") {
-        getUserList(input);
-        changePanel("userList");
-    }
-
-    function setPostPanel(input = "") {
-        changePanel("postList");
-    }
 });
+
+function changePanel(nextPage) {
+    let productList = $("#productList");
+    let newProduct = $("#newProduct");
+
+    let userList = $("#userList");
+    let postList = $("#postList");
+
+    switch (nextPage) {
+        case "productList": {
+            page = 0;
+            break;
+        }
+        case "userList": {
+            page = 1;
+            break;
+        }
+        case "postList": {
+            page = 2;
+            break;
+        }
+    }
+    if (page === 0) {
+        productList.show();
+        searchProduct(true);
+    } else {
+        productList.hide();
+        newProduct.hide();
+        $("#addProduct").html("Add Product");
+        searchProduct(false);
+    }
+
+    if (page === 1) {
+        userList.show();
+        searchUserRB(true);
+    } else {
+        userList.hide();
+        searchUserRB(false);
+    }
+
+    if (page === 2) {
+        postList.show();
+        searchPostRB(true);
+    } else {
+        postList.hide();
+        searchPostRB(false);
+    }
+}
+
+
+function searchProduct(enable) {
+    let rbProductName = $("#rbProductName");
+    let rbProductCategory = $("#rbProductCategory");
+
+    rbProductName.prop('disabled', !enable);
+    rbProductName.prop('checked', enable);
+    rbProductCategory.prop('disabled', !enable);
+    rbProductCategory.prop('checked', false);
+}
+
+function searchUserRB(enable) {
+
+    let rbUserName = $("#rbUserName");
+    let rbEmail = $("#rbUserEmail");
+
+    rbUserName.prop('disabled', !enable);
+    rbUserName.prop('checked', enable);
+    rbEmail.prop('disabled', !enable);
+    rbEmail.prop('checked', false);
+}
+
+function searchPostRB(enable) {
+    let rbPostTitle = $("#rbPostTitle");
+    let rbPost = $("#rbPost");
+
+    rbPostTitle.prop('disabled', !enable);
+    rbPostTitle.prop('checked', enable);
+    rbPost.prop('disabled', !enable);
+    rbPost.prop('checked', false);
+}
+
+
+function setProductPanel(load = true) {
+    if (load) {
+        getProductList();
+    }
+    changePanel("productList");
+
+}
+
+function setUserPanel(load = true) {
+    if (load) {
+        getUserList();
+    }
+
+    changePanel("userList");
+}
+
+function setPostPanel(load = true) {
+    if (load) {
+        getPostList();
+    }
+    changePanel("postList");
+}
+
+
+function onViewUserPost(uid) {
+    setPostPanel(true);
+    getPostList(uid, 'user')
+
+}
+
+function onChangePostStatus(uid, pno, cid = null) {
+    let head = (cid) ? uid + '' + pno + '' + cid : uid + '' + pno;
+    let status = $('.' + head + 'PostStatus');
+
+    let action = status.data('status');
+    console.log(action);
+    let btn = $('.' + head + 'PostChange');
+
+    let obj = {'action': action, 'userid': uid, 'pno': pno};
+
+    if (cid) {
+        obj.cid = cid;
+    }
+
+    $.post('action/adminEditUser.php', JSON.stringify(obj))
+        .done(function (data) {
+            console.log(data);
+
+            let statusName = '';
+
+            let btnName = "";
+
+            if (status.data('status') === 'setPost') {
+                action = 'unsetPost';
+                btnName = 'Enable';
+                statusName = 'Disabled'
+            } else {
+                action = 'setPost';
+                btnName = 'Disable';
+                statusName = 'Enabled';
+            }
+
+            status.data('status', action);
+            status.text(statusName);
+            btn.text(btnName);
+        }).fail(function (jqXHR) {
+            console.log(jqXHR);
+
+    })
+
+}
+
+function onSearchUser(uid) {
+    setUserPanel(false);
+    getUserList(uid, 'uid');
+
+}
+
 
 function onSearch() {
 
     let rb = $("input[name=rbgroup]:checked").val();
     let search = $('#subSearch').val();
-    console.log(rb);
     switch (rb) {
         case '0':
             console.log('search productName');
@@ -188,6 +255,7 @@ function onChangeStatus(uid) {
 function onSendRecovery(uid) {
 
 }
+
 
 function onCopyRecovery(uid) {
 
@@ -251,12 +319,28 @@ function onAdminUser(uid) {
     })
 }
 
+function getPostList(search = "", searchType = "") {
+    let obj = {'searchInput': search, 'searchType': searchType};
+
+    $.post('action/getPostList.php', JSON.stringify(obj))
+        .done(function (data) {
+            console.log(data);
+
+            // let userTable = $("#postContent");
+            // userTable.empty();
+        }).fail(function (jqXHR) {
+        console.log("Error: " + jqXHR.status);
+    })
+
+}
+
+
 function getUserList(search = "", searchType = "") {
 
     let obj = {'searchInput': search, 'searchType': searchType};
 
 
-    $.post('/src/action/getUserList.php', JSON.stringify(obj))
+    $.post('action/getUserList.php', JSON.stringify(obj))
         .done(function (data) {
             let userTable = $("#userContent");
 
@@ -317,7 +401,7 @@ function buildUserItem(json) {
     // <td><button class="<uid>ChangeStatus" data-status="false" onclick="onChangeStatus(<uid>)">Change Status</button></td>
     let cells2 = $('<td><button class="' + json.userid + 'SendRecovery" onclick="onSendRecovery(' + json.userid + ')">Send Recovery Email</button></td>');
     // <td><button class="<uid>SendRecovery" onclick="onSendRecovery(<uid>)">Send Recovery Email</button></td>
-    let cells3 = $('<td><button class="' + json.userid + 'CopyRecovery" onclick="onCopyRecovery(' + json.userid + ')">Copy Recovery Token</button></td>');
+    let cells3 = $('<td><button class="' + json.userid + 'CopyRecovery" onclick="onCopyRecovery(' + json.userid + ')" disabled>Copy Recovery Token</button></td>');
     // <td><button class="<uid>CopyRecovery" onclick="onCopyRecovery(<uid>)">Copy Recovery Token</button></td>
 
 
@@ -344,13 +428,13 @@ function buildUserItem(json) {
     // <td><button class="<uid>AdminUser" onclick="onAdminUser(<uid>)" disabled="">Remove Admin</button></td>
 
     //TODO finish me
-    let cells4 = $('<td><form method="get" action=""><button>View Users Order History</button></form></td>');
+    let cells4 = $('<td><form method="get" action=""><button disabled>View Users Order History</button></form></td>');
     // <td><form method="get" action=""><button>View Users Order History</button></form></td>
 
-    let cells5 = $('<td><button>View Users Reviews</button></td>');
+    let cells5 = $('<td><button onclick="onViewUserPost(' + json.userid + ')">View Users Reviews</button></td>');
     // <td><button>View Users Reviews</button></td>
 
-    let cells6 = $('<td><button>View Users Comments</button></td>');
+    let cells6 = $('<td><button onclick="onViewUserPost(' + json.userid + ')">View Users Comments</button></td>');
 // <td><button>View Users Comments</button></td>
 
 
@@ -369,7 +453,7 @@ function buildUserItem(json) {
 function getProductList(search = "", searchType = "") {
     let obj = {'searchInput': search, 'searchType': searchType};
 
-    $.post('/src/action/getProductList.php', JSON.stringify(obj))
+    $.post('action/getProductList.php', JSON.stringify(obj))
         .done(function (data) {
             let productTable = $("#productContent");
 
