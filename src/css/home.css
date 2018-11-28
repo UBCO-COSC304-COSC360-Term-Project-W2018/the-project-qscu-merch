@@ -1,10 +1,9 @@
-
 #main{
 	display: flex;
 	flex-direction: row;
 	margin:2em;
 }
-
+/*categories formatting*/
 #browsecol{
 	margin: 2em 2em 2em 0em;
 	background-color: #183263;
@@ -20,11 +19,11 @@
 
 #browselist{
 	list-style: none;
-	padding: 0em;
+	padding-left: 0em;
 	clear:left;
 }
 
-.browselist{
+.browseitem{
 	font-size: 1.2em;
 	margin: 1em;
 	padding: 0.5em;
@@ -32,13 +31,15 @@
 }
 
 .browselink{
+	color:white;
 	text-decoration: none;
-	color: white;
 }
 
 .browselink:hover{
 	color: tomato;
 }
+
+/* item formatting */
 
 #productviews{
 	overflow: auto;

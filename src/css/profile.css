@@ -1,20 +1,103 @@
-#profileImage {
-    width: 240px;
-    height: 240px;
+#welcome{
+	display: block;
+	margin-left: 1.5em;
 }
-#imageContent{
-    max-width: 15em;
+
+#userProfile input{
+	margin-top:0.5em;
+	margin-bottom: 0.5em;
+	width: 90%;
 }
+
 
 #userProfile{
     margin: 1em;
     display: flex;
     flex-direction: row;
 }
+
+#imageContent{
+	display:block;
+	max-width: 17em;
+	border-style: solid;
+	border-color: #183263;
+	
+}
+#imageContent form{
+	max-width: 17em;
+}
+#uploadImage{
+	max-width: 17em;
+	margin-left: 1.45em;
+	padding:0.5em 4.2em 0.5em 0.5em;
+	border-style: dashed;
+	border-color: #183263;
+	border-width: thin;
+	overflow: hidden;
+	}
+
+
+#uploadButton{
+	max-width: 8em;
+	margin-left: 8em;
+	margin-right: 8em;
+	border: thin solid black;
+	background-color: #18bfef;
+	border-radius: 1em;
+	
+}
+[type~=button] {
+	max-width: 4em;
+	border: thin solid black;
+	background-color: #18bfef;
+	border-radius: 1em;
+}
+
+[value~=Save]{
+		max-width: 4em;
+	border: thin solid black;
+	background-color: tomato;
+	border-radius: 1em;
+}
+
+#imagePreview {
+
+	padding: 1em 1em 0em 1em;
+    width: 240px;
+    height: 240px;
+}
+
+#infoContent{
+	white-space: nowrap;
+	flex-grow: 2;
+	color: white;
+	background-color: #183263;
+}
+
+#personalContent{
+	margin: 0em 0em 2em 0em;
+	
+}
+
+
+#billingContent{
+	white-space: nowrap;
+	flex-grow: 6;
+	color: white;
+	background-color: #183263;
+
+}
+
 #imageContent, #infoContent, #billingContent{
-    padding: 0 2em;
+	padding: 1em;
+	margin: 1em;
 }
 
 #infoContent *, #billingContent label, #billingAddress *, #billingEditSave{
     display: block;
 }
+
+.userProfile img{
+	margin-right: 1em;
+}
+

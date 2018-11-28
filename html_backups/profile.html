@@ -23,6 +23,7 @@
 
 <body>
 <!--    Header-->
+
 <main>
     <div id="userProfile">
         <div id="imageContent">
@@ -40,7 +41,7 @@
             <!--They will not be there when it a admin in on the user page-->
 
             <!--TODO for brandon make action page-->
-            <form>
+            <form id="personalContent">
                 <fieldset>
                     <legend>Personal Information</legend>
                     <label for="emailInput">Email:</label>
@@ -56,8 +57,8 @@
                 </fieldset>
             </form>
 
-            <form id="passwordContent">
-                <fieldset>
+            <form id="passwordForm">
+                <fieldset id="passwordContent">
                     <legend>Change Password:</legend>
                     <label for="passwordInput">New Password:</label>
                     <input type="password" id="passwordInput" name="passwordInput" readonly>
@@ -75,8 +76,8 @@
             <!--They will not be there when it a admin in on the user page-->
 
             <!--TODO for brandon make action page-->
-            <form id="billingLocation" method="post">
-                <fieldset>
+            <form id="billingForm" method="post">
+                <fieldset id="billingLocation">
                     <legend>Billing Information:</legend>
                     <label for="billingAddressInput">Address Line: </label>
                     <input type="text" name="billingAddressInput" id="billingAddressInput" maxlength="256" placeholder="" readonly>

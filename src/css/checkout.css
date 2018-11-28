@@ -2,18 +2,18 @@
 centers form in middle of page
  */
 #checkOutForm {
-    width:30%;
+    width:50%;
     margin-right: auto;
     margin-left: auto;
     margin-top: 5em;
-    text-align: center;
+    /*text-align: center;*/
     background-color: #183263;
     color: white;
     padding:1em;
 }
 
 #checkOutFormTitle {
-    font-size: 1em;
+    font-size: 3em;
     text-align: center;
     color: #18bfef;
 }
@@ -26,6 +26,12 @@ sets font size for labels and input fields
     margin-bottom: 1em;
     font-size:1em;
 }
+
+/*#creditCardAndBillingAddressContainer {*/
+    /*display: flex;*/
+    /*flex-wrap: nowrap;*/
+    /*justify-content: space-between;*/
+/*}*/
 
 /*
 inline block display ensures that the div that holds the radio button is the width of the largest
@@ -47,7 +53,7 @@ give each label a new line
 sets labels to left of div. Inline-block display ensures that the width of the div
 is the width of its largest element
  */
-#checkoutFormInputElements {
+#creditCardElementsContainer {
     text-align: left;
     display: inline-block;
 }
@@ -71,6 +77,11 @@ from normal flow
  */
 #shippingAddressContainer {
     display:none;
+}
+
+#addressContainer {
+    float:right;
+    margin-right:1em;
 }
 
 
