@@ -1,7 +1,7 @@
 <?php
 include "includes/init.php";
 
-
+$headerSet=1;
 
 //need to have arrays (2D array?) here to store the row results as strings
 
@@ -133,7 +133,9 @@ $cartRows = array();
 			$sumtotal += $prod['total'];
 			
         }
-        
+        if($len==0){
+            $sumtotal=0;
+        }
         echo '<tr><td id="sumTotal" colspan="4">Your Subtotal: $' .$sumtotal . '</td><td class="centerContents"><form method="POST" action="checkout.php"><input type="submit" id="checkoutButton" class="button" value="Check-out"></form></td></tr>';
 			echo '</table></div>';
         ?>

@@ -369,7 +369,7 @@ function buildUserItem(json) {
 function getProductList(search = "", searchType = "") {
     let obj = {'searchInput': search, 'searchType': searchType};
 
-    $.post('/src/action/getProductList.php', JSON.stringify(obj))
+    $.post('action/getProductList.php', JSON.stringify(obj))
         .done(function (data) {
             let productTable = $("#productContent");
 

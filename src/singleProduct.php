@@ -44,13 +44,14 @@ if ($stmt = $con->prepare($sql)) {
 
     <link rel="stylesheet" href="../src/css/singleProduct.css">
     <?php include 'includes/headerFooterHead.php' ?>
-    <script type="text/javascript" src="../src/script/quantity.js"></script>
-    <script type="text/javascript" src="../src/script/reviewModal.js"></script>
-    <script type="text/javascript" src="../src/script/commentModal.js"></script>
-    <link rel="stylesheet" href="css/singleProduct.css">
-    <?php include 'includes/headerFooterHead.php'; ?>
-    <script type="text/javascript" src="script/quantity.js"></script>
+<!--    <script type="text/javascript" src="libs/jquery-3.3.1.min.js"></script>-->
     <script type="text/javascript" src="script/reviewModal.js"></script>
+<!--    <script type="text/javascript" src="../src/script/quantity.js"></script>-->
+    <!--    <script type="text/javascript" src="script/reviewModal.js"></script>-->
+<!--    <script type="text/javascript" src="../src/script/commentModal.js"></script>-->
+    <link rel="stylesheet" href="css/singleProduct.css">
+<!--    --><?php //include 'includes/headerFooterHead.php'; ?>
+<!--    <script type="text/javascript" src="script/quantity.js"></script>-->
     <!--    <script type="text/javascript" src="../src/script/commentModal.js"></script>-->
 
   
@@ -139,7 +140,7 @@ if ($stmt = $con->prepare($sql)) {
         </div>
         <section id="reviews">
             <h3>Reviews
-                <button title="Add Review" id="writeReviewButton" class="pageButtons">Write a Review <span
+                <button title="Add Review" id="writeReviewButton" class="pageButtons" onclick={console.log("test")}>Write a Review <span
                             class="fa fa-pencil">
                 </button>
             </h3>
@@ -251,3 +252,5 @@ if ($stmt = $con->prepare($sql)) {
 <?php
 include "footer.php";
 ?>
+</body>
+</html>

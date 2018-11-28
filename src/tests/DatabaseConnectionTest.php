@@ -1,14 +1,15 @@
 <?php
 
+//require_once('PHPUnit/Autoload.php');
 
 class DatabaseConnectionTest extends PHPUnit_Framework_TestCase {
 
     public function testDatabaseConnectionReturnTrue () {
 
-        define("DBHOST","cosc304.ok.ubc.ca");
-        define("DBNAME", "db_rgelden");
-        define("DBUSER", "rgelden");
-        define("DBPASS", "40215162");
+        define("DBHOST","localhost");
+        define("DBNAME", "qscurachelle");
+        define("DBUSER", "rachellegelden");
+        define("DBPASS", "rachelle");
 
         $mysqli = new mysqli (DBHOST, DBUSER, DBPASS, DBNAME);
 

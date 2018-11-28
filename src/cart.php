@@ -15,6 +15,8 @@ if($con -> connect_errno){
 	die("Connection Failed: ".$con -> connect_errno);
 }
 
+$headerSet = 1;
+
 ?>
 
 <!DOCTYPE html>

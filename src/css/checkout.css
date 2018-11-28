@@ -10,6 +10,7 @@ centers form in middle of page
     background-color: #183263;
     color: white;
     padding:1em;
+    max-width: 800px;
 }
 
 #checkOutFormTitle {
@@ -40,6 +41,7 @@ radio button. All buttons are aligned on far left of this div
 #addressRadioGroup {
     display: inline-block;
     text-align: left;
+    /*margin-left: 2em;*/
 }
 
 /*
@@ -56,7 +58,23 @@ is the width of its largest element
 #creditCardElementsContainer {
     text-align: left;
     display: inline-block;
+    /*width:50%;*/
+    margin-left: 2em;
 }
+
+#billingAddressContainer {
+    margin-right: 2em;
+}
+
+#shippingAddressRadioGroup {
+    margin-left: 2em;
+}
+
+#checkOutButton {
+    margin-left: 2em;
+}
+
+
 
 
 #checkOutButton {
