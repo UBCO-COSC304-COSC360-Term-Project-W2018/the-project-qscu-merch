@@ -1,5 +1,4 @@
 <?php
-$headerSet = 0;
 include "includes/init.php";
 try {
     if (isset($_SESSION['user'])) {
@@ -169,11 +168,11 @@ if ($stmt = $con->prepare($sql)) {
                 <h1>Product Review</h1>
             </div>
             <div class="modal-body">
-
+                <input type="hidden" id="reviewPNO" value="<?php echo $pNo; ?>">
                 <h2> Overall Rating</h2>
                 <!-- added drop down rating -->
 
-                <form id="reviewInputForm" method="POST" action="http://www.randyconnolly.com/tests/process.php">
+                <form id="reviewInputForm">
 
                     <select class="ratingInput" required name="userRatingInput">
                         <!--TODO: change value of default selected option, how about null?-->
@@ -195,7 +194,7 @@ if ($stmt = $con->prepare($sql)) {
             </div>
             <div class="modal-footer">
                 <div class="modal-submit">
-                    <input title="Submit Form" type="submit" value="Submit">
+                    <input title="Submit Form" id="reviewSubmitButton" value="Submit">
                     </form>
                 </div>
                 <h3 class="footerNote">We value your feedback!</h3>
