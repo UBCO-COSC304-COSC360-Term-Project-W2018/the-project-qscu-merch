@@ -1,3 +1,70 @@
-#postList{
+.postContent{
+	border: 3px solid #183263;
+	min-width: 737px;
+	white-space: nowrap;
+
+}
+
+.productReview{
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.reviewFor{
+	background-color:#183263;
+	color: white;
+	font-size: medium;
+}
+
+.reviewFor a{
+	text-decoration: none;
+	color: #18bfef;
+}
+
+.reviewFor a:hover{
+	color: tomato;
+}
+
+.userReview{
+	border-collapse: collapse;
+	border: 2px solid #183263;
+}
+
+.userInfo th{
+	color: white;
+	background-color: #183263;
+}
+
+.userComment{
+	margin: 0.5em;
+	border-collapse: collapse;
+	margin-left: 4em;
+	border: 2px solid #18bfef;
+}
+.userReview td, .userInfo th{
+	border-bottom: 2px solid #183263;
 	
+}
+
+.userComment th{
+	color: white;
+	background-color: #18bfef;
+	border-bottom: 2px solid #18bfef;
+}
+
+
+
+.userComment td{
+	border-bottom: 2px solid #18bfef;
+}
+
+tr .commentsFor{
+	border-bottom: 0px solid #18bfef;
+	padding-top:0.2em;
+	background-color:#18bfef;
+	color: white;
+}
+
+.longText span{
+	white-space: normal;
 }

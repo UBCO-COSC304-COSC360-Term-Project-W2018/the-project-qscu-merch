@@ -117,7 +117,7 @@ if ($stmt = $con->prepare($sql)) {
                         </select>
 
                         <!--                    TODO: Liam needs pName and price -->
-                        <?php echo "<input type='hidden' value='1' name='prodNum' />" ?>
+                        <?php echo "<input type='hidden' value='1' name='pNo' />" ?>
                         <button type="submit" title="Add to Cart" class="pageButtons">Add to Cart <i class="fa fa-shopping-cart"></i>
                         </button>
                     </form>
