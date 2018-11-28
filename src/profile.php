@@ -272,12 +272,15 @@ $headerSet = 1;
         </div>
     </div>
 
+
     <div id="reviewsComments">
         <h3>Your Reviews</h3>
 
         <?php
+        //TODO: MAKE SURE THIS ALL WORKS WITH CUURRENT DB, WAS SIZE DROPPED???
         $userid = $_SESSION['user']->id;
 
+        //TODO: put this in a try catch before brandon yells at you
         $mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
         //ok so get each review from database
@@ -302,6 +305,7 @@ $headerSet = 1;
                 $content_type = "";
                 $formatted_date = date("M-d-y", strtotime($date));
 
+                //TODO: Rachelle check if the review disabled. If yes, then ABORT MISSION
 
                 //get name of product
                 $product_name_sql = "SELECT pname FROM Product WHERE pNo = ? AND size = ?";
@@ -333,7 +337,7 @@ $headerSet = 1;
                 echo "<div class=\"review\">
                         <p class=\"userProfile\">
                             <img src=\"<?php  echo 'data:'.$content_type.';base64,'.base64_encode($profile_image) ?>\" alt=\"User's profile picture\" align=\"middle\">
-//                          <span>".$firstName." ".$lastName."</span>
+                            <span>".$firstName." ".$lastName."</span>
                             <span class='time'>".$formatted_date."</span>
                         </p>
                         <p class=\"productName\">".$pname."</p>";
@@ -349,25 +353,83 @@ $headerSet = 1;
                 echo "</p>
                       <p class=\"reviewDescription\">".$body."</p>
                     </div>";
+
+                $comment_on_review_sql = "SELECT * FROM Comment WHERE pNo = ? AND size = ? AND uid = ?";
+                if ( $comment_on_review = $mysqli -> prepare($comment_on_review_sql) ) {
+                    $comment_on_review -> bind_param("sss", $pNo, $size, $uid);
+                    $comment_on_review -> execute();
+
+                    $comment_on_review_result = $comment_on_review -> get_result();
+
+                    while ( $comment_on_review_row = $comment_on_review_result -> fetch_assoc() ) {
+                        $left_by = $comment_on_review_row['leftBy'];
+                        $comment_date = $comment_on_review_row['date'];
+                        $comment_text = $comment_on_review_row['comment'];
+                        $comment_enabled = $comment_on_review_row['isEnabled'];
+                        $commenter_profile_image = "";
+                        $commenter_content_type = "";
+                        $commenter_fname = "";
+                        $commenter_lname = "";
+                        //format date
+                        $comment_formatted_date = date("M-d-y", strtotime($comment_date));
+
+                        if ( !$comment_enabled ) {
+                            continue;
+                        }
+                        else {
+                            //get commenter's first and last name
+                            $commenter_name_details_sql = "SELECT fname, lname FROM User WHERE uid = ?";
+                            if ( $commenter_name_details = $mysqli -> prepare($commenter_name_details_sql) ) {
+                                $commenter_name_details -> bind_param("s", $left_by);
+                                $commenter_name_details -> execute();
+
+                                $commenter_name_details_result = $commenter_name_details -> get_result();
+
+                                while ( $commenter_name_details_row = $commenter_name_details_result -> fetch_assoc() ) {
+                                    $commenter_fname = $commenter_name_details_row['fname'];
+                                    $commenter_lname = $commenter_name_details_row['lname'];
+                                }
+                            }
+                            else {
+                                echo "<p>something really went wrong getting the commenter's name lol</p>";
+                            }
+                            if ( $commenter_image_details = $mysqli -> prepare($image_details_sql) ) {
+                                $commenter_image_details -> bind_param("s", $left_by);
+                                $commenter_image_details -> execute();
+
+                                $commenter_image_details_result = $commenter_image_details -> get_result();
+
+                                while ( $commenter_image_details_row = $commenter_image_details_result -> fetch_assoc() ) {
+                                    $commenter_profile_image = $commenter_image_details_row['profilePicture'];
+                                    $commenter_content_type = $commenter_image_details_row['contentType'];
+                                }
+                            }
+                            else {
+                                echo "ok something went wrong getting commenter's image yikes lol";
+                            }
+                            echo "<div class=\"comment\">
+                                        <p class=\"userProfile\">
+                                            <img src=\" <?php  echo 'data:'.$commenter_content_type.';base64,'.base64_encode($commenter_profile_image)?>\" alt=\"User's profile picture\" align=\"middle\">
+                                            <span>".$commenter_fname." ".$commenter_lname."</span>
+                                            <span class='time'>".$comment_formatted_date."</span>
+                                        </p>
+                                        <p class=\"reviewDescription\">".$comment_text."</p>
+                                  </div>";
+                        }
+
+
+//
+                    }
+                }
             }
         }
         ?>
 
 
-<!--        <!--TODO put this in a include file-->-->
-<!---->
-<!---->
-<!--        <div class="comments">-->
-<!--            <div class="comment">-->
-<!--                <p class="userProfile">-->
-<!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Not Parsa R-->
-<!--                    <time datetime="2018-10-30">- October 30, 2018</time>-->
-<!--                </p>-->
-<!--                <p class="reviewTitle">-->
-<!--                    Balls-->
-<!--                </p>-->
-<!--                <p class="reviewDescription">Its a bunch of balls</p>-->
-<!--            </div>-->
+        <!--TODO put this in a include file-->
+
+
+
 <!--            <div class="comment">-->
 <!--                <p class="userProfile">-->
 <!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> James-->
