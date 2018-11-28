@@ -91,11 +91,6 @@ $headerSet = 1;
 
 
     <script src="script/imagePreview.js"></script>
-  
-  <ul class="breadcrumb">
-        <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-        <a>Profile</a>
-    </ul>
 
 </head>
 
