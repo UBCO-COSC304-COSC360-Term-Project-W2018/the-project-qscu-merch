@@ -1,9 +1,9 @@
 <?php
 include("../includes/init.php");
-if(isset($_SESSION['user'])){
+if (isset($_SESSION['user'])) {
     $user = sanitizeInput($_SESSION['user']->id);
 }
-if(isset($_POST['userRatingInput']) && isset($_POST['userReviewInput']) ){
+if (isset($_POST['userRatingInput']) && isset($_POST['userReviewInput'])) {
     $json = new stdClass();
     $json->status = "fail";
     $json->msg = "Failed to connect to the database.";
@@ -11,7 +11,7 @@ if(isset($_POST['userRatingInput']) && isset($_POST['userReviewInput']) ){
 
         $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-        if (!$con||$con->connect_errno) {
+        if (!$con || $con->connect_errno) {
             die("Connection Failed: " . $con->connect_errno);
         }
 
@@ -23,7 +23,7 @@ if(isset($_POST['userRatingInput']) && isset($_POST['userReviewInput']) ){
 //        $sql = "SELECT uid, fname, lname, uEmail FROM User WHERE uEmail = ? LIMIT 1";
         if ($stmt = $con->prepare($sql)) {
 
-            $stmt->bind_param('iis',$user, $raitng, $comment);
+            $stmt->bind_param('iis', $user, $raitng, $comment);
             $stmt->execute();
             $stmt->close();
         } else {
