@@ -94,13 +94,13 @@ if ($stmt = $con->prepare($sql)) {
                 <div class="quant">
                     <p>Quantity</p>
                     <!--                    TODO: need to send this somwehere-->
-                    <form id='myform' method='POST' action="http://www.randyconnolly.com/tests/process.php">
+                    <form id='myform' method='POST' action="action/addToCart.php">
                         <input title="Decrease Quantity" type='button' value='-' class='qtyminus' field='quantity'/>
                         <input required type='text' name='quantity' value='' class='qty'/>
                         <input title="Increase Quantity" type='button' value='+' class='qtyplus' field='quantity'/>
 
                         <!-- added drop down menu -->
-
+						<!-- TODO: MAKE THIS TABLE DYNAMIC BASED ON PRODUCT -->
                         <select name="size" class="size" required>
                             <option selected value="">Select a size</option>
                             <option value="SML">Small (S)</option>
@@ -110,7 +110,8 @@ if ($stmt = $con->prepare($sql)) {
                         </select>
 
                         <!--                    TODO: Liam needs pName and price -->
-                        <button title="Add to Cart" class="pageButtons">Add to Cart <i class="fa fa-shopping-cart"></i>
+						<input type="hidden" value="<?php echo $pNo;?>" name="pNo">
+                        <button title="Add to Cart" class="pageButtons" type="submit">Add to Cart <i class="fa fa-shopping-cart"></i>
                         </button>
                     </form>
 
