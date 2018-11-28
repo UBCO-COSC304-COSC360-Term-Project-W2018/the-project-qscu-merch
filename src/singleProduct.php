@@ -223,7 +223,7 @@ if ($stmt = $con->prepare($sql)) {
                     <h2>What's your comment?</h2>
                     <div class="formElement">
                         <!-- max lenght is 200 chars and there are 3 rows -->
-                        <textarea id="commentInput" name="userCommentInput" placeholder="Insert your comment here"
+                        <textarea id="reviewInput" name="userReviewInput" placeholder="Insert your comment here"
                                   rows="8"
                                   maxlength="400" required></textarea>
                     </div>
