@@ -46,15 +46,6 @@ if ($stmt = $con->prepare($sql)) {
     <?php include 'includes/headerFooterHead.php' ?>
     <script type="text/javascript" src="../src/script/quantity.js"></script>
     <script type="text/javascript" src="../src/script/reviewModal.js"></script>
-    <script type="text/javascript" src="../src/script/commentModal.js"></script>
-
-    <link rel="stylesheet" href="css/singleProduct.css">
-    <?php include 'includes/headerFooterHead.php'; ?>
-    <script type="text/javascript" src="script/quantity.js"></script>
-    <script type="text/javascript" src="script/reviewModal.js"></script>
-    <!--    <script type="text/javascript" src="../src/script/commentModal.js"></script>-->
-
-  
 
 </head>
 <!--    Body-->
@@ -319,6 +310,10 @@ if ($stmt = $con->prepare($sql)) {
         </div>
     </div>
 </main>
+
+
 <?php
 include "footer.php";
 ?>
+</body>
+</html>
