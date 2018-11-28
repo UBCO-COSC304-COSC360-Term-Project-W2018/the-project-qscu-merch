@@ -37,9 +37,13 @@ if ($stmt = $con->prepare($sql)) {
     <title>QSCU Merch Store</title>
 
     <link rel="stylesheet" href="../src/css/singleProduct.css">
-    <?php include 'includes/headerFooterHead.php' ?>
+    <?php include 'includes/headerFooterHead.php'; ?>
     <script type="text/javascript" src="script/quantity.js"></script>
     <script type="text/javascript" src="script/reviewModal.js"></script>
+
+    <script type="text/javascript" src="script/addToCart.js"></script>
+    <!--<script type="text/javascript" src="script/commentModal.js"></script>-->
+
     <link rel="stylesheet" href="css/singleProduct.css">
 </head>
 <!--    Body-->
@@ -91,12 +95,15 @@ if ($stmt = $con->prepare($sql)) {
                 <div class="quant">
                     <p>Quantity</p>
                     <!--                    TODO: need to send this somwehere-->
-                    <form id='myform' method='POST' action="action/addToCart.php">
+
+                    <form id='myform'>
+
                         <input title="Decrease Quantity" type='button' value='-' class='qtyminus' field='quantity'/>
-                        <input required type='text' name='quantity' value='' class='qty'/>
+                        <input required id="quantity" type='text' name='quantity' value='' class='qty'/>
                         <input title="Increase Quantity" type='button' value='+' class='qtyplus' field='quantity'/>
 
                         <!-- added drop down menu -->
+
 						<!-- TODO: MAKE THIS TABLE DYNAMIC BASED ON PRODUCT -->
                         <select name="size" class="size" required>
                             <option selected value="">Select a size</option>
@@ -119,8 +126,10 @@ if ($stmt = $con->prepare($sql)) {
 
                         <!--                    TODO: Liam needs pName and price -->
 
-						            <input type="hidden" value="<?php echo $pNo;?>" name="pNo">
-                        <button title="Add to Cart" class="pageButtons" type="submit">Add to Cart <i class="fa fa-shopping-cart"></i>
+
+						            <input id="pNo" type="hidden" value="<?php echo $pNo;?>" name="pNo">
+                        <button id="addToCartButton" title="Add to Cart" class="pageButtons">Add to Cart <i class="fa fa-shopping-cart"></i>
+
 
                         </button>
                     </form>

@@ -61,9 +61,13 @@ $(document).ready(function () {
     // var spanComment = document.getElementsByClassName("closeComment")[0];
 
     // When the user clicks the button, open the reviewModal
-    // commentButton.onclick = function () {
-    //     commentModal.style.display = "block";
-    // };
+
+/*
+    commentButton.onclick = function () {
+        commentModal.style.display = "block";
+    };
+*/
+
     reviewButton.onclick = function () {
         reviewModal.style.display = "block";
     };
@@ -85,8 +89,12 @@ $(document).ready(function () {
         if (event.target == reviewModal) {
             reviewModal.style.display = "none";
         }
-        // if (event.target == commentModal) {
-        //     commentModal.style.display = "none";
-        // }
+
+/*
+        if (event.target == commentModal) {
+            commentModal.style.display = "none";
+        }
+*/
+
     }
 });
