@@ -49,18 +49,12 @@ button, submit{
 }
 
 
-.productItem, .userTable{
+.productItem{
 	border-collapse: collapse;
 	margin-bottom: 1em;
 }
 
-.userTable td{
-	padding: 0em 1em 0em 1em;
-	font-size: 1.5em;
-	border: thin solid #183263;
 
-	text-align: center;
-}
 
 .productNameTitle, .productQuantityTitle, .productPriceTitle, .productSizeTitle{
 	padding: 0em 1em 0em 1em;
