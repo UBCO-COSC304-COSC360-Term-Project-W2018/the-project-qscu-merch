@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   if (isset($_GET['pNo'])) $pNo = $_GET['pNo'];
   else die("Please use a pNo when connecting to this page."); //TODO do something better in this case. -Jasper
 }
-$sql = "SELECT pname, AVG(rating) AS rating, image, contentType, description, price FROM Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo WHERE Product.pNo = ? GROUP BY Product.pNo, Product.pname";
+$sql = "SELECT pname, AVG(rating) AS rating, image, contentType, description, price FROM Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo WHERE Product.pNo = ? GROUP BY Product.pNo";
 if ($stmt = $con->prepare($sql)) {
 
     $stmt->bind_param('i', $pNo);
@@ -46,6 +46,7 @@ if ($stmt = $con->prepare($sql)) {
     <?php include 'includes/headerFooterHead.php' ?>
     <script type="text/javascript" src="../src/script/quantity.js"></script>
     <script type="text/javascript" src="../src/script/reviewModal.js"></script>
+
 </head>
 <!--    Body-->
 
