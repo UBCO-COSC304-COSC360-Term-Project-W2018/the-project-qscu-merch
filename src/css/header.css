@@ -224,12 +224,12 @@ button:hover , input[type=submit]:hover {
 	-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.25);
 	-moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.25);
 	box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.25);
-	-webkit-transform: translateX(-5px) translateY(-5px);
-	-moz-transform: translateX(-5px) translateY(-5px);
-	transform: translateX(-5px) translateY(-5px);
-	-webkit-transition: -webkit-transform 0.2s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
-	-moz-transition: -moz-transform 0.2s ease-in-out, -moz-box-shadow 0.3s ease-in-out;
-	transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+	-webkit-transform: translateX(-3px) translateY(-3px);
+	-moz-transform: translateX(-3px) translateY(-3px);
+	transform: translateX(-3px) translateY(-3px);
+	-webkit-transition: -webkit-transform 0.3s ease-in-out, -webkit-box-shadow 0.4s ease-in-out;
+	-moz-transition: -moz-transform 0.3s ease-in-out, -moz-box-shadow 0.4s ease-in-out;
+	transition: transform 0.3s ease-in-out, box-shadow 0.4s ease-in-out;
 	cursor: pointer;
 }
 
