@@ -36,11 +36,12 @@ $cartRows = array();
 
 <body>
 
-<ul class="breadcrumb">
+	<?php include "header.php"; ?>
+
+    <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
     <a>Your Cart</a>
 </ul>
-	<?php include "header.php"; ?>
 <main>
 
 

@@ -35,7 +35,6 @@ $headerSet = 0;
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
     <a>Login</a>
 </ul>
-<?php include "header.php"; ?>
 <main>
 <div id="forms">
     <form id="loginForm" method="post" action="action/getLogin.php">
