@@ -10,7 +10,9 @@ validateAdminRequest($_SESSION);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
-    if (isset($input['searchType']) && isset($input['searchInput'])) {
+    $validSearchType = array('userName', 'userEmail', 'uid', "");
+
+    if (isset($input['searchType']) && in_array($input['searchType'], $validSearchType) && isset($input['searchInput'])) {
         $searchInput = $input['searchInput'];
         $searchType = $input['searchType'];
         try {
@@ -23,26 +25,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $input = '%' . $searchInput . '%';
 
+            switch ($searchType) {
+                case "":
 
-            if ($searchInput === "") {
-                $query = "SELECT uid, fname, lname, uEmail, contentType, profilePicture, customerBanned, isAdmin FROM User";
-                $stmt = $mysql->prepare($query);
-            } else {
-                switch ($searchType) {
-                    case "userName":
-                        $query = "SELECT uid, fname, lname, uEmail, contentType, profilePicture, customerBanned, isAdmin FROM User WHERE fname LIKE ? OR lname LIKE ?";
-                        $stmt = $mysql->prepare($query);
-                        $stmt->bind_param('ss', $input, $input);
-                        break;
-                    case "userEmail":
-                        $query = "SELECT uid, fname, lname, uEmail, contentType, profilePicture, customerBanned, isAdmin FROM User WHERE uEmail Like ?";
-                        $stmt = $mysql->prepare($query);
-                        $stmt->bind_param('s', $input);
-                        break;
-                    default:
-                        throw new Exception;
-                }
+                    $query = "SELECT uid, fname, lname, uEmail, contentType, profilePicture, customerBanned, isAdmin FROM User";
+                    $stmt = $mysql->prepare($query);
+                    break;
+
+                case "userName":
+                    $query = "SELECT uid, fname, lname, uEmail, contentType, profilePicture, customerBanned, isAdmin FROM User WHERE fname LIKE ? OR lname LIKE ?";
+                    $stmt = $mysql->prepare($query);
+                    $stmt->bind_param('ss', $input, $input);
+                    break;
+                case "userEmail":
+                    $query = "SELECT uid, fname, lname, uEmail, contentType, profilePicture, customerBanned, isAdmin FROM User WHERE uEmail Like ?";
+                    $stmt = $mysql->prepare($query);
+                    $stmt->bind_param('s', $input);
+                    break;
+
+                case "uid":
+                    $query = "SELECT uid, fname, lname, uEmail, contentType, profilePicture, customerBanned, isAdmin FROM User WHERE uid = ?";
+                    $stmt = $mysql->prepare($query);
+                    $stmt->bind_param('i', $searchInput);
+                    break;
+                default:
+                    throw new Exception;
             }
+
 
             $stmt->bind_result($uid, $firstName, $lastName, $userEmail, $contentType, $image, $isBanned, $isAdmin);
             $stmt->execute();

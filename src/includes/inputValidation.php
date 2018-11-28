@@ -49,7 +49,7 @@ function isValidSizeInput($input){
 
 
 function sanitizeInput($input){
-    $regex = '[<>"=/\[\]!#$%^&*{}`~\;]';
+    $regex = '/[<>"=\/\[\]!#$%^&*{}|()+`~\;]/';
     return preg_replace($regex,"",$input);
 }
 ?>
