@@ -174,3 +174,9 @@ header.sticky.top {
 #admin{
 	margin-left:0.5em;
 }
+.breadcrumb {
+	margin:0;
+	background-color:#183263;
+	color:#ffffff;
+	padding-bottom:0.5em;
+}

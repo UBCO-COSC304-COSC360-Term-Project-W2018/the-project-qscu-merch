@@ -1,7 +1,7 @@
 /*
 set width of forms and center in middle of page
  */
-#loginForm, #signUpForm {
+#loginForm, #signUpForm, #passForgetForm, #newPassForm {
     width: 40%;
     margin-right: auto;
     margin-left: auto;
@@ -10,7 +10,7 @@ set width of forms and center in middle of page
 /*
 sets background and text colours, sets right margin to maintain space between forms
  */
-#loginForm, #signUpForm {
+#loginForm, #signUpForm, #passForgetForm, #newPassForm {
 
     margin-top: 4em;
     color:white;
