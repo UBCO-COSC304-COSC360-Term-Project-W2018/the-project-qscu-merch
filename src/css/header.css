@@ -180,3 +180,12 @@ header.sticky.top {
 	color:#ffffff;
 	padding-bottom:0.5em;
 }
+.breadcrumb a {
+	color:#18bfef;
+}
+.breadcrumb a:visited {
+	color:#18bfef;
+}
+.breadcrumb a:active {
+	color:#dd9999;
+}
