@@ -1,12 +1,17 @@
 main{
     margin: 1em;
 }
+
+.adminListHeaders{
+	border-bottom: 2px solid #183263;
+}
+
 #container{
 	margin: 2em 4em 2em 4em;
     display: flex;
     flex-direction: column;
     align-content: stretch;
-    white-space: nowrap;
+
 }
 #productContent table tr{
 flex-grow: 2;
@@ -40,6 +45,7 @@ flex-grow: 2;
 button, submit{
 	background-color: #18bfef;
 	border-radius: 1em;
+	border-color: black;
 }
 
 

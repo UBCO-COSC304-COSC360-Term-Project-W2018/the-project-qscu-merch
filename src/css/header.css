@@ -195,7 +195,7 @@ header.sticky.top {
 .breadcrumb {
 	margin:0;
 	background-color:#183263;
-	color:#ffffff;
+	color: white;
 	padding-bottom:0.5em;
 }
 .breadcrumb a {
@@ -206,5 +206,13 @@ header.sticky.top {
 }
 .breadcrumb a:active {
 	color:#dd9999;
+}
+
+.breadcrumb a{
+	color: #18bfef;
+}
+
+.breadcrumb a:hover{
+	color: tomato;
 }
 
