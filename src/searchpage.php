@@ -98,12 +98,11 @@ $headerSet = 0;
 					$k = 1;
 				}
 				if ($stmt = $con->prepare($sql)) {
-					if ($k == 0) $pname = "%".$searchFor."%";
+				if ($k == 0) $pname = "%{".$searchFor."}%";
 					if ($k == 0) $stmt->bind_param('i', $pname);
 					$stmt->execute();
 					$stmt->bind_result($product['pNo'],$product['pname'],$product['rating'],$product['image'],$product['contentType'],$product['description'],$product['price']);
 					$hasChanged = false;
-					for ($i = 0; $i < 6; $i++)  {
 						if ($stmt->fetch()):?>
 							
 							<?php $hasChanged = true;?>
@@ -116,10 +115,14 @@ $headerSet = 0;
 									<p class="itemprice">$<?php echo $product['price'];?></p>
 									<p class="numberofliams">
 									<?php 
-										for ($j = 0; j < $product['rating']; $j++) {
-											echo "<span class='fa fa-star";
-											if ($j < $product['rating']) echo " checked";
-											echo "'></span>";
+										if ($product['rating'] <= 0 || !$product['rating']) {
+											echo "<span>Rating N/A</span>";
+										} else {
+											for ($j = 0; $j < $product['rating']; $j++) {
+												echo "<span class='fa fa-star";
+												if ($j < $product['rating']) echo " checked";
+												echo "'></span>";
+											}
 										}
 									?>
 									</p>
@@ -133,7 +136,7 @@ $headerSet = 0;
 					}
 					if (!$hasChanged) echo "<p>No results found for &quot;".$searchFor."&quot;. Please try searching something else.</p>";
 				} else {
-				  die(mysqli_error($con));
+					die(mysqli_error($con));
 				}
 			?>
 		</div>

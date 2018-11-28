@@ -18,12 +18,9 @@ if(isset($_GET['uid'])&&isset($_GET['token'])){
 			
 			$stmt->bind_param('is', $uid, $token);
 			$stmt->execute();
-			$stmt->bind_result($uid);
-			$stmt->fetch();
-			if ($stmt->num_rows > 0) {
-				
+			$stmt->bind_result($uido);
+			while($stmt->fetch()) {
 				$valid = true;
-				
 			}
 			
 		} else {
@@ -57,7 +54,7 @@ $headerSet = 0;
 </ul>
 <main>
 <div id="forms">
-    <form id="newPassForm" method="post"><!--TODO: give this form an action that can nicely update a user's password -->
+    <form id="newPassForm" method="post" action="action/editUser.php"><!--TODO: give this form an action that can nicely update a user's password -->
         <fieldset>
             <legend id="loginTitle">Reset Password</legend>
 			<?php if (!$valid):?>
@@ -72,11 +69,14 @@ $headerSet = 0;
 
                 <div class="SUformElement">
                     <label id="SUconfirmPasswordLabel" class="signUpLabel" for="signUpPasswordConfirmationInput">Confirm Password: </label>
-                    <input type="password" name="confirmPassword" id="signUpPasswordConfirmationInput" required>
+                    <input type="password" id="signUpPasswordConfirmationInput" required>
                 </div>
             </div>
             <div class="loginFormElement">
-                <button id="sendResetEmailButton" type="submit">Save Password</button>
+				<input type="hidden" name="action" value="changePassword">
+				<input type="hidden" name="uid" value="<?php echo $uid;?>">
+				<input type="hidden" name="authToken" value="<?php echo $token;?>">
+                <button type="submit">Save Password</button>
             </div>
 			<?php endif;?>
             <div class="loginFormElement">

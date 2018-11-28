@@ -20,10 +20,11 @@ if(isset($_POST['email'])){
 			$stmt->bind_param('s', $email);
 			$stmt->execute();
 			$stmt->bind_result($uid,$fname,$lname,$uEmail);
-			$stmt->fetch();
+			while($stmt->fetch()) {
+				
+			}
 			if ($uid) {
 				
-				$json->stmt = $stmt;
 				//There was a User with this email, generate new reset token
 				$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 				$randstring = "";
@@ -32,31 +33,36 @@ if(isset($_POST['email'])){
 					$randstring .= $characters[$offset];
 				}
 				
-				$sql2 = "UPDATE User SET (authToken = '".$randstring."') WHERE uid = '".$uid."'";
-				$con->query($sql2);
-				
-				
+				$sql2 = "UPDATE User SET authToken = ? WHERE uid = ?";
+				if ($pstmt = $con->prepare($sql2)) {
+					$pstmt->bind_param('si', $randstring, $uid);
+					$pstmt->execute();
+					$pstmt->close();
 					
-				//Send email to user
-				$to = $uEmail;
-				$headers = "From: QSCUStore@noreply.qscu.shop\r\n";
-				$headers .= "Content-type: text/html; charset=utf-8";
-				$subject = "QSCU Store - Forgot Password";
-				$txt = "<html><head></head><body><p>Hello, ".$fname." ".$lname."!</p>";
-				$txt .= "<p>It seems that you recently requested a password reset.</p>";
-				$txt .= "<p>To complete this process, simply follow the link below:</p>";
-				//TODO: Make sure on the final website that this URL below gets evaluated correctly
-				$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?uid=".$uid."&token=".$randstring;
-				$url = str_replace("action/resetPass.php","confirmResetPass.php",$url);
-				$txt .= "<a href=".$url.">".$url."</a>";
-				$txt .= "<br><br><p>Sincerly, the QSCU Team</p></body></html>";
+					//Send email to user
+					$to = $uEmail;
+					$headers = "From: QSCUStore@noreply.qscu.shop\r\n";
+					$headers .= "Content-type: text/html; charset=utf-8";
+					$subject = "QSCU Store - Forgot Password";
+					$txt = "<html><head></head><body><p>Hello, ".$fname." ".$lname."!</p>";
+					$txt .= "<p>It seems that you recently requested a password reset.</p>";
+					$txt .= "<p>To complete this process, simply follow the link below:</p>";
+					//TODO: Make sure on the final website that this URL below gets evaluated correctly
+					$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?uid=".$uid."&token=".$randstring;
+					$url = str_replace("action/resetPass.php","confirmResetPass.php",$url);
+					$txt .= "<a href=".$url.">".$url."</a>";
+					$txt .= "<br><br><p>Sincerly, the QSCU Team</p></body></html>";
 
-				mail($to,$subject,$txt,$headers);
-				$json->status = "success";
-				$json->to = $to;
-				$json->subject = $subject;
-				$json->headers = $headers;
-				$json->msg = "Successfully sent email.";
+					mail($to,$subject,$txt,$headers);
+					$json->status = "success";
+					$json->to = $to;
+					$json->subject = $subject;
+					$json->headers = $headers;
+					$json->msg = "Successfully sent email.";
+				} else {
+					$json->status = "fail";
+					$json->msg = "Something went wrong1...";
+				}
 				
 			} else {
 				$json->status = "fail";
