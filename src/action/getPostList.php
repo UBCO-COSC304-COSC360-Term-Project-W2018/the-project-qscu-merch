@@ -32,25 +32,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             switch ($searchType) {
                 case "":
                     if ($searchInput === "") {
-                        $query = 'SELECT uid, fname, lname, uEmail, pNo, pname, rating, comment, date, isEnabled, title FROM Reviews NATURAL JOIN User NATURAL JOIN (SELECT DISTINCT (pNo), pname FROM Product) AS P ORDER BY date desc';
+                        $query = 'SELECT uid, fname, lname, uEmail, pNo, pname, rating, comment, date, isEnabled FROM Reviews NATURAL JOIN User NATURAL JOIN (SELECT DISTINCT (pNo), pname FROM Product) AS P ORDER BY date desc';
                         $stmt = $mysql->prepare($query);
                     }
 
                     break;
-                case "title":
-                    $query = 'SELECT uid, fname, lname, uEmail, pNo, pname, rating, comment, date, isEnabled, title FROM (SELECT Reviews.uid, Reviews.pNo, Reviews.rating, Reviews.comment, Reviews.date, Reviews.isEnabled, Reviews.title FROM Reviews JOIN Comment ON Reviews.uid = Comment.uid AND Reviews.pNo = Comment.pNo WHERE Reviews.title LIKE ? OR Comment.title LIKE ? ) AS R NATURAL JOIN User NATURAL JOIN (SELECT DISTINCT (pNo), pname FROM Product) AS P GROUP BY uid, pNo ORDER BY date desc';
-                    $stmt = $mysql->prepare($query);
-                    $stmt->bind_param('ss', $input, $input);
-                    break;
 
                 case "content":
-                    $query = 'SELECT uid, fname, lname, uEmail, pNo, pname, rating, comment, date, isEnabled, title FROM (SELECT Reviews.uid, Reviews.pNo, Reviews.rating, Reviews.comment, Reviews.date, Reviews.isEnabled, Reviews.title FROM Reviews JOIN Comment ON Reviews.uid = Comment.uid AND Reviews.pNo = Comment.pNo WHERE Reviews.comment LIKE ? OR Comment.comment LIKE ? ) AS R NATURAL JOIN User NATURAL JOIN (SELECT DISTINCT (pNo), pname FROM Product) AS P GROUP BY uid, pNo ORDER BY date desc';
+                    $query = 'SELECT uid, fname, lname, uEmail, pNo, pname, rating, comment, date, isEnabled FROM (SELECT Reviews.uid, Reviews.pNo, Reviews.rating, Reviews.comment, Reviews.date, Reviews.isEnabled FROM Reviews JOIN Comment ON Reviews.uid = Comment.uid AND Reviews.pNo = Comment.pNo WHERE Reviews.comment LIKE ? OR Comment.comment LIKE ? ) AS R NATURAL JOIN User NATURAL JOIN (SELECT DISTINCT (pNo), pname FROM Product) AS P GROUP BY uid, pNo ORDER BY date desc';
                     $stmt = $mysql->prepare($query);
                     $stmt->bind_param('ss', $input, $input);
                     break;
 
                 case "user":
-                    $query = 'SELECT uid, fname, lname, uEmail, pNo, pname, rating, comment, date, isEnabled, title FROM (SELECT Reviews.uid, Reviews.pNo, Reviews.rating, Reviews.comment, Reviews.date, Reviews.isEnabled, Reviews.title FROM Reviews JOIN Comment ON Reviews.uid = Comment.uid AND Reviews.pNo = Comment.pNo WHERE Comment.uid = ? OR Comment.leftBy = ? ) AS R NATURAL JOIN User NATURAL JOIN (SELECT DISTINCT (pNo), pname FROM Product) AS P GROUP BY uid, pNo ORDER BY date desc';
+                    $query = 'SELECT uid, fname, lname, uEmail, pNo, pname, rating, comment, date, isEnabled FROM (SELECT Reviews.uid, Reviews.pNo, Reviews.rating, Reviews.comment, Reviews.date, Reviews.isEnabled FROM Reviews JOIN Comment ON Reviews.uid = Comment.uid AND Reviews.pNo = Comment.pNo WHERE Comment.uid = ? OR Comment.leftBy = ? ) AS R NATURAL JOIN User NATURAL JOIN (SELECT DISTINCT (pNo), pname FROM Product) AS P GROUP BY uid, pNo ORDER BY date desc';
                     $stmt = $mysql->prepare($query);
                     $stmt->bind_param('ii', $searchInput, $searchInput);
                     break;
@@ -59,22 +54,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $stmt->execute();
-            $stmt->bind_result($uidR, $fnameR, $lnameR, $emailR, $pnoR, $pnameR, $ratingR, $commentR, $dateR, $isEnaledR, $titleR);
+            $stmt->bind_result($uidR, $fnameR, $lnameR, $emailR, $pnoR, $pnameR, $ratingR, $commentR, $dateR, $isEnaledR);
             while ($stmt->fetch()) {
-                $item = array('comments' => [], 'review' => array('uid' => $uidR, 'fname' => $fnameR, 'lname' => $lnameR, 'email' => $emailR, 'pno' => $pnoR, 'pname' => $pnameR, 'rating' => $ratingR, 'comment' => $commentR, 'date' => $dateR, 'isEnabled' => $isEnaledR, 'title' => $titleR));
+                $item = array('comments' => [], 'review' => array('uid' => $uidR, 'fname' => $fnameR, 'lname' => $lnameR, 'email' => $emailR, 'pno' => $pnoR, 'pname' => $pnameR, 'rating' => $ratingR, 'comment' => $commentR, 'date' => $dateR, 'isEnabled' => $isEnaledR));
                 array_push($list, $item);
             }
 
 
-            $query = 'SELECT commentId, leftBy, fname, lname, uEmail, comment, date, isEnabled, title FROM Comment JOIN User U ON Comment.leftBy = U.uid WHERE Comment.uid = ? AND Comment.pNo = ? ORDER BY date desc';
+            $query = 'SELECT commentId, leftBy, fname, lname, uEmail, comment, date, isEnabled FROM Comment JOIN User U ON Comment.leftBy = U.uid WHERE Comment.uid = ? AND Comment.pNo = ? ORDER BY date desc';
             $stmt = $mysql->prepare($query);
 
             foreach ($list as $key1 => $value1) {
                 $stmt->bind_param('ii', $list[$key1]['review']['uid'], $list[$key1]['review']['pno']);
                 $stmt->execute();
-                $stmt->bind_result($commentIdC, $leftbyC, $fnameC, $lnameC, $emailC, $commentC, $dateC, $isEnaledC, $titleC);
+                $stmt->bind_result($commentIdC, $leftbyC, $fnameC, $lnameC, $emailC, $commentC, $dateC, $isEnaledC);
                 while ($stmt->fetch()) {
-                    $item = array('pno'=> $list[$key1]['review']['pno'], 'uid'=> $list[$key1]['review']['uid'],'commentId' => $commentIdC, 'leftby' => $leftbyC, 'fname' => $fnameC, 'lname' => $lnameC, 'email' => $emailC, 'comment' => $commentC, 'date' => $dateC, 'isEnabled' => $isEnaledC, 'title' => $titleC);
+                    $item = array('pno'=> $list[$key1]['review']['pno'], 'uid'=> $list[$key1]['review']['uid'],'commentId' => $commentIdC, 'leftby' => $leftbyC, 'fname' => $fnameC, 'lname' => $lnameC, 'email' => $emailC, 'comment' => $commentC, 'date' => $dateC, 'isEnabled' => $isEnaledC);
                     array_push($list[$key1]['comments'], $item);
 
                 }
