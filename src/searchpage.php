@@ -22,6 +22,7 @@ $headerSet = 0;
     <title>QSCU Merch Store</title>
     <link rel="stylesheet" href="css/searchpage.css"/>
     <?php include 'includes/headerFooterHead.php';?>
+    <script type="text/javascript" src="script/search_controller.js"></script>
 </head>
 
 
@@ -43,13 +44,19 @@ $headerSet = 0;
 				<form id="refineform">
 					<fieldset id="refinefieldset">
 						<legend>Refine Results</legend>
-						
+
+            <div id="itemsperpage">
+              <p class="refinelabel"><label>Items per Page:</label></p>
+							<input type="number" id="iperpage" value="6" min="2" max="25" step="1">
+							<output name="price" for="max"></output><br>
+            </div>
+
 						<div id="pricerange">
 							<p class="refinelabel"><label>Price Range:</label></p>
 							<input type="range" id="max" name="pricemax" value="1000">
 							<output name="price" for="max"></output><br>
 						</div>
-				
+
 						<div id="colourselect">
 							<p class="refinelabel"><label id="colour">Colour:</label></p>
 							<input type="checkbox" name="colour1" value="Blue"> Blue<br>
@@ -71,85 +78,32 @@ $headerSet = 0;
 							<input type="checkbox" name="unrated" value="0"> Unrated<br>
 						</div>
 					</fieldset>
-				</form>	
+				</form>
 		</div>
-	
-	<div id="categoryviews">
-		<div id="sortby">
-			<p id='searchResultsTitle'>Search Results</p> <!--could include what we searched for in this line. Simple Query, extra -->
-		<form id="sortform">
-			
-			<label id="sortlabel">Sort By:</label>
-			<select name="sort" id="sort">
-				<option value="liamspicks">Liam's Picks</option>
-				<option value="rating">Rating</option>
-				<option value="lowtohigh">Price: Low to High</option>
-				<option value="hightolow">Price: High to Low</option>
-			</select>
-		</form>
-		</div>
-			<?php
-				if (isset($_GET['Search'])&&$_GET['Search']!=null&&!empty($_GET['Search']&&$_GET['Search']!="")) {
-					$searchFor = sanitizeInput($_GET['Search']);
-					$sql = "SELECT Product.pNo, pname, AVG(rating) AS rating, image, contentType, description, price FROM Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo WHERE Product.pname LIKE ? GROUP BY Product.pNo";
-					$k = 0;
-				} else {
-					$sql = "SELECT Product.pNo, pname, AVG(rating) AS rating, image, contentType, description, price FROM Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo GROUP BY Product.pNo";
-					$k = 1;
-				}
-				if ($stmt = $con->prepare($sql)) {
-					if ($k == 0) $pname = "%".$searchFor."%";
-					if ($k == 0) $stmt->bind_param('s', $pname);
-					$stmt->execute();
-					$stmt->bind_result($product['pNo'],$product['pname'],$product['rating'],$product['image'],$product['contentType'],$product['description'],$product['price']);
-					$hasChanged = false;
-						if ($stmt->fetch()):?>
-							
-							<?php $hasChanged = true;?>
-							<div class="item">
-								<div class="itempicture">
-									<a href="singleProduct.php?pNo=<?php echo $product['pNo'];?>"><img src="data:<?php echo $product['contentType'];?>;base64,<?php echo base64_encode($product['image']);?>" alt="<?php echo $product['pname'];?> Picture"/></a>
-								</div>
-								<div class="iteminfo">
-									<p class="pname"><a href="singleProduct.php?pNo=<?php echo $product['pNo'];?>"><?php echo $product['pname'];?></a></p>
-									<p class="itemprice">$<?php echo $product['price'];?></p>
-									<p class="numberofliams">
-									<?php 
-										if ($product['rating'] <= 0 || !$product['rating']) {
-											echo "<span>Rating N/A</span>";
-										} else {
-											for ($j = 0; $j < $product['rating']; $j++) {
-												echo "<span class='fa fa-star";
-												if ($j < $product['rating']) echo " checked";
-												echo "'></span>";
-											}
-										}
-									?>
-									</p>
-									<p class="addtocart">
-										<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-									</p>
-								</div>
-							</div>
-							
-						<?php endif;
-					if (!$hasChanged) echo "<p>No results found for &quot;".$searchFor."&quot;. Please try searching something else.</p>";
-				} else {
-					die(mysqli_error($con));
-				}
-			?>
+
+  	<div id="categoryviews">
+  		<div id="sortby">
+  			<p id='searchResultsTitle'>Search Results<?php if(isset($_GET['Search'])) echo " for: &quot;".$_GET['Search']."&quot;";?></p> <!--could include what we searched for in this line. Simple Query, extra -->
+    		<form id="sortform">
+    			<label id="sortlabel">Sort By:</label>
+    			<select name="sort" id="sort">
+    				<option value="liamspicks">Liam's Picks</option>
+    				<option value="rating">Rating</option>
+    				<option value="lowtohigh">Price: Low to High</option>
+    				<option value="hightolow">Price: High to Low</option>
+    			</select>
+    		</form>
+  		</div>
+
+      <div id="resultHolder">
+        <input type="hidden" id="searchTransferForLoad" value="<?php if(isset($_GET['Search'])) echo $_GET['Search'];?>">
+      </div>
+
 		</div>
 	</div>
-		<div id="pagenumber">
-			<p id="number">
-				<a href="#">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">5</a>
-			</p>
-		</div>
+	<div id="pagenumber">
+		<p id="number">
+		</p>
+	</div>
 </main>
 <?php include "footer.php"; ?>
-
-
