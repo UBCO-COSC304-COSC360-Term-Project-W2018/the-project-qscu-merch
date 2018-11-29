@@ -297,7 +297,6 @@ $headerSet = 1;
                 while ($get_review_row = $get_review_result->fetch_assoc()) {
                     $uid = $userid;
                     $pNo = $get_review_row['pNo'];
-                    $size = $get_review_row['size'];
                     $rating = $get_review_row['rating'];
                     $body = $get_review_row['comment'];
                     $date = $get_review_row['date'];
@@ -313,9 +312,9 @@ $headerSet = 1;
                     }
 
                     //get name of product
-                    $product_name_sql = "SELECT pname FROM Product WHERE pNo = ? AND size = ?";
+                    $product_name_sql = "SELECT pname FROM Product WHERE pNo = ?";
                     if ($product_name = $mysqli->prepare($product_name_sql)) {
-                        $product_name->bind_param("ss", $pNo, $size);
+                        $product_name->bind_param("s", $pNo);
                         $product_name->execute();
 
                         $product_name_result = $product_name->get_result();
@@ -359,9 +358,9 @@ $headerSet = 1;
                       <p class=\"reviewDescription\">".$body."</p>
                     </div>";
 
-                    $comment_on_review_sql = "SELECT * FROM Comment WHERE pNo = ? AND size = ? AND uid = ?";
+                    $comment_on_review_sql = "SELECT * FROM Comment WHERE pNo = ? AND uid = ?";
                     if ( $comment_on_review = $mysqli -> prepare($comment_on_review_sql) ) {
-                        $comment_on_review -> bind_param("sss", $pNo, $size, $uid);
+                        $comment_on_review -> bind_param("ss", $pNo, $uid);
                         $comment_on_review -> execute();
 
                         $comment_on_review_result = $comment_on_review -> get_result();
@@ -422,8 +421,6 @@ $headerSet = 1;
                                   </div>";
                             }
 
-
-//
                         }
                     }
                 }
