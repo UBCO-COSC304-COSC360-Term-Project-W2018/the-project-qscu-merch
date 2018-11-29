@@ -1,9 +1,11 @@
 $(document).ready(function(){
 
     $("#addToCartButton").on('click', function (e) {
+	    
         var quantity = $("#quantity").val();
         var size = $("#size").val();
         var pNo = $("#pNo").val();
+        if($.trim(quantity)!=""||$.trim(size)!=""||$.trim(pNo)!=""){
         console.log(quantity);
         console.log(size);
 		//TODO Do more validation on emailField clientside right here
@@ -12,13 +14,14 @@ $(document).ready(function(){
 		
 		$.post('../src/action/addToCart.php', JSON.stringify(obj))
 		.done(function (data){
-			console.log(data);
+			
+			var message = $("#addedToCart").html("Added To Cart");
 		})
 		.fail(function(jqXHR){
 			console.log("Error:" + jqXHR.status);
 		}).always(function(){
-			console.log("FUCK");
-		})
 		
+		})
+}		
 })
 });

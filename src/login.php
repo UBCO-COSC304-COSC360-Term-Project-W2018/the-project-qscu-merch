@@ -12,7 +12,7 @@ if(isset($_SESSION['hasError'])){
     $errorType = $_SESSION['errorType'];
     $error = $_SESSION['error'];
 }
-$headerSet = 0;
+
 
 ?>
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ $headerSet = 0;
 
 </head>
 <body>
-<?include "header.php"; ?>
+<?php include "header.php"; ?>
 
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
