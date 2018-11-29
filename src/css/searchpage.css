@@ -7,7 +7,7 @@
 
 
 #refinecol{
-	display: flex;	
+	display: flex;
 	height: auto;
 	align-items: stretch;
 	padding: 1em;
@@ -17,7 +17,7 @@
 }
 
 #refineform{
-	display: flex;	
+	display: flex;
 	align-items: stretch;
 	margin-bottom: 0em;
 }
@@ -62,6 +62,9 @@
 	flex-direction: row;
 	border: thin solid #183263;
 }
+.item.hidden {
+	display:none;
+}
 
 .itempicture{
 	margin: 1em 1em 1em 1em;
@@ -78,7 +81,7 @@
 	float: left;
 	font-size: 1.2em;
 	margin: 1em 0em 2em 1em;
-	
+
 }
 .pname a{
 	text-decoration: none;
@@ -95,14 +98,14 @@
 .numberofliams{
 	float: right;
 	margin: 1em;
-	
+
 }
 
 .addtocart{
 	clear:right;
 	float: right;
 	margin: 1em;
-	
+
 }
 .addtocart button{
 	font-size: 1.1em;
@@ -118,13 +121,14 @@
 #pagenumber{
 	text-align: center;
 
-	
+
 }
 #number{
 	background-color: #183263;
 }
 #pagenumber a{
 	color: white;
+	padding-right: 0.3em;
 }
 #pagenumber a:hover{
 	color: tomato;
@@ -135,4 +139,8 @@
 
 .checked{
 	color: orange;
+}
+
+#number >a.active {
+	color:orange;
 }
