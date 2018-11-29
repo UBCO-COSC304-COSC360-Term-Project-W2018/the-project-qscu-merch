@@ -124,7 +124,7 @@ $cartRows = array();
 	        
         
 			echo "<table id='cartTable'><tr><th>Product Name</th><th>Quantity</th><th>Size</th><th>Price</th></tr>";
-
+        $sumtotal = 0;
         foreach ($cartRows as $prod) {
             //for each row in cartRows
 

@@ -12,7 +12,7 @@ if(isset($_SESSION['hasError'])){
     $errorType = $_SESSION['errorType'];
     $error = $_SESSION['error'];
 }
-$headerSet = 0;
+
 
 ?>
 <!DOCTYPE html>
@@ -26,7 +26,6 @@ $headerSet = 0;
 
 </head>
 <body>
-
 <?php include "header.php"; ?>
 
 <ul class="breadcrumb">

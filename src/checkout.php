@@ -6,8 +6,8 @@ try {
 
     //TODO: Uncomment this once i merge onto dev
     $user = $_SESSION['user'];
-    $userid = $user->id;
-//    $_SESSION['userid'] = 1;          //PURELY FOR TESTING
+//    $userid = $user->id;
+    $_SESSION['userid'] = 1;          //PURELY FOR TESTING
 
     if (!isset($_SESSION['user'])) {
         header('Location: http://localhost/the-project-qscu-merch/src/login.php');

@@ -138,10 +138,10 @@ if ($stmt = $con->prepare($sql)) {
 							}
 						}
 						?>
-                        <!--    <option value="SML">Small (S)</option>
+                           <option value="single">single</option>
                             <option value="MED">Medium (M)</option>
                             <option value="LG">Large (L)</option>
-                            <option value="XLG">Extra-Large (XL)</option> -->
+                            <option value="XLG">Extra-Large (XL)</option>
                         </select>
 
                         <!--                    TODO: Liam needs pName and price -->
@@ -152,6 +152,7 @@ if ($stmt = $con->prepare($sql)) {
 
 
                         </button>
+                        <span id="addedToCart"></span>
                     </form>
 
                 </div>
