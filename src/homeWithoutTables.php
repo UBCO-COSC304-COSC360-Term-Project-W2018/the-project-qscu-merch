@@ -24,15 +24,15 @@ try {
   if(!($cats = $con->query($sqlCats))) {
 		die("Category Query failed.");
 	}
-  $sqlProdsBestSell = "SELECT Product.pNo, pname, image, contentType, Product.price, description, AVG(rating) AS rating, COUNT(quantity) AS numSold FROM (Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo) LEFT JOIN HasOrder ON (Product.pNo = HasOrder.pNo AND Product.size = HasOrder.size) GROUP BY Product.pNo ORDER BY numSold DESC, rating DESC, pname ASC LIMIT 5";
+  $sqlProdsBestSell = "SELECT Product.pNo, pname, image, contentType, Product.price, description, AVG(rating) AS rating, COUNT(quantity) AS numSold FROM (Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo) LEFT JOIN HasOrder ON (Product.pNo = HasOrder.pNo AND Product.size = HasOrder.size) WHERE Product.isEnabled = 1 GROUP BY Product.pNo ORDER BY numSold DESC, rating DESC, pname ASC LIMIT 5";
   if (!($productsBestSell = $con->query($sqlProdsBestSell))) {
     die(mysqli_error($con));
   }
-  $sqlProdsLiams = "SELECT Product.pNo, pname, image, contentType, Product.price, description, AVG(rating) AS rating, COUNT(quantity) AS numSold FROM (Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo) LEFT JOIN HasOrder ON (Product.pNo = HasOrder.pNo AND Product.size = HasOrder.size) WHERE Product.pNo IN (SELECT pNo FROM ProductInCategory WHERE cid = '7') GROUP BY Product.pNo ORDER BY numSold DESC, rating DESC, pname ASC LIMIT 5";
+  $sqlProdsLiams = "SELECT Product.pNo, pname, image, contentType, Product.price, description, AVG(rating) AS rating FROM (Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo) WHERE Product.isEnabled = 1 AND Product.pNo IN (SELECT pNo FROM ProductInCategory WHERE cid = '7') GROUP BY Product.pNo ORDER BY rating DESC, pname ASC LIMIT 5";
   if (!($productsLiams = $con->query($sqlProdsLiams))) {
     die(mysqli_error($con));
   }
-  $sqlProdsStaff = "SELECT Product.pNo, pname, image, contentType, Product.price, description, AVG(rating) AS rating, COUNT(quantity) AS numSold FROM (Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo) LEFT JOIN HasOrder ON (Product.pNo = HasOrder.pNo AND Product.size = HasOrder.size) WHERE Product.pNo IN (SELECT pNo FROM ProductInCategory WHERE cid = '8') GROUP BY Product.pNo ORDER BY numSold DESC, rating DESC, pname ASC LIMIT 5";
+  $sqlProdsStaff = "SELECT Product.pNo, pname, image, contentType, Product.price, description, AVG(rating) AS rating FROM (Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo) WHERE Product.isEnabled = 1 AND Product.pNo IN (SELECT pNo FROM ProductInCategory WHERE cid = '8') GROUP BY Product.pNo ORDER BY rating DESC, pname ASC LIMIT 5";
   if (!($productsStaff = $con->query($sqlProdsStaff))) {
     die(mysqli_error($con));
   }
@@ -89,7 +89,16 @@ try {
                       echo "</a>";
                       echo "<div class=\"itemInfo\">";
                         echo "<p class=\"itemPrice\">\$".$product['price']."</p>";
-                        echo "<p class=\"numberOfLiams\">Rated ".($product['rating']==NULL||$product['rating']==""?"0":$product['rating'])." / 5</p>";
+                        echo "<p class=\"numberOfLiams\">";
+                        $doRating = !($product['rating']==NULL||$product['rating']=="");
+                        if ($doRating) {
+                          for ($i = 0; $i < 5; $i++) {
+                            echo "<span class=\"fa fa-star".(($i+1)<=floatval($product['rating'])?" checked":"")."\"></span>";
+                          }
+                        } else {
+                          echo "Not Rated";
+                        }
+                        echo "</p>";
                   echo "</div></div></div>";
                   if ($counter>4) break; //top 5 best selling products finished displaying
                 }
@@ -117,7 +126,16 @@ try {
                       echo "</a>";
                       echo "<div class=\"itemInfo\">";
                         echo "<p class=\"itemPrice\">\$".$product['price']."</p>";
-                        echo "<p class=\"numberOfLiams\">Rated ".($product['rating']==NULL||$product['rating']==""?"0":$product['rating'])." / 5</p>";
+                        echo "<p class=\"numberOfLiams\">";
+                        $doRating = !($product['rating']==NULL||$product['rating']=="");
+                        if ($doRating) {
+                          for ($i = 0; $i < 5; $i++) {
+                            echo "<span class=\"fa fa-star".(($i+1)<=floatval($product['rating'])?" checked":"")."\"></span>";
+                          }
+                        } else {
+                          echo "Not Rated";
+                        }
+                        echo "</p>";
                   echo "</div></div></div>";
                   if ($counter>4) break; //top 5 best selling products finished displaying
                 }
@@ -145,7 +163,16 @@ try {
                       echo "</a>";
                       echo "<div class=\"itemInfo\">";
                         echo "<p class=\"itemPrice\">\$".$product['price']."</p>";
-                        echo "<p class=\"numberOfLiams\">Rated ".($product['rating']==NULL||$product['rating']==""?"0":$product['rating'])." / 5</p>";
+                        echo "<p class=\"numberOfLiams\">";
+                        $doRating = !($product['rating']==NULL||$product['rating']=="");
+                        if ($doRating) {
+                          for ($i = 0; $i < 5; $i++) {
+                            echo "<span class=\"fa fa-star".(($i+1)<=floatval($product['rating'])?" checked":"")."\"></span>";
+                          }
+                        } else {
+                          echo "Not Rated";
+                        }
+                        echo "</p>";
                   echo "</div></div></div>";
                   if ($counter>4) break; //top 5 best selling products finished displaying
                 }
