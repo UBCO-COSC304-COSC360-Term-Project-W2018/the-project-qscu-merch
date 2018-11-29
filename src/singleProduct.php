@@ -2,10 +2,9 @@
 include "includes/init.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if (isset($_GET['pNo'])){
+    if (isset($_GET['pNo'])) {
         $pNo = sanitizeInput($_GET['pNo']);
-    }
-    else die("Please use a pNo when connecting to this page."); //TODO do something better in this case. -Jasper
+    } else die("Please use a pNo when connecting to this page."); //TODO do something better in this case. -Jasper
 }
 $mysql;
 
@@ -54,9 +53,6 @@ try {
                 break;
         }
     }
-
-
-
 
 
 } catch (Exception $e) {
@@ -174,13 +170,14 @@ try {
                 </div>
 
             </div>
-<!--            TODO review block-->
+            <!--            TODO review block-->
             <section id="reviews">
                 <h3>Reviews
                     <?php
-                    if(isset($_SESSION['user']))
+                    if (isset($_SESSION['user'])) {
                         echo '<input type="hidden" id="UserLoggedIn">';
-                        echo '<button title="Add Review" id="writeReviewButton" class="pageButtons" onclick="onWriteReview()">Write a Review <span class="fa fa-pencil"></button>'
+                        echo '<button title="Add Review" id="writeReviewButton" class="pageButtons" onclick="onWriteReview()">Write a Review <span class="fa fa-pencil"></button>';
+                                        }
                     ?>
 
                 </h3>
