@@ -422,6 +422,47 @@ $headerSet = 1;
                             }
 
                         }
+
+                        echo "<h3>Your Comments:</h3>";
+                        //get all comments made by this user.
+                        //a comment needs:name of user who left, date, profile pic, text
+                        $get_comment_sql = "SELECT * FROM Comment WHERE leftBy = ?";
+                        if ( $get_comment = $mysqli -> prepare($get_comment_sql) ) {
+                            $get_comment -> bind_param("s", $userid);
+                            $get_comment -> execute();
+
+                            $get_comment_result = $get_comment -> get_result();
+
+                            while ( $get_comment_row = $get_comment_result -> fetch_assoc() ) {
+                                //i already have first and last name
+                                $date = $get_comment_row['date'];
+                                $text = $get_comment_row['comment'];
+                                $enabled = $get_comment_row['isEnabled'];
+                                $comment_formatted_date = date("M-d-y", strtotime($date));
+                                //query for
+                                $content_type = $profileImage;
+                                $profile_image = $contentType;
+
+                                if ( !$enabled ) {
+                                    continue;
+                                }
+
+                                echo "<div class=\"comment\">
+                                        <p class=\"userProfile\">
+                                            <img src=\" <?php  echo 'data:'.$content_type.';base64,'.base64_encode($profile_image)?>\" alt=\"User's profile picture\" align=\"middle\">
+                                            <span>".$firstName." ".$lastName."</span>
+                                            <span class='time'>".$comment_formatted_date."</span>
+                                        </p>
+                                        <p class=\"reviewDescription\">".$text."</p>
+                                  </div>";
+
+
+
+
+
+
+                            }
+                        }
                     }
                 }
             }
@@ -435,6 +476,7 @@ $headerSet = 1;
         }
 
         ?>
+
 
 
         <!--TODO put this in a include file-->
