@@ -132,8 +132,7 @@ finally {
                             </div>
                             <div id="ccNumContainer" class="checkoutContainer">
                                 <label id="ccNumLabel" for="ccNum" class="elementLabel">Credit Card Number: </label>
-                                <input type="number" name="ccNum" id="ccNum" required
-                                       value="<?php echo $creditCardNum ?>">
+                                <input type="number" name="ccNum" id="ccNum" required value="<?php echo $creditCardNum ?>">
                             </div>
 
                             <div id="ccExpirationContainer" class="checkoutContainer">
