@@ -24,12 +24,8 @@ class DatabaseConnectionTest extends PHPUnit_Framework_TestCase {
 
         $expected = true;
 
-        $actual1 = 'foo';
-        $expected1 = 'foo';
 
-        $this -> assertEquals($expected1, $actual1);
-
-        return $actual;
+        $this -> assertEquals($expected, $actual);
 
     }
 
