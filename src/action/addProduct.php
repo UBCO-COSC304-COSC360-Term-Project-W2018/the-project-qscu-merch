@@ -106,6 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             die();
         }
     }
-}
+}else
+    echo "error 404";
+die();
 
 ?>
