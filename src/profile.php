@@ -304,7 +304,7 @@ $headerSet = 1;
                     $pname = "";
                     $profile_image = "";
                     $content_type = "";
-                    $formatted_date = date("M-d-y", strtotime($date));
+                    $formatted_date = date("M-d-y H:i:s", strtotime($date));
 
                     //TODO: Rachelle check if the review disabled. If yes, then ABORT MISSION
                     if ( !$isEnabled ) {
@@ -336,11 +336,14 @@ $headerSet = 1;
                             $content_type = $image_details_row['contentType'];
                         }
                     }
+        //              src=\"<?php echo 'data:' . $contentType . ';base64,' . base64_encode($profileImage) \"
+                    echo $contentType;
 
 
                     echo "<div class=\"review\">
                         <p class=\"userProfile\">
-                            <img src=\"<?php  echo 'data:'.$content_type.';base64,'.base64_encode($profile_image) ?>\" alt=\"User's profile picture\" align=\"middle\">
+
+                            <img src=\"data:".$contentType. ';base64,' . base64_encode($profileImage)."\" alt=\"User's profile picture\" align=\"middle\">
                             <span>".$firstName." ".$lastName."</span>
                             <span class='time'>".$formatted_date."</span>
                         </p>
@@ -362,10 +365,12 @@ $headerSet = 1;
                     if ( $comment_on_review = $mysqli -> prepare($comment_on_review_sql) ) {
                         $comment_on_review -> bind_param("ss", $pNo, $uid);
                         $comment_on_review -> execute();
+                        echo "executed statement to get comments";
 
                         $comment_on_review_result = $comment_on_review -> get_result();
 
                         while ( $comment_on_review_row = $comment_on_review_result -> fetch_assoc() ) {
+                            echo "entered while loop for comment";
                             $left_by = $comment_on_review_row['leftBy'];
                             $comment_date = $comment_on_review_row['date'];
                             $comment_text = $comment_on_review_row['comment'];
@@ -375,7 +380,7 @@ $headerSet = 1;
                             $commenter_fname = "";
                             $commenter_lname = "";
                             //format date
-                            $comment_formatted_date = date("M-d-y", strtotime($comment_date));
+                            $comment_formatted_date = date("M-d-y H-i-s", strtotime($comment_date));
 
                             if ( !$comment_enabled ) {
                                 continue;
@@ -413,7 +418,7 @@ $headerSet = 1;
                                 }
                                 echo "<div class=\"comment\">
                                         <p class=\"userProfile\">
-                                            <img src=\" <?php  echo 'data:'.$commenter_content_type.';base64,'.base64_encode($commenter_profile_image)?>\" alt=\"User's profile picture\" align=\"middle\">
+                                            <img src=\"data:".$commenter_content_type.';base64,'.base64_encode($commenter_profile_image)."\" alt=\"User's profile picture\" align=\"middle\">
                                             <span>".$commenter_fname." ".$commenter_lname."</span>
                                             <span class='time'>".$comment_formatted_date."</span>
                                         </p>
@@ -443,7 +448,7 @@ $headerSet = 1;
                     $date = $get_comment_row['date'];
                     $text = $get_comment_row['comment'];
                     $enabled = $get_comment_row['isEnabled'];
-                    $comment_formatted_date = date("M-d-y", strtotime($date));
+                    $comment_formatted_date = date("M-d-y H:i:s", strtotime($date));
                     //query for
                     $content_type = $profileImage;
                     $profile_image = $contentType;
@@ -454,7 +459,7 @@ $headerSet = 1;
 
                     echo "<div class=\"comment\">
                                         <p class=\"userProfile\">
-                                            <img src=\" <?php  echo 'data:'.$content_type.';base64,'.base64_encode($profile_image)?>\" alt=\"User's profile picture\" align=\"middle\">
+                            <img src=\"data:".$contentType. ';base64,' . base64_encode($profileImage)."\" alt=\"User's profile picture\" align=\"middle\">
                                             <span>".$firstName." ".$lastName."</span>
                                             <span class='time'>".$comment_formatted_date."</span>
                                         </p>
