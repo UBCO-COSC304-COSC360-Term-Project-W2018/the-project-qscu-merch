@@ -150,6 +150,7 @@ try {
                         <button id="addToCartButton" title="Add to Cart" class="pageButtons">Add to Cart
                             <i class="fa fa-shopping-cart"></i>
                         </button>
+                        <span id='addedToCart'></span>
                         <!--                        </form>-->
 
                     </div>
