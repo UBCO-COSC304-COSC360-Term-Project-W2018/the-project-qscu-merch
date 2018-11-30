@@ -43,7 +43,6 @@ function onWriteComment(uid, pno) {
 
 
 function onCommentSubmit() {
-
     let commentStatus = $('#statusHolderComment');
 
     let commentInput = $("#commentInput").val().trim();
@@ -83,7 +82,10 @@ function onCommentSubmit() {
                         commentStatus.addClass("success");
                         commentStatus.html("<p>Your review has been posted!</p>");
                         commentSubmitButton.removeAttr("disabled");
-                        $("#commentInput").val('')
+                        $("#commentInput").val('');
+                        setTimeout(function () {
+                            $('#commentModal').hide();
+                        },1000)
                     } else {
                         commentStatus.addClass("fail");
                         commentStatus.html('<p>' + results.msg + '</p>');
@@ -145,6 +147,9 @@ function onReviewSubmit() {
                     reviewStatus.addClass("success");
                     reviewStatus.html("<p>Your review has been posted!</p>");
                     reviewSubmitButton.removeAttr("disabled");
+                    setTimeout(function () {
+                        $('#reviewModal').hide();
+                    },1000)
                 } else {
                     reviewStatus.addClass("fail");
                     reviewStatus.html('<p>' + results.msg + '</p>');
@@ -168,7 +173,10 @@ $(document).ready(function () {
     let reviewModal = $('#reviewModal');
 
 
+
     window.onclick = function (event) {
+
+
 
         if (event.target == reviewModal[0]) {
             reviewModal.hide();
@@ -225,6 +233,7 @@ function getNewPosts(pno) {
                 $('#' + value.uid + '' + value.pno + 'ReviewComments').prepend(buildComment(value));
             })
 
+      
             date = data.date;
 
 
@@ -284,7 +293,3 @@ function buildComment(json) {
 
     return comment;
 }
-
-
-
-

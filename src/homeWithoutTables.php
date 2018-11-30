@@ -66,7 +66,7 @@ try {
 				<ul id="browselist">
 					<?php
 						foreach($cats as $cat) {
-							echo "<li class='browseitem'><a href='categorypage.php?cat=" . $cat['cname'] . "' class='browselink'>" . $cat['cname'] . "</a></li>";
+							echo "<li class='browseitem'><a href='searchpage.php?cat=" . $cat['cname'] . "' class='browselink'>" . $cat['cname'] . "</a></li>";
 						}
 					?>
 				</ul>

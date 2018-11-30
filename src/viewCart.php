@@ -1,6 +1,16 @@
 <?php
 include "includes/init.php";
 
+
+$headerSet=1;
+
+//need to have arrays (2D array?) here to store the row results as strings
+
+// then using HTML display all the arrays as the cart and have the buttons and stuff but this will also be in php
+
+//then depending on the button clicks we are gonna have to update the cart
+
+
 if(isset($_SESSION['user'])){
     $user = $_SESSION['user']->id;
 }
@@ -16,7 +26,7 @@ $cartRows = array();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <link rel="stylesheet" href="css/cart.css">
         <?php include 'includes/headerFooterHead.php'; ?>
@@ -81,9 +91,7 @@ $cartRows = array();
         //user not logged in
         //cart is an object (in a cookie or something idk), must iterate through (look at Ramon's code Lab 7)
 
-        $uc = $_SESSION['cart'];
-
-        $cart = $uc -> getCart();
+        $cart = $_SESSION['cart'] -> getCart();
 
         //somehow iterate through the cart... idk how yet though so thats good
 
@@ -92,7 +100,7 @@ $cartRows = array();
             //add to the array
             
             
-			$prod["pNo"] = $cart[$itemID]['pno'];
+			$prod["pNo"] = $cart[$itemID]['pNo'];
 			$prod["pname"] =  $cart[$itemID]['pname'];
 			$prod["size"] =  $cart[$itemID]['size'];
 			$prod["quantity"] =  $cart[$itemID]['qty'];
@@ -114,7 +122,7 @@ $cartRows = array();
 	        
         
 			echo "<table id='cartTable'><tr><th>Product Name</th><th>Quantity</th><th>Size</th><th>Price</th></tr>";
-
+        $sumtotal = 0;
         foreach ($cartRows as $prod) {
             //for each row in cartRows
 
@@ -133,7 +141,10 @@ $cartRows = array();
 			$sumtotal += $prod['total'];
 			
         }
-        
+
+        if($len==0){
+            $sumtotal=0;
+        }
 
         echo '<tr><td id="sumTotal" colspan="4">Your Subtotal: $' .$sumtotal . '</td><td class="centerContents"><form method="POST" action="checkout.php"><input type="submit" id="checkoutButton" class="button" value="Check-out"></form></td></tr>';
 			echo '</table></div>';
