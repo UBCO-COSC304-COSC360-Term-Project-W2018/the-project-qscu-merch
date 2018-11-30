@@ -1,6 +1,5 @@
 <?php
 
-$headerSet = 1;
 include "includes/init.php";
 
 if (isset($_SESSION['user'])) {
@@ -16,8 +15,6 @@ try {
         die("Connection Failed: " . $con->connect_errno);
     }
 } catch (Exception $e) {
-    //TODO: CHECK IF THIS IS VALID
-    header('location: error404.php');
     die("Session Terminated.");
 }
 try {
@@ -39,8 +36,6 @@ try {
     }
 
 } catch (Exception $ex) {
-    //TODO: CHECK IF THIS IS VALID
-    header('location: ../error404.php');
 }
 ?>
 
