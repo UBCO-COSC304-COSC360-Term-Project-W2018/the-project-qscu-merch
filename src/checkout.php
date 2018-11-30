@@ -13,7 +13,7 @@ try {
         header('Location: http://localhost/the-project-qscu-merch/src/login.php');
         exit();
     } else {
-        $userid = $_SESSION['userid'];
+        $userid = $_SESSION['user']->id;
     }
 
     $firstName = "";
@@ -38,11 +38,13 @@ try {
 //    echo "<p> You are connected to the database</p>";
     }
 //get info user info if they exist
-    $sql1 = "SELECT * FROM billinginfo WHERE uid = ?";
+    $sql1 = "SELECT * FROM BillingInfo WHERE uid = ?";
 
     if ($user_billing_info = $mysqli->prepare($sql1)) {
         $user_billing_info->bind_param("s", $userid);
         $user_billing_info->execute();
+
+//        echo "<p>getting billing info</p>";
 
         $result = $user_billing_info->get_result();
 
@@ -57,6 +59,14 @@ try {
             $ccv = $row['CCV'];
         }
     }
+//    echo "<p>".$addressLine."</p>";
+//    echo "<p>".$city."</p>";
+//    echo "<p>".$province."</p>";
+//    echo "<p>".$country."</p>";
+//    echo "<p>".$postalcode."</p>";
+//    echo "<p>".$creditCardNum."</p>";
+//    echo "<p>".$creditCardExpiryDate."</p>";
+//    echo "<p>".$ccv."</p>";
 
     $sql2 = "SELECT fname, lname FROM user WHERE uid= ?";
 
@@ -122,8 +132,7 @@ finally {
                             </div>
                             <div id="ccNumContainer" class="checkoutContainer">
                                 <label id="ccNumLabel" for="ccNum" class="elementLabel">Credit Card Number: </label>
-                                <input type="number" name="ccNum" id="ccNum" required
-                                       value="<?php echo $creditCardNum ?>">
+                                <input type="number" name="ccNum" id="ccNum" required value="<?php echo $creditCardNum ?>">
                             </div>
 
                             <div id="ccExpirationContainer" class="checkoutContainer">
@@ -155,6 +164,14 @@ finally {
                                 <div id="billingCountry" class="checkoutContainer">
                                     <label class="elementLabel" for="billingCountryInput">Country: </label>
                                     <select name="billingCountry" id="billingCountrySelect">
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
+                                        <option value="Canada">Canada</option>
                                         <option value="Canada">Canada</option>
                                     </select>
                                 </div>

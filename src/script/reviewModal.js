@@ -288,7 +288,3 @@ function buildComment(json) {
 
     return comment;
 }
-
-
-
-

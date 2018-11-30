@@ -40,7 +40,7 @@ include "header.php";
     <div class ="container">
         <div class ="contactInfo flex-item">
             <h1>Get in Touch</h1>
-            <p> Please fill otu the quick from and will be in touch with lightening speed! </p>
+            <p> Please fill out the quick from and will be in touch with lightning speed! </p>
             <h2>Connect with us</h2>
             <p> For support or any questions, emails us at <a href="mailto:qscu.ubco@gmail.com?Subject=QSCU%20Shop" target="_top">qscu.ubco@gmail.com</a></p>
 
@@ -93,6 +93,7 @@ include "header.php";
 </div>
 
 <!-- Insert Footer Here-->
+<?php include "footer.php" ?>
 </body>
 
 </html>

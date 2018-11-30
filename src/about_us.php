@@ -1,5 +1,5 @@
 <?php 
-include "init.php";
+include "includes/init.php";
 include "header.php";
 ?>
 <!--HTML about us page for shop.qscu.org-->

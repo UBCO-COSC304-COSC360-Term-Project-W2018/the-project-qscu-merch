@@ -15,8 +15,7 @@ try {
         $fullShippingAddress = $_SESSION['fullShippingAddress'];
         $totalPrice = $_SESSION['totalCost'];
 
-        //TODO: fix this before merging onto dev
-//        $userid = 1;
+
         $user = $_SESSION['user'];
         $userid = $user->id;
 
@@ -45,7 +44,7 @@ try {
                 $_SESSION['kicked_out'] = true;
             }
             //TODO: change the URL
-            header('Location: http://localhost/the-project-qscu-merch/src/action/logout.php');
+            header('Location: logout.php');
             exit();
         }
         $warehouseId = 1;
@@ -198,13 +197,14 @@ try {
                     //TODO: REPLACE WITH REDIRECT
                     //TODO: REPLACE WITH ACTUAL URL REDIRECt RACHELLE USE RELATIVE
                     header("Location: ../orderError.php");
+                    $_SESSION['order_error'] = true;
 //                    echo "<p>Our apologies! We do not have the products that you want to order in our inventory</p>";
 //                    echo "<p><a href = \"../homeWithoutTables.php\" >Return Home</a></p>";
                 }
 
                 //its all good to delete their cart
                 else {
-
+                    $_SESSION['order_placed'] = true;
                     header("Location: ../orderPlaced.php");
 //                    echo "<p>redirecting user</p>";
                 }
