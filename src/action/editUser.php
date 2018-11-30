@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $extension = end(explode(".", $file['name']));
                     $validExt = array("jpg", "png", "gif");
                     $validMine = array("image/jpeg", "image/png", "image/gif");
-                    if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 1000 * 1000))) {
+                    if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 66 * 1000))) {
                         if (move_uploaded_file($file['tmp_name'], $targetFilePath)) {
                             $query = 'UPDATE User SET profilePicture = ?, contentType = ? WHERE customerBanned = 0 AND uid = ?';
                             $stmt = $mysql->prepare($query);
