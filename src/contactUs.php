@@ -57,7 +57,7 @@ include "header.php";
         </div>
 
 
-        <form id="contactForm" method="post" action="http://www.randyconnolly.com/tests/process.php" class="flex-item">
+        <form id="contactForm" method="post" action="https://formspree.io/qscu.ubco@gmail.com" class="flex-item">
             <fieldset>
                 <!-- legend -->
                 <legend id="contactTitle">Contact Us</legend>
@@ -84,7 +84,7 @@ include "header.php";
                 </div>
 
                 <div class="formElement">
-                    <button type="submit" id="SubmitButton">Submit</button>
+                    <button type="submit" value ="Send" id="SubmitButton">Submit</button>
                 </div>
 
             </fieldset>
