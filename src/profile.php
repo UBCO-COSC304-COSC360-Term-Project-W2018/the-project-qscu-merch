@@ -468,7 +468,7 @@ $headerSet = 1;
 
         }
         catch ( Exception $exception ) {
-            header('Location: login.php');
+//            header('Location: homeWithoutTables.php');
         }
         finally {
             $mysqli -> close();
