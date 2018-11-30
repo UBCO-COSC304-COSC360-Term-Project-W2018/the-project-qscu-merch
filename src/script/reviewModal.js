@@ -56,26 +56,18 @@ function onCommentSubmit() {
             let commentSubmitButton = $('#commentSubmitButton');
             commentSubmitButton.attr("disabled", "disabled");
 
-            let data = {
+            let obj = {
                 'action': 'setComment',
                 'userReviewInput': commentInput,
                 'pno': compd,
                 'uid': comid,
             };
 
-            $.ajax({
-                url: "action/setReview.php",
-                method: "post",
-                data: data,
+            commentStatus.html("<p>Sending...</p>");
+            commentStatus.addClass("loading");
 
-
-                beforeSend: function () {
-
-                    commentStatus.html("<p>Sending...</p>");
-                    commentStatus.addClass("loading");
-
-                },
-                success: function (results) {
+            $.post('action/setReview.php', JSON.stringify(obj))
+                .done(function (results) {
                     console.log(results);
                     commentStatus.removeClass("loading");
                     if (results.status == "success") {
@@ -83,6 +75,7 @@ function onCommentSubmit() {
                         commentStatus.html("<p>Your review has been posted!</p>");
                         commentSubmitButton.removeAttr("disabled");
                         $("#commentInput").val('');
+
                         setTimeout(function () {
                             $('#commentModal').hide();
                         },1000)
@@ -92,16 +85,16 @@ function onCommentSubmit() {
                         commentSubmitButton.removeAttr("disabled");
                     }
 
-                }
+                }).fail(function (jqXHR) {
+                    console.log(jqXHR)
 
             });
-
-
         }
     }
 }
 
 function onReviewSubmit() {
+    console.log('click sub')
 
 
     let reviewSubmitButton = $("#reviewSubmitButton");
@@ -120,26 +113,19 @@ function onReviewSubmit() {
     } else {
         reviewSubmitButton.attr("disabled", "disabled");
 
-        let data = {
+        let obj = {
             'action': 'setReview',
             'userRatingInput': ratingInput,
             'userReviewInput': commentInput,
             'pno': productNum,
         };
 
-        $.ajax({
-            url: "action/setReview.php",
-            method: "post",
-            data: data,
 
-            beforeSend: function () {
+        reviewStatus.html("<p>Sending...</p>");
+        reviewStatus.addClass("loading");
 
-                reviewStatus.html("<p>Sending...</p>");
-                reviewStatus.addClass("loading");
-
-            },
-            success: function (results) {
-
+        $.post('action/setReview.php', JSON.stringify(obj))
+            .done(function (results) {
                 console.log("res is ");
                 console.log(results)
                 reviewStatus.removeClass("loading");
@@ -156,7 +142,9 @@ function onReviewSubmit() {
                     reviewSubmitButton.removeAttr("disabled");
                 }
 
-            }
+        }).fail(function (jqXHR) {
+            console.log(jqXHR)
+
         });
     }
 }
