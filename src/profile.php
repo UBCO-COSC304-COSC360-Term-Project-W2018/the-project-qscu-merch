@@ -337,7 +337,6 @@ $headerSet = 1;
                         }
                     }
         //              src=\"<?php echo 'data:' . $contentType . ';base64,' . base64_encode($profileImage) \"
-                    echo $contentType;
 
 
                     echo "<div class=\"review\">
@@ -365,7 +364,6 @@ $headerSet = 1;
                     if ( $comment_on_review = $mysqli -> prepare($comment_on_review_sql) ) {
                         $comment_on_review -> bind_param("ss", $pNo, $uid);
                         $comment_on_review -> execute();
-                        echo "executed statement to get comments";
 
                         $comment_on_review_result = $comment_on_review -> get_result();
 
@@ -478,214 +476,10 @@ $headerSet = 1;
 
         ?>
 
-
-
-        <!--TODO put this in a include file-->
-
-
-
-<!--            <div class="comment">-->
-<!--                <p class="userProfile">-->
-<!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> James-->
-<!--                    <time datetime="2018-11-9">- November 9, 2018</time>-->
-<!--                </p>-->
-<!--                <p class="reviewTitle">-->
-<!--                    You just don't get it-->
-<!--                </p>-->
-<!--                <p class="reviewDescription">Those are some dank zebra eye ping pongs!</p>-->
-<!--            </div>-->
-<!--            <div class="comment">-->
-<!--                <p class="userProfile">-->
-<!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Parsa R-->
-<!--                    <time datetime="2018-10-24">- October 24, 2018</time>-->
-<!--                </p>-->
-<!--                <p class="reviewTitle">-->
-<!--                    Great product!-->
-<!--                </p>-->
-<!--                <p class="reviewDescription">Those are some dank ping pongs!</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!---->
-<!--    <div class="reviewBlock">-->
-<!--        <p class="userProfile">-->
-<!--            <img src="../src/images/profile.png" alt="User's profile picture" align="middle">User-->
-<!--            Name-->
-<!--            <time datetime="2018-10-24">- Month Day, Year</time>-->
-<!--        </p>-->
-<!--        <p class="userRating">-->
-<!--            <span class="fa fa-star checked"></span>-->
-<!--            <span class="fa fa-star checked"></span>-->
-<!--            <span class="fa fa-star checked"></span>-->
-<!--            <span class="fa fa-star "></span>-->
-<!--            <span class="fa fa-star"></span>-->
-<!--        </p>-->
-<!---->
-<!--        <p class="reviewTitle">-->
-<!--            Review Title Here-->
-<!--        </p>-->
-<!--        <p class="reviewDescription">Review Description Here</p>-->
-<!--    </div>-->
-<!--        <h3>Your Reviews & Comments</h3>-->
-<!--        -->
-<!--            <!--TODO put this in a include file-->
-<!--            <div class="reviewBlock">-->
-<!--                <div class="review">-->
-<!--                    <p class="userProfile">-->
-<!--                        <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa-->
-<!--                            R</a>-->
-<!--                        <time datetime="2018-10-24">- October 24, 2018</time>-->
-<!--                    </p>-->
-<!--                    <p class="userRating">-->
-<!--                        <span class="fa fa-star checked"></span>-->
-<!--                        <span class="fa fa-star checked"></span>-->
-<!--                        <span class="fa fa-star checked"></span>-->
-<!--                        <span class="fa fa-star "></span>-->
-<!--                        <span class="fa fa-star"></span>-->
-<!--                    </p>-->
-<!---->
-<!--                    <p class="reviewTitle">-->
-<!--                        Great product!-->
-<!--                    </p>-->
-<!--                    <p class="reviewDescription">Those are some dank ping pongs!</p>-->
-<!--                </div>-->
-<!--                <div class="comments">-->
-<!--                    <div class="comment">-->
-<!--                        <p class="userProfile">-->
-<!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Not Parsa R-->
-<!--                            <time datetime="2018-10-30">- October 30, 2018</time>-->
-<!--                        </p>-->
-<!--                        <p class="reviewTitle">-->
-<!--                            Balls-->
-<!--                        </p>-->
-<!--                        <p class="reviewDescription">Its a bunch of balls</p>-->
-<!--                    </div>-->
-<!--                    <div class="comment">-->
-<!--                        <p class="userProfile">-->
-<!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> James-->
-<!--                            <time datetime="2018-11-9">- November 9, 2018</time>-->
-<!--                        </p>-->
-<!--                        <p class="reviewTitle">-->
-<!--                            You just don't get it-->
-<!--                        </p>-->
-<!--                        <p class="reviewDescription">Those are some dank zebra eye ping pongs!</p>-->
-<!--                    </div>-->
-<!--                    <div class="comment">-->
-<!--                        <p class="userProfile">-->
-<!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Parsa R-->
-<!--                            <time datetime="2018-10-24">- October 24, 2018</time>-->
-<!--                        </p>-->
-<!--                        <p class="reviewTitle">-->
-<!--                            Great product!-->
-<!--                        </p>-->
-<!--                        <p class="reviewDescription">Those are some dank ping pongs!</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!---->
-<!--            <div class="reviewBlock">-->
-<!--                <p class="userProfile">-->
-<!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle">User-->
-<!--                    Name-->
-<!--                    <time datetime="2018-10-24">- Month Day, Year</time>-->
-<!--                </p>-->
-<!--                <p class="userRating">-->
-<!--                    <span class="fa fa-star checked"></span>-->
-<!--                    <span class="fa fa-star checked"></span>-->
-<!--                    <span class="fa fa-star checked"></span>-->
-<!--                    <span class="fa fa-star "></span>-->
-<!--                    <span class="fa fa-star"></span>-->
-<!--                </p>-->
-<!---->
-<!--                <p class="reviewTitle">-->
-<!--                    Review Title Here-->
-<!--                </p>-->
-<!--                <p class="reviewDescription">Review Description Here</p>-->
-<!--            </div>-->
-
     </div>
 </main>
 <?php include "footer.php"; ?>
 </body>
 </html>
 
-<!---->
-<!--<div id="reviewsComments">-->
-<!--    <h3>Your Reviews & Comments</h3>-->
-<!---->
-<!--    <!--TODO put this in a include file-->-->
-<!--    <div class="reviewBlock">-->
-<!--        <div class="review">-->
-<!--            <p class="userProfile">-->
-<!--                <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa-->
-<!--                    R</a>-->
-<!--                <time datetime="2018-10-24">- October 24, 2018</time>-->
-<!--            </p>-->
-<!--            <p class="userRating">-->
-<!--                <span class="fa fa-star checked"></span>-->
-<!--                <span class="fa fa-star checked"></span>-->
-<!--                <span class="fa fa-star checked"></span>-->
-<!--                <span class="fa fa-star "></span>-->
-<!--                <span class="fa fa-star"></span>-->
-<!--            </p>-->
-<!---->
-<!--            <p class="reviewTitle">-->
-<!--                Great product!-->
-<!--            </p>-->
-<!--            <p class="reviewDescription">Those are some dank ping pongs!</p>-->
-<!--        </div>-->
-<!--        <div class="comments">-->
-<!--            <div class="comment">-->
-<!--                <p class="userProfile">-->
-<!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Not Parsa R-->
-<!--                    <time datetime="2018-10-30">- October 30, 2018</time>-->
-<!--                </p>-->
-<!--                <p class="reviewTitle">-->
-<!--                    Balls-->
-<!--                </p>-->
-<!--                <p class="reviewDescription">Its a bunch of balls</p>-->
-<!--            </div>-->
-<!--            <div class="comment">-->
-<!--                <p class="userProfile">-->
-<!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> James-->
-<!--                    <time datetime="2018-11-9">- November 9, 2018</time>-->
-<!--                </p>-->
-<!--                <p class="reviewTitle">-->
-<!--                    You just don't get it-->
-<!--                </p>-->
-<!--                <p class="reviewDescription">Those are some dank zebra eye ping pongs!</p>-->
-<!--            </div>-->
-<!--            <div class="comment">-->
-<!--                <p class="userProfile">-->
-<!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Parsa R-->
-<!--                    <time datetime="2018-10-24">- October 24, 2018</time>-->
-<!--                </p>-->
-<!--                <p class="reviewTitle">-->
-<!--                    Great product!-->
-<!--                </p>-->
-<!--                <p class="reviewDescription">Those are some dank ping pongs!</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!---->
-<!--    <div class="reviewBlock">-->
-<!--        <p class="userProfile">-->
-<!--            <img src="../src/images/profile.png" alt="User's profile picture" align="middle">User-->
-<!--            Name-->
-<!--            <time datetime="2018-10-24">- Month Day, Year</time>-->
-<!--        </p>-->
-<!--        <p class="userRating">-->
-<!--            <span class="fa fa-star checked"></span>-->
-<!--            <span class="fa fa-star checked"></span>-->
-<!--            <span class="fa fa-star checked"></span>-->
-<!--            <span class="fa fa-star "></span>-->
-<!--            <span class="fa fa-star"></span>-->
-<!--        </p>-->
-<!---->
-<!--        <p class="reviewTitle">-->
-<!--            Review Title Here-->
-<!--        </p>-->
-<!--        <p class="reviewDescription">Review Description Here</p>-->
-<!--    </div>-->
-<!---->
-<!--</div>-->
+
