@@ -18,24 +18,15 @@ function generateSalt()
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    echo "<p>We have passed the if for POST</p>";
     $validArr = array('billingInfo', 'changePassword', 'userInfo', 'uploadImage', 'resetPassword');
-    if (isset($_POST['action']) && in_array($_POST['action'], $validArr)) {
-        echo "<p>We have entered the if statement saying action is set</p>";
-
+    if (isset($_POST['action']) && in_array($_POST['action'], $validArr)) {;
         try {
             $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
             if ($mysql->error) {
                 throw new Exception();
             }
-
-            echo "<p>connected to database</p>";
-
             if ($_SESSION['user']) {
-                echo "<p>user is valid</p>";
-
                 if ($_POST['action'] === 'uploadImage' && isset($_FILES['uploadImage'])) {
-                    echo "<p>entering if regarding images</p>";
                     $file = $_FILES['uploadImage'];
                     $fileName = basename($file["name"]);
                     $targetFilePath = "../uploads/" . $fileName;
@@ -66,10 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $fieldsUserInfo = array('emailInput', 'firstNameInput', 'lastNameInput');
 
                 if ($_POST['action'] === 'userInfo' && arrayExists($_POST, $fieldsUserInfo) && arrayIsValidInput($_POST, $fieldsUserInfo)) {
-                    $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-                    if ($mysql->errno) {
-                        throw new Exception();
-                    }
                     $query = 'UPDATE User SET fname = ?, lname = ?, uEmail = ? WHERE uid = ?';
                     $stmt = $mysql->prepare($query);
                     $stmt->bind_param('sssi', $_POST['firstNameInput'], $_POST['lastNameInput'], $_POST['emailInput'], $_SESSION['user']->id);
@@ -115,14 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $stmt->bind_result($stop);
 
                     if($stmt->get_result()->num_rows > 0){
-                        echo "<p>updating BillingInfo</p>";
 
                         $query = 'UPDATE BillingInfo SET address = ?, city = ?, province = ?, postalCode = ?, creditCardNumber = ?, cardExpiryDate = ?, CCV = ? WHERE uid = ?';
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('ssssssss', $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode'], $_SESSION['user']->id);
 
                     }else{
-                        echo "<p>Inserting into BillingInfo</p>";
 
                         $query = 'INSERT INTO BillingInfo (uid, address, city, province, postalCode, creditCardNumber, cardExpiryDate, CCV, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "Canada")';
                         $stmt = $mysql->prepare($query);
@@ -130,8 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     }
 
-                   $stmt->execute();
-                    echo "<p>stmt is executed</p>";
+                   $stmt->execute();;
 
                 }
 
@@ -151,18 +135,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         } catch (Exception $e) {
 
-            echo "<p>you hit an exception lolololol</p>";
-
-//          header('location: ../error404.php');
+          header('location: ../error404.php');
 
             $mysql->close();
         } finally {
             $mysql->close();
-            echo "<p>you hit the finally statement</p>";
         }
 
-
+$sqlError = [];
+        array_push($sqlError, mysqli_connect_error());
+        mysqli_connect_error();
+        error_get_last();
     }
 }
-echo "<p>This is where I would redirect someone back to profile</p>";
-//header('Location: ../profile.php');
+header('Location: ../profile.php');

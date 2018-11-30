@@ -74,7 +74,6 @@ try {
 
 $user = $_SESSION['user']->id;
 $name = $_SESSION['user']->firstName;
-$headerSet = 1;
 ?>
 
 <!DOCTYPE html>
@@ -430,13 +429,15 @@ $headerSet = 1;
                     }
                 }
             }
-
+            mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
             echo "<h3>Your Comments:</h3>";
+            $commenter_name_details->close();
             //get all comments made by this user.
             //a comment needs:name of user who left, date, profile pic, text
             $get_comment_sql = "SELECT * FROM Comment WHERE leftBy = ?";
+
             if ( $get_comment = $mysqli -> prepare($get_comment_sql) ) {
-                $get_comment -> bind_param("s", $userid);
+                $get_comment -> bind_param("i", $userid);
                 $get_comment -> execute();
 
                 $get_comment_result = $get_comment -> get_result();
@@ -468,16 +469,13 @@ $headerSet = 1;
 
         }
         catch ( Exception $exception ) {
-            header('Location: login.php');
-            $mysqli -> close();
+            echo '<script>window.location.replace("homeWithoutTables.php");</script>';
           //TODO: Should this be die()? or exit?? @brandon
             die();
-//            header('Location: homeWithoutTables.php');
         }
         finally {
             $mysqli -> close();
         }
-
         ?>
 
     </div>

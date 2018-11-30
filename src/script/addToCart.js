@@ -10,7 +10,7 @@ $(document).ready(function(){
 		
 		$.post('action/addToCart.php', JSON.stringify(obj))
 		.done(function (data){
-			if(data == 11){
+			if(data == true){
 				$("#addedToCart").text("Added To Cart");
 			
 				setTimeout( function(){
