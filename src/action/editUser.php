@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $fieldsUserInfo = array('emailInput', 'firstNameInput', 'lastNameInput');
 
-                if ($_POST['action'] === 'userInfo' && arrayExists($_POST, $fieldsUserInfo) && arrayIsValidInput($_POST, $fieldsUserInfo) && preg_match($emailRegex, $_POST['emailInput'])) {
+                if ($_POST['action'] === 'userInfo' && arrayExists($_POST, $fieldsUserInfo) && arrayIsValidInput($_POST, $fieldsUserInfo)) {
                     $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
                     if ($mysql->errno) {
                         throw new Exception();
