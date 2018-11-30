@@ -114,6 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     }
 
+                    echo $mysql->error_list;
                    $stmt->execute();
 
 
