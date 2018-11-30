@@ -9,20 +9,15 @@ if(isset($_SESSION['user'])){
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-	$inputFields = array('prodNum', 'size', 'quantity');
-	if(!(arrayExists($_POST, $inputFields) && arrayIsValidInput($_POST, $inputFields))){
-        //This is where I need you guys to somehow access this information
-        $_SESSION['hasError'] = true;
-        $_SESSION['errorType'] = "Form";
-        $_SESSION['errorMsg'] = "invalid form data";
-        header('location: ../homeWithoutTables.php');
-    }else{
+	$data =array('rst'=>true);
+	$input = json_decode(file_get_contents('php://input'), true);
+	if(isset($input['pNo'])&&isset($input['size'])&&isset($input['quantity'])){
 	    try{
-		   $pNo = $_POST["prodNum"];
-		   $size = $_POST['size'];
-		   $quantity = $_POST['quantity'];
+		   $pNo = $input["pNo"];
+		   $size = $input['size'];
+		   $quantity = $input['quantity'];
 		   $pname = null;
-		   $price = null;
+		   $cost = 0;
 		   
 		   $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
@@ -40,19 +35,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				$pstmt1->bind_result($name, $cost);
 
 	            while($pstmt1->fetch()){
+		            $pname = $name;
+		            $price = $cost;
 	                //should only be one row
-	                $pname = $name;
-	                $price = $cost;
 	            }
+	        
 	            
-            }
+            
             $numRows;
             $quantityToUpdate;
             
 			if (isset($user)) {
-				$stmt = "SELECT quantity FROM HasCart WHERE pNo = ? AND size = ? AND uid = ?";
+				$slct = "SELECT quantity FROM HasCart WHERE pNo = ? AND size = ? AND uid = ?";
 				
-				if($stmt = $con->prepare($stmt)){
+				if($stmt = $con->prepare($slct)){
 					
 					$stmt->bind_param('isi', $pNo, $size, $user);
 					$stmt->execute();
@@ -73,7 +69,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		
 		                $pstmt->execute();
 
-		                header('location: ../singleProduct.php?pNo=' . $pNo);  
+		                //header('location: ../singleProduct.php?pNo=' . $pNo);  
 					}
 				}else{
 					$upd = "UPDATE HasCart SET quantity = ? WHERE pNo = ? AND size = ? AND uid = ?";
@@ -83,27 +79,34 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		                $updStmt ->bind_param('iisi', $quantity, $pNo, $size, $user);
 		                $updStmt->execute();
 	
-		                header('location: ../singleProduct.php?pNo=' . $pNo);  
+		                //header('location: ../singleProduct.php?pNo=' . $pNo);  
 
 					}
 	            }
 	        } else {
-	            if(isset($price) && isset($pname)) {
+	          
 	                //add to object cart
-	
-	                $uCartObj = $_SESSION['userCart'];
-	
-	                $uCartObj->addItem($pNo, $pname, $size, $quantity, $price);
-	                
-	            }
-	            header('location: ../singleProduct.php?pNo=' . $pNo);  
+/*
+	                $_SESSION['cart']= new userCart();
+	                echo "FUCK";
+					echo $pNo;
+*/
+					
+	                $_SESSION['cart']->addItem($pNo, $pname, $size, $quantity, $price);
+	              
+
 	        }
+	        }
+	          //header('location: ../singleProduct.php?pNo=' . $pNo);
 		}catch (Exception $e){
-            header('location: ../singleProduct.php?pNo=' . $pNo);      
+            //header('location: ../singleProduct.php?pNo=' . $pNo);      
         }finally{
+	       $data['rst'] = false;
             $con->close();
             die();
         }
+        header('Content-Type: application/json');
+ 		echo json_encode($data);
     }
 }
 ?>

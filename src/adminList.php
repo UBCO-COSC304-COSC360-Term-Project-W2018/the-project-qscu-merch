@@ -3,7 +3,7 @@ include 'includes/init.php';
 include 'includes/validateAdmin.php';
 
 validateAdminRequest($_SESSION);
-$headerSet = 1;
+
 
 ?>
     <!DOCTYPE html>
@@ -11,6 +11,8 @@ $headerSet = 1;
     <head>
         <?php include 'includes/headerFooterHead.php' ?>
         <link rel="stylesheet" href="css/adminList.css">
+         <link rel="stylesheet" href="css/adminPosts.css">
+         <link rel="stylesheet" href="css/userList.css">
         <script src="script/admin_controller.js"></script>
         <script src="script/imagePreview.js"></script>
     </head>
@@ -23,7 +25,6 @@ $headerSet = 1;
                 <button id="btnProducts">Products</button>
                 <button id="btnUsers">Users</button>
                 <button id="btnPosts">Posts</button>
-                <button id="btnAdminJunk">Admin Junk</button>
                 <input id="subSearch" name="subSearch" type="text">
                 <button id="btnSearch" onclick="onSearch()">Search</button>
                 <label for="rbProductName">Product Name:</label>
@@ -34,10 +35,8 @@ $headerSet = 1;
                 <input id="rbUserName" value="2" name="rbgroup" type="radio" disabled>
                 <label for="rbUserEmail">Users Email:</label>
                 <input id="rbUserEmail" value="3" name="rbgroup" type="radio" disabled>
-                <label for="rbPostTitle">Post Title:</label>
-                <input id="rbPostTitle" value="4" name="rbgroup" type="radio" disabled>
                 <label for="rbPost">Post Body:</label>
-                <input id="rbPost" value="5" name="rbgroup" type="radio" disabled>
+                <input id="rbPost" value="4" name="rbgroup" type="radio" disabled>
             </div>
 
 
@@ -101,123 +100,14 @@ $headerSet = 1;
                 <div id="userContent">
                 </div>
             </div>
+            
+            
             <div class="hidden" id="postList">
                 <div>
-                    <h1>Reviews and Comments</h1>
+                    <h1 class="adminListHeaders">Reviews and Comments</h1>
                 </div>
-                <div class="postContent">
-                    <table class="productReview">
-                        <tr>
-                            <td colspan="5">
-                                <span>Product Name: <a href="">Product Name</a></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table class="userReview">
-                                    <tr>
-                                        <td>
-                                            <span>User Email:</span>
-                                        </td>
-                                        <td>
-                                            <span>Email@email.com</span>
-                                        </td>
-                                        <td>
-                                            <span>User Name:</span>
-                                        </td>
-                                        <td>
-                                            <span>Jeff Bridges</span>
-                                        </td>
-                                        <td>
-                                            <button onclick="onSearchUser(1)">Search User</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span>Review Tile:</span>
-                                        </td>
-                                        <td colspan="4">
-                                            <span>This is a product</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span>Rating: 5/5</span>
-                                        </td>
-                                        <td>
-                                            <span>Date Posted: 2018-11-23</span>
-                                        </td>
-
-                                        <td>
-                                            <span>Review Status:</span>
-                                        </td>
-                                        <td>
-                                            <span class="17PostStatus" data-status="setPost" >Enabled</span>
-                                        </td>
-                                        <td>
-                                            <button class="17PostChange" onclick="onChangePostStatus(1,7)">Disable</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5">
-                                            This is a product review, is good products
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5">
-                                            <table class="userComment">
-                                                <tr>
-                                                    <td>
-                                                        <span>User Email:</span>
-                                                    </td>
-                                                    <td>
-                                                        <span>notemail@email.com</span>
-                                                    </td>
-                                                    <td>
-                                                        <span>User Name:</span>
-                                                    </td>
-                                                    <td>
-                                                        <span>scarlett johansson</span>
-                                                    </td>
-                                                    <td>
-                                                        <button onclick="onSearchUser(2)">Search User</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <span>Comment Tile:</span>
-                                                    </td>
-                                                    <td colspan="4">
-                                                        <span>Your Review sucks</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <span>Date Posted: 2018-11-24</span>
-                                                    </td>
-
-                                                    <td>
-                                                        <span>Review Status:</span>
-                                                    </td>
-                                                    <td>
-                                                        <span class="171PostStatus" data-status="unsetPost" >Enabled</span>
-                                                    </td>
-                                                    <td>
-                                                        <button class="171PostChange" onclick="onChangePostStatus(1,7,1)">Disable</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td rowspan="3" colspan="5">
-                                                        write more in your review
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
+                <!-- TODO use a new postContent div for each product's reviews/comments -->
+                <div id="postContent" class="postContent">
                 </div>
             </div>
 

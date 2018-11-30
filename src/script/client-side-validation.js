@@ -14,6 +14,7 @@ window.onload = function () {
 
     };
 
+/*
        document.getElementById("signUpForm").onsubmit = function (e) {
 
         //sign-up form elements to be validated
@@ -41,6 +42,7 @@ window.onload = function () {
 
 
     }
+*/
 
     function validateName ( name ) {
         var valid = true;
