@@ -125,7 +125,7 @@ try {
                         <!--                        <form id='myform'>-->
 
                         <input title="Decrease Quantity" type='button' value='-' class='qtyminus' field='quantity'/>
-                        <input required id="quantity" type='number' name='quantity' value='' min='1' placeholder="0" class='qty'/>
+                        <input required id="quantity" type='number' name='quantity' value='1' min='1' placeholder="0" class='qty'/>
                         <input title="Increase Quantity" type='button' value='+' class='qtyplus' field='quantity'/>
 
                         <!-- added drop down menu -->
