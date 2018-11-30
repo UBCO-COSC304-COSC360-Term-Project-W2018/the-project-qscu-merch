@@ -73,9 +73,9 @@ $headerSet = 0;
                 </div>
             </div>
             <div class="loginFormElement">
-				<input type="hidden" name="action" value="changePassword">
-				<input type="hidden" name="uid" value="<?php echo $uid;?>">
-				<input type="hidden" name="authToken" value="<?php echo $token;?>">
+				<input type="hidden" name="action" value="changePassword" required>
+				<input type="hidden" name="uid" value="<?php echo $uid;?>" required>
+				<input type="hidden" name="authToken" value="<?php echo $token;?>" required>
                 <button type="submit">Save Password</button>
             </div>
 			<?php endif;?>

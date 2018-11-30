@@ -1,13 +1,11 @@
 <?php
 include "includes/init.php";
-
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (isset($_GET['pNo'])) {
         $pNo = sanitizeInput($_GET['pNo']);
     } else die("Please use a pNo when connecting to this page."); //TODO do something better in this case. -Jasper
 }
 $mysql;
-
 try {
     if (isset($_SESSION['user'])) {
         $user = $_SESSION['user']->id;
@@ -17,17 +15,13 @@ try {
     if ($mysql->connect_errno) {
         die("Connection Failed: " . $mysql->connect_errno);
     }
-
     $query = "SELECT pname, AVG(rating) AS rating, image, contentType, description, price FROM Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo WHERE Product.pNo = ? GROUP BY Product.pNo";
-
     $stmt0 = $mysql->prepare($query);
     $stmt0->bind_param('i', $pNo);
     $stmt0->execute();
     $stmt0->bind_result($product['pname'], $product['rating'], $product['image'], $product['contentType'], $product['description'], $product['price']);
     $stmt0->fetch();
-
     $stmt0->close();
-
     $size = [];
     $query = "SELECT size FROM Product WHERE pNo = ?";
     $stmt = $mysql->prepare($query);
@@ -53,14 +47,11 @@ try {
                 break;
         }
     }
-
-
 } catch (Exception $e) {
     die("Error with Cart. Session Terminated.");
 } finally {
     $mysql->close();
 }
-
 ?>
 
     <!DOCTYPE HTML>
@@ -88,7 +79,7 @@ try {
 <?php include "header.php"; ?>
     <ul class="breadcrumb">
         <a href="homeWithoutTables.php">Home</a> &gt; &gt;
-        <a href="categorypage.php">Categories</a> &gt; &gt;
+        <a href="searchpage.php">Categories</a> &gt; &gt;
         <a>Product</a>
     </ul>
 
@@ -112,7 +103,7 @@ try {
                             if ($ratingAvg && $ratingAvg != NULL) {
                                 for ($i = 0; $i < 5; $i++) {
                                     echo "<span class=\"fa fa-star";
-                                    if ($i <= $ratingAvg) echo "checked";
+                                    if ($i <= $ratingAvg) echo " checked";
                                     echo "\"></span>";
                                 }
                             } else {
@@ -147,7 +138,7 @@ try {
                             <?php
                             foreach ($size AS $key2 => $value2) {
                                 if ($size[$key2] === 'single') {
-                                    echo '<option value="single">Size Unavailable</option>';
+                                    echo '<option value="single">No size</option>';
                                 } else {
                                     echo '<option value="' . $size[$key2] . '">' . $size[$key2] . '</option>';
                                 }

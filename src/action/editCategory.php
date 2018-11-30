@@ -53,9 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
             }
 
 
-            $protectedCategorys = [];
             //protected category array add cid to array to protect it
-//        $protectedCategorys = array('7',);
+            $protectedCategorys = array('1','2','3','4','5','6','7');
             if ($input['action'] === 'deleteCategory' && !in_array($input['cid'], $protectedCategorys)) {
                 $query = 'DELETE FROM ProductInCategory WHERE cid = ?';
                 $stmt = $mysql->prepare($query);
@@ -66,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
                 $stmt = $mysql->prepare($query);
                 $stmt->bind_param('i', $input['cid']);
                 $stmt->execute();
-
             }
 
             header('Content-Type: application/json');

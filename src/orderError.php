@@ -2,6 +2,11 @@
 include "includes/init.php";
 $headerSet = 1;
 
+if ( !isset($_SESSION['order_error']) OR $_SESSION['order_error'] === false ) {
+    header('Location: homeWithoutTables.php');
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>

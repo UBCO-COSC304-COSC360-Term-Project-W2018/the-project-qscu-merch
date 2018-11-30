@@ -24,9 +24,6 @@ if(isset($_SESSION['hasError'])){
     <link rel="stylesheet" href="css/login.css">
     <script type="text/javascript" src="script/client-side-validation.js"></script>
 
-
-
-
 </head>
 <body>
 <?php include "header.php"; ?>

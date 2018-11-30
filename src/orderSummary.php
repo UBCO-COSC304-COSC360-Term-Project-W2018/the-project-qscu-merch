@@ -1,26 +1,29 @@
 <?php
 include "includes/init.php";
 
+if ( !isset($_SESSION['user'])) {
+    header("Location: homeWithoutTables.php");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($_SESSION['userid'])) {
         header('Location: http://localhost/the-project-qscu-merch/src/login.php');
         exit();
     } else {
         //getting the user object
-//        $userid = $_SESSION['userid'];
         //TODO: RACHELLE REMEMBER TO UNCOMMENT THIS WHEN YOU ARE DONE TESTING
-//        $userid = 1;
         $user = $_SESSION['user'];
         $userid = $user->id;
-//        or
-//        $userid = $_SESSION['user']->userid
+
     }
     if (!isset($_POST['ccName']) || !isset($_POST['ccNum']) || !isset($_POST['ccExpiration'])
             || !isset($_POST['ccv']) || !isset($_POST['billingAddress']) || !isset($_POST['billingCity'])
             || !isset($_POST['billingProvince']) || !isset($_POST['billingCountry']) || !isset($_POST['billingPostalCode'])
             || !isset($_POST['shippingAddressRadio']) || !isset($_POST['shippingAddress']) || !isset($_POST['shippingCity'])
             || !isset($_POST['shippingProvince']) || !isset($_POST['shippingCountry']) || !isset($_POST['shippingPostalCode'])) {
-        die();
+        header("Location: homeWithoutTables.php");
+        exit();
     }
     //all variables set
     else {
@@ -82,15 +85,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         }
         catch (Exception $exception) {
-            die();
+//            die();
+            echo "<p>went to catch</p>";
         }
 
     }
 }
 //a POST method wasn't used
 else {
-    die();
+//    die();
+    echo "<p>went to final else</p>";
 }
+
 
 ?>
 

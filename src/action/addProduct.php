@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $extension = end(explode(".", $file['name']));
                 $validExt = array("jpg", "png", "gif");
                 $validMine = array("image/jpeg", "image/png", "image/gif");
-                if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 10 * 1000 * 1000))) {
+                if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 66 * 1000))) {
                     if (!move_uploaded_file($file['tmp_name'], $targetFilePath)) {
                         throw new Exception();
                     }
@@ -106,6 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             die();
         }
     }
-}
+}else
+    echo "error 404";
+die();
 
 ?>
