@@ -1,8 +1,7 @@
 <?php
 include "../includes/init.php";
 
-function loginFailed($input = null)
-{
+function loginFailed($input = null){
     $_SESSION['hasError'] = true;
     $_SESSION['errorType'] = "login";
     if (isset($input)) {
@@ -61,7 +60,7 @@ try {
     }
 } catch (Exception $e) {
     loginFailed();
-}finally{
+} finally {
     $mysqli->close();
     die();
 }

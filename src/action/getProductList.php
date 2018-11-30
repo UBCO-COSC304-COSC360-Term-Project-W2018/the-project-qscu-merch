@@ -3,25 +3,21 @@ include '../includes/session.php';
 include '../includes/inputValidation.php';
 include '../includes/db_credentials.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
 
     $validSearchType = array('productName', 'productCategory', 'productNameWithRating', "");
-    $validBuildType = array('grouped','deepgrouped','individual');
-    if(isset($input['searchType'])&& isset($input['searchInput']) && in_array($input['searchType'], $validSearchType)){
-
+    $validBuildType = array('grouped', 'deepgrouped', 'individual');
+    if (isset($input['searchType']) && isset($input['searchInput']) && in_array($input['searchType'], $validSearchType)) {
 
         $searchInput = $input['searchInput'];
         $searchType = $input['searchType'];
-        $buildType = (isset($input['buildType']) && in_array($input['buildType'], $validBuildType))? $input['buildType']: 'grouped';
-
+        $buildType = (isset($input['buildType']) && in_array($input['buildType'], $validBuildType)) ? $input['buildType'] : 'grouped';
 
         $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
         if ($mysql->errno) {
             die();
         }
-
 
         try {
 
@@ -68,9 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if ($searchType == "productNameWithRating") {
-              $stmt->bind_result($rating, $pno, $size, $pname, $price, $contentType, $image, $description, $quantity);
+                $stmt->bind_result($rating, $pno, $size, $pname, $price, $contentType, $image, $description, $quantity);
             } else {
-              $stmt->bind_result($pno, $size, $pname, $price, $contentType, $image, $description, $quantity);
+                $stmt->bind_result($pno, $size, $pname, $price, $contentType, $image, $description, $quantity);
             }
 
             $stmt->execute();
@@ -99,7 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         } else {
                             $item[$size] = array("productSize" => $size, "productPrice" => $price, "productQuantity" => $quantity);
                         }
-
                     }
                     if (isset($item)) {
                         array_push($data, $item);
@@ -108,14 +103,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo json_encode($data);
                     break;
                 case "deepgrouped":
-                //deep ( -_-)
+                    //deep ( -_-)
                     $counter = -1;
                     while ($stmt->fetch()) {
                         if ($counter !== $pno) {
                             if (isset($item)) {
                                 array_push($data, $item);
                             }
-
                             $item = [];
 
                             $item['productNumber'] = $pno;
@@ -123,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $item['productContentType'] = $contentType;
                             $item['productImage'] = base64_encode($image);
                             if ($searchType == "productNameWithRating") {
-                              $item['productRating'] = $rating;
+                                $item['productRating'] = $rating;
                             }
                             $item['variations'] = array($size => array("productSize" => $size, "productPrice" => $price, "productQuantity" => $quantity, "productDescription" => $description));
                             $counter = $pno;
@@ -154,6 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     throw new Exception();
             }
         } catch (Exception $e) {
+            header('location: ../error404.php');
         } finally {
             $mysql->close();
             die();
@@ -161,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         //invalid formdata
         $json = new stdClass();
-        echo json_encode($json->error=isset($input['searchType']));
+        echo json_encode($json->error = isset($input['searchType']));
     }
 
 }

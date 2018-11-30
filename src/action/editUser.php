@@ -5,7 +5,8 @@ include '../includes/inputValidation.php';
 include '../includes/regex.php';
 
 
-function generateSalt() {
+function generateSalt()
+{
     $randString = "";
     $charUniverse = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     for ($i = 0; $i < 32; $i++) {
@@ -60,8 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $_SESSION['errorMsg'] = "invalid file";
                         throw new Exception();
                     }
-
-
                 }
 
                 $fieldsUserInfo = array('emailInput', 'firstNameInput', 'lastNameInput');
@@ -101,14 +100,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
                 }
 
-
                 $billingInformation = array('billingAddress', 'billingCity', 'billingProvince', 'billingPostalCode', 'cardNumber', 'expiryInput', 'securityCode');
-
 
                 if ($_POST['action'] === 'billingInfo' && arrayExists($_POST, $billingInformation) && arrayIsValidInput($_POST, $billingInformation)) {
                     echo "<p>entered billing info action if statement</p>";
                     $query = 'SELECT uid FROM BillingInfo WHERE uid = ?';
                     $stmt = $mysql->prepare($query);
+
                     echo "<p>prepared select </p>";
                     $stmt->bind_param('i',$_SESSION['user']->id);
                     $stmt->execute();
@@ -116,19 +114,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     if($stmt->get_result()->num_rows > 0){
                         echo "<p>updating BillingInfo</p>";
+
                         $query = 'UPDATE BillingInfo SET address = ?, city = ?, province = ?, postalCode = ?, creditCardNumber = ?, cardExpiryDate = ?, CCV = ? WHERE uid = ?';
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('ssssssss', $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode'], $_SESSION['user']->id);
 
                     }else{
                         echo "<p>Inserting into BillingInfo</p>";
+
                         $query = 'INSERT INTO BillingInfo (uid, address, city, province, postalCode, creditCardNumber, cardExpiryDate, CCV, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "Canada")';
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('isssssss', $_SESSION['user']->id, $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode']);
 
                     }
+
                    $stmt->execute();
                     echo "<p>stmt is executed</p>";
+
                 }
 
             }
@@ -144,7 +146,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
         } catch (Exception $e) {
+
             echo "<p>you hit an exception lolololol</p>";
+
+//          header('location: ../error404.php');
+
             $mysql->close();
         } finally {
             $mysql->close();
@@ -155,4 +161,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 echo "<p>This is where I would redirect someone back to profile</p>";
-//header('Location: ../profile.php');
+header('Location: ../profile.php');
