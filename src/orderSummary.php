@@ -8,7 +8,7 @@ if ( !isset($_SESSION['user'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($_SESSION['userid'])) {
-        header('Location: http://localhost/the-project-qscu-merch/src/login.php');
+        header('Location: login.php');
         exit();
     } else {
         //getting the user object
