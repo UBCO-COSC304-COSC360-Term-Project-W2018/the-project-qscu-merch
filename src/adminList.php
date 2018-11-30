@@ -25,6 +25,7 @@ validateAdminRequest($_SESSION);
                 <button id="btnProducts">Products</button>
                 <button id="btnUsers">Users</button>
                 <button id="btnPosts">Posts</button>
+                <button id="btnInventory">Display Inventory</button>
                 <input id="subSearch" name="subSearch" type="text">
                 <button id="btnSearch" onclick="onSearch()">Search</button>
                 <label for="rbProductName">Product Name:</label>

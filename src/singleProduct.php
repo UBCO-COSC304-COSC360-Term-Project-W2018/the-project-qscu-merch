@@ -68,7 +68,7 @@ try {
         <script type="text/javascript" src="script/quantity.js"></script>
         <script type="text/javascript" src="script/reviewModal.js"></script>
         <script type="text/javascript" src="script/addToCart.js"></script>
-        <!--<script type="text/javascript" src="script/commentModal.js"></script>-->
+
 
         <link rel="stylesheet" href="css/singleProduct.css">
     </head>
@@ -125,14 +125,14 @@ try {
                         <!--                        <form id='myform'>-->
 
                         <input title="Decrease Quantity" type='button' value='-' class='qtyminus' field='quantity'/>
-                        <input required id="quantity" type='text' name='quantity' value='' class='qty'/>
+                        <input required id="quantity" type='number' name='quantity' value='' min='1' placeholder="0" class='qty'/>
                         <input title="Increase Quantity" type='button' value='+' class='qtyplus' field='quantity'/>
 
                         <!-- added drop down menu -->
 
 
                         <!-- TODO: MAKE THIS TABLE DYNAMIC BASED ON PRODUCT -->
-                        <select name="size" class="size" required>
+                        <select id="size" name="size" class="size" required>
 
                             <option selected value="">Select a size</option>
                             <?php
