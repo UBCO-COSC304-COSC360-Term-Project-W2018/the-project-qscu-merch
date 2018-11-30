@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
                 die();
             }
 
-
             if ($input['action'] === 'removeImage') {
                 $query = "UPDATE User SET profilePicture = ?, contentType = ? WHERE uid = ?";
 
@@ -43,8 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
                 if ($rst = $stmt->execute()) {
                     $return = array("userid" => $input['userid'], "isBanned" => $action);
                 }
-
-
             }
 
             if ($input['action'] === 'setAdmin' || $input['action'] === 'unSetAdmin') {
@@ -57,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
                 if ($rst = $stmt->execute()) {
                     $return = array("userid" => $input['userid'], "isAdmin" => $action);
                 }
-
             }
 
             if (isset($input['pno']) && $input['pno'] != "" && $input['action'] === 'setPost' || $input['action'] === 'unsetPost') {
@@ -81,10 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
                     if ($rst = $stmt->execute()) {
                         $return = array("userid" => $input['userid'], 'pno' => $input['pno'], 'isEnabled' => $isEnabled);
                     }
-
                 }
-
-
             }
             if ($return == null) {
                 invalidRequest();
@@ -97,6 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
         } finally {
             $mysql->close();
         }
-
     }
+} else {
+    //TODO: CHECK IF THIS IS VALID
+    header('location: ../error404.php');
+    die();
 }

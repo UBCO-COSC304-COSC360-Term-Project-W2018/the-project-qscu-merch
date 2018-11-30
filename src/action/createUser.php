@@ -1,8 +1,6 @@
 <?php
 include '../includes/init.php';
 
-
-
 //TODO if user has cart set it in db
 
 function generateSalt()
@@ -21,9 +19,9 @@ function creationFailed($input = null)
 {
     $_SESSION['hasError'] = true;
     $_SESSION['errorType'] = "createUser";
-    if(isset($input)){
+    if (isset($input)) {
         $_SESSION['error'] = $input;
-    }else{
+    } else {
         $_SESSION['error'] = "Invalid username or password";
     }
 }
@@ -40,7 +38,8 @@ try {
 
             if (mysqli_connect_errno()) {
                 //connection failed
-                echo "something went wrong yikes";
+//                echo "something went wrong yikes";
+                header('location: ../error404.php');
 //                die();
             } else {
                 $data["email"] = $email;
@@ -57,7 +56,6 @@ try {
                     $lastName = trim($_POST['lastName']);
                     $password = trim($_POST['password']);
 
-
                     $salt = generateSalt();
                     $hashword = hash_pbkdf2("sha256", $password, $salt, 2500);
 
@@ -65,18 +63,18 @@ try {
                     $stmt = $mysqli->prepare($query);
                     $null = null;
                     $fileContents = file_get_contents('../images/profile.png');
-                    $stmt->bind_param('bsssss', $null ,$firstName, $lastName, $email, $hashword, $salt);
+                    $stmt->bind_param('bsssss', $null, $firstName, $lastName, $email, $hashword, $salt);
                     $stmt->send_long_data(0, $fileContents);
 //                    echo $fileContents;
                     $stmt->execute();
                     $uid = $stmt->insert_id;
 
-                    $_SESSION['user']= new User($uid, $firstName, $lastName);
-					
-					$headers = "From: QSCUStoreRegistrationSystem@qscu.shop";
-					$subj = "Welcome, ".$firstName." ".$lastName."!";
-					$txt = "Thank you for your registration, ".$firstName." ".$lastName."!\nWe hope that our wide variety of ping pong balls suits your taste for balls just fine!\n\nSincerely, the QSCU Store";
-					mail($email, $subj, $txt, $headers);
+                    $_SESSION['user'] = new User($uid, $firstName, $lastName);
+
+                    $headers = "From: QSCUStoreRegistrationSystem@qscu.shop";
+                    $subj = "Welcome, " . $firstName . " " . $lastName . "!";
+                    $txt = "Thank you for your registration, " . $firstName . " " . $lastName . "!\nWe hope that our wide variety of ping pong balls suits your taste for balls just fine!\n\nSincerely, the QSCU Store";
+                    mail($email, $subj, $txt, $headers);
                     $stmt->close();
                     header("Location: ../profile.php");
                     exit();
@@ -94,7 +92,7 @@ try {
 } catch (Exception $e) {
     creationFailed("Email already registered.");
 
-}finally{
+} finally {
     $mysqli->close();
     die();
 }

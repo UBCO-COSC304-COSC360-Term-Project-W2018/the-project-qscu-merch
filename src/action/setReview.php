@@ -3,6 +3,7 @@ include("../includes/init.php");
 
 
 $validActionArray = array('setReview', 'setComment', 'updatePage');
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = json_decode(file_get_contents('php://input'), TRUE);
 
@@ -17,30 +18,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 throw  new Exception();
             }
 
-
-
-
             $query = 'SELECT uid FROM User WHERE uid = ? AND customerBanned = 0';
             $stmt = $mysql->prepare($query);
-            $stmt->bind_param('i',$_SESSION['user']->id);
+            $stmt->bind_param('i', $_SESSION['user']->id);
             $stmt->execute();
             $rst = $stmt->get_result();
 
-            if($rst->num_rows !== 1){
+            if ($rst->num_rows !== 1) {
                 $json['status'] = 'failed';
                 $json['msg'] = 'User is banned and can not make reviews or comments';
                 throw new Exception();
             }
             $stmt->close();
 
-
-
-            if (isset($input['userReviewInput'])) {
-                $comment = sanitizeInput($input['userReviewInput']);
+            if (isset($_POST['userReviewInput'])) {
+                $comment = sanitizeInput($_POST['userReviewInput']);
 
                 if ($input['action'] == 'setComment' && isset($input['uid'])) {
-
-
 
                     $query = 'INSERT INTO Comment (uid, pNo, leftby, date, comment, isEnabled) VALUES (?, ?, ?, ?, ?, 1)';
                     $stmt = $mysql->prepare($query);
@@ -51,15 +45,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 }
 
-
                 $validRatingArray = array('1', '2', '3', '4', '5');
                 if ($input['action'] === 'setReview' && isset($input['userRatingInput'])) {
 
                     if (in_array($input['userRatingInput'], $validRatingArray)) {
 
-
-                        $rating = sanitizeInput($input['userRatingInput']);
-
+                        $rating = sanitizeInput($_POST['userRatingInput']);
 
                         $query = "INSERT INTO Reviews ( uid, pNo, rating, comment, date, isEnabled) VALUES (?, ?, ?, ?, ?, 1)";
                         $stmt = $mysql->prepare($query);
@@ -75,7 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             }
         } catch (Exception $e) {
-
+            //TODO: CHECK IF THIS IS VALID
+            header('location: ../error404.php');
         } finally {
             $mysql->close();
         }
@@ -83,4 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $send = json_encode($json);
         echo $send;
     }
+}else {
+    header('location: ../error404.php');
+    die();
 }

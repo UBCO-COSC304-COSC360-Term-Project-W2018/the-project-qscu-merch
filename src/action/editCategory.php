@@ -14,8 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
         $mysql;
 
         try {
-
-
             $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
             if ($mysql->errno) {
                 throw new Exception();
@@ -54,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
 
 
             //protected category array add cid to array to protect it
-            $protectedCategorys = array('1','2','3','4','5','6','7');
+            $protectedCategorys = array('1', '2', '3', '4', '5', '6', '7');
             if ($input['action'] === 'deleteCategory' && !in_array($input['cid'], $protectedCategorys)) {
                 $query = 'DELETE FROM ProductInCategory WHERE cid = ?';
                 $stmt = $mysql->prepare($query);
@@ -70,9 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
             header('Content-Type: application/json');
             echo json_encode($return);
         } catch (Exception $e) {
-            invalidRequest();
+            //TODO: CHECK IF THIS IS VALID 
+                header('location: ../error404.php');
+                die();
         } finally {
             $mysql->close();
+//            TODO: DO WE NEED A DIE HERE?
+//            die();
         }
     }
 
