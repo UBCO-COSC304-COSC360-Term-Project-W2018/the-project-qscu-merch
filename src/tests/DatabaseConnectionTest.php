@@ -2,6 +2,7 @@
 
 //require_once('PHPUnit/Autoload.php');
 
+
 class DatabaseConnectionTest extends PHPUnit_Framework_TestCase {
 
     public function testDatabaseConnectionReturnTrue() {

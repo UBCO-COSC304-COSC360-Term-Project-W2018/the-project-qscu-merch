@@ -7,11 +7,10 @@ if ( !isset($_SESSION['user'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (!isset($_SESSION['user'])) {
+    if (!isset($_SESSION['userid'])) {
         header('Location: login.php');
         exit();
-    }
-    else {
+    } else {
         //getting the user object
         //TODO: RACHELLE REMEMBER TO UNCOMMENT THIS WHEN YOU ARE DONE TESTING
         $user = $_SESSION['user'];
@@ -44,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $mysqli = new mysqli (DBHOST, DBUSER, DBPASS, DBNAME);
 
-            $sql = "UPDATE BillingInfo SET country = ?, province = ?, city = ?, address = ?,
+            $sql = "UPDATE billinginfo SET country = ?, province = ?, city = ?, address = ?,
                         postalCode = ?, creditCardNumber = ?, cardExpiryDate = ?, ccv=?
                          WHERE uid = ?";
 
@@ -263,11 +262,11 @@ else {
     console.log("hit the script tag");
 
     $('#editOrderButton').click(function() {
-        location.replace("viewcart.php");
+        location.replace("http://localhost/the-project-qscu-merch/src/viewcart.php");
     });
 
     $('#confirmOrderButton').click(function () {
-        location.replace("action/checkout-action.php");
+        location.replace("http://localhost/the-project-qscu-merch/src/action/checkout-action.php");
 
         //call the ajax function which will link to the action php file
 

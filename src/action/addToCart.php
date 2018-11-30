@@ -1,10 +1,10 @@
 <?php
 include "../includes/init.php";
-if(isset($_SESSION['user'])){
+if (isset($_SESSION['user'])) {
     $user = $_SESSION['user']->id;
 }
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-	$data =array("rst"=>1);
+	$data =array("rst"=>true);
 	$input = json_decode(file_get_contents('php://input'), true);
 	$validArray =array('pNo', 'size', 'quantity');
 	if(arrayExists($input, $validArray) && arrayIsValidInput($input, $validArray)){
@@ -85,10 +85,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$data["rst"] = false;
         }finally{
         }
-        header('Content-Type: application/json');
- 		echo json_encode($data["rst"]);
-    }else{
-	    $data["rst"] = false;
+    } else {
+        $data["rst"] = false;
     }
+    header('Content-Type: application/json');
+    echo json_encode($data["rst"]);
 }
 ?>
