@@ -7,7 +7,6 @@ include '../includes/validateAdmin.php';
 
 validateAdminRequest($_SESSION);
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $validSearchType = array('title', 'user', 'content', "");
     $input = json_decode(file_get_contents('php://input'), true);
@@ -60,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 array_push($list, $item);
             }
 
-
             $query = 'SELECT commentId, leftBy, fname, lname, uEmail, comment, date, isEnabled FROM Comment JOIN User U ON Comment.leftBy = U.uid WHERE Comment.uid = ? AND Comment.pNo = ? ORDER BY date desc';
             $stmt = $mysql->prepare($query);
 
@@ -69,18 +67,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute();
                 $stmt->bind_result($commentIdC, $leftbyC, $fnameC, $lnameC, $emailC, $commentC, $dateC, $isEnaledC);
                 while ($stmt->fetch()) {
-                    $item = array('pno'=> $list[$key1]['review']['pno'], 'uid'=> $list[$key1]['review']['uid'],'commentId' => $commentIdC, 'leftby' => $leftbyC, 'fname' => $fnameC, 'lname' => $lnameC, 'email' => $emailC, 'comment' => $commentC, 'date' => $dateC, 'isEnabled' => $isEnaledC);
+                    $item = array('pno' => $list[$key1]['review']['pno'], 'uid' => $list[$key1]['review']['uid'], 'commentId' => $commentIdC, 'leftby' => $leftbyC, 'fname' => $fnameC, 'lname' => $lnameC, 'email' => $emailC, 'comment' => $commentC, 'date' => $dateC, 'isEnabled' => $isEnaledC);
                     array_push($list[$key1]['comments'], $item);
 
                 }
             }
-
-
             header('Content-Type: application/json');
             echo json_encode($list);
 
         } catch (Exception $e) {
-
+            //TODO: CHECK IF THIS IS VALID
+                header('location: ../error404.php');
         } finally {
             $mysql->close();
         }
