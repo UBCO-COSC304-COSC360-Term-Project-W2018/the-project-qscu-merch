@@ -28,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($mysql->error) {
                 throw new Exception();
             }
-
             if ($_SESSION['user']) {
                 if ($_POST['action'] === 'uploadImage' && isset($_FILES['uploadImage'])) {
                     $file = $_FILES['uploadImage'];
@@ -61,10 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $fieldsUserInfo = array('emailInput', 'firstNameInput', 'lastNameInput');
 
                 if ($_POST['action'] === 'userInfo' && arrayExists($_POST, $fieldsUserInfo) && arrayIsValidInput($_POST, $fieldsUserInfo)) {
-                    $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-                    if ($mysql->errno) {
-                        throw new Exception();
-                    }
                     $query = 'UPDATE User SET fname = ?, lname = ?, uEmail = ? WHERE uid = ?';
                     $stmt = $mysql->prepare($query);
                     $stmt->bind_param('sssi', $_POST['firstNameInput'], $_POST['lastNameInput'], $_POST['emailInput'], $_SESSION['user']->id);
@@ -119,8 +114,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     }
 
-                   $stmt->execute();
-                    echo $mysql->error_list;
+                   $stmt->execute();;
+
+
                 }
 
             }
@@ -136,18 +132,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $mysql->close();
             }
+        } catch (Exception $e) {
 
-        }
 
         catch (Exception $e) {
             $mysql->close();
         } finally {
             $mysql->close();
         }
-
     }
 }
 header('Location: ../profile.php');
-
-
 
