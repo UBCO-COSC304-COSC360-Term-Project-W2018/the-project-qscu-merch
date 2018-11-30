@@ -9,7 +9,7 @@ if(isset($_SESSION['user'])){
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-	$data =array('rst'=>true);
+	$data =array("rst"=>1);
 	$input = json_decode(file_get_contents('php://input'), true);
 	$validArray =array('pNo', 'size', 'quantity');
 	if(arrayExists($input, $validArray) && arrayIsValidInput($input, $validArray)){
@@ -93,14 +93,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	        }
 	        }
 		}catch (Exception $e){
-			$data['rst'] = false;
+			$data["rst"] = false;
         }finally{
             $con->close();
         }
         header('Content-Type: application/json');
- 		echo json_encode($data);
+ 		echo json_encode($data["rst"]);
     }else{
-	    $data['rst'] = false;
+	    $data["rst"] = false;
     }
 }
 ?>

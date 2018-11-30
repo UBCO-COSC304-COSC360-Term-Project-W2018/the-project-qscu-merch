@@ -4,36 +4,33 @@ $(document).ready(function(){
         var quantity = $("#quantity").val();
         var size = $("#size").val();
         var pNo = $("#pNo").val();
-        console.log(quantity);
-        console.log(size);
 		//TODO Do more validation on emailField clientside right here
 		let obj = {'pNo':pNo, 'size':size, 'quantity':quantity};
 		//send this inputted email to the server to check if it exists in the DB
 		
 		$.post('action/addToCart.php', JSON.stringify(obj))
 		.done(function (data){
-			console.log(data);
-			if(data['rst']==true){
-				$("<span id='addedToCart'>Added To Cart</span>").insertAfter("#addToCartButton");
+			if(data == 11){
+				$("#addedToCart").text("Added To Cart");
 			
 				setTimeout( function(){
-					$("#addedToCart").hide();
+					$("#addedToCart").empty();
 				}
 				, 1000);
 			}else{
-				$("<span id='addedToCart'>Failed To Add To Cart</span>").insertAfter("#addToCartButton");
-			
+				$("#addedToCart").text("Failed To Add To Cart");
+				
 				setTimeout( function(){
-					$("#addedToCart").hide();
-				}
-				, 1000);
+					$("#addedToCart").empty();
+					}
+					, 1000);
 			}
+		}).fail(function(jqXHR){
+			console.log(jqXHR);
+			
+		}).always(function(data){
 
-		})
-		.fail(function(jqXHR){
-			console.log("Error:" + jqXHR.status);
-		}).always(function(){
-		})
+		});
 		
 })
 });
