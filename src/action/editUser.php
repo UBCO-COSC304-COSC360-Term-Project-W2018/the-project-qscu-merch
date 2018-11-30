@@ -4,6 +4,8 @@ include '../includes/db_credentials.php';
 include '../includes/inputValidation.php';
 include '../includes/regex.php';
 
+//IF THIS PAGE ISN'T WORKING FOR YOU UNCOMMENT LINE 123
+
 
 function generateSalt()
 {
@@ -18,10 +20,8 @@ function generateSalt()
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    echo "<p>We have passed the if for POST</p>";
     $validArr = array('billingInfo', 'changePassword', 'userInfo', 'uploadImage', 'resetPassword');
     if (isset($_POST['action']) && in_array($_POST['action'], $validArr)) {
-        echo "<p>We have entered the if statement saying action is set</p>";
 
         try {
             $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
@@ -29,13 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 throw new Exception();
             }
 
-            echo "<p>connected to database</p>";
-
             if ($_SESSION['user']) {
-                echo "<p>user is valid</p>";
-
                 if ($_POST['action'] === 'uploadImage' && isset($_FILES['uploadImage'])) {
-                    echo "<p>entering if regarding images</p>";
                     $file = $_FILES['uploadImage'];
                     $fileName = basename($file["name"]);
                     $targetFilePath = "../uploads/" . $fileName;
@@ -105,25 +100,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $billingInformation = array('billingAddress', 'billingCity', 'billingProvince', 'billingPostalCode', 'cardNumber', 'expiryInput', 'securityCode');
 
                 if ($_POST['action'] === 'billingInfo' && arrayExists($_POST, $billingInformation) && arrayIsValidInput($_POST, $billingInformation)) {
-                    echo "<p>entered billing info action if statement</p>";
                     $query = 'SELECT uid FROM BillingInfo WHERE uid = ?';
                     $stmt = $mysql->prepare($query);
 
-                    echo "<p>prepared select </p>";
                     $stmt->bind_param('i',$_SESSION['user']->id);
                     $stmt->execute();
                     $stmt->bind_result($stop);
 
                     if($stmt->get_result()->num_rows > 0){
-                        echo "<p>updating BillingInfo</p>";
-
                         $query = 'UPDATE BillingInfo SET address = ?, city = ?, province = ?, postalCode = ?, creditCardNumber = ?, cardExpiryDate = ?, CCV = ? WHERE uid = ?';
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('ssssssss', $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode'], $_SESSION['user']->id);
 
                     }else{
-                        echo "<p>Inserting into BillingInfo</p>";
-
                         $query = 'INSERT INTO BillingInfo (uid, address, city, province, postalCode, creditCardNumber, cardExpiryDate, CCV, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "Canada")';
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('isssssss', $_SESSION['user']->id, $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode']);
@@ -131,8 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
 
                    $stmt->execute();
-                    echo "<p>stmt is executed</p>";
-
+                    echo $mysql->error_list;
                 }
 
             }
@@ -149,20 +137,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $mysql->close();
             }
 
-        } catch (Exception $e) {
+        }
 
-            echo "<p>you hit an exception lolololol</p>";
-
-//          header('location: ../error404.php');
-
+        catch (Exception $e) {
             $mysql->close();
         } finally {
             $mysql->close();
-            echo "<p>you hit the finally statement</p>";
         }
-
 
     }
 }
-echo "<p>This is where I would redirect someone back to profile</p>";
-//header('Location: ../profile.php');
+header('Location: ../profile.php');
+
+
+
