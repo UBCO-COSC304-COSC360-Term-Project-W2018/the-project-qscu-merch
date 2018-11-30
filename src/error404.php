@@ -7,7 +7,7 @@ include "header.php";
 <html>
 <head lang="en">
     <meta charset="utf-8">
-        <link rel="stylesheet" href="css/error.css"/>
+    <link rel="stylesheet" href="css/error.css"/>
     <title>QSCU Merch Store</title>
     <?php include 'includes/headerFooterHead.php'; ?>
     <link rel="icon" type="image/x-icon" href="../src/images/QSCU_favicon.png"/>

@@ -68,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
             header('Content-Type: application/json');
             echo json_encode($return);
         } catch (Exception $e) {
+            //TODO: CHECK IF THIS IS VALID 
                 header('location: ../error404.php');
                 die();
         } finally {

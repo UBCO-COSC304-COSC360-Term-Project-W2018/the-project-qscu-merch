@@ -1,7 +1,7 @@
 <?php
 include "includes/init.php";
 
-if ( !isset($_SESSION['user'])) {
+if (!isset($_SESSION['user'])) {
     header("Location: homeWithoutTables.php");
     exit();
 }
@@ -18,14 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     }
     if (!isset($_POST['ccName']) || !isset($_POST['ccNum']) || !isset($_POST['ccExpiration'])
-            || !isset($_POST['ccv']) || !isset($_POST['billingAddress']) || !isset($_POST['billingCity'])
-            || !isset($_POST['billingProvince']) || !isset($_POST['billingCountry']) || !isset($_POST['billingPostalCode'])
-            || !isset($_POST['shippingAddressRadio']) || !isset($_POST['shippingAddress']) || !isset($_POST['shippingCity'])
-            || !isset($_POST['shippingProvince']) || !isset($_POST['shippingCountry']) || !isset($_POST['shippingPostalCode'])) {
+        || !isset($_POST['ccv']) || !isset($_POST['billingAddress']) || !isset($_POST['billingCity'])
+        || !isset($_POST['billingProvince']) || !isset($_POST['billingCountry']) || !isset($_POST['billingPostalCode'])
+        || !isset($_POST['shippingAddressRadio']) || !isset($_POST['shippingAddress']) || !isset($_POST['shippingCity'])
+        || !isset($_POST['shippingProvince']) || !isset($_POST['shippingCountry']) || !isset($_POST['shippingPostalCode'])) {
         header("Location: homeWithoutTables.php");
         exit();
-    }
-    //all variables set
+    } //all variables set
     else {
         $mysqli;
         try {
@@ -48,12 +47,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                          WHERE uid = ?";
 
             //update DB with billing info
-            if ( $user_billing_info = $mysqli -> prepare($sql) ) {
-                $user_billing_info -> bind_param("sssssssss", $billingCountry, $billingProvince, $billingCity,
-                    $billingAddressLine, $billingPostalCode, $ccNum, $ccExp, $ccCCV, $userid );
-                $user_billing_info -> execute();
-            }
-            else {
+            if ($user_billing_info = $mysqli->prepare($sql)) {
+                $user_billing_info->bind_param("sssssssss", $billingCountry, $billingProvince, $billingCity,
+                    $billingAddressLine, $billingPostalCode, $ccNum, $ccExp, $ccCCV, $userid);
+                $user_billing_info->execute();
+            } else {
                 throw new Exception();
             }
 
@@ -64,15 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $shippingPostalCode;
 
             //case where billing address = shipping address
-            if ( $radio == 1 ) {
+            if ($radio == 1) {
                 $shippingAddressLine = $billingAddressLine;
                 $shippingCity = $billingCity;
                 $shippingProvince = $billingProvince;
                 $shippingCountry = $billingCountry;
                 $shippingPostalCode = $billingPostalCode;
 
-            }
-            else if ( $radio == 2 ) {
+            } else if ($radio == 2) {
                 $shippingAddressLine = $_POST['shippingAddress'];
                 $shippingCity = $_POST['shippingCity'];
                 $shippingProvince = $_POST['shippingProvince'];
@@ -83,15 +80,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //TODO: Take these out when you are done testing
             $headerSet = 1;
 
-        }
-        catch (Exception $exception) {
+        } catch (Exception $exception) {
 //            die();
             echo "<p>went to catch</p>";
         }
 
     }
-}
-//a POST method wasn't used
+} //a POST method wasn't used
 else {
 //    die();
     echo "<p>went to final else</p>";
@@ -115,7 +110,7 @@ else {
 <?php include "header.php" ?>
 
 <ul class="breadcrumb">
-    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a href="homeWithoutTables.php">Home</a> &gt; &gt;
     <a href="viewCart.php">Cart</a> &gt; &gt;
     <a>Your Order</a>
 </ul>
@@ -221,22 +216,19 @@ else {
             $taxTotal = number_format((float)($subtotal * $tax), 2, '.', '');
             $netTotal = number_format((float)($subtotal + $taxTotal), 2, '.', '');
 
-            $fullShippingAddress = $shippingAddressLine.",".$shippingCity.",".$shippingProvince.",".$shippingCountry.",".$shippingPostalCode;
+            $fullShippingAddress = $shippingAddressLine . "," . $shippingCity . "," . $shippingProvince . "," . $shippingCountry . "," . $shippingPostalCode;
 
             if (isset($_SESSION['fullShippingAddress'])) {
                 $_SESSION['fullShippingAddress'] = $fullShippingAddress;
-            }
-            else {
+            } else {
                 $_SESSION['fullShippingAddress'] = $fullShippingAddress;
             }
 
-            if (isset($_SESSION['totalCost']) ) {
+            if (isset($_SESSION['totalCost'])) {
+                $_SESSION['totalCost'] = $netTotal;
+            } else {
                 $_SESSION['totalCost'] = $netTotal;
             }
-            else {
-                $_SESSION['totalCost'] = $netTotal;
-            }
-
 
 
             ?>
@@ -260,13 +252,12 @@ else {
 <script>
     console.log("hit the script tag");
 
-    $('#editOrderButton').click(function() {
+    $('#editOrderButton').click(function () {
         location.replace("http://localhost/the-project-qscu-merch/src/viewcart.php");
     });
 
     $('#confirmOrderButton').click(function () {
         location.replace("http://localhost/the-project-qscu-merch/src/action/checkout-action.php");
-
         //call the ajax function which will link to the action php file
 
     });

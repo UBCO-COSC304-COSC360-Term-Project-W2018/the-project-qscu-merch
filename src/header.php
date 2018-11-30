@@ -47,7 +47,6 @@ if (isset($_SESSION['user'])) {
                 } else {
                     echo "<a href='profile.php'>" . $name . "</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
                 }
-
             } else {
                 echo "<a href='login.php'>Login</a>";
             }

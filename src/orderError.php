@@ -1,8 +1,7 @@
 <?php
 include "includes/init.php";
-$headerSet = 1;
 
-if ( !isset($_SESSION['order_error']) OR $_SESSION['order_error'] === false ) {
+if (!isset($_SESSION['order_error']) OR $_SESSION['order_error'] === false) {
     header('Location: homeWithoutTables.php');
     exit();
 }
@@ -22,84 +21,9 @@ if ( !isset($_SESSION['order_error']) OR $_SESSION['order_error'] === false ) {
 <main>
     <p>Our apologies! We do not have the products that you want to order in our inventory</p>
     <p><a href=\"../homeWithoutTables.php\">Return Home</a></p>
-    <p>Here are a few Liam's Picks:</p>
-    <div id="liamspicks" class="products">
-        <div class="viewnamediv">
-            <p class="viewname">Liam's Picks</p></div>
-        <div class="productlist">
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <img style="max-width: 50%;" src="resources/yikes-shrug.gif">
 </main>
 <?php include "footer.php"; ?>
 </body>
 </html>
+

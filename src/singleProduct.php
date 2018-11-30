@@ -88,7 +88,8 @@ try {
         <div class="bigboi">
             <div class="container">
                 <!--        TODO: find product src-->
-                <img src="data:<?php echo $product['contentType']; ?>;base64,<?php echo base64_encode($product['image']); ?>" alt="Product Picture">
+                <img src="data:<?php echo $product['contentType']; ?>;base64,<?php echo base64_encode($product['image']); ?>"
+                     alt="Product Picture">
 
                 <div class="sideContent">
                     <div class="pName" name="pName">
@@ -170,7 +171,7 @@ try {
                     if (isset($_SESSION['user'])) {
                         echo '<input type="hidden" id="UserLoggedIn">';
                         echo '<button title="Add Review" id="writeReviewButton" class="pageButtons" onclick="onWriteReview()">Write a Review <span class="fa fa-pencil"></button>';
-                                        }
+                    }
                     ?>
 
                 </h3>
@@ -240,7 +241,8 @@ try {
                     <h2>What's your comment?</h2>
                     <div class="formElement">
                         <!-- max lenght is 200 chars and there are 3 rows -->
-                        <textarea id="commentInput" name="userReviewInput" placeholder="Insert your comment here" rows="8"
+                        <textarea id="commentInput" name="userReviewInput" placeholder="Insert your comment here"
+                                  rows="8"
                                   maxlength="400" required></textarea>
                     </div>
                 </div>

@@ -307,7 +307,7 @@ $headerSet = 1;
                     $formatted_date = date("M-d-y", strtotime($date));
 
                     //TODO: Rachelle check if the review disabled. If yes, then ABORT MISSION
-                    if ( !$isEnabled ) {
+                    if (!$isEnabled) {
                         continue;
                     }
 
@@ -325,13 +325,13 @@ $headerSet = 1;
                     }
 
                     $image_details_sql = "SELECT profilePicture, contentType FROM User WHERE uid = ?";
-                    if ( $image_details = $mysqli -> prepare($image_details_sql) ) {
-                        $image_details -> bind_param("s", $uid);
-                        $image_details -> execute();
+                    if ($image_details = $mysqli->prepare($image_details_sql)) {
+                        $image_details->bind_param("s", $uid);
+                        $image_details->execute();
 
-                        $image_details_result = $image_details -> get_result();
+                        $image_details_result = $image_details->get_result();
 
-                        while ( $image_details_row = $image_details_result -> fetch_assoc() ) {
+                        while ($image_details_row = $image_details_result->fetch_assoc()) {
                             $profile_image = $image_details_row['profilePicture'];
                             $content_type = $image_details_row['contentType'];
                         }
@@ -341,10 +341,10 @@ $headerSet = 1;
                     echo "<div class=\"review\">
                         <p class=\"userProfile\">
                             <img src=\"<?php  echo 'data:'.$content_type.';base64,'.base64_encode($profile_image) ?>\" alt=\"User's profile picture\" align=\"middle\">
-                            <span>".$firstName." ".$lastName."</span>
-                            <span class='time'>".$formatted_date."</span>
+                            <span>" . $firstName . " " . $lastName . "</span>
+                            <span class='time'>" . $formatted_date . "</span>
                         </p>
-                        <p class=\"productName\">".$pname."</p>";
+                        <p class=\"productName\">" . $pname . "</p>";
 
                     echo "<p class=\"userRating\">";
                     for ($x = 0; $x < 5; $x++) {
@@ -355,17 +355,17 @@ $headerSet = 1;
                         }
                     }
                     echo "</p>
-                      <p class=\"reviewDescription\">".$body."</p>
+                      <p class=\"reviewDescription\">" . $body . "</p>
                     </div>";
 
                     $comment_on_review_sql = "SELECT * FROM Comment WHERE pNo = ? AND uid = ?";
-                    if ( $comment_on_review = $mysqli -> prepare($comment_on_review_sql) ) {
-                        $comment_on_review -> bind_param("ss", $pNo, $uid);
-                        $comment_on_review -> execute();
+                    if ($comment_on_review = $mysqli->prepare($comment_on_review_sql)) {
+                        $comment_on_review->bind_param("ss", $pNo, $uid);
+                        $comment_on_review->execute();
 
-                        $comment_on_review_result = $comment_on_review -> get_result();
+                        $comment_on_review_result = $comment_on_review->get_result();
 
-                        while ( $comment_on_review_row = $comment_on_review_result -> fetch_assoc() ) {
+                        while ($comment_on_review_row = $comment_on_review_result->fetch_assoc()) {
                             $left_by = $comment_on_review_row['leftBy'];
                             $comment_date = $comment_on_review_row['date'];
                             $comment_text = $comment_on_review_row['comment'];
@@ -377,47 +377,44 @@ $headerSet = 1;
                             //format date
                             $comment_formatted_date = date("M-d-y", strtotime($comment_date));
 
-                            if ( !$comment_enabled ) {
+                            if (!$comment_enabled) {
                                 continue;
-                            }
-                            else {
+                            } else {
                                 //get commenter's first and last name
                                 $commenter_name_details_sql = "SELECT fname, lname FROM User WHERE uid = ?";
-                                if ( $commenter_name_details = $mysqli -> prepare($commenter_name_details_sql) ) {
-                                    $commenter_name_details -> bind_param("s", $left_by);
-                                    $commenter_name_details -> execute();
+                                if ($commenter_name_details = $mysqli->prepare($commenter_name_details_sql)) {
+                                    $commenter_name_details->bind_param("s", $left_by);
+                                    $commenter_name_details->execute();
 
-                                    $commenter_name_details_result = $commenter_name_details -> get_result();
+                                    $commenter_name_details_result = $commenter_name_details->get_result();
 
-                                    while ( $commenter_name_details_row = $commenter_name_details_result -> fetch_assoc() ) {
+                                    while ($commenter_name_details_row = $commenter_name_details_result->fetch_assoc()) {
                                         $commenter_fname = $commenter_name_details_row['fname'];
                                         $commenter_lname = $commenter_name_details_row['lname'];
                                     }
-                                }
-                                else {
+                                } else {
                                     echo "<p>something really went wrong getting the commenter's name lol</p>";
                                 }
-                                if ( $commenter_image_details = $mysqli -> prepare($image_details_sql) ) {
-                                    $commenter_image_details -> bind_param("s", $left_by);
-                                    $commenter_image_details -> execute();
+                                if ($commenter_image_details = $mysqli->prepare($image_details_sql)) {
+                                    $commenter_image_details->bind_param("s", $left_by);
+                                    $commenter_image_details->execute();
 
-                                    $commenter_image_details_result = $commenter_image_details -> get_result();
+                                    $commenter_image_details_result = $commenter_image_details->get_result();
 
-                                    while ( $commenter_image_details_row = $commenter_image_details_result -> fetch_assoc() ) {
+                                    while ($commenter_image_details_row = $commenter_image_details_result->fetch_assoc()) {
                                         $commenter_profile_image = $commenter_image_details_row['profilePicture'];
                                         $commenter_content_type = $commenter_image_details_row['contentType'];
                                     }
-                                }
-                                else {
+                                } else {
                                     echo "ok something went wrong getting commenter's image yikes lol";
                                 }
                                 echo "<div class=\"comment\">
                                         <p class=\"userProfile\">
                                             <img src=\" <?php  echo 'data:'.$commenter_content_type.';base64,'.base64_encode($commenter_profile_image)?>\" alt=\"User's profile picture\" align=\"middle\">
-                                            <span>".$commenter_fname." ".$commenter_lname."</span>
-                                            <span class='time'>".$comment_formatted_date."</span>
+                                            <span>" . $commenter_fname . " " . $commenter_lname . "</span>
+                                            <span class='time'>" . $comment_formatted_date . "</span>
                                         </p>
-                                        <p class=\"reviewDescription\">".$comment_text."</p>
+                                        <p class=\"reviewDescription\">" . $comment_text . "</p>
                                   </div>";
                             }
 
@@ -432,13 +429,13 @@ $headerSet = 1;
             //get all comments made by this user.
             //a comment needs:name of user who left, date, profile pic, text
             $get_comment_sql = "SELECT * FROM Comment WHERE leftBy = ?";
-            if ( $get_comment = $mysqli -> prepare($get_comment_sql) ) {
-                $get_comment -> bind_param("s", $userid);
-                $get_comment -> execute();
+            if ($get_comment = $mysqli->prepare($get_comment_sql)) {
+                $get_comment->bind_param("s", $userid);
+                $get_comment->execute();
 
-                $get_comment_result = $get_comment -> get_result();
+                $get_comment_result = $get_comment->get_result();
 
-                while ( $get_comment_row = $get_comment_result -> fetch_assoc() ) {
+                while ($get_comment_row = $get_comment_result->fetch_assoc()) {
                     //i already have first and last name
                     $date = $get_comment_row['date'];
                     $text = $get_comment_row['comment'];
@@ -448,155 +445,151 @@ $headerSet = 1;
                     $content_type = $profileImage;
                     $profile_image = $contentType;
 
-                    if ( !$enabled ) {
+                    if (!$enabled) {
                         continue;
                     }
 
                     echo "<div class=\"comment\">
                                         <p class=\"userProfile\">
                                             <img src=\" <?php  echo 'data:'.$content_type.';base64,'.base64_encode($profile_image)?>\" alt=\"User's profile picture\" align=\"middle\">
-                                            <span>".$firstName." ".$lastName."</span>
-                                            <span class='time'>".$comment_formatted_date."</span>
+                                            <span>" . $firstName . " " . $lastName . "</span>
+                                            <span class='time'>" . $comment_formatted_date . "</span>
                                         </p>
-                                        <p class=\"reviewDescription\">".$text."</p>
+                                        <p class=\"reviewDescription\">" . $text . "</p>
                                   </div>";
                 }
             }
 
-        }
-        catch ( Exception $exception ) {
+        } catch (Exception $exception) {
             header('Location: login.php');
-        }
-        finally {
-            $mysqli -> close();
+        } finally {
+            $mysqli->close();
         }
 
         ?>
 
 
-
         <!--TODO put this in a include file-->
 
 
-
-<!--            <div class="comment">-->
-<!--                <p class="userProfile">-->
-<!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> James-->
-<!--                    <time datetime="2018-11-9">- November 9, 2018</time>-->
-<!--                </p>-->
-<!--                <p class="reviewTitle">-->
-<!--                    You just don't get it-->
-<!--                </p>-->
-<!--                <p class="reviewDescription">Those are some dank zebra eye ping pongs!</p>-->
-<!--            </div>-->
-<!--            <div class="comment">-->
-<!--                <p class="userProfile">-->
-<!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Parsa R-->
-<!--                    <time datetime="2018-10-24">- October 24, 2018</time>-->
-<!--                </p>-->
-<!--                <p class="reviewTitle">-->
-<!--                    Great product!-->
-<!--                </p>-->
-<!--                <p class="reviewDescription">Those are some dank ping pongs!</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!---->
-<!--    <div class="reviewBlock">-->
-<!--        <p class="userProfile">-->
-<!--            <img src="../src/images/profile.png" alt="User's profile picture" align="middle">User-->
-<!--            Name-->
-<!--            <time datetime="2018-10-24">- Month Day, Year</time>-->
-<!--        </p>-->
-<!--        <p class="userRating">-->
-<!--            <span class="fa fa-star checked"></span>-->
-<!--            <span class="fa fa-star checked"></span>-->
-<!--            <span class="fa fa-star checked"></span>-->
-<!--            <span class="fa fa-star "></span>-->
-<!--            <span class="fa fa-star"></span>-->
-<!--        </p>-->
-<!---->
-<!--        <p class="reviewTitle">-->
-<!--            Review Title Here-->
-<!--        </p>-->
-<!--        <p class="reviewDescription">Review Description Here</p>-->
-<!--    </div>-->
-<!--        <h3>Your Reviews & Comments</h3>-->
-<!--        -->
-<!--            <!--TODO put this in a include file-->
-<!--            <div class="reviewBlock">-->
-<!--                <div class="review">-->
-<!--                    <p class="userProfile">-->
-<!--                        <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa-->
-<!--                            R</a>-->
-<!--                        <time datetime="2018-10-24">- October 24, 2018</time>-->
-<!--                    </p>-->
-<!--                    <p class="userRating">-->
-<!--                        <span class="fa fa-star checked"></span>-->
-<!--                        <span class="fa fa-star checked"></span>-->
-<!--                        <span class="fa fa-star checked"></span>-->
-<!--                        <span class="fa fa-star "></span>-->
-<!--                        <span class="fa fa-star"></span>-->
-<!--                    </p>-->
-<!---->
-<!--                    <p class="reviewTitle">-->
-<!--                        Great product!-->
-<!--                    </p>-->
-<!--                    <p class="reviewDescription">Those are some dank ping pongs!</p>-->
-<!--                </div>-->
-<!--                <div class="comments">-->
-<!--                    <div class="comment">-->
-<!--                        <p class="userProfile">-->
-<!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Not Parsa R-->
-<!--                            <time datetime="2018-10-30">- October 30, 2018</time>-->
-<!--                        </p>-->
-<!--                        <p class="reviewTitle">-->
-<!--                            Balls-->
-<!--                        </p>-->
-<!--                        <p class="reviewDescription">Its a bunch of balls</p>-->
-<!--                    </div>-->
-<!--                    <div class="comment">-->
-<!--                        <p class="userProfile">-->
-<!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> James-->
-<!--                            <time datetime="2018-11-9">- November 9, 2018</time>-->
-<!--                        </p>-->
-<!--                        <p class="reviewTitle">-->
-<!--                            You just don't get it-->
-<!--                        </p>-->
-<!--                        <p class="reviewDescription">Those are some dank zebra eye ping pongs!</p>-->
-<!--                    </div>-->
-<!--                    <div class="comment">-->
-<!--                        <p class="userProfile">-->
-<!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Parsa R-->
-<!--                            <time datetime="2018-10-24">- October 24, 2018</time>-->
-<!--                        </p>-->
-<!--                        <p class="reviewTitle">-->
-<!--                            Great product!-->
-<!--                        </p>-->
-<!--                        <p class="reviewDescription">Those are some dank ping pongs!</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!---->
-<!--            <div class="reviewBlock">-->
-<!--                <p class="userProfile">-->
-<!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle">User-->
-<!--                    Name-->
-<!--                    <time datetime="2018-10-24">- Month Day, Year</time>-->
-<!--                </p>-->
-<!--                <p class="userRating">-->
-<!--                    <span class="fa fa-star checked"></span>-->
-<!--                    <span class="fa fa-star checked"></span>-->
-<!--                    <span class="fa fa-star checked"></span>-->
-<!--                    <span class="fa fa-star "></span>-->
-<!--                    <span class="fa fa-star"></span>-->
-<!--                </p>-->
-<!---->
-<!--                <p class="reviewTitle">-->
-<!--                    Review Title Here-->
-<!--                </p>-->
-<!--                <p class="reviewDescription">Review Description Here</p>-->
-<!--            </div>-->
+        <!--            <div class="comment">-->
+        <!--                <p class="userProfile">-->
+        <!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> James-->
+        <!--                    <time datetime="2018-11-9">- November 9, 2018</time>-->
+        <!--                </p>-->
+        <!--                <p class="reviewTitle">-->
+        <!--                    You just don't get it-->
+        <!--                </p>-->
+        <!--                <p class="reviewDescription">Those are some dank zebra eye ping pongs!</p>-->
+        <!--            </div>-->
+        <!--            <div class="comment">-->
+        <!--                <p class="userProfile">-->
+        <!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Parsa R-->
+        <!--                    <time datetime="2018-10-24">- October 24, 2018</time>-->
+        <!--                </p>-->
+        <!--                <p class="reviewTitle">-->
+        <!--                    Great product!-->
+        <!--                </p>-->
+        <!--                <p class="reviewDescription">Those are some dank ping pongs!</p>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!---->
+        <!--    <div class="reviewBlock">-->
+        <!--        <p class="userProfile">-->
+        <!--            <img src="../src/images/profile.png" alt="User's profile picture" align="middle">User-->
+        <!--            Name-->
+        <!--            <time datetime="2018-10-24">- Month Day, Year</time>-->
+        <!--        </p>-->
+        <!--        <p class="userRating">-->
+        <!--            <span class="fa fa-star checked"></span>-->
+        <!--            <span class="fa fa-star checked"></span>-->
+        <!--            <span class="fa fa-star checked"></span>-->
+        <!--            <span class="fa fa-star "></span>-->
+        <!--            <span class="fa fa-star"></span>-->
+        <!--        </p>-->
+        <!---->
+        <!--        <p class="reviewTitle">-->
+        <!--            Review Title Here-->
+        <!--        </p>-->
+        <!--        <p class="reviewDescription">Review Description Here</p>-->
+        <!--    </div>-->
+        <!--        <h3>Your Reviews & Comments</h3>-->
+        <!--        -->
+        <!--            <!--TODO put this in a include file-->
+        <!--            <div class="reviewBlock">-->
+        <!--                <div class="review">-->
+        <!--                    <p class="userProfile">-->
+        <!--                        <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa-->
+        <!--                            R</a>-->
+        <!--                        <time datetime="2018-10-24">- October 24, 2018</time>-->
+        <!--                    </p>-->
+        <!--                    <p class="userRating">-->
+        <!--                        <span class="fa fa-star checked"></span>-->
+        <!--                        <span class="fa fa-star checked"></span>-->
+        <!--                        <span class="fa fa-star checked"></span>-->
+        <!--                        <span class="fa fa-star "></span>-->
+        <!--                        <span class="fa fa-star"></span>-->
+        <!--                    </p>-->
+        <!---->
+        <!--                    <p class="reviewTitle">-->
+        <!--                        Great product!-->
+        <!--                    </p>-->
+        <!--                    <p class="reviewDescription">Those are some dank ping pongs!</p>-->
+        <!--                </div>-->
+        <!--                <div class="comments">-->
+        <!--                    <div class="comment">-->
+        <!--                        <p class="userProfile">-->
+        <!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Not Parsa R-->
+        <!--                            <time datetime="2018-10-30">- October 30, 2018</time>-->
+        <!--                        </p>-->
+        <!--                        <p class="reviewTitle">-->
+        <!--                            Balls-->
+        <!--                        </p>-->
+        <!--                        <p class="reviewDescription">Its a bunch of balls</p>-->
+        <!--                    </div>-->
+        <!--                    <div class="comment">-->
+        <!--                        <p class="userProfile">-->
+        <!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> James-->
+        <!--                            <time datetime="2018-11-9">- November 9, 2018</time>-->
+        <!--                        </p>-->
+        <!--                        <p class="reviewTitle">-->
+        <!--                            You just don't get it-->
+        <!--                        </p>-->
+        <!--                        <p class="reviewDescription">Those are some dank zebra eye ping pongs!</p>-->
+        <!--                    </div>-->
+        <!--                    <div class="comment">-->
+        <!--                        <p class="userProfile">-->
+        <!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Parsa R-->
+        <!--                            <time datetime="2018-10-24">- October 24, 2018</time>-->
+        <!--                        </p>-->
+        <!--                        <p class="reviewTitle">-->
+        <!--                            Great product!-->
+        <!--                        </p>-->
+        <!--                        <p class="reviewDescription">Those are some dank ping pongs!</p>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!---->
+        <!--            <div class="reviewBlock">-->
+        <!--                <p class="userProfile">-->
+        <!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle">User-->
+        <!--                    Name-->
+        <!--                    <time datetime="2018-10-24">- Month Day, Year</time>-->
+        <!--                </p>-->
+        <!--                <p class="userRating">-->
+        <!--                    <span class="fa fa-star checked"></span>-->
+        <!--                    <span class="fa fa-star checked"></span>-->
+        <!--                    <span class="fa fa-star checked"></span>-->
+        <!--                    <span class="fa fa-star "></span>-->
+        <!--                    <span class="fa fa-star"></span>-->
+        <!--                </p>-->
+        <!---->
+        <!--                <p class="reviewTitle">-->
+        <!--                    Review Title Here-->
+        <!--                </p>-->
+        <!--                <p class="reviewDescription">Review Description Here</p>-->
+        <!--            </div>-->
 
     </div>
 </main>
