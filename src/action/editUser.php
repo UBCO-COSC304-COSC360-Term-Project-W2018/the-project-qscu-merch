@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo "<p>entered billing info action if statement</p>";
                     $query = 'SELECT uid FROM BillingInfo WHERE uid = ?';
                     $stmt = $mysql->prepare($query);
-                    echo "<p>prepared select F";
+                    echo "<p>prepared select </p>";
                     $stmt->bind_param('i',$_SESSION['user']->id);
                     $stmt->execute();
                     $stmt->bind_result($stop);
