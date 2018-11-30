@@ -84,7 +84,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		}catch (Exception $e){
 			$data["rst"] = false;
         }finally{
-            $con->close();
         }
         header('Content-Type: application/json');
  		echo json_encode($data["rst"]);
