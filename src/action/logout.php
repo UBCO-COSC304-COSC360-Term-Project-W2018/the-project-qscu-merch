@@ -2,9 +2,9 @@
 include "../includes/session.php";
 
 $cart = new userCart();
-if(isset($_SESSION['user'])){
+if (isset($_SESSION['user'])) {
     $_SESSION['user'] = null;
-    if(isset($_SESSION['cart'])){
+    if (isset($_SESSION['cart'])) {
         $cart = $_SESSION['cart'];
     }
 }

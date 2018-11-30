@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $datetime = (new DateTime('now'))->format('Y-m-d H:i:s');
         $return = [];
         if ($input['action'] == 'loadNew' && isset($input['date'])) {
-            $return = array('com' => [], 'rev' => [],'date'=>$datetime);
+            $return = array('com' => [], 'rev' => [], 'date' => $datetime);
 
 
             $query = 'SELECT pNo, uid, rating, comment, date, profilePicture, contentType, fname, lname FROM Reviews NATURAL JOIN User WHERE  pNo = ? AND date > ? AND isEnabled = 1 ORDER BY date desc';
@@ -37,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bind_param('is', $input['pno'], $input['date']);
             $stmt->execute();
             $stmt->bind_result($uidC, $pnoC, $fnameC, $lnameC, $commentC, $dateC, $imageC, $contentTypeC);
-            while ($stmt->fetch()){
+            while ($stmt->fetch()) {
                 $item = array('uid' => $uidC, 'pno' => $pnoC, 'comment' => $commentC, 'fname' => $fnameC, 'lname' => $lnameC, 'date' => $dateC, 'image' => base64_encode($imageC), 'contentType' => $contentTypeC);
-                array_push($return['com'],$item);
+                array_push($return['com'], $item);
             }
         }
 
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bind_result($pnoR, $uidR, $ratingR, $commentR, $dateR, $imageR, $contentTypeR, $fnameR, $lnameR);
             $temp3 = [];
             while ($stmt->fetch()) {
-                $item = array('posts'=> [], 'pno' => $pnoR, 'uid' => $uidR, 'rating' => $ratingR, 'comment' => $commentR, 'date' => $dateR, 'image' => base64_encode($imageR), '$contentType' => $contentTypeR, 'fname' => $fnameR, 'lname' => $lnameR);
+                $item = array('posts' => [], 'pno' => $pnoR, 'uid' => $uidR, 'rating' => $ratingR, 'comment' => $commentR, 'date' => $dateR, 'image' => base64_encode($imageR), '$contentType' => $contentTypeR, 'fname' => $fnameR, 'lname' => $lnameR);
                 array_push($return, $item);
             }
 
@@ -65,12 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $mysql->prepare($query);
 
             foreach ($return as $key1 => $value1) {
-                if($key1 == 0){
+                if ($key1 == 0) {
                     continue;
                 }
                 $stmt->bind_param('ii', $return[$key1]['uid'], $return[$key1]['pno']);
                 $stmt->execute();
-                $stmt->bind_result($pnoC,$uidC, $fnameC, $lnameC, $commentC, $dateC, $imageC, $contentTypeC);
+                $stmt->bind_result($pnoC, $uidC, $fnameC, $lnameC, $commentC, $dateC, $imageC, $contentTypeC);
                 while ($stmt->fetch()) {
                     $item = array('pno' => $pnoC, 'uid' => $uidC, 'comment' => $commentC, 'fname' => $fnameC, 'lname' => $lnameC, 'date' => $dateC, 'image' => base64_encode($imageC), 'contentType' => $contentTypeC);
                     array_push($return[$key1]['posts'], $item);
@@ -85,4 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         echo $json;
     }
+}else {
+    header('location: ../error404.php');
+    die();
 }

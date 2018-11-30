@@ -10,7 +10,7 @@ try {
 //    $_SESSION['userid'] = 1;          //PURELY FOR TESTING
 
     if (!isset($_SESSION['user'])) {
-        header('Location: http://localhost/the-project-qscu-merch/src/login.php');
+        header('Location: login.php');
         exit();
     } else {
         $userid = $_SESSION['user']->id;
@@ -113,7 +113,6 @@ finally {
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
     <a href="viewCart.php">Cart</a> &gt; &gt;
-    <a href="orderSummary.php">Order Summary</a> &gt; &gt;
     <a>Checkout</a>
 </ul>
 <main>

@@ -36,7 +36,8 @@ if($con -> connect_errno){
 <body>
 <?php include "header.php";?>
 <main>
-	<p id="warehousepagetitle">Warehouse Product Inventory List</p>
+	<p id="warehousepagetitle">Warehouse Product Inventory List <a id='btn' href="../src/adminList.php">Return To Admin</a></p>
+	
 <?php
 try {
 
