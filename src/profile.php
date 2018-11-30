@@ -466,6 +466,8 @@ $headerSet = 1;
         }
         catch ( Exception $exception ) {
             header('Location: login.php');
+            $mysqli -> close();
+            die();
         }
         finally {
             $mysqli -> close();

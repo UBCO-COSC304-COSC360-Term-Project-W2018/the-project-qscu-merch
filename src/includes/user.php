@@ -15,6 +15,11 @@ class User{
         $this->lastName = $userLastName;
     }
 
+    function updateUser($userFirstName, $userLastName){
+        $this->firstName = $userFirstName;
+        $this->lastName = $userLastName;
+    }
+
     function getUserArray(){
         return array("userid"=>$this->id,"firstName"=>$this->firstName,"lastName"=>$this->lastName);
     }
