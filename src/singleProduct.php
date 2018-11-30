@@ -103,7 +103,7 @@ try {
                             if ($ratingAvg && $ratingAvg != NULL) {
                                 for ($i = 0; $i < 5; $i++) {
                                     echo "<span class=\"fa fa-star";
-                                    if ($i <= $ratingAvg) echo "checked";
+                                    if ($i <= $ratingAvg) echo " checked";
                                     echo "\"></span>";
                                 }
                             } else {
