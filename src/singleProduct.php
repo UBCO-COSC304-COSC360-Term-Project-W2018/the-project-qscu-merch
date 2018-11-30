@@ -105,7 +105,7 @@ if ($stmt = $con->prepare($sql)) {
                         <!-- added drop down menu -->
 
 						<!-- TODO: MAKE THIS TABLE DYNAMIC BASED ON PRODUCT -->
-                        <select name="size" class="size" required>
+                        <select id="size" name="size" class="size" required>
                             <option selected value="">Select a size</option>
 						<?php 
 						$sql2 = "SELECT size FROM Product WHERE pNo = ?";

@@ -63,9 +63,9 @@ $(document).ready(function () {
     // When the user clicks the button, open the reviewModal
 
 
-    commentButton.onclick = function () {
-        commentModal.style.display = "block";
-    };
+//     commentButton.onclick = function () {
+//         commentModal.style.display = "block";
+//     };
     
 
     reviewButton.onclick = function () {
@@ -91,9 +91,9 @@ $(document).ready(function () {
         }
 
 
-        if (event.target == commentModal) {
-            commentModal.style.display = "none";
-        }
+//         if (event.target == commentModal) {
+//             commentModal.style.display = "none";
+//         }
 
 
     }

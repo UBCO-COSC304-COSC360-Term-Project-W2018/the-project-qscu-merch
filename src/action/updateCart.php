@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	    $_SESSION['hasError'] = true;
         $_SESSION['errorType'] = "Form";
         $_SESSION['errorMsg'] = "invalid form data";
-        header('location: ../homeWithoutTables.php');
+        header('location: ../viewCart.php');
     }else{
 	    try{
 		    
@@ -46,7 +46,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	        } else {
 		        
 	            //user doesn't exist, update the object
-	            $uc = $_SESSION['cart'];
 				
 	
 	            if($buttonPressed == 'Remove'){
@@ -55,7 +54,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	                
 	            }else{
 	                //update the item's quantity in cart
-	                $uc -> updateItem($pNo, $size, $newQuantity, $price);
+	                $_SESSION['cart'] -> updateItem($pNo, $size, $newQuantity, $price);
 	            }
 	            header("location: ../viewCart.php");
 	        }
