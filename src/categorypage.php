@@ -1,23 +1,24 @@
  <?php 
-$headerSet = 1;
 include "includes/init.php";
 
+$user = null;
+$name = null;
 
-try{
-
-$user = isset($_SESSION["userId"])? $_SESSION['userId']: null;
+if(isset($_SESSION['user'])){
+    $user = $_SESSION['user']->id;
+    $name = $_SESSION['user']->firstName;
+}
 
 $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 	if($con -> connect_errno){
 		die("Connection Failed: ".$con -> connect_errno);
 	}
-} catch (Exception $e) {
-	die("Error with Cart. Session Terminated.");
-}
+
 
 
 ?>
+
 <!DOCTYPE HTML>
 <html>
 <!--    Head-->
@@ -39,7 +40,7 @@ $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 	<?php include "header.php"; ?>
 
-	<ul class="breadcrumb">
+<ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
     <a >Categories</a>
 </ul>
@@ -81,41 +82,46 @@ $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
 			//So here I will use a cat = $_GET["cname"] to determine what category I'm in
 			//This might be the wrong way of getting the current category, so James do you wanna double check? Thanks
-			$currCat = "";
+			$currCat = null;
 			if (isset($_GET['cat'])){
 				$currCat = $_GET['cat'];
 			}
 
-			$getCID = "SELECT cid FROM Category WHERE cname = '". $currCat ."'";
+			$getCID = "SELECT cid FROM Category WHERE cname = ?";
 
-			if($catID = $con->query($currCat)){
-
-				$categoryID = $catID->fetch_assoc();
-
-				$cID = '"'.$categoryID['cid'].'"';
-
+			if($cstmt = $con->prepare($getCID)){
+					
+					$cstmt->bind_param('s', $currCat);
+					$cstmt->execute();
+					$cstmt->bind_result($cid);
+					while($cstmt->fetch()){
+						$catID = $cid;
+	           		}
+	        }
+	        
 
 				//IDK why its purple... I dont like it what if it breaks. PHP is not fun
-				$sqlListProds = "SELECT pname, price, image, AVG(rating) AS score FROM Product, Reviews, ProductInCategory WHERE ProductInCategory.cid =" . $cID . ", ProductInCategory.pNo = Product.pNo, Product.pNo = Reviews.pNo";
+				$sqlListProds = "SELECT Product.pNo, pname, price, image, contentType, AVG(rating) FROM Product JOIN Reviews ON Product.pNo = Reviews.pNo JOIN ProductInCategory ON ProductInCategory.pNo = Product.pNo WHERE ProductInCategory.cid = ? GROUP BY Product.pNo";
+			
+				
+				if($prods = $con->prepare($sqlListProds)){
+					
+					$prods->bind_param('i', $catID);
+					
+					$prods->execute();
+					
+					$prods->bind_result($pNo, $pname, $price, $image, $contentType, $rating);
+					
+					while($prods->fetch()){
+                    	
 
-				if($prods = $con->query($sqlListProds)){
-
-					while($prod = $prods->fetch_assoc()){
-
-						$image = '"'.$prod['image'].'"';
-                    	$price = '"'.$prod['price'].'"';
-                    	$prodName = '"'.$prod['pname'].'"';
-                    	$rating = $prod['score'];
-
-                    	$rating = '"'.round($rating).'"';
-
-						echo "<div class='item'><div class='itempicture'><a href='singleProduct.html'><img src='" . $image . "' alt='Product Picture'/></a></div><div class='iteminfo'><p class='pname'><a href='#'>" . $prodName . "</a></p><p class='itemprice'>" . $price . "</p><p class='numberofliams'>" . $rating . "</p><p class='addtocart'><button>Add to Cart <i class='fa fa-shopping-cart'></i></button></p></div></div>";
+						echo "<div class='item'><div class='itempicture'><a href='singleProduct.php?pNo=" . $pNo . "'><img src='' alt='Product Picture'/></a></div><div class='iteminfo'><p class='pname'><a href='singleProduct.php?pNo=" . $pNo . "'>" . $pname . "</a></p><p class='itemprice'>" . $price . "</p><p class='numberofliams'>" . $rating . "</p><p class='viewCart'>";
+						
+						
+						echo "<a href='singleProduct.php?pNo=" .$pNo . "' class='button'>View Product Page</a></p></div></div>";
 
 					}
 				}
-
-
-			}
 
 			?>
 

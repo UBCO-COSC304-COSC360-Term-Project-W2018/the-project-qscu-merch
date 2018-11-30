@@ -9,10 +9,9 @@ if(isset($_SESSION['user'])){
 }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+	$data =array('rst'=>true);
 	$input = json_decode(file_get_contents('php://input'), true);
 	if(isset($input['pNo'])&&isset($input['size'])&&isset($input['quantity'])){
-		header('Content-Type: application/json');
- 		echo json_encode($data);
 	    try{
 		   $pNo = $input["pNo"];
 		   $size = $input['size'];
@@ -47,9 +46,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $quantityToUpdate;
             
 			if (isset($user)) {
-				$stmt = "SELECT quantity FROM HasCart WHERE pNo = ? AND size = ? AND uid = ?";
+				$slct = "SELECT quantity FROM HasCart WHERE pNo = ? AND size = ? AND uid = ?";
 				
-				if($stmt = $con->prepare($stmt)){
+				if($stmt = $con->prepare($slct)){
 					
 					$stmt->bind_param('isi', $pNo, $size, $user);
 					$stmt->execute();
@@ -87,9 +86,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	        } else {
 	          
 	                //add to object cart
-	                $uCartObj = $_SESSION['cart'];
+/*
+	                $_SESSION['cart']= new userCart();
+	                echo "FUCK";
+					echo $pNo;
+*/
 					
-	                $uCartObj->addItem($pNo, $pname, $size, $quantity, $price);
+	                $_SESSION['cart']->addItem($pNo, $pname, $size, $quantity, $price);
 	              
 
 	        }
@@ -98,10 +101,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		}catch (Exception $e){
             //header('location: ../singleProduct.php?pNo=' . $pNo);      
         }finally{
-	       
+	       $data['rst'] = false;
             $con->close();
             die();
         }
+        header('Content-Type: application/json');
+ 		echo json_encode($data);
     }
 }
 ?>

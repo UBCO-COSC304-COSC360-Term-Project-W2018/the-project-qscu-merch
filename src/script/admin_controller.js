@@ -115,13 +115,9 @@ function searchUserRB(enable) {
 }
 
 function searchPostRB(enable) {
-    let rbPostTitle = $("#rbPostTitle");
     let rbPost = $("#rbPost");
-
-    rbPostTitle.prop('disabled', !enable);
-    rbPostTitle.prop('checked', enable);
     rbPost.prop('disabled', !enable);
-    rbPost.prop('checked', false);
+    rbPost.prop('checked', enable);
 }
 
 
@@ -223,9 +219,6 @@ function onSearch() {
             getUserList(search, 'userEmail');
             break;
         case '4':
-            getPostList(search, 'title');
-            break;
-        case '5':
             getPostList(search, 'content');
             break;
     }
@@ -688,25 +681,25 @@ function buildReview(json) {
     //      </tr>
 
 
-
-    row = $('<tr></tr>');
-    //      <tr>
-
-
-    cell1 = $('<td><span>Review Title:</span></td>');
-    //      <td><span>Review Title:</span></td>
-
-
-    cell2 = $('<td colspan="4"><span>'+json.review.title+'</span></td>');
-    //      <td colspan="4"><span>This is a product</span></td>
-
-
-    row.append(cell1);
-    row.append(cell2);
-
-
-    table.append(row);
-    //      </tr>
+    //TODO just removed title
+    // row = $('<tr></tr>');
+    // //      <tr>
+    //
+    //
+    // cell1 = $('<td><span>Review Title:</span></td>');
+    // //      <td><span>Review Title:</span></td>
+    //
+    //
+    // cell2 = $('<td colspan="4"><span>'+json.review.title+'</span></td>');
+    // //      <td colspan="4"><span>This is a product</span></td>
+    //
+    //
+    // row.append(cell1);
+    // row.append(cell2);
+    //
+    //
+    // table.append(row);
+    // //      </tr>
 
 
     row = $('<tr></tr>');
@@ -877,24 +870,24 @@ function buildComment(json) {
     // </tr>
     table.append(row);
 
-
-    row = $('<tr></tr>');
-    // <tr>
-
-    cell1 = $('<td><span>Comment Title:</span></td>');
-    // <td><span>Comment Title:</span></td>
-
-
-    cell2 = $('<td class="longText" colspan="4"><span>'+json.title+'</span></td>');
-    // <td class="longText" colspan="4"><span>Your Review sucks</span></td>
-
-
-    row.append(cell1);
-    row.append(cell2);
-
-
-    // </tr>
-    table.append(row);
+    //TODO just removed title
+    // row = $('<tr></tr>');
+    // // <tr>
+    //
+    // cell1 = $('<td><span>Comment Title:</span></td>');
+    // // <td><span>Comment Title:</span></td>
+    //
+    //
+    // cell2 = $('<td class="longText" colspan="4"><span>'+json.title+'</span></td>');
+    // // <td class="longText" colspan="4"><span>Your Review sucks</span></td>
+    //
+    //
+    // row.append(cell1);
+    // row.append(cell2);
+    //
+    //
+    // // </tr>
+    // table.append(row);
 
 
     row = $('<tr></tr>');
