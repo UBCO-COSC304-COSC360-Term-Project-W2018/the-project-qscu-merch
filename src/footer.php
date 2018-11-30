@@ -5,7 +5,7 @@
         </div>
 
         <nav class=footNav>
-            <p><a href="homeWithoutTables.php">Home</a> | <a href="searchpage.php">Browse</a> | <a href="viewCart.php">Cart </a>| <a href="about_us.php"> About Us</a>| <a href="contactUs.php">Contact us</a></p>
+            <p><a href="homeWithoutTables.php">Home</a> | <a href="searchpage.php">Browse</a> | <a href="viewCart.php">Cart </a>| <a href="about_us.php"> About Us</a></p>
         </nav>
 
         <!-- Copyright -->

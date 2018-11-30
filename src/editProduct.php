@@ -10,6 +10,7 @@ $notCategorys = [];
 $headerSet = 1;
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_GET, array('pno')) && arrayIsValidInput($_GET, array('pno'))) {
 
+
     $mysql;
     try {
 
@@ -98,9 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_
 
                                 <tr>
                                     <td>
-                                        <img id="imagePreview" width="100px" height="100px"
-                                             src="<?php echo 'data:' . $product['contentType'] . ';base64,' . base64_encode($product['image']) ?>"
-                                             alt="Product image">
+                                        <img id="imagePreview" width="100px" height="100px" src="<?php echo 'data:' . $product['contentType'] . ';base64,' . base64_encode($product['image']) ?>" alt="Product image">
                                     </td>
                                 </tr>
                                 <tr>
@@ -124,8 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_
                     </td>
                     <form method="post" action="action/changeProduct.php">
                         <td>
-                            <input type="text" name="productName" id="productName" maxlength="254"
-                                   placeholder="Enter Product Name" required value="<?php echo $product['pname'] ?>">
+                            <input type="text" name="productName" id="productName" maxlength="254" placeholder="Enter Product Name" required value="<?php echo $product['pname'] ?>">
 
                         </td>
                         <td rowspan="4">
@@ -153,8 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_
                         <label for="productPrice">Price:</label>
                     </td>
                     <td>
-                        <input type="Number" step="0.01" name="productPrice" id="productPrice" placeholder="$"
-                               value="<?php echo $product['price'] ?>">
+                        <input type="Number" step="0.01" name="productPrice" id="productPrice" placeholder="$" value="<?php echo $product['price'] ?>">
                     </td>
                 </tr>
                 <tr>
@@ -162,8 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_
                         <label for="productDescription">Description:</label>
                     </td>
                     <td>
-                        <textarea rows="4" cols="50" name="productDescription" id="productDescription" maxlength="254"
-                                  placeholder="Enter Description..."><?php echo $product['description'] ?></textarea>
+                        <textarea rows="4" cols="50" name="productDescription" id="productDescription" maxlength="254" placeholder="Enter Description..."><?php echo $product['description'] ?></textarea>
                     </td>
                 </tr>
 
@@ -199,8 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_
                     </div>
                 </div>
                 <div>
-                    <input type="text" id="newCategoryName" placeholder="Enter Category Name"
-                           data-pno="<?php echo $_GET['pno'] ?>">
+                    <input type="text" id="newCategoryName" placeholder="Enter Category Name" data-pno="<?php echo $_GET['pno'] ?>">
                 </div>
                 <div id="addButtons">
                     <div id="addCategory">

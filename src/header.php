@@ -42,13 +42,6 @@ if (isset($_SESSION['user'])) {
 
             <?php
             if (isset($user)) {
-<<<<<<< HEAD
-                if (isAdmin($user)) {
-                    echo "<span class='dividerClass'>|</span><a id='profile' href='profile.php'>" . $name . "</a><span class='dividerClass'>|</span><a id='admin' href='adminList.php'>Admin</a><span class='dividerClass'>|</span><a id='logout' href='../src/action/logout.php'>Logout</a>";
-                } else {
-                    echo "<a href='profile.php'>" . $name . "</a><a id='logout' href='../src/action/logout.php'>Logout</a>";
-                }
-=======
 
 	            if(isAdmin($user)){
 		            echo "<span class='dividerClass'>|</span><a id='profile' href='profile.php'>" . $name . "</a><span class='dividerClass'>|</span><a id='admin' href='adminList.php'>Admin</a><span class='dividerClass'>|</span><a id='logout' href='../src/action/logout.php'>Logout</a>";
@@ -57,7 +50,6 @@ if (isset($_SESSION['user'])) {
 	            }
                 
 
->>>>>>> 7d88056f78fbb7c5e6314763b0da524155aba16e
             } else {
                 echo "<a href='login.php'>Login</a><span class='dividerClass'>|</span><a href='signup.php'>Sign-Up</a>";
             }
