@@ -5,32 +5,31 @@ $(document).ready(function(){
         var size = $("#size").val();
         var pNo = $("#pNo").val();
 		//TODO Do more validation on emailField clientside right here
-		let obj = {'pNo':pNo, 'size':size, 'quantity':quantity};
+		var obj = {'pNo':pNo, 'size':size, 'quantity':quantity};
 		//send this inputted email to the server to check if it exists in the DB
 		
 		$.post('action/addToCart.php', JSON.stringify(obj))
 		.done(function (data){
-			if(data == 11){
+			if(data=== 11||data===01){
 				$("#addedToCart").text("Added To Cart");
 			
 				setTimeout( function(){
 					$("#addedToCart").empty();
-				}
-				, 1000);
+				}, 1000);
 			}else{
 				$("#addedToCart").text("Failed To Add To Cart");
 				
 				setTimeout( function(){
 					$("#addedToCart").empty();
-					}
-					, 1000);
+					}, 1000);
 			}
 		}).fail(function(jqXHR){
 			console.log(jqXHR);
 			
 		}).always(function(data){
 
+			console.log(data);
 		});
 		
-})
+});
 });
