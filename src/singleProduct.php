@@ -79,7 +79,7 @@ try {
 <?php include "header.php"; ?>
     <ul class="breadcrumb">
         <a href="homeWithoutTables.php">Home</a> &gt; &gt;
-        <a href="categorypage.php">Categories</a> &gt; &gt;
+        <a href="searchpage.php">Categories</a> &gt; &gt;
         <a>Product</a>
     </ul>
 
