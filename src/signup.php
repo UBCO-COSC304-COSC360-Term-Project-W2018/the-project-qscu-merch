@@ -1,6 +1,5 @@
 <?php
 include "includes/init.php";
-$headerSet = 1;
 ?>
 
 <!DOCTYPE html>

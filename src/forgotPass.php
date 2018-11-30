@@ -12,7 +12,6 @@ if(isset($_SESSION['hasError'])){
     $errorType = $_SESSION['errorType'];
     $error = $_SESSION['error'];
 }
-$headerSet = 0;
 
 ?>
 <!DOCTYPE html>
