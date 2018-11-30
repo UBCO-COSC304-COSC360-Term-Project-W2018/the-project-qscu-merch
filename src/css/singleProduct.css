@@ -5,7 +5,6 @@
     margin: 0 auto;
     max-width: 1080px;
     background-color: white;
-    /*    color: #18bfef;*/
 }
 
 html {
@@ -65,20 +64,11 @@ html {
     text-align: center;
 }
 
-input.qtyplus {
-    width: 25px;
-    height: 25px;
-}
 
-input.qtyminus {
-    width: 25px;
-    height: 25px;
-}
 
 select.size {
     text-align-last: center;
     margin-left: 4em;
-    background: none;
 }
 
 .checked {
@@ -339,4 +329,18 @@ select.size {
     .container {
         flex-direction: column;
     }
+}
+
+.qtyplus, .qtyminus{
+	background-color: #18bfef;
+	border-radius: 1em;
+	border-color: black;
+	color: white;
+	font-size: large;
+	text-align: center;
+    width: 18px;
+    height: 18px;
+    line-height: 10px;
+    padding: 0em;
+
 }
