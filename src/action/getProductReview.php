@@ -82,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo $json;
     }
 }else {
+    //TODO: CHECK IF THIS IS VALID
     header('location: ../error404.php');
     die();
 }

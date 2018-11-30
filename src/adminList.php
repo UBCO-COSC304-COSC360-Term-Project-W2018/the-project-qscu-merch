@@ -4,15 +4,14 @@ include 'includes/validateAdmin.php';
 
 validateAdminRequest($_SESSION);
 
-
 ?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <?php include 'includes/headerFooterHead.php' ?>
         <link rel="stylesheet" href="css/adminList.css">
-         <link rel="stylesheet" href="css/adminPosts.css">
-         <link rel="stylesheet" href="css/userList.css">
+        <link rel="stylesheet" href="css/adminPosts.css">
+        <link rel="stylesheet" href="css/userList.css">
         <script src="script/admin_controller.js"></script>
         <script src="script/imagePreview.js"></script>
     </head>
@@ -39,7 +38,6 @@ validateAdminRequest($_SESSION);
                 <label for="rbPost">Post Body:</label>
                 <input id="rbPost" value="4" name="rbgroup" type="radio" disabled>
             </div>
-
 
             <div id="productList">
                 <div>
@@ -77,7 +75,8 @@ validateAdminRequest($_SESSION);
                                     <input type="file" id="uploadImage" name="uploadImage" required>
                                 </td>
                                 <td colspan="4" rowspan="2">
-                                    <textarea placeholder="Product Description" maxlength="254" name="productDescription" id="productDescription"></textarea>
+                                    <textarea placeholder="Product Description" maxlength="254"
+                                              name="productDescription" id="productDescription"></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -101,8 +100,7 @@ validateAdminRequest($_SESSION);
                 <div id="userContent">
                 </div>
             </div>
-            
-            
+
             <div class="hidden" id="postList">
                 <div>
                     <h1 class="adminListHeaders">Reviews and Comments</h1>

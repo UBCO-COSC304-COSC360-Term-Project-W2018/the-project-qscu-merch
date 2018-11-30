@@ -77,6 +77,7 @@ if (isset($_POST['email'])) {
     } catch (Exception $e) {
         $json->status = "fail";
         $json->msg = "Failed to connect to the database.";
+        //TODO: CHECK IF THIS IS VALID
         header('location: ../error404.php');
 
     }

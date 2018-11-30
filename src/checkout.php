@@ -33,7 +33,6 @@ try {
 
     if ($mysqli->connect_errno) {
 //    echo "<p> Unable to connect to database </p>";
-        die();
     } else {
 //    echo "<p> You are connected to the database</p>";
     }
@@ -82,18 +81,13 @@ try {
         }
     }
     $fullName = $firstName . " " . $lastName;
-}
-
-catch (Exception $exception) {
+} catch (Exception $exception) {
     die();
+} finally {
+    $mysqli->close();
 }
-finally {
-    $mysqli -> close();
-}
-
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,14 +98,13 @@ finally {
     <script src="libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="script/checkout-validation.js"></script>
 
-
 </head>
-
 <body>
+
 <?php include "header.php" ?>
 
 <ul class="breadcrumb">
-    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a href="homeWithoutTables.php">Home</a> &gt; &gt;
     <a href="viewCart.php">Cart</a> &gt; &gt;
     <a>Checkout</a>
 </ul>
@@ -131,7 +124,8 @@ finally {
                             </div>
                             <div id="ccNumContainer" class="checkoutContainer">
                                 <label id="ccNumLabel" for="ccNum" class="elementLabel">Credit Card Number: </label>
-                                <input type="number" name="ccNum" id="ccNum" required value="<?php echo $creditCardNum ?>">
+                                <input type="number" name="ccNum" id="ccNum" required
+                                       value="<?php echo $creditCardNum ?>">
                             </div>
 
                             <div id="ccExpirationContainer" class="checkoutContainer">
@@ -203,7 +197,8 @@ finally {
 
                     <div id="shippingAddressRadioGroup" class="checkoutContainer">
                         <label class="elementLabel" for="shippingAddressRadioGroup">Select a shipping address: </label>
-                        <input type="radio" name="shippingAddressRadio" id="billingAddressRadio" checked="checked" value="1">Billing
+                        <input type="radio" name="shippingAddressRadio" id="billingAddressRadio" checked="checked"
+                               value="1">Billing
                         address<br>
                         <input type="radio" name="shippingAddressRadio" id="shippingAddressRadio" value="2">New shipping
                         address <br>
@@ -237,7 +232,7 @@ finally {
                                 <option value="QC">QC</option>
                                 <option value="SK">SK</option>
                                 <option value="YK">YK</option>
-                            </select>                        </div>
+                            </select></div>
 
                         <div id="shippingCountry">
                             <label class="elementLabel" for="shippingCountryInput">Country: </label>
@@ -264,8 +259,7 @@ finally {
     </script>
 
     <div id="paypalButtonContainer">
-        <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal"
-                                              id="paypalButton"></a>
+        <a href="https://www.paypal.com"><img src="images/paypal-checkout-button.png" alt="checkout using paypal" id="paypalButton"></a>
     </div>
 </main>
 <?php include "footer.php"; ?>

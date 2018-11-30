@@ -65,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 } else {
+    //TODO: CHECK IF THIS VALID
     header('location: ../error404.php');
     die();
 }
