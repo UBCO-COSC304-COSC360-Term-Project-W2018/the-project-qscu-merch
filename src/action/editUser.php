@@ -4,7 +4,7 @@ include '../includes/db_credentials.php';
 include '../includes/inputValidation.php';
 include '../includes/regex.php';
 
-//IF THIS PAGE ISN'T WORKING FOR YOU UNCOMMENT LINE 123
+//IF THIS PAGE ISN'T WORKING FOR YOU UNCOMMENT the echo around LINE 141
 
 
 function generateSalt()
@@ -114,7 +114,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     }
 
-                    echo $mysql->error_list;
                    $stmt->execute();
 
 
@@ -139,6 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mysql->close();
         } finally {
             $mysql->close();
+            echo $mysql->error_list;
         }
     }
 }
