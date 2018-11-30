@@ -23,6 +23,12 @@ $(document).ready(function () {
         setPostPanel();
 
     });
+    
+    $("#btnInventory").on('click', function () {
+
+         window.location = "../src/displayInventory.php";
+
+    });
 
     $("#addProduct").on('click', function () {
         if (page === 0) {

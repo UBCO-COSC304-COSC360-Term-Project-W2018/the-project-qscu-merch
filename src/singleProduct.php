@@ -68,7 +68,7 @@ try {
         <script type="text/javascript" src="script/quantity.js"></script>
         <script type="text/javascript" src="script/reviewModal.js"></script>
         <script type="text/javascript" src="script/addToCart.js"></script>
-        <!--<script type="text/javascript" src="script/commentModal.js"></script>-->
+
 
         <link rel="stylesheet" href="css/singleProduct.css">
     </head>
@@ -104,7 +104,7 @@ try {
                             if ($ratingAvg && $ratingAvg != NULL) {
                                 for ($i = 0; $i < 5; $i++) {
                                     echo "<span class=\"fa fa-star";
-                                    if ($i <= $ratingAvg) echo "checked";
+                                    if ($i <= $ratingAvg) echo " checked";
                                     echo "\"></span>";
                                 }
                             } else {
@@ -126,20 +126,20 @@ try {
                         <!--                        <form id='myform'>-->
 
                         <input title="Decrease Quantity" type='button' value='-' class='qtyminus' field='quantity'/>
-                        <input required id="quantity" type='text' name='quantity' value='' class='qty'/>
+                        <input required id="quantity" type='number' name='quantity' value='' min='1' placeholder="0" class='qty'/>
                         <input title="Increase Quantity" type='button' value='+' class='qtyplus' field='quantity'/>
 
                         <!-- added drop down menu -->
 
 
                         <!-- TODO: MAKE THIS TABLE DYNAMIC BASED ON PRODUCT -->
-                        <select name="size" class="size" required>
+                        <select id="size" name="size" class="size" required>
 
                             <option selected value="">Select a size</option>
                             <?php
                             foreach ($size AS $key2 => $value2) {
                                 if ($size[$key2] === 'single') {
-                                    echo '<option value="single">Size Unavailable</option>';
+                                    echo '<option value="single">No size</option>';
                                 } else {
                                     echo '<option value="' . $size[$key2] . '">' . $size[$key2] . '</option>';
                                 }
@@ -151,6 +151,7 @@ try {
                         <button id="addToCartButton" title="Add to Cart" class="pageButtons">Add to Cart
                             <i class="fa fa-shopping-cart"></i>
                         </button>
+                        <span id='addedToCart'></span>
                         <!--                        </form>-->
 
                     </div>

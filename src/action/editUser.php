@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $extension = end(explode(".", $file['name']));
                     $validExt = array("jpg", "png", "gif");
                     $validMine = array("image/jpeg", "image/png", "image/gif");
-                    if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 1000 * 1000))) {
+                    if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 66 * 1000))) {
                         if (move_uploaded_file($file['tmp_name'], $targetFilePath)) {
                             $query = 'UPDATE User SET profilePicture = ?, contentType = ? WHERE customerBanned = 0 AND uid = ?';
                             $stmt = $mysql->prepare($query);
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $fieldsUserInfo = array('emailInput', 'firstNameInput', 'lastNameInput');
 
-                if ($_POST['action'] === 'userInfo' && arrayExists($_POST, $fieldsUserInfo) && arrayIsValidInput($_POST, $fieldsUserInfo) && preg_match($emailRegex, $_POST['emailInput'])) {
+                if ($_POST['action'] === 'userInfo' && arrayExists($_POST, $fieldsUserInfo) && arrayIsValidInput($_POST, $fieldsUserInfo)) {
                     $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
                     if ($mysql->errno) {
                         throw new Exception();

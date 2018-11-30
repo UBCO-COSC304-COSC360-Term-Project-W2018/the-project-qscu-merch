@@ -52,3 +52,33 @@ display: inline-block;
 .producttables td{
 	font-size: 0.9em;
 }
+
+#btn{
+	margin-left: 1em;
+	color: black;
+	text-decoration: none;
+	font-size: 0.4em;
+	background: #18bfef;
+	border: thin solid black;
+	border-radius: 1em; 
+	padding: 3px; 
+	box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.25);
+
+	transform: translateX(0) translateY(0);
+
+	transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+	cursor: pointer;
+}
+
+#btn:hover{
+		-webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.25);
+	-moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.25);
+	box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.25);
+	-webkit-transform: translateX(-3px) translateY(-3px);
+	-moz-transform: translateX(-3px) translateY(-3px);
+	transform: translateX(-3px) translateY(-3px);
+	-webkit-transition: -webkit-transform 0.3s ease-in-out, -webkit-box-shadow 0.4s ease-in-out;
+	-moz-transition: -moz-transform 0.3s ease-in-out, -moz-box-shadow 0.4s ease-in-out;
+	transition: transform 0.3s ease-in-out, box-shadow 0.4s ease-in-out;
+	cursor: pointer;
+}

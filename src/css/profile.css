@@ -18,6 +18,7 @@
 
 #imageContent{
 	display:block;
+	min-width: 17em;
 	max-width: 17em;
 	border-style: solid;
 	border-color: #183263;

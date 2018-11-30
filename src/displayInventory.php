@@ -35,9 +35,16 @@ if ($con->connect_errno) {
 <body>
 <?php include "header.php"; ?>
 <main>
+<<<<<<< HEAD
     <p id="warehousepagetitle">Warehouse Product Inventory List</p>
     <?php
     try {
+=======
+	<p id="warehousepagetitle">Warehouse Product Inventory List <a id='btn' href="../src/adminList.php">Return To Admin</a></p>
+	
+<?php
+try {
+>>>>>>> 7d88056f78fbb7c5e6314763b0da524155aba16e
 
 
         $sqlWH = "SELECT wNo, location FROM Warehouse";
