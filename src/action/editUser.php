@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     }
 
-                   $stmt->execute();;
+                   $stmt->execute();
 
 
                 }
@@ -132,8 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $mysql->close();
             }
-        } catch (Exception $e) {
-
+        }
 
         catch (Exception $e) {
             $mysql->close();
@@ -142,5 +141,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-header('Location: ../profile.php');
+//header('Location: ../profile.php');
 
