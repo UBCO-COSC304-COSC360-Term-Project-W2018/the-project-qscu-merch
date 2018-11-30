@@ -10,7 +10,7 @@ try {
 //    $_SESSION['userid'] = 1;          //PURELY FOR TESTING
 
     if (!isset($_SESSION['user'])) {
-        header('Location: login.php');
+        header('Location: http://localhost/the-project-qscu-merch/src/login.php');
         exit();
     } else {
         $userid = $_SESSION['user']->id;
