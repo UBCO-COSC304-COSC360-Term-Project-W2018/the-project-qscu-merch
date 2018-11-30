@@ -36,33 +36,13 @@ $(document).ready(function (e) {
     $("#passwordEditSave").on('click', function (e) {
 
         let passwordEditSave = $(this);
+        let oldPassword = $("#oldPasswordInput");
         let passwordInput = $("#passwordInput");
         let confirmPasswordInput = $("#confirmPasswordInput");
 
 
         if (passwordEditSave.val() === "Edit") {
-            passwordInput.prop("readonly", false);
-            confirmPasswordInput.prop("readonly", false);
-
-            passwordEditSave.val("Save");
-            setTimeout(function () {
-                passwordEditSave.prop("type", "submit")
-            }, 1)
-
-        } else if ($("#passwordEditSave").val() === "Save") {
-            //TODO validate input
-
-        }
-    });
-
-    $("#passwordEditSave").on('click', function (e) {
-
-        let passwordEditSave = $(this);
-        let passwordInput = $("#passwordInput");
-        let confirmPasswordInput = $("#confirmPasswordInput");
-
-
-        if (passwordEditSave.val() === "Edit") {
+            oldPassword.prop("readonly", false);
             passwordInput.prop("readonly", false);
             confirmPasswordInput.prop("readonly", false);
 
@@ -95,7 +75,7 @@ $(document).ready(function (e) {
         if (billingEditSave.val() === "Edit") {
             billingAddressInput.prop("readonly", false);
             billingCityInput.prop("readonly", false);
-            billingProvinceInput.prop("readonly", false);
+            billingProvinceInput.prop("disabled", false);
             billingCountryInput.prop("readonly", false);
             billingPostalCodeInput.prop("readonly", false);
             cardNumberInput.prop("readonly", false);

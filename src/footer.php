@@ -5,7 +5,7 @@
         </div>
 
         <nav class=footNav>
-            <p><a href="homeWithoutTables.php">Home</a> | <a href="categorypage.php">Browse</a> | <a href="#searchform">Search </a> | <a href="login.php">Login </a>| <a href="cart.php">Cart </a>| <a href="about_us.php"> About Us</a></p>
+            <p><a href="homeWithoutTables.php">Home</a> | <a href="searchpage.php">Browse</a> | <a href="login.php">Login </a>| <a href="viewCart.php">Cart </a>| <a href="about_us.php"> About Us</a></p>
         </nav>
 
         <!-- Copyright -->
@@ -23,5 +23,4 @@
 
         </div>
     </footer>
-</body>
-</html>
+

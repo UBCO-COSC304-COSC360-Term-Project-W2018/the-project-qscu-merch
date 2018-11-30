@@ -5,6 +5,7 @@
  * Date: 2018-11-12
  * Time: 1:37 PM
  */
+$headerSet = 1;
 include "header.php";
 
 ?>
@@ -17,11 +18,10 @@ include "header.php";
 <head lang="en">
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
-    <link rel="stylesheet" href="css/footer.css" />
-    <link rel="stylesheet" href="css/header.css" />
     <link rel="stylesheet" href="css/contact.css" />
-    <link rel="icon" type="image/x-icon" href="../src/images/QSCU_favicon.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<?php include 'includes/headerFooterHead.php'?>
+
+
 </head>
 
 <!--    Body-->
@@ -30,11 +30,17 @@ include "header.php";
 <!-- Inseart Header Here-->
 
 
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a >Contact Us</a>
+</ul>
+
+
 <div class="bigboi">
     <div class ="container">
         <div class ="contactInfo flex-item">
             <h1>Get in Touch</h1>
-            <p> Please fill otu the quick from and will be in touch with lightening speed! </p>
+            <p> Please fill out the quick from and will be in touch with lightning speed! </p>
             <h2>Connect with us</h2>
             <p> For support or any questions, emails us at <a href="mailto:qscu.ubco@gmail.com?Subject=QSCU%20Shop" target="_top">qscu.ubco@gmail.com</a></p>
 
@@ -87,6 +93,7 @@ include "header.php";
 </div>
 
 <!-- Insert Footer Here-->
+<?php include "footer.php" ?>
 </body>
 
 </html>

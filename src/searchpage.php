@@ -1,9 +1,19 @@
-<?php 
-include "init.php";
-$headerSet = 0;
-include "header.php";
-?>
+<?php
+include "includes/init.php";
+try {
+  //    TODO this needs to be changed the query part doesnt have a trycatch
 
+  $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+
+  if($con -> connect_errno){
+  	die("Connection Failed: ".$con -> connect_errno);
+  }
+} catch (Exception $e) {
+	die("Session Terminated.");
+}
+$headerSet = 0;
+?>
+<!DOCTYPE HTML>
 <html>
 <!--    Head-->
 
@@ -11,16 +21,21 @@ include "header.php";
     <meta charset="utf-8">
     <title>QSCU Merch Store</title>
     <link rel="stylesheet" href="css/searchpage.css"/>
-    <link rel="stylesheet" href="css/header.css"/>
-    <link rel="stylesheet" href="css/footer.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png"/>
+    <?php include 'includes/headerFooterHead.php';?>
+    <script type="text/javascript" src="script/search_controller.js"></script>
 </head>
 
 
 <!--    Body-->
 
 <body>
+
+<?php include "header.php"?>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a>Search</a>
+</ul>
 
     <!-- Main Body -->
 <main>
@@ -29,13 +44,19 @@ include "header.php";
 				<form id="refineform">
 					<fieldset id="refinefieldset">
 						<legend>Refine Results</legend>
-						
+
+            <div id="itemsperpage">
+              <p class="refinelabel"><label>Items per Page:</label></p>
+							<input type="number" id="iperpage" value="6" min="2" max="25" step="1">
+							<output name="price" for="max"></output><br>
+            </div>
+
 						<div id="pricerange">
 							<p class="refinelabel"><label>Price Range:</label></p>
 							<input type="range" id="max" name="pricemax" value="1000">
 							<output name="price" for="max"></output><br>
 						</div>
-				
+
 						<div id="colourselect">
 							<p class="refinelabel"><label id="colour">Colour:</label></p>
 							<input type="checkbox" name="colour1" value="Blue"> Blue<br>
@@ -57,131 +78,32 @@ include "header.php";
 							<input type="checkbox" name="unrated" value="0"> Unrated<br>
 						</div>
 					</fieldset>
-				</form>	
+				</form>
 		</div>
-	
-	<div id="categoryviews">
-		<div id="sortby">
-		<form id="sortform">
-			<label id="sortlabel">Sort By:</label>
-			<select name="sort" id="sort">
-				<option value="liamspicks">Liam's Picks</option>
-				<option value="rating">Rating</option>
-				<option value="lowtohigh">Price: Low to High</option>
-				<option value="hightolow">Price: High to Low</option>
-			</select>
-		</form>
-		</div>
-			<div class="item">
-				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
-				</div>
-				<div class="iteminfo">
-					<p class="pname"><a href="#">Ping Pong Balls</a></p>
-					<p class="itemprice">$200</p>
-					<p class="numberofliams">
-                    	<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-                    	<span class="fa fa-star"></span>
-                	</p>
-                	<p class="addtocart">
-	                	<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-	                </p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
-				</div>
-				<div class="iteminfo">
-					<p class="pname"><a href="#">Ping Pong Balls</a></p>
-					<p class="itemprice">$200</p>
-					<p class="numberofliams">
-                    	<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-                    	<span class="fa fa-star"></span>
-                	</p>
-                	<p class="addtocart">
-	                	<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-	                </p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
-				</div>
-				<div class="iteminfo">
-					<p class="pname"><a href="#">Ping Pong Balls</a></p>
-					<p class="itemprice">$200</p>
-					<p class="numberofliams">
-                    	<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-                    	<span class="fa fa-star"></span>
-                	</p>
-                	<p class="addtocart">
-	                	<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-	                </p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
-				</div>
-				<div class="iteminfo">
-					<p class="pname"><a href="#">Ping Pong Balls</a></p>
-					<p class="itemprice">$200</p>
-					<p class="numberofliams">
-                    	<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-                    	<span class="fa fa-star"></span>
-                	</p>
-                	<p class="addtocart">
-	                	<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-	                </p>
-				</div>
-			</div>
-			<div class="item">
-				<div class="itempicture">
-					<a href="singleProduct.html"><img src="images/pingpong.jpg" alt="Product Picture"/></a>
-				</div>
-				<div class="iteminfo">
-					<p class="pname"><a href="#">Ping Pong Balls</a></p>
-					<p class="itemprice">$200</p>
-					<p class="numberofliams">
-                    	<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-                    	<span class="fa fa-star"></span>
-                	</p>
-                	<p class="addtocart">
-	                	<button>Add to Cart <i class="fa fa-shopping-cart"></i></button>
-	                </p>
-				</div>
-			</div>
+
+  	<div id="categoryviews">
+  		<div id="sortby">
+  			<p id='searchResultsTitle'>Search Results<?php if(isset($_GET['Search'])) echo " for: &quot;".$_GET['Search']."&quot;";?></p> <!--could include what we searched for in this line. Simple Query, extra -->
+    		<form id="sortform">
+    			<label id="sortlabel">Sort By:</label>
+    			<select name="sort" id="sort">
+    				<option value="liamspicks">Liam's Picks</option>
+    				<option value="rating">Rating</option>
+    				<option value="lowtohigh">Price: Low to High</option>
+    				<option value="hightolow">Price: High to Low</option>
+    			</select>
+    		</form>
+  		</div>
+
+      <div id="resultHolder">
+        <input type="hidden" id="searchTransferForLoad" value="<?php if(isset($_GET['Search'])) echo $_GET['Search'];?>">
+      </div>
+
 		</div>
 	</div>
-		<div id="pagenumber">
-			<p id="number">
-				<a href="#">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-				<a href="#">4</a>
-				<a href="#">5</a>
-			</p>
-		</div>
+	<div id="pagenumber">
+		<p id="number">
+		</p>
+	</div>
 </main>
-</body>
-</html>
-
-<?php
-include "footer.php";
-?>
+<?php include "footer.php"; ?>

@@ -1,9 +1,8 @@
 <?php
-//session has to be first in the file
-include "includes/session.php";
+include "includes/init.php";
 
-if(isset($_SESSION["userId"])){
-    header("location: profile.php");
+if (isset($_SESSION['user'])) {
+    header('location: profile.php');
 }
 
 $errorType;
@@ -13,27 +12,29 @@ if(isset($_SESSION['hasError'])){
     $errorType = $_SESSION['errorType'];
     $error = $_SESSION['error'];
 }
-$headerSet = 0;
 
-include "header.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login/Sign-up</title>
+    <?php include 'includes/headerFooterHead.php';?>
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="script/client-side-validation.js"></script>
-    <link rel="icon" type="image/x-icon" href="images/QSCU_favicon.png" />
 
 </head>
 <body>
+<?php include "header.php"; ?>
+
+<ul class="breadcrumb">
+    <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
+    <a>Login</a>
+</ul>
 <main>
 <div id="forms">
-    <form id="loginForm" method="post" action="action/login.php">
+    <form id="loginForm" method="post" action="action/getLogin.php">
         <fieldset>
             <legend id="loginTitle">Login</legend>
             <div id="loginFormInputElements">
@@ -52,51 +53,16 @@ include "header.php";
             </div>
 
             <div class="loginFormElement">
-                <a href="#">Forgot Password?</a>
-            </div>
-        </fieldset>
-    </form>
-
-    <form id="signUpForm" method="post" action="action/createUser.php">
-        <fieldset>
-            <legend id="signUpTitle">Sign-Up</legend>
-            <div id="signUpInputElements">
-                <div class="SUformElement">
-                    <label id="SUfnameLabel" class="signUpLabel" for="fnameInput">First name: </label>
-                    <input type="text" name="firstName" id="fnameInput" required>
-                </div>
-
-                <div class="SUformElement">
-                    <label id="SUlnameLabel" class="signUpLabel" for="lnameInput">Last name: </label>
-                    <input type="text" name="lastName" id="lnameInput" required>
-                </div>
-
-                <div class="SUformElement">
-                    <label id="SUemailLabel" class="signUpLabel" for="signUpEmailInput">Email: </label>
-                    <input type="email" name="email" id="signUpEmailInput" required>
-                </div>
-
-                <div class="SUformElement">
-                    <label id="SUpasswordLabel" class="signUpLabel" for="signUpPasswordInput">Password: </label>
-                    <input type="password" name="password" id="signUpPasswordInput" required>
-                </div>
-
-                <div class="SUformElement">
-                    <label id="SUconfirmPasswordLabel" class="signUpLabel" for="signUpPasswordConfirmationInput">Confirm Password: </label>
-                    <input type="password" name="confirmPassword" id="signUpPasswordConfirmationInput" required>
-                </div>
-            </div>
-
-            <div class="SUformElement">
-                <button type="submit">Sign-up</button>
+                <a href="forgotPass.php">Forgot Password?</a>
             </div>
         </fieldset>
     </form>
 </div>
+    <div id="createAccountLink">
+        <p><a href="signup.php">Don't have an account?</a></p>
+    </div>
 </main>
+<?php include "footer.php"; ?>
 </body>
 </html>
 
-<?php 
-include "footer.php";
-?>

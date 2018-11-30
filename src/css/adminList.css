@@ -1,17 +1,86 @@
 main{
     margin: 1em;
 }
+
+.adminListHeaders{
+	border-bottom: 2px solid #183263;
+}
+
 #container{
+	margin: 2em 4em 2em 4em;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-content: stretch;
+
 }
-#container table{
-    min-width: 50%;
+#productContent table tr{
+flex-grow: 2;
 }
-#container table tr{
-    border: 1px solid black;
+#productContent table td{
+
 }
-#container table th{
-    text-align: left;
+#productContent table .colspan2{
+    width: 1%;
+}
+.hidden{
+    display: none;
+}
+.productHead{
+    display: inline-block;
+}
+#addProduct {
+	margin: 2.5em 2em 2.5em 2em;
+    float: right;
+}
+
+.productImage{
+	width: 100%;
+	padding: 1em;
+	text-align:center;
+	border-left: 4px solid #183263;
+}
+
+/* buttons */
+
+button, submit{
+	background-color: #18bfef;
+	border-radius: 1em;
+	border-color: black;
+}
+
+
+.productItem{
+	border-collapse: collapse;
+	margin-bottom: 1em;
+}
+
+
+
+.productNameTitle, .productQuantityTitle, .productPriceTitle, .productSizeTitle{
+	padding: 0em 1em 0em 1em;
+	font-size: 1.5em;
+	border: 4px solid #183263;
+	text-align: center;
+}
+
+.productQuantity, .productPrice, .productSize {
+	width:10%;
+	}
+	
+.productName, .productQuantity, .productPrice, .productSize {
+	
+	text-align: center;
+	border-left: 4px solid #183263;
+	border-right: 4px solid #183263;
+}
+
+.editProduct{
+	text-align: right;
+	border: 4px solid #183263;
+	padding: 0.5em;
+}
+
+.editProduct input{
+	background-color: #18bfef;
+	border-radius: 1em;
 }

@@ -1,0 +1,54 @@
+main{
+display: inline-block;
+	
+}
+
+#warehousepagetitle{
+	padding: 0.5em 0em 0.5em 0.5em;
+	font-size: 1.5em;
+	margin: 0em;
+}
+.warehousetables{
+	border-collapse: collapse;
+	display: inline-block;
+	margin: 2em;
+	border: 4px solid #183263;
+}
+.warehousetables th, td{
+	text-align: center;
+	padding: 0.2em;
+	border: thin solid #183263;
+}
+
+.producttables {
+	border-collapse: collapse;
+	border: 2px solid #183263;
+}
+
+.producttables td, th{
+	border: thin solid #183263;
+}
+
+
+.warehousetables th{
+	background-color:#183263;
+	color: white;
+	font-size: 1.2em;
+	
+}
+
+.warehousetables td{
+	font-size: 1.1em;
+
+}
+
+.producttables th{
+	color: white;
+	background-color: #18bfef;
+	font-size: 0.9em;
+
+}
+
+.producttables td{
+	font-size: 0.9em;
+}

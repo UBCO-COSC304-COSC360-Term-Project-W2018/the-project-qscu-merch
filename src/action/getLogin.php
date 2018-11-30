@@ -1,7 +1,5 @@
 <?php
-include "../includes/session.php";
-include "../includes/inputValidation.php";
-include "../includes/db_credentials.php";
+include "../includes/init.php";
 
 function loginFailed($input = null)
 {
@@ -13,13 +11,12 @@ function loginFailed($input = null)
         $_SESSION['error'] = "Invalid username or password";
     }
     header("Location: ../login.php");
-    exit();
 }
 
 try {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ((isset($_POST["email"]) && isset($_POST["password"])) && ($_POST["email"] != "" && $_POST["password"] != "")) {
-            $email = strtolower(trim($_POST['email']));
+            $email = trim($_POST['email']);
             $password = trim($_POST["password"]);
 
 
@@ -37,29 +34,24 @@ try {
 
                     if ($stmt->fetch()) {
                         $hashword = hash_pbkdf2("sha256", $password, $salt, 2500);
-                        $query = "SELECT uid FROM User WHERE uEmail = ? AND password = ?";
-
+                        $query = "SELECT uid, fname, lname FROM User WHERE uEmail = ? AND password = ?";
                         $stmt->close();
+
                         $stmt = $mysqli->prepare($query);
                         $stmt->bind_param('ss', $email, $hashword);
                         $stmt->execute();
-                        $stmt->bind_result($uid);
+                        $stmt->bind_result($uid, $firstName, $lastName);
 
                         if ($stmt->fetch()) {
-                            $_SESSION['userId'] = $uid;
-                            $data['uid'] = $uid;
-                            $stmt->close();
+                            $_SESSION['user'] = new User($uid, $firstName, $lastName);
                             header("Location: ../homeWithoutTables.php");
                         } else {
                             //could not find a match of email and password in database
-                            $stmt->close();
-                            loginFailed();
+                            throw new Exception();
                         }
                     } else {
                         //could not find email in database
-                        $stmt->close();
-                        loginFailed();
-
+                        throw new Exception();
                     }
                 }
             } else {
@@ -68,6 +60,8 @@ try {
         }
     }
 } catch (Exception $e) {
-    header("Location: ../login.php");
+    loginFailed();
+}finally{
+    $mysqli->close();
     die();
 }
