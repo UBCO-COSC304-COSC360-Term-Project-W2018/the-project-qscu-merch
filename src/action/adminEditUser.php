@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
                 }
 
             }
-$temp = "";
+
             if (isset($input['pno']) && $input['pno'] != "" && $input['action'] === 'setPost' || $input['action'] === 'unsetPost') {
                 if (isset($input['cid']) && $input['cid'] != "") {
 
@@ -69,27 +69,26 @@ $temp = "";
                     $stmt->bind_param('iiii', $isEnabled, $input['cid'], $input['userid'], $input['pno']);
                     $stmt->execute();
                     if ($rst = $stmt->execute()) {
-                        $return = array("userid" => $input['userid'], 'cid'=>$input['cid'], 'pno'=> $input['pno'],'isEnabled'=>$isEnabled);
+                        $return = array("userid" => $input['userid'], 'cid' => $input['cid'], 'pno' => $input['pno'], 'isEnabled' => $isEnabled);
                     }
 
-                }else {
+                } else {
                     $isEnabled = ($input['action'] === 'setPost') ? 1 : 0;
                     $query = 'UPDATE Reviews SET isEnabled = ? WHERE uid = ? AND pNo = ?';
                     $stmt = $mysql->prepare($query);
                     $stmt->bind_param('iii', $isEnabled, $input['userid'], $input['pno']);
                     $stmt->execute();
                     if ($rst = $stmt->execute()) {
-                        $return = array("userid" => $input['userid'], 'pno'=> $input['pno'],'isEnabled'=>$isEnabled);
+                        $return = array("userid" => $input['userid'], 'pno' => $input['pno'], 'isEnabled' => $isEnabled);
                     }
 
                 }
 
 
-
             }
-            if($return == null){
+            if ($return == null) {
                 invalidRequest();
-            }else{
+            } else {
                 header('Content-Type: application/json');
                 echo json_encode($return);
             }

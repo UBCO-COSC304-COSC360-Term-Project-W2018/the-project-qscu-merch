@@ -5,24 +5,21 @@ include "../includes/init.php";
 
 if(isset($_SESSION['user'])){
 	$user = $_SESSION['user']->id;
-	}else{
-		include "../includes/userCart.php";
 	}
-
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-	$inputFields = array('newQuantity', 'pno', 'size', 'quantity', 'productBtn');
+	$inputFields = array('newQuantity', 'pNo', 'size', 'quantity', 'productBtn');
 	if(!(arrayExists($_POST, $inputFields) && arrayIsValidInput($_POST, $inputFields))){
 	    $_SESSION['hasError'] = true;
         $_SESSION['errorType'] = "Form";
         $_SESSION['errorMsg'] = "invalid form data";
-        header('location: ../homeWithoutTables.php');
+        header('location: ../viewCart.php');
     }else{
 	    try{
 		    
 		    $sql = null;
 		    $newQuantity = $_POST['newQuantity'];
-		    $pNo = $_POST['pno'];
+		    $pNo = $_POST['pNo'];
 	        $size = $_POST['size'];
 	        $quantity = $_POST['quantity'];
 	        $buttonPressed = $_POST['productBtn'];
@@ -47,16 +44,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 					header('location: ../viewCart.php');
 				}
 	        } else {
-	
+		        
 	            //user doesn't exist, update the object
-	            $uc = $_SESSION['userCart'];
+				
 	
 	            if($buttonPressed == 'Remove'){
 	                //delete the item from the cart
-	                $uc -> removeItem($pno, $size);
+	                $_SESSION['cart'] -> removeItem($pNo, $size);
+	                
 	            }else{
 	                //update the item's quantity in cart
-	                $uc -> updateItem($pno, $size, $newQuantity);
+	                $_SESSION['cart'] -> updateItem($pNo, $size, $newQuantity, $price);
 	            }
 	            header("location: ../viewCart.php");
 	        }
