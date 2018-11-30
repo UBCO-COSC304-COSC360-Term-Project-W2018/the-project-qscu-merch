@@ -165,4 +165,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 echo "<p>This is where I would redirect someone back to profile</p>";
-header('Location: ../profile.php');
+// header('Location: ../profile.php');
