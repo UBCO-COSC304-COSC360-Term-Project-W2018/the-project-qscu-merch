@@ -38,61 +38,68 @@ if($con -> connect_errno){
 <main>
 	<p id="warehousepagetitle">Warehouse Product Inventory List</p>
 <?php
+try {
 
-$sqlWH = "SELECT wNo, location FROM Warehouse";
+
+    $sqlWH = "SELECT wNo, location FROM Warehouse";
 
 
-$warehouses = array();
-$locs = array();
-if($WH = $con->prepare($sqlWH)){
-	$WH ->execute();
-	$WH->bind_result($wNo, $loc);
-	while($WH->fetch()){
-		array_push($warehouses, $wNo);
-		array_push($locs, $loc);
+    $warehouses = array();
+    $locs = array();
+    if ($WH = $con->prepare($sqlWH)) {
+        $WH->execute();
+        $WH->bind_result($wNo, $loc);
+        while ($WH->fetch()) {
+            array_push($warehouses, $wNo);
+            array_push($locs, $loc);
 
-		}
+        }
 
-		
-		$sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory NATURAL JOIN Product WHERE wNo = ?";
-		$len = count($warehouses);
-		
-		for($x = 0; $x < $len; $x++){
-			echo '<table class="warehousetables"><tr><th>Warehouse Number</th><th>Location</th></tr>';
-			echo "<tr><td>".$warehouses[$x] ."</td>";
-			echo "<td>".$locs[$x]."</td></tr>";
-			echo '<tr><td colspan="4"><table  class="producttables" >';
-			echo '<th>Product Id</th><th>Product Name</th> <th>Size</th> <th>Quantity</th></tr>';
-		if($prods = $con->prepare($sqlProds)){
-			$prods->bind_param('i', $warehouses[$x]);
-			$prods->execute();
 
-			$prods->bind_result($pNo, $size, $quantity, $pname);
+        $sqlProds = "SELECT pNo, size, quantity, pname FROM HasInventory NATURAL JOIN Product WHERE wNo = ?";
+        $len = count($warehouses);
 
-			while($prods->fetch()){
+        for ($x = 0; $x < $len; $x++) {
+            echo '<table class="warehousetables"><tr><th>Warehouse Number</th><th>Location</th></tr>';
+            echo "<tr><td>" . $warehouses[$x] . "</td>";
+            echo "<td>" . $locs[$x] . "</td></tr>";
+            echo '<tr><td colspan="4"><table  class="producttables" >';
+            echo '<th>Product Id</th><th>Product Name</th> <th>Size</th> <th>Quantity</th></tr>';
+            if ($prods = $con->prepare($sqlProds)) {
+                $prods->bind_param('i', $warehouses[$x]);
+                $prods->execute();
 
-				echo "<tr><td>".$pNo."</td>";
-				echo "<td>".$pname."</td>";
-				echo "<td>".$size."</td>";
-				echo "<td>".$quantity."</td></tr>";
-		}
-			
+                $prods->bind_result($pNo, $size, $quantity, $pname);
 
-		}else{
-			die();
-		}
-	
+                while ($prods->fetch()) {
 
-		echo "</table></td></tr>";
+                    echo "<tr><td>" . $pNo . "</td>";
+                    echo "<td>" . $pname . "</td>";
+                    echo "<td>" . $size . "</td>";
+                    echo "<td>" . $quantity . "</td></tr>";
+                }
 
-	}
-	}
-else{
-	die();
+
+            } else {
+                die();
+            }
+
+
+            echo "</table></td></tr>";
+
+        }
+    } else {
+        throw new Exception();
+    }
+
+    echo "</table>";
+    $con->close();
 }
-
-echo "</table>";
-$con->close();
+catch(Exception $e) {
+    $con->close();
+    header("Location: adminList.php");
+    exit();
+}
 ?>
 </main>
 
