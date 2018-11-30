@@ -5,7 +5,7 @@ include '../includes/inputValidation.php';
 include '../includes/regex.php';
 
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 
 //IF THIS PAGE ISN'T WORKING FOR YOU UNCOMMENT the echo around LINE 141
 
