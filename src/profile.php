@@ -468,6 +468,10 @@ $headerSet = 1;
 
         }
         catch ( Exception $exception ) {
+            header('Location: login.php');
+            $mysqli -> close();
+          //TODO: Should this be die()? or exit?? @brandon
+            die();
 //            header('Location: homeWithoutTables.php');
         }
         finally {

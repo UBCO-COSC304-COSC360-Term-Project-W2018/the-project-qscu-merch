@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 array_push($return['rev'], $item);
             }
 
+            $stmt->close();
 
             $query = 'SELECT Comment.uid, pNo, fname, lname, comment, date, profilePicture, contentType  FROM Comment JOIN User U ON Comment.leftBy = U.uid WHERE Comment.pNo = ? AND date > ? AND isEnabled = 1 ORDER BY date desc';
             $stmt = $mysql->prepare($query);
@@ -58,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 array_push($return, $item);
             }
 
+            $stmt->close();
 
             $query = 'SELECT Comment.uid, pNo, fname, lname, comment, date, profilePicture, contentType  FROM Comment JOIN User U ON Comment.leftBy = U.uid WHERE Comment.uid = ? AND Comment.pNo = ? AND isEnabled = 1 ORDER BY date desc';
             $stmt = $mysql->prepare($query);
@@ -76,6 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             }
         }
+
+        $mysql->close();
         header('Content-Type: application/json');
         $json = json_encode($return);
 
