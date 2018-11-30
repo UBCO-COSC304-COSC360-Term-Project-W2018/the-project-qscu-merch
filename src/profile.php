@@ -341,16 +341,10 @@ $headerSet = 1;
 
                     echo "<div class=\"review\">
                         <p class=\"userProfile\">
-<<<<<<< HEAD
-                            <img src=\"<?php  echo 'data:'.$content_type.';base64,'.base64_encode($profile_image) ?>\" alt=\"User's profile picture\" align=\"middle\">
-                            <span>" . $firstName . " " . $lastName . "</span>
-                            <span class='time'>" . $formatted_date . "</span>
-=======
 
                             <img src=\"data:".$contentType. ';base64,' . base64_encode($profileImage)."\" alt=\"User's profile picture\" align=\"middle\">
                             <span>".$firstName." ".$lastName."</span>
                             <span class='time'>".$formatted_date."</span>
->>>>>>> 7d88056f78fbb7c5e6314763b0da524155aba16e
                         </p>
                         <p class=\"productName\">" . $pname . "</p>";
 
@@ -373,12 +367,7 @@ $headerSet = 1;
 
                         $comment_on_review_result = $comment_on_review->get_result();
 
-<<<<<<< HEAD
                         while ($comment_on_review_row = $comment_on_review_result->fetch_assoc()) {
-=======
-                        while ( $comment_on_review_row = $comment_on_review_result -> fetch_assoc() ) {
-                            echo "entered while loop for comment";
->>>>>>> 7d88056f78fbb7c5e6314763b0da524155aba16e
                             $left_by = $comment_on_review_row['leftBy'];
                             $comment_date = $comment_on_review_row['date'];
                             $comment_text = $comment_on_review_row['comment'];
@@ -423,15 +412,10 @@ $headerSet = 1;
                                 }
                                 echo "<div class=\"comment\">
                                         <p class=\"userProfile\">
-<<<<<<< HEAD
-                                            <img src=\" <?php  echo 'data:'.$commenter_content_type.';base64,'.base64_encode($commenter_profile_image)?>\" alt=\"User's profile picture\" align=\"middle\">
-                                            <span>" . $commenter_fname . " " . $commenter_lname . "</span>
-                                            <span class='time'>" . $comment_formatted_date . "</span>
-=======
+                                        
                                             <img src=\"data:".$commenter_content_type.';base64,'.base64_encode($commenter_profile_image)."\" alt=\"User's profile picture\" align=\"middle\">
                                             <span>".$commenter_fname." ".$commenter_lname."</span>
                                             <span class='time'>".$comment_formatted_date."</span>
->>>>>>> 7d88056f78fbb7c5e6314763b0da524155aba16e
                                         </p>
                                         <p class=\"reviewDescription\">" . $comment_text . "</p>
                                   </div>";
@@ -470,155 +454,25 @@ $headerSet = 1;
 
                     echo "<div class=\"comment\">
                                         <p class=\"userProfile\">
-<<<<<<< HEAD
-                                            <img src=\" <?php  echo 'data:'.$content_type.';base64,'.base64_encode($profile_image)?>\" alt=\"User's profile picture\" align=\"middle\">
-                                            <span>" . $firstName . " " . $lastName . "</span>
-                                            <span class='time'>" . $comment_formatted_date . "</span>
-=======
                             <img src=\"data:".$contentType. ';base64,' . base64_encode($profileImage)."\" alt=\"User's profile picture\" align=\"middle\">
                                             <span>".$firstName." ".$lastName."</span>
                                             <span class='time'>".$comment_formatted_date."</span>
->>>>>>> 7d88056f78fbb7c5e6314763b0da524155aba16e
                                         </p>
                                         <p class=\"reviewDescription\">" . $text . "</p>
                                   </div>";
                 }
             }
 
-        } catch (Exception $exception) {
-            header('Location: login.php');
-        } finally {
-            $mysqli->close();
+        }
+        catch ( Exception $exception ) {
+          //TODO: Uncomment this
+//            header('Location: homeWithoutTables.php');
+        }
+        finally {
+            $mysqli -> close();
         }
 
         ?>
-
-<<<<<<< HEAD
-
-        <!--TODO put this in a include file-->
-
-
-        <!--            <div class="comment">-->
-        <!--                <p class="userProfile">-->
-        <!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> James-->
-        <!--                    <time datetime="2018-11-9">- November 9, 2018</time>-->
-        <!--                </p>-->
-        <!--                <p class="reviewTitle">-->
-        <!--                    You just don't get it-->
-        <!--                </p>-->
-        <!--                <p class="reviewDescription">Those are some dank zebra eye ping pongs!</p>-->
-        <!--            </div>-->
-        <!--            <div class="comment">-->
-        <!--                <p class="userProfile">-->
-        <!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Parsa R-->
-        <!--                    <time datetime="2018-10-24">- October 24, 2018</time>-->
-        <!--                </p>-->
-        <!--                <p class="reviewTitle">-->
-        <!--                    Great product!-->
-        <!--                </p>-->
-        <!--                <p class="reviewDescription">Those are some dank ping pongs!</p>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--    </div>-->
-        <!---->
-        <!--    <div class="reviewBlock">-->
-        <!--        <p class="userProfile">-->
-        <!--            <img src="../src/images/profile.png" alt="User's profile picture" align="middle">User-->
-        <!--            Name-->
-        <!--            <time datetime="2018-10-24">- Month Day, Year</time>-->
-        <!--        </p>-->
-        <!--        <p class="userRating">-->
-        <!--            <span class="fa fa-star checked"></span>-->
-        <!--            <span class="fa fa-star checked"></span>-->
-        <!--            <span class="fa fa-star checked"></span>-->
-        <!--            <span class="fa fa-star "></span>-->
-        <!--            <span class="fa fa-star"></span>-->
-        <!--        </p>-->
-        <!---->
-        <!--        <p class="reviewTitle">-->
-        <!--            Review Title Here-->
-        <!--        </p>-->
-        <!--        <p class="reviewDescription">Review Description Here</p>-->
-        <!--    </div>-->
-        <!--        <h3>Your Reviews & Comments</h3>-->
-        <!--        -->
-        <!--            <!--TODO put this in a include file-->
-        <!--            <div class="reviewBlock">-->
-        <!--                <div class="review">-->
-        <!--                    <p class="userProfile">-->
-        <!--                        <img src="../src/images/profile.png" alt="User's profile picture" align="middle"><a href="#">Parsa-->
-        <!--                            R</a>-->
-        <!--                        <time datetime="2018-10-24">- October 24, 2018</time>-->
-        <!--                    </p>-->
-        <!--                    <p class="userRating">-->
-        <!--                        <span class="fa fa-star checked"></span>-->
-        <!--                        <span class="fa fa-star checked"></span>-->
-        <!--                        <span class="fa fa-star checked"></span>-->
-        <!--                        <span class="fa fa-star "></span>-->
-        <!--                        <span class="fa fa-star"></span>-->
-        <!--                    </p>-->
-        <!---->
-        <!--                    <p class="reviewTitle">-->
-        <!--                        Great product!-->
-        <!--                    </p>-->
-        <!--                    <p class="reviewDescription">Those are some dank ping pongs!</p>-->
-        <!--                </div>-->
-        <!--                <div class="comments">-->
-        <!--                    <div class="comment">-->
-        <!--                        <p class="userProfile">-->
-        <!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Not Parsa R-->
-        <!--                            <time datetime="2018-10-30">- October 30, 2018</time>-->
-        <!--                        </p>-->
-        <!--                        <p class="reviewTitle">-->
-        <!--                            Balls-->
-        <!--                        </p>-->
-        <!--                        <p class="reviewDescription">Its a bunch of balls</p>-->
-        <!--                    </div>-->
-        <!--                    <div class="comment">-->
-        <!--                        <p class="userProfile">-->
-        <!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> James-->
-        <!--                            <time datetime="2018-11-9">- November 9, 2018</time>-->
-        <!--                        </p>-->
-        <!--                        <p class="reviewTitle">-->
-        <!--                            You just don't get it-->
-        <!--                        </p>-->
-        <!--                        <p class="reviewDescription">Those are some dank zebra eye ping pongs!</p>-->
-        <!--                    </div>-->
-        <!--                    <div class="comment">-->
-        <!--                        <p class="userProfile">-->
-        <!--                            <img src="../src/images/profile.png" alt="User's profile picture" align="middle"> Parsa R-->
-        <!--                            <time datetime="2018-10-24">- October 24, 2018</time>-->
-        <!--                        </p>-->
-        <!--                        <p class="reviewTitle">-->
-        <!--                            Great product!-->
-        <!--                        </p>-->
-        <!--                        <p class="reviewDescription">Those are some dank ping pongs!</p>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!---->
-        <!--            <div class="reviewBlock">-->
-        <!--                <p class="userProfile">-->
-        <!--                    <img src="../src/images/profile.png" alt="User's profile picture" align="middle">User-->
-        <!--                    Name-->
-        <!--                    <time datetime="2018-10-24">- Month Day, Year</time>-->
-        <!--                </p>-->
-        <!--                <p class="userRating">-->
-        <!--                    <span class="fa fa-star checked"></span>-->
-        <!--                    <span class="fa fa-star checked"></span>-->
-        <!--                    <span class="fa fa-star checked"></span>-->
-        <!--                    <span class="fa fa-star "></span>-->
-        <!--                    <span class="fa fa-star"></span>-->
-        <!--                </p>-->
-        <!---->
-        <!--                <p class="reviewTitle">-->
-        <!--                    Review Title Here-->
-        <!--                </p>-->
-        <!--                <p class="reviewDescription">Review Description Here</p>-->
-        <!--            </div>-->
-
-=======
->>>>>>> 7d88056f78fbb7c5e6314763b0da524155aba16e
     </div>
 </main>
 <?php include "footer.php"; ?>

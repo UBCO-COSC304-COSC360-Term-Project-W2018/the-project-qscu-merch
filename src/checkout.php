@@ -106,7 +106,6 @@ try {
 <ul class="breadcrumb">
     <a href="homeWithoutTables.php">Home</a> &gt; &gt;
     <a href="viewCart.php">Cart</a> &gt; &gt;
-    <a href="orderSummary.php">Order Summary</a> &gt; &gt;
     <a>Checkout</a>
 </ul>
 <main>
