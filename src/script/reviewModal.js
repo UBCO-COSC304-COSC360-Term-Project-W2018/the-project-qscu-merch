@@ -168,7 +168,10 @@ $(document).ready(function () {
     let reviewModal = $('#reviewModal');
 
 
+
     window.onclick = function (event) {
+
+
 
         if (event.target == reviewModal[0]) {
             reviewModal.hide();
@@ -225,6 +228,7 @@ function getNewPosts(pno) {
                 $('#' + value.uid + '' + value.pno + 'ReviewComments').prepend(buildComment(value));
             })
 
+      
             date = data.date;
 
 

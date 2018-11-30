@@ -139,8 +139,10 @@ try {
 
                         <!-- added drop down menu -->
 
+
                         <!-- TODO: MAKE THIS TABLE DYNAMIC BASED ON PRODUCT -->
                         <select name="size" class="size" required>
+
                             <option selected value="">Select a size</option>
                             <?php
                             foreach ($size AS $key2 => $value2) {

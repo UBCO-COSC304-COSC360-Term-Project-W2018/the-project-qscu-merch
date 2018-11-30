@@ -16,7 +16,7 @@ $cartRows = array();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <link rel="stylesheet" href="css/cart.css">
         <?php include 'includes/headerFooterHead.php'; ?>
@@ -81,9 +81,7 @@ $cartRows = array();
         //user not logged in
         //cart is an object (in a cookie or something idk), must iterate through (look at Ramon's code Lab 7)
 
-        $uc = $_SESSION['cart'];
-
-        $cart = $uc -> getCart();
+        $cart = $_SESSION['cart'] -> getCart();
 
         //somehow iterate through the cart... idk how yet though so thats good
 
@@ -92,7 +90,7 @@ $cartRows = array();
             //add to the array
             
             
-			$prod["pNo"] = $cart[$itemID]['pno'];
+			$prod["pNo"] = $cart[$itemID]['pNo'];
 			$prod["pname"] =  $cart[$itemID]['pname'];
 			$prod["size"] =  $cart[$itemID]['size'];
 			$prod["quantity"] =  $cart[$itemID]['qty'];
