@@ -103,7 +103,7 @@ try {
                             if ($ratingAvg && $ratingAvg != NULL) {
                                 for ($i = 0; $i < 5; $i++) {
                                     echo "<span class=\"fa fa-star";
-                                    if ($i <= $ratingAvg) echo "checked";
+                                    if ($i <= $ratingAvg) echo " checked";
                                     echo "\"></span>";
                                 }
                             } else {
@@ -138,7 +138,7 @@ try {
                             <?php
                             foreach ($size AS $key2 => $value2) {
                                 if ($size[$key2] === 'single') {
-                                    echo '<option value="single">Size Unavailable</option>';
+                                    echo '<option value="single">No size</option>';
                                 } else {
                                     echo '<option value="' . $size[$key2] . '">' . $size[$key2] . '</option>';
                                 }
