@@ -23,18 +23,19 @@
 	clear:left;
 }
 
-#browselist li{
+.browseitem{
 	font-size: 1.2em;
 	margin: 1em;
 	padding: 0.5em;
 
 }
 
-#browselist li a{
+.browselink{
+	color:white;
 	text-decoration: none;
 }
 
-#browselist li a:hover{
+.browselink:hover{
 	color: tomato;
 }
 
@@ -49,21 +50,8 @@
 	flex-direction: column;
 
 }
-.browselist{
-	font-size: 1.2em;
-	margin: 1em;
-	padding: 0.5em;
 
-}
 
-.browselink{
-	text-decoration: none;
-	color: white;
-}
-
-.browselink:hover{
-	color: tomato;
-}
 .item{
 	margin: 1em;
 	display: flex;

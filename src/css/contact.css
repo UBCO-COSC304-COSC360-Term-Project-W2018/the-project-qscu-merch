@@ -1,0 +1,128 @@
+.bigboi {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1080px;
+    background-color: white;
+    /*    color: #18bfef;*/
+}
+
+html {
+/*        min-width: 413px;*/
+    min-width: 956px;
+    background-color: aliceblue;
+}
+
+.container{
+    padding: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.container .contactInfo{
+  order: -1;
+  width: 500px;
+  padding: 1em;
+}
+
+.container form{
+  order: -1;
+  width: 400px;
+}
+
+fieldset {
+    text-align: center;
+}
+
+#contactForm {
+    /* margin-left: 30em; */
+    /* margin-top: 4em; */
+    color:white;
+    background-color: #183263;
+    padding:1em;
+    margin-right:0.5em;
+    margin-bottom: 4em;
+
+}
+
+#contactTitle {
+    text-align: center;
+    font-size: 3em;
+    color: #18bfef;
+}
+
+.contactFormElement {
+    padding-top:1em;
+    padding-bottom: 1em;
+}
+
+.formElement{
+  padding-top:0.7em;
+  padding-bottom:0.7em;
+  /* width: 400px; */
+  /* text-align: center; */
+}
+
+#firstNameInput, #lastNameInput, #emailInput, #messageInput{
+  width: 150px;
+}
+
+#messageInput{
+  max-width: 150px;
+  min-width: 150px;
+
+}
+
+.messageInput{
+  height: 20px;
+}
+
+.address p{
+    margin: 0;
+}
+
+p.qscu{
+  font-weight: bold;
+}
+h2{
+  margin: 0;
+}
+a{
+    color: #18bfef;
+}
+a:hover{
+  color: tomato;
+}
+@media screen and (max-width: 790px) {
+    .container {
+        flex-direction: column;
+    }
+}
+/* .container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.container img{
+    order: -1;
+    width: 450px;
+    height: 320px;
+    padding: 2em;
+
+
+}
+
+.container p{
+    margin: 0;
+}
+.inner{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-right: 2em;
+}
+
+.inner .QSCUbio{
+order: -1;
+}
+ */

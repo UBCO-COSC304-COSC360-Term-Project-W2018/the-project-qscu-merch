@@ -1,98 +1,182 @@
-html, body{
-	margin: 0;
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+* {
+    font-family: 'Montserrat', Helvetica, sans-serif;
 }
+
+html, body {
+    margin: 0;
+    
+}
+
 #headerIcon{
-	width:120px;
-	height: 80px;
+	width:180px;
+	height: 120px;
 }
 
 header{
-	padding-bottom: 1em;
-	color: white;
-	background-color: #183263;
+	min-width: 660px;
+    z-index: 999;
+    padding-bottom: 1em;
+    color: white;
+    background-color: #183263;
 }
 
-#htop{
-	white-space: nowrap;
-	display: flex;
-	align-items: stretch;
-	flex-direction: row;
-	margin-bottom: 2em;
-	overflow-y: auto;
-	overflow-x: hidden;
+/*the css to modify the sticky bar*/
+header.sticky.top {
+    position: sticky;
+    top: 0;
 }
+
+#htop {
+    white-space: nowrap;
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    /*margin-bottom: 2em;*/
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 
 #logo {
-	width: 80px;
+	width: 140px;
 	flex-grow: 0;
+
 }
 
-#title{
-	flex-grow: 10;
-	margin-left: 80px;
+#title {
+    flex-grow: 10;
+    margin-left: 80px;
 }
 
-#hbot{	
-	white-space: nowrap;
-	display: flex;
-	align-items: stretch;
-	flex-direction: row;
+#hbot {
+    white-space: nowrap;
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    padding-top: 2em;
 }
 
-.hbotline{
-	font-size: 1.2em;
+.hbotline {
+    font-size: 1.2em;
 }
 
-#home{
-	margin-left:1em;
-	margin-right: 1em;
+#variablebutton {
+    margin-left: 1em;
+    margin-right: 1em;
 }
 
-#home, #profile{
+#variablebutton, #profile{
 	color: white;
 	text-decoration: none;
-	width: 100px;
 	flex-grow: 2;
 }
 
-#profile a:link, #profile a:visited, #home a:visited, #home a:link{
-	color: white;
-	text-decoration: none;
+#profile a:link, #profile a:visited, #homebutton:visited, #homebutton:link {
+    color: white;
+    text-decoration: none;
 }
 
-#searchbar{
-	margin-right: 100px;
-	width:100px;
-	flex-grow: 6;
+#searchbar {
+    margin-right: 100px;
+    width: 100px;
+    flex-grow: 6;
 }
 
-#searchicon{
-	position: relative;
-	left: -30px;
-	top: 2px;
-	color: #183263;
+#searchicon {
+    position: relative;
+    left: -30px;
+    top: 2px;
+    color: #183263;
 }
-#searchicon:hover{
-	color: #18bfef;
+
+#searchicon:hover {
+    color: #18bfef;
 }
 
 #textinput{
-	width: 80%;
+	width: 100%;
 	flex-grow: inherit;
 	height: 2em;
 }
 
-#profile{
-	float: left;
-	text-align: end;
-	margin-right: 1em;
-		display:flex;
-	align-items: center;
-	justify-content: center;
+#profile {
+    float: left;
+    text-align: end;
+    margin-right: 2em;
+    display: flex;
+    justify-content: flex-end;
 }
 
 
-#shoppingcart{
-	width: 40px;
-	height: 40px;
+#shoppingcart {
+    width: 36px;
+    height: 36px;
+    position: relative;
+    top: -6px;
+}
+
+#browsedropbutton {
+    display: inline;
+}
+
+#browsedropnav{
+	display: none;
+	margin: -3em 0em 0em 0.2em;
+	background-color: #183263;
+	color: white;
+	z-index: 10;
+	border: thin solid white;
+	border-radius: 1em;
+	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+#browsedroptitle {
+    color: #18bfef;
+    float: left;
+    font-size: 2em;
+    margin: 0.5em 1em 1em 0.5em;
+}
+
+#browsedroplist {
+    padding-bottom: 0.5em;
+    list-style: none;
+    padding-left: 2em;
+    clear: left;
+}
+
+.browsedropitem {
+    font-size: 1em;
+    margin: 1em;
+    padding: 0.5em;
+
+}
+
+.browsedroplink {
+    text-decoration: none;
+    color: white;
+}
+
+.browsedroplink:hover {
+    color: tomato;
+}
+
+#searchbar input {
+    min-width: 105px;
+}
+
+#logout{
+	margin-right:-1em;
+	margin-left: 0.5em;
+}
+
+#admin{
+	margin-left:0.5em;
+}
+.breadcrumb {
+	margin:0;
+	background-color:#183263;
+	color:#ffffff;
+	padding-bottom:0.5em;
 }

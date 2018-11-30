@@ -25,17 +25,17 @@ window.onload = function () {
 
         if ( !(validateName ( fnamefield )) ) {
             e.preventDefault();
-            alert("put in an actual first name");
+            alert("Put in an actual first name");
         }
 
         else if ( !(validateName ( lnamefield )) ) {
             e.preventDefault();
-            alert("put in an actual last name");
+            alert("Put in an actual last name");
         }
 
         else if ( passwordField.value != passwordConfirmField.value ) {
             e.preventDefault();
-            alert("passwords do not match");
+            alert("Passwords do not match");
         }
 
 

@@ -1,0 +1,138 @@
+
+#main{
+	display: flex;
+	flex-direction: row;
+	margin:2em 2em 0em 2em;
+}
+
+
+#refinecol{
+	display: flex;	
+	height: auto;
+	align-items: stretch;
+	padding: 1em;
+	margin: 2em 2em 2em 0em;
+	background-color: #183263;
+	color: white;
+}
+
+#refineform{
+	display: flex;	
+	align-items: stretch;
+	margin-bottom: 0em;
+}
+#refinefieldset{
+	color: white;
+}
+#searchResultsTitle{
+	white-space: nowrap;
+	float: left;
+	margin:0em;
+	color: white;
+}
+#sortby{
+	background-color: #183263;
+	padding: 0.2em;
+	margin: 1em;
+	white-space: nowrap;
+}
+
+#sortform{
+	float: right;
+	margin-bottom: 0em;
+	white-space: nowrap;
+}
+
+#sortlabel{
+	color: white;
+	white-space: nowrap;
+}
+#categoryviews{
+	white-space: nowrap;
+	margin: 1em;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+
+}
+
+.item{
+	margin: 1em;
+	display: flex;
+	flex-direction: row;
+	border: thin solid #183263;
+}
+
+.itempicture{
+	margin: 1em 1em 1em 1em;
+
+}
+
+.iteminfo{
+	width: 100%;
+	margin: 1em;
+
+
+}
+.pname{
+	float: left;
+	font-size: 1.2em;
+	margin: 1em 0em 2em 1em;
+	
+}
+.pname a{
+	text-decoration: none;
+	color:black;
+}
+
+.itemprice{
+	clear: left;
+	font-size: 1.2em;
+	margin: 1em;
+
+}
+
+.numberofliams{
+	float: right;
+	margin: 1em;
+	
+}
+
+.addtocart{
+	clear:right;
+	float: right;
+	margin: 1em;
+	
+}
+.addtocart button{
+	font-size: 1.1em;
+    background-color: #18bfef;
+    height: 2em;
+}
+
+.addtoCart button:hover {
+    background-color: tomato;
+    color: white;
+}
+
+#pagenumber{
+	text-align: center;
+
+	
+}
+#number{
+	background-color: #183263;
+}
+#pagenumber a{
+	color: white;
+}
+#pagenumber a:hover{
+	color: tomato;
+}
+#pagenumber a:visited{
+	color: #18bfef;
+}
+
+.checked{
+	color: orange;
+}

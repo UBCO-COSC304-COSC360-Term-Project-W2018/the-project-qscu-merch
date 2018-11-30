@@ -1,0 +1,82 @@
+
+#reviewsComments {
+    padding: 0.5em;
+    /*    margin: 2em;*/
+    margin-top: 0;
+    border-top: 1px solid #18bfef;
+    /*    background-color: #93daf0;*/
+    /*    border: 1px solid black;*/
+}
+
+#reviewsComments h3 {
+    margin-top: 0;
+}
+
+#reviewsComments h3 a {
+    border: 1px solid black;
+    background-color: #18bfef;
+    padding: 0.5em;
+    border-radius: 5em;
+    color: black;
+}
+
+#reviewsComments .byline {
+    font-style: italic;
+    margin-bottom: 0.5em;
+}
+
+#reviewsComments p {
+    margin-top: 0;
+}
+
+#reviewsComments .reviewDescription {
+    padding-bottom: 0.5em;
+    border-bottom: 1px dashed #18bfef;
+}
+
+#reviewsComments .userProfile {
+    margin: 0;
+}
+
+#reviewsComments .userProfile time {
+    /*    color: lightblue;*/
+    font-size: 0.85em;
+}
+
+#reviewsComments img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    /*align-self: middle;*/
+    border: 1px solid tomato;
+
+}
+
+#reviewsComments a {
+    text-decoration: none;
+    padding-left: 1em;
+
+}
+
+
+
+#reviewsComments .userRating {
+    padding-top: 0.5em;
+    margin: 0;
+    /*    padding-left: 1em;*/
+}
+
+#reviewsComments .reviewTitle {
+    padding-top: 0.5em;
+    font-weight: bold;
+}
+
+#reviewsComments a:visited {}
+
+.checked {
+    color: orange;
+}
+
+#reviewsComments .comment{
+    margin-left: 2em;
+}
