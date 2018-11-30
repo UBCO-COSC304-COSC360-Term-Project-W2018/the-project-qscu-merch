@@ -109,8 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     echo "<p>prepared select </p>";
                     $stmt->bind_param('i',$_SESSION['user']->id);
+                    echo "<p>binding parameters</p>";
                     $stmt->execute();
+                    echo "<p>executing parameters</p>";
                     $stmt->bind_result($stop);
+                    echo "<p>binded result</p>";
 
                     if($stmt->get_result()->num_rows > 0){
                         echo "<p>updating BillingInfo</p>";
@@ -155,10 +158,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } finally {
             $mysql->close();
             echo "<p>you hit the finally statement</p>";
+            echo "<p>This is where I would redirect someone back to profile</p>";
+//            header('Location: ../profile.php');
         }
 
 
     }
 }
-echo "<p>This is where I would redirect someone back to profile</p>";
-header('Location: ../profile.php');
+else {
+//    header('Location: ../error404.php');
+    echo "<p>This is where I would redirect someone to an error page</p>";
+}
+
