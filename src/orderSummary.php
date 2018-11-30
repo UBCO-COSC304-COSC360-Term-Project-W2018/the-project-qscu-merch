@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } //a POST method wasn't used
 else {
 //    die();
-    echo "<p>went to final else</p>";
+    header("Location: homeWithoutTables.php");
 }
 
 
@@ -113,6 +113,7 @@ else {
 <ul class="breadcrumb">
     <a href="homeWithoutTables.php">Home</a> &gt; &gt;
     <a href="viewCart.php">Cart</a> &gt; &gt;
+    <a href="checkout.php">Checkout</a>>>
     <a>Your Order</a>
 </ul>
 <main id="orderSummaryBody">
