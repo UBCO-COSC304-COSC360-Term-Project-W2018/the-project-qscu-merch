@@ -1,6 +1,5 @@
  <?php
 
-$headerSet = 1;
 include "includes/init.php";
 
 if(isset($_SESSION['user'])) {
@@ -17,7 +16,7 @@ try {
   	die("Connection Failed: ".$con -> connect_errno);
   }
 } catch (Exception $e) {
-	die("Session Terminated.");
+    die("Session Terminated.");
 }
 try {
 	$sqlCats = "SELECT cname FROM Category";

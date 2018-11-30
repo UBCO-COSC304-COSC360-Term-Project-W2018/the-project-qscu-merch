@@ -4,8 +4,11 @@ include '../includes/db_credentials.php';
 include '../includes/inputValidation.php';
 include '../includes/regex.php';
 
+//IF THIS PAGE ISN'T WORKING FOR YOU UNCOMMENT LINE 123
 
-function generateSalt() {
+
+function generateSalt()
+{
     $randString = "";
     $charUniverse = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     for ($i = 0; $i < 32; $i++) {
@@ -20,15 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $validArr = array('billingInfo', 'changePassword', 'userInfo', 'uploadImage', 'resetPassword');
     if (isset($_POST['action']) && in_array($_POST['action'], $validArr)) {
 
-
         try {
             $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
             if ($mysql->error) {
                 throw new Exception();
             }
-
             if ($_SESSION['user']) {
-
                 if ($_POST['action'] === 'uploadImage' && isset($_FILES['uploadImage'])) {
                     $file = $_FILES['uploadImage'];
                     $fileName = basename($file["name"]);
@@ -55,26 +55,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $_SESSION['errorMsg'] = "invalid file";
                         throw new Exception();
                     }
-
-
                 }
 
                 $fieldsUserInfo = array('emailInput', 'firstNameInput', 'lastNameInput');
 
                 if ($_POST['action'] === 'userInfo' && arrayExists($_POST, $fieldsUserInfo) && arrayIsValidInput($_POST, $fieldsUserInfo)) {
-                    $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-                    if ($mysql->errno) {
-                        throw new Exception();
-                    }
                     $query = 'UPDATE User SET fname = ?, lname = ?, uEmail = ? WHERE uid = ?';
                     $stmt = $mysql->prepare($query);
                     $stmt->bind_param('sssi', $_POST['firstNameInput'], $_POST['lastNameInput'], $_POST['emailInput'], $_SESSION['user']->id);
                     $stmt->execute();
+                    if($mysql->affected_rows == 1){
+                        $_SESSION['user']->updateUser($_POST['firstNameInput'],$_POST['lastNameInput']);
+                    }
 
                 }
                 $fieldsPassword = array('oldPasswordInput', 'passwordInput');
-
-                if ($_POST['action'] === 'changePassword' && arrayExists($_POST, $fieldsPassword)) {
+                if ($_POST['action'] === 'changePassword' && arrayExists($_POST, $fieldsPassword) && $_POST['passwordInput'] === $_POST['confirmPasswordInput']) {
                     $query = 'SELECT uEmail, salt FROM User WHERE uid = ?';
                     $stmt = $mysql->prepare($query);
                     $stmt->bind_param('i', $_SESSION['user']->id);
@@ -88,21 +84,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                         $stmt->close();
 
-                        $query = 'UPDATE User SET password = ? WHERE uEmail = ? AND password = ? AND uid = ?';
+                        $query = 'UPDATE User SET password = ?, salt = ? WHERE uEmail = ? AND password = ? AND uid = ?';
                         $stmt = $mysql->prepare($query);
-                        $stmt->bind_param('sssi', $hashword, $email, $oldHashword, $_SESSION['user']->id);
+                        $stmt->bind_param('ssssi', $hashword,$newSalt, $email, $oldHashword, $_SESSION['user']->id);
                         $stmt->execute();
 
                     }
                 }
 
-
                 $billingInformation = array('billingAddress', 'billingCity', 'billingProvince', 'billingPostalCode', 'cardNumber', 'expiryInput', 'securityCode');
-
 
                 if ($_POST['action'] === 'billingInfo' && arrayExists($_POST, $billingInformation) && arrayIsValidInput($_POST, $billingInformation)) {
                     $query = 'SELECT uid FROM BillingInfo WHERE uid = ?';
                     $stmt = $mysql->prepare($query);
+
                     $stmt->bind_param('i',$_SESSION['user']->id);
                     $stmt->execute();
                     $stmt->bind_result($stop);
@@ -118,7 +113,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $stmt->bind_param('isssssss', $_SESSION['user']->id, $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode']);
 
                     }
+
                    $stmt->execute();
+
+
                 }
 
             }
@@ -131,15 +129,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt = $mysql->prepare($query);
                 $stmt->bind_param('sssis', $null, $hashword, $salt, $_POST['uid'], $_POST['authToken']);
                 $stmt->execute();
-            }
 
-        } catch (Exception $e) {
+                $mysql->close();
+            }
+        }
+
+        catch (Exception $e) {
             $mysql->close();
         } finally {
             $mysql->close();
         }
-
-
     }
 }
-header('location: ../profile.php');
+//header('Location: ../profile.php');
+

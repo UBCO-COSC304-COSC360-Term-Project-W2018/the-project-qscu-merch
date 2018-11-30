@@ -1,8 +1,7 @@
 <?php
 include "../includes/init.php";
 
-function loginFailed($input = null)
-{
+function loginFailed($input = null){
     $_SESSION['hasError'] = true;
     $_SESSION['errorType'] = "login";
     if (isset($input)) {
@@ -34,13 +33,14 @@ try {
 
                     if ($stmt->fetch()) {
                         $hashword = hash_pbkdf2("sha256", $password, $salt, 2500);
-                        $query = "SELECT uid, fname, lname FROM User WHERE uEmail = ? AND password = ?";
+
                         $stmt->close();
 
+                        $query = "SELECT uid, fname, lname, uEmail FROM User WHERE password = ? AND uEmail = ?";
                         $stmt = $mysqli->prepare($query);
-                        $stmt->bind_param('ss', $email, $hashword);
+                        $stmt->bind_param('ss',$hashword, $email);
                         $stmt->execute();
-                        $stmt->bind_result($uid, $firstName, $lastName);
+                        $stmt->bind_result($uid, $firstName, $lastName, $uEmail);
 
                         if ($stmt->fetch()) {
                             $_SESSION['user'] = new User($uid, $firstName, $lastName);
@@ -61,7 +61,7 @@ try {
     }
 } catch (Exception $e) {
     loginFailed();
-}finally{
+} finally {
     $mysqli->close();
     die();
 }
