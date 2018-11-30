@@ -137,8 +137,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         catch (Exception $e) {
             $mysql->close();
         } finally {
+            print_r($mysql->error_list);
             $mysql->close();
-            echo $mysql->error_list;
         }
     }
 }
