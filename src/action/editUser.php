@@ -148,10 +148,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         catch (Exception $e) {
             $mysql->close();
         } finally {
-            print_r($mysql->error_list);
             $mysql->close();
         }
     }
 }
-//header('Location: ../profile.php');
+header('Location: ../profile.php');
 
