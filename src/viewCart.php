@@ -2,7 +2,6 @@
 include "includes/init.php";
 
 
-$headerSet=1;
 
 //need to have arrays (2D array?) here to store the row results as strings
 
