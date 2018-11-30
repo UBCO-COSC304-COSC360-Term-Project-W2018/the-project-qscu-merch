@@ -11,13 +11,12 @@ if(isset($_SESSION['user'])){
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$data =array('rst'=>true);
 	$input = json_decode(file_get_contents('php://input'), true);
-	if(isset($input['pNo'])&&isset($input['size'])&&isset($input['quantity'])){
+	$validArray =array('pNo', 'size', 'quantity');
+	if(arrayExists($input, $validArray) && arrayIsValidInput($input, $validArray)){
 	    try{
 		   $pNo = $input["pNo"];
 		   $size = $input['size'];
 		   $quantity = $input['quantity'];
-		   $pname = null;
-		   $cost = 0;
 		   
 		   $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
@@ -84,29 +83,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 					}
 	            }
 	        } else {
+		        
+		        	//$_SESSION['cart']= new userCart();
 	          
-	                //add to object cart
-/*
-	                $_SESSION['cart']= new userCart();
-	                echo "FUCK";
-					echo $pNo;
-*/
-					
 	                $_SESSION['cart']->addItem($pNo, $pname, $size, $quantity, $price);
+	                
 	              
 
 	        }
 	        }
-	          //header('location: ../singleProduct.php?pNo=' . $pNo);
 		}catch (Exception $e){
-            //header('location: ../singleProduct.php?pNo=' . $pNo);      
+			$data['rst'] = false;
         }finally{
-	       $data['rst'] = false;
             $con->close();
-            die();
         }
         header('Content-Type: application/json');
  		echo json_encode($data);
+    }else{
+	    $data['rst'] = false;
     }
 }
 ?>

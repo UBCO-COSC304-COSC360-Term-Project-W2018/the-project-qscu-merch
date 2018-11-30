@@ -1,30 +1,3 @@
-/*
-$(document).ready(function(){
-
-    $("#addToCartButton").on('click', function (e) {
-	    
-        var quantity = $("#quantity").val();
-        
-        var size = $("#size").val();
-        var pNo = $("#pNo").val();
-        console.log(quantity);
-        console.log(size);
-        console.log(pNo);
-		//TODO Do more validation on emailField clientside right here
-		let obj = {'pNo':pNo, 'size':size, 'quantity':quantity};
-		//send this inputted email to the server to check if it exists in the DB
-		
-		$.post('../src/action/addToCart.php', JSON.stringify(obj))
-		.done(function (data){
-		})
-		.fail(function(jqXHR){
-			console.log("Error:" + jqXHR.status);
-		}).always(function(){
-		
-		});	
-})
-});
-*/
 
 $(document).ready(function(){
      $("#addToCartButton").on('click', function (e) {
@@ -40,11 +13,26 @@ $(document).ready(function(){
 		$.post('action/addToCart.php', JSON.stringify(obj))
 		.done(function (data){
 			console.log(data);
+			if(data['rst']==true){
+				$("<span id='addedToCart'>Added To Cart</span>").insertAfter("#addToCartButton");
+			
+				setTimeout( function(){
+					$("#addedToCart").hide();
+				}
+				, 1000);
+			}else{
+				$("<span id='addedToCart'>Failed To Add To Cart</span>").insertAfter("#addToCartButton");
+			
+				setTimeout( function(){
+					$("#addedToCart").hide();
+				}
+				, 1000);
+			}
+
 		})
 		.fail(function(jqXHR){
 			console.log("Error:" + jqXHR.status);
 		}).always(function(){
-			console.log("FUCK");
 		})
 		
 })
