@@ -1,13 +1,8 @@
 <?php
-
-
 include "../includes/init.php";
-
-
 if(isset($_SESSION['user'])){
     $user = $_SESSION['user']->id;
 }
-
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$data =array("rst"=>1);
 	$input = json_decode(file_get_contents('php://input'), true);
@@ -19,7 +14,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		   $quantity = $input['quantity'];
 		   
 		   $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-
 		   if ($con->connect_errno) {
 		   		die("Connection Failed: " . $con->connect_errno);
 			}
@@ -29,10 +23,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	            
            
             	$pstmt1->bind_param('is', $pNo, $size);
-
 				$pstmt1->execute();
 				$pstmt1->bind_result($name, $cost);
-
 	            while($pstmt1->fetch()){
 		            $pname = $name;
 		            $price = $cost;
@@ -67,7 +59,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		                $pstmt ->bind_param('iisi',$user,$pNo,$size,$quantity);
 		
 		                $pstmt->execute();
-
 		                //header('location: ../singleProduct.php?pNo=' . $pNo);  
 					}
 				}else{
@@ -79,7 +70,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		                $updStmt->execute();
 	
 		                //header('location: ../singleProduct.php?pNo=' . $pNo);  
-
 					}
 	            }
 	        } else {
@@ -89,13 +79,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 	                $_SESSION['cart']->addItem($pNo, $pname, $size, $quantity, $price);
 	                
 	              
-
 	        }
 	        }
 		}catch (Exception $e){
 			$data["rst"] = false;
         }finally{
-            $con->close();
         }
         header('Content-Type: application/json');
  		echo json_encode($data["rst"]);
