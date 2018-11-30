@@ -86,13 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST)) {
                 echo json_encode($return);
             }
         } catch (Exception $e) {
-            invalidRequest();
+            header('location: ../error404.php');
+//            invalidRequest();
         } finally {
             $mysql->close();
         }
     }
 } else {
-    //TODO: CHECK IF THIS IS VALID
     header('location: ../error404.php');
     die();
 }

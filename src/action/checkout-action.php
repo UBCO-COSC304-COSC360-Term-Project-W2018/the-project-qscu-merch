@@ -205,6 +205,7 @@ try {
         }
 
     } else {
+        header('location: ../error404.php');
         die();
     }
 } catch (Exception $exception) {

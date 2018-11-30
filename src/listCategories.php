@@ -1,33 +1,38 @@
+
 <?php
-include "includes/init.php";
+	include "includes/init.php";
 
-try {
+try{
 
-    $con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+$con = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
 
-    if ($con->connect_errno) {
-        die("Connection Failed: " . $con->connect_errno);
-    }
-
-} catch (Exception $e) {
-    die("Error with Cart. Session Terminated.");
+if($con -> connect_errno){
+	die("Connection Failed: ".$con -> connect_errno);
 }
 
-$sqlCats = "SELECT cname FROM Category";
-
-if ($cats = $con->query($sqlCats)) {
-
-    $list = [];
-
-    while ($catNames = $cats->fetch_assoc()) {
-        $name = $catNames['cname'];
-        array_push($list, $name);
-    }
-
-    header('Content-Type: application/json');
-    echo json_encode($list);
-
 }
+catch (Exception $e) {
+	die("Error with Cart. Session Terminated.");
+}
+					
+					$sqlCats = "SELECT cname FROM Category";
 
+					if($cats = $con->query($sqlCats)) {
+						
+						$list = [];
+						
+						while($catNames = $cats->fetch_assoc()) {
+							$name = $catNames['cname'];
+							array_push($list, $name);
+						}
+						
+ 						header('Content-Type: application/json');
+						echo json_encode($list);
+						
+					} else {
+						echo "Category Query failed.";
+						die();
+					}
+					
 
 ?>	

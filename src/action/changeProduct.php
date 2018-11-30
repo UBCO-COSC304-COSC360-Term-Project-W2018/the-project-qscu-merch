@@ -115,7 +115,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pno']) && $_POST['pno'
     header('location: ../editProduct.php?pno=' . $_POST['pno']);
 
 } else {
-    //TODO: CHECK IF THIS IS VALID:
     header('location: ../error404.php');
     die();
 }

@@ -66,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             }
         } catch (Exception $e) {
-            //TODO: CHECK IF THIS IS VALID
             header('location: ../error404.php');
         } finally {
             $mysql->close();
