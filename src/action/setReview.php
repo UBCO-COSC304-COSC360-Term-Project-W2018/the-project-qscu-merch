@@ -5,7 +5,9 @@ include("../includes/init.php");
 $validActionArray = array('setReview', 'setComment', 'updatePage');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['action']) && in_array($_POST['action'], $validActionArray) && isset($_POST['pno']) && isset($_SESSION['user'])) {
+    $input = json_decode(file_get_contents('php://input'), TRUE);
+
+    if (isset($input['action']) && in_array($input['action'], $validActionArray) && isset($input['pno']) && isset($_SESSION['user'])) {
         $datetime = (new DateTime('now'))->format('Y-m-d H:i:s');
         $json['status'] = 'failed';
         $json['msg'] = 'undeterred error';
@@ -32,11 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['userReviewInput'])) {
                 $comment = sanitizeInput($_POST['userReviewInput']);
 
-                if ($_POST['action'] == 'setComment' && isset($_POST['uid'])) {
+                if ($input['action'] == 'setComment' && isset($input['uid'])) {
 
                     $query = 'INSERT INTO Comment (uid, pNo, leftby, date, comment, isEnabled) VALUES (?, ?, ?, ?, ?, 1)';
                     $stmt = $mysql->prepare($query);
-                    $stmt->bind_param('iiiss', $_POST['uid'], $_POST['pno'], $_SESSION['user']->id, $datetime, $comment);
+                    $stmt->bind_param('iiiss', $input['uid'], $input['pno'], $_SESSION['user']->id, $datetime, $comment);
                     $stmt->execute();
 
                     $json['status'] = 'success';
@@ -44,15 +46,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
 
                 $validRatingArray = array('1', '2', '3', '4', '5');
-                if ($_POST['action'] === 'setReview' && isset($_POST['userRatingInput'])) {
+                if ($input['action'] === 'setReview' && isset($input['userRatingInput'])) {
 
-                    if (in_array($_POST['userRatingInput'], $validRatingArray)) {
+                    if (in_array($input['userRatingInput'], $validRatingArray)) {
 
                         $rating = sanitizeInput($_POST['userRatingInput']);
 
                         $query = "INSERT INTO Reviews ( uid, pNo, rating, comment, date, isEnabled) VALUES (?, ?, ?, ?, ?, 1)";
                         $stmt = $mysql->prepare($query);
-                        $stmt->bind_param('iiiss', $_SESSION['user']->id, $_POST['pno'], $rating, $comment, $datetime);
+                        $stmt->bind_param('iiiss', $_SESSION['user']->id, $input['pno'], $rating, $comment, $datetime);
                         $stmt->execute();
                         if ($stmt->errno == 1062) {
                             $json['msg'] = "You already has a review for this product";
