@@ -74,11 +74,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $stmt = $mysql->prepare($query);
                     $stmt->bind_param('sssi', $_POST['firstNameInput'], $_POST['lastNameInput'], $_POST['emailInput'], $_SESSION['user']->id);
                     $stmt->execute();
+                    if($mysql->affected_rows == 1){
+                        $_SESSION['user']->updateUser($_POST['firstNameInput'],$_POST['lastNameInput']);
+                    }
 
                 }
                 $fieldsPassword = array('oldPasswordInput', 'passwordInput');
-
-                if ($_POST['action'] === 'changePassword' && arrayExists($_POST, $fieldsPassword)) {
+                if ($_POST['action'] === 'changePassword' && arrayExists($_POST, $fieldsPassword) && $_POST['passwordInput'] === $_POST['confirmPasswordInput']) {
                     $query = 'SELECT uEmail, salt FROM User WHERE uid = ?';
                     $stmt = $mysql->prepare($query);
                     $stmt->bind_param('i', $_SESSION['user']->id);
@@ -92,9 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                         $stmt->close();
 
-                        $query = 'UPDATE User SET password = ? WHERE uEmail = ? AND password = ? AND uid = ?';
+                        $query = 'UPDATE User SET password = ?, salt = ? WHERE uEmail = ? AND password = ? AND uid = ?';
                         $stmt = $mysql->prepare($query);
-                        $stmt->bind_param('sssi', $hashword, $email, $oldHashword, $_SESSION['user']->id);
+                        $stmt->bind_param('ssssi', $hashword,$newSalt, $email, $oldHashword, $_SESSION['user']->id);
                         $stmt->execute();
 
                     }
@@ -143,6 +145,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt = $mysql->prepare($query);
                 $stmt->bind_param('sssis', $null, $hashword, $salt, $_POST['uid'], $_POST['authToken']);
                 $stmt->execute();
+
+                $mysql->close();
             }
 
         } catch (Exception $e) {
