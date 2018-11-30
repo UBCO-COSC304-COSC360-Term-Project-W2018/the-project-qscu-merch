@@ -17,12 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $searchType = $input['searchType'];
         try {
 
-
             $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
             if ($mysql->errno) {
                 die();
             }
-
             $input = '%' . $searchInput . '%';
 
             switch ($searchType) {
@@ -52,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     throw new Exception;
             }
 
-
             $stmt->bind_result($uid, $firstName, $lastName, $userEmail, $contentType, $image, $isBanned, $isAdmin);
             $stmt->execute();
 
@@ -70,4 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die();
         }
     }
+} else {
+    header('location: ../error404.php');
+    die();
 }
