@@ -49,7 +49,7 @@ try {
 
 //        echo "<p>getting billing info</p>";
 
-        $result = $user_billing_info->get_result();
+        $result = $user_billing_info->store_result();
 
         while ($row = $result->fetch_assoc()) {
             $addressLine = $row['address'];
