@@ -3,6 +3,9 @@ include '../includes/session.php';
 include '../includes/inputValidation.php';
 include '../includes/db_credentials.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     $validActionArray = array('loadAll', 'loadNew');
