@@ -92,9 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if ($searchType == "productNameWithRating" || $searchType == "productCategoryWithRating" || $searchType == "productNameAndCategoryWithRating") {
-              $stmt->bind_result($rating, $pno, $size, $pname, $price, $contentType, $image, $description, $quantity);
+                $stmt->bind_result($rating, $pno, $size, $pname, $price, $contentType, $image, $description, $quantity);
             } else {
-              $stmt->bind_result($pno, $size, $pname, $price, $contentType, $image, $description, $quantity);
+                $stmt->bind_result($pno, $size, $pname, $price, $contentType, $image, $description, $quantity);
             }
 
             $stmt->execute();
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo json_encode($data);
                     break;
                 case "deepgrouped":
-                //deep ( -_-)
+                    //deep ( -_-)
                     $counter = -1;
                     while ($stmt->fetch()) {
                         if ($counter !== $pno) {
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $item['productContentType'] = $contentType;
                             $item['productImage'] = base64_encode($image);
                             if ($searchType == "productNameWithRating") {
-                              $item['productRating'] = $rating;
+                                $item['productRating'] = $rating;
                             }
                             $item['variations'] = array($size => array("productSize" => $size, "productPrice" => $price, "productQuantity" => $quantity, "productDescription" => $description));
                             $counter = $pno;
@@ -165,10 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     throw new Exception();
             }
         } catch (Exception $e) {
-            $json = new stdClass();
-            $json->error = "Oopsie something broke";
-            $json->status = "failed";
-            echo json_encode($json);
+            header('location: ../error404.php');
         } finally {
             $mysql->close();
             die();

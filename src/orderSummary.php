@@ -1,14 +1,17 @@
 <?php
 include "includes/init.php";
 
-if ( !isset($_SESSION['user'])) {
-    header("Location: homeWithoutTables.php");
-    exit();
-}
+//if ( !isset($_SESSION['user'])) {
+//    header("Location: homeWithoutTables.php");
+//    exit();
+//}
+
+
+$subtotal = 0;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (!isset($_SESSION['userid'])) {
-        header('Location: http://localhost/the-project-qscu-merch/src/login.php');
+    if (!isset($_SESSION['user'])) {
+        header('Location: login.php');
         exit();
     } else {
         //getting the user object
@@ -41,11 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $billingCountry = $_POST['billingCountry'];
             $billingPostalCode = $_POST['billingPostalCode'];
 
+
             $mysqli = new mysqli (DBHOST, DBUSER, DBPASS, DBNAME);
 
-            $sql = "UPDATE billinginfo SET country = ?, province = ?, city = ?, address = ?,
+            $sql = "UPDATE BillingInfo SET country = ?, province = ?, city = ?, address = ?,
                         postalCode = ?, creditCardNumber = ?, cardExpiryDate = ?, ccv=?
                          WHERE uid = ?";
+
 
             //update DB with billing info
             if ( $user_billing_info = $mysqli -> prepare($sql) ) {
@@ -80,12 +85,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $shippingPostalCode = $_POST['shippingPostalCode'];
             }
 
-            //TODO: Take these out when you are done testing
-            $headerSet = 1;
 
         }
         catch (Exception $exception) {
 //            die();
+            echo $mysqli->error_list;
             echo "<p>went to catch</p>";
         }
 
@@ -94,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 //a POST method wasn't used
 else {
 //    die();
-    echo "<p>went to final else</p>";
+    header("Location: homeWithoutTables.php");
 }
 
 
@@ -117,6 +121,7 @@ else {
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
     <a href="viewCart.php">Cart</a> &gt; &gt;
+    <a href="checkout.php">Checkout</a>>>
     <a>Your Order</a>
 </ul>
 <main id="orderSummaryBody">
@@ -136,23 +141,24 @@ else {
             $cartTwoDimArray = array();
 
 
-            $sql = "SELECT hascart.quantity, product.pname, hascart.size, product.price " .
-                "FROM hascart JOIN product ON hascart.pno = product.pno AND hascart.size = product.size " .
-                "WHERE hascart.uid = ?";
+            $sql = "SELECT HasCart.quantity, Product.pname, HasCart.size, Product.price " .
+                "FROM HasCart JOIN Product ON HasCart.pno = Product.pno AND HasCart.size = Product.size " .
+                "WHERE HasCart.uid = ?";
 
             if ($user_cart = $mysqli->prepare($sql)) {
                 $user_cart->bind_param("s", $userid);
                 $user_cart->execute();
 
-                $result = $user_cart->get_result();
+//                $result = $user_cart->get_result();
+                $user_cart -> bind_result($dbQuantity, $dbPname, $dbSize, $dbPrice);
 
                 $count = 0;
-                $subtotal = 0;
-                while ($row = $result->fetch_assoc()) {
-                    $quantity = $row['quantity'];
-                    $product_name = $row['pname'];
-                    $size = $row['size'];
-                    $price = $row['price'];
+
+                while ($user_cart->fetch()) {
+                    $quantity = $dbQuantity;
+                    $product_name = $dbPname;
+                    $size = $dbSize;
+                    $price = $dbPrice;
 
                     $total_price = $price * $quantity;
                     $subtotal = $subtotal + $total_price;
@@ -171,6 +177,7 @@ else {
                         </tr>";
                 }
             }
+
 
             $taxTotal = 0;
             $tax = 0;
@@ -221,6 +228,7 @@ else {
             $taxTotal = number_format((float)($subtotal * $tax), 2, '.', '');
             $netTotal = number_format((float)($subtotal + $taxTotal), 2, '.', '');
 
+
             $fullShippingAddress = $shippingAddressLine.",".$shippingCity.",".$shippingProvince.",".$shippingCountry.",".$shippingPostalCode;
 
             if (isset($_SESSION['fullShippingAddress'])) {
@@ -261,11 +269,11 @@ else {
     console.log("hit the script tag");
 
     $('#editOrderButton').click(function() {
-        location.replace("http://localhost/the-project-qscu-merch/src/viewcart.php");
+        location.replace("viewcart.php");
     });
 
     $('#confirmOrderButton').click(function () {
-        location.replace("http://localhost/the-project-qscu-merch/src/action/checkout-action.php");
+        location.replace("action/checkout-action.php");
 
         //call the ajax function which will link to the action php file
 

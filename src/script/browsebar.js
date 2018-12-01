@@ -4,7 +4,7 @@ var browsebar;
 var isOpen = false;
 
   function listCat() {
-      var results = $.get("../listCategories.php");
+      var results = $.get("../src/listCategories.php");
       results.done(function(data) {
                             console.log(data);
 

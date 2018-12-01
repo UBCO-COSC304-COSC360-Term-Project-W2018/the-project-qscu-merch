@@ -1,54 +1,89 @@
-main{
-display: inline-block;
-	
+#chart_div {
+    display: flex;
+    order: 1;
 }
 
-#warehousepagetitle{
-	padding: 0.5em 0em 0.5em 0.5em;
-	font-size: 1.5em;
-	margin: 0em;
+#warehousepagetitle {
+    order: 1;
+    padding: 0.5em 0em 0.5em 0.5em;
+    font-size: 1.5em;
+    margin: 0em;
 }
-.warehousetables{
-	border-collapse: collapse;
-	display: inline-block;
-	margin: 2em;
-	border: 4px solid #183263;
+
+.warehousetables {
+
+    order: -1;
+    border-collapse: collapse;
+    display: inline-block;
+    margin: 2em;
+    border: 4px solid #183263;
 }
-.warehousetables th, td{
-	text-align: center;
-	padding: 0.2em;
-	border: thin solid #183263;
+
+.warehousetables th, td {
+    text-align: center;
+    padding: 0.2em;
+    border: thin solid #183263;
 }
 
 .producttables {
-	border-collapse: collapse;
-	border: 2px solid #183263;
+    border-collapse: collapse;
+    border: 2px solid #183263;
 }
 
-.producttables td, th{
-	border: thin solid #183263;
+.producttables td, th {
+    border: thin solid #183263;
 }
 
 
-.warehousetables th{
-	background-color:#183263;
-	color: white;
-	font-size: 1.2em;
-	
-}
-
-.warehousetables td{
-	font-size: 1.1em;
+.warehousetables th {
+    background-color: #183263;
+    color: white;
+    font-size: 1.2em;
 
 }
 
-.producttables th{
-	color: white;
-	background-color: #18bfef;
-	font-size: 0.9em;
+.warehousetables td {
+    font-size: 1.1em;
 
 }
 
-.producttables td{
-	font-size: 0.9em;
+.producttables th {
+    color: white;
+    background-color: #18bfef;
+    font-size: 0.9em;
+
+}
+
+.producttables td {
+    font-size: 0.9em;
+}
+
+#btn {
+    margin-left: 1em;
+    color: black;
+    text-decoration: none;
+    font-size: 0.75em;
+    background: #18bfef;
+    border: thin solid black;
+    border-radius: 1em;
+    padding: 3px;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25);
+
+    transform: translateX(0) translateY(0);
+
+    transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+#btn:hover {
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.25);
+    -webkit-transform: translateX(-3px) translateY(-3px);
+    -moz-transform: translateX(-3px) translateY(-3px);
+    transform: translateX(-3px) translateY(-3px);
+    -webkit-transition: -webkit-transform 0.3s ease-in-out, -webkit-box-shadow 0.4s ease-in-out;
+    -moz-transition: -moz-transform 0.3s ease-in-out, -moz-box-shadow 0.4s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.4s ease-in-out;
+    cursor: pointer;
 }

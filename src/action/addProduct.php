@@ -1,6 +1,5 @@
 <?php
 include '../includes/init.php';
-
 include '../includes/validateAdmin.php';
 
 validateAdminRequest($_SESSION);
@@ -15,14 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['errorMsg'] = "invalid form data";
         header('location: ../adminList.php');
         exit();
-    }else{
+    } else {
 
         try {
             $productName = $_POST['productName'];
             $productPrice = $_POST['productPrice'];
             $productDescription = $_POST['productDescription'];
             $size = $null;
-            if(isset($_POST['singleItem'])){
+            if (isset($_POST['singleItem'])) {
                 $size = "single";
             }
 
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $extension = end(explode(".", $file['name']));
                 $validExt = array("jpg", "png", "gif");
                 $validMine = array("image/jpeg", "image/png", "image/gif");
-                if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 66 * 1000))) {
+                if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 10 * 1000 * 1000))) {
                     if (!move_uploaded_file($file['tmp_name'], $targetFilePath)) {
                         throw new Exception();
                     }
@@ -48,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             }
 
-
             $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
             if ($mysql->connect_error) {
                 //connection failed
@@ -58,22 +56,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $query = "INSERT INTO Product (image, size, pname, price, contentType, description, isEnabled) VALUES (?, ?, ?, ?, ?, ?, 1)";
             $stmt = $mysql->prepare($query);
 
-            $size = ($size === "single")? $size:"small";
+            $size = ($size === "single") ? $size : "small";
 
             $null = null;
 
 //                                if string = s, if blob b, if decimal d, int i
-            $stmt->bind_param('bssdss',$null, $size, $productName, $productPrice, $file['type'], $productDescription);
+            $stmt->bind_param('bssdss', $null, $size, $productName, $productPrice, $file['type'], $productDescription);
             $stmt->send_long_data(0, file_get_contents($targetFilePath));
             $stmt->execute();
 
             $id = $stmt->insert_id;
 
-
-            if(isset($id)) {
-                if($size !== "single") {
+            if (isset($id)) {
+                if ($size !== "single") {
                     $size = array('medium', 'large', 'xl');
-                        $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType, description, isEnabled) VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
+                    $query = "INSERT INTO Product (image, pNo, size, pname, price, contentType, description, isEnabled) VALUES (?, ?, ?, ?, ?, ?, ?, 1)";
                     $stmt = $mysql->prepare($query);
                     foreach ($size as $key => $value) {
 
@@ -83,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
                     unlink($targetFilePath);
                     array_push($size, "small");
-                }else{
+                } else {
                     $size = array($size);
                 }
 
@@ -94,20 +91,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $stmt->execute();
                 }
 
-                header("location: ../editProduct.php?pno=".$id);
-            }else{
+                header("location: ../editProduct.php?pno=" . $id);
+            } else {
                 throw new Exception();
             }
-        }catch (Exception $e){
+        } catch (Exception $e) {
             header('location: ../adminList.php');
 
-        }finally{
+        } finally {
             $mysql->close();
             die();
         }
     }
-}else
-    echo "error 404";
-die();
+} else {
+    header('location: ../error404.php');
+    die();
+}
+
 
 ?>

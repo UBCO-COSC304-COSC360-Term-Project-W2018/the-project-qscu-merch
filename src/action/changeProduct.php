@@ -12,8 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pno']) && $_POST['pno'
     $fields = array('productName', 'productPrice', 'productDescription');
     $mysql;
     try {
-
-
         $mysql = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
         if ($mysql->connect_error) {
             //connection failed
@@ -31,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pno']) && $_POST['pno'
             $extension = end(explode(".", $file['name']));
             $validExt = array("jpg", "png", "gif");
             $validMine = array("image/jpeg", "image/png", "image/gif");
-            if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 100 * 1000))) {
+            if ((in_array($file['type'], $validMine) && in_array($extension, $validExt) && ($file['size'] < 10 * 1000 * 1000))) {
                 if (!move_uploaded_file($file['tmp_name'], $targetFilePath)) {
                     throw new Exception();
                 }
@@ -52,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pno']) && $_POST['pno'
             }
         }
 
-
+        $_POST['productDescription'] = sanitizeInput($_POST['productDescription']);
         if (arrayExists($_POST, $fields) && arrayIsValidInput($_POST, $fields)) {
 
             $query = "UPDATE Product SET pname = ?, price = ?, description = ?, isEnabled = ? WHERE pNo = ?";
@@ -116,4 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pno']) && $_POST['pno'
 
     header('location: ../editProduct.php?pno=' . $_POST['pno']);
 
+} else {
+    header('location: ../error404.php');
+    die();
 }

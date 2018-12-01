@@ -1,11 +1,12 @@
     <!--    start footer-->
     <footer>
+	    <div id="foot">
         <div class="footLogo">
             <a href="homeWithoutTables.php"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" > </a>
         </div>
 
         <nav class=footNav>
-            <p><a href="homeWithoutTables.php">Home</a> | <a href="searchpage.php">Browse</a> | <a href="login.php">Login </a>| <a href="viewCart.php">Cart </a>| <a href="about_us.php"> About Us</a></p>
+            <p><a href="homeWithoutTables.php">Home</a> | <a href="searchpage.php">Browse</a> | <a href="viewCart.php">Cart </a>| <a href="about_us.php"> About Us</a>| <a href="contactUs.php">Contact Us </a></p>
         </nav>
 
         <!-- Copyright -->
@@ -22,5 +23,6 @@
             <p class="copyright">&copy; COSC 304/360 Project 2018</p>
 
         </div>
+	    </div>
     </footer>
 
