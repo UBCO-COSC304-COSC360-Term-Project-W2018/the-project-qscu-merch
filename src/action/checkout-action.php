@@ -117,6 +117,7 @@ try {
                 echo "<p>beginning of if-statement</p>";
                 $product_cost = $mysqli->prepare($product_cost_sql);
                 echo var_dump($product_cost);
+                print_r($mysqli->error_list);
                 if ($product_cost = $mysqli->prepare($product_cost_sql)) {
                     echo "<p>entered if-statement</p>";
                     $product_cost->bind_param("ss", $pNo, $size);
@@ -230,8 +231,6 @@ try {
         header('location: ../error404.php');
     }
 } catch (Exception $exception) {
-    print_r($mysqli->error_list);
-
     $mysqli->close();
 //    die();
 } finally {
