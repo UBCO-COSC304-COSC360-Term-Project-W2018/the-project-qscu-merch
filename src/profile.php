@@ -431,7 +431,6 @@ $name = $_SESSION['user']->firstName;
             }
             mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
             echo "<h3>Your Comments:</h3>";
-            $commenter_name_details->close();
             //get all comments made by this user.
             //a comment needs:name of user who left, date, profile pic, text
             $get_comment_sql = "SELECT * FROM Comment WHERE leftBy = ?";
