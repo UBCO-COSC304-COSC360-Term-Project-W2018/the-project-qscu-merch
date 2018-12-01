@@ -49,9 +49,10 @@ try {
 
 //        echo "<p>getting billing info</p>";
 
-        $result = $user_billing_info->store_result();
+//        $result = $user_billing_info->get_result();
+        $user_billing_info -> bind_result($dbAddress, $dbCity, $dbProvince, $dbCountry, $dbPostalCode, $dbCreditCardNum, $dbExpiry, $dbCCV);
 
-        while ($row = $result->fetch_assoc()) {
+        while ($user_billing_info->fetch()) {
             $addressLine = $row['address'];
             $city = $row['city'];
             $province = $row['province'];
