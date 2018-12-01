@@ -4,9 +4,12 @@ main{
 }
 
 #container{
-	display: flex;
+	/*display: flex;*/
 }
 
+/*img.canvasjs-chart-toolbar image.canvasjs-chart-toolbar button.canvasjs-chart-toolbar{*/
+	/*width: 0;*/
+/*}*/
 #chart_div{
 	display: flex;
 	order: 1;
@@ -68,7 +71,7 @@ main{
 	margin-left: 1em;
 	color: black;
 	text-decoration: none;
-	font-size: 0.4em;
+	font-size: 0.75em;
 	background: #18bfef;
 	border: thin solid black;
 	border-radius: 1em; 
