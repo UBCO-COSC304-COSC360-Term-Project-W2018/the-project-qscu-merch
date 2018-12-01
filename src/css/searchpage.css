@@ -14,12 +14,13 @@ img{
 #refinecol{
 	display: flex;
 	height: auto;
+	white-space: nowrap;
 	align-items: stretch;
 	padding: 1em;
 	margin: 2em 2em 2em 0em;
 	background-color: #183263;
 	color: white;
-	border-radius: 1em;
+	border-radius: 2em;
 }
 
 #refineform{
@@ -28,9 +29,13 @@ img{
 	margin-bottom: 0em;
 }
 #refinefieldset{
+	padding-top: 0em;
+	border-color: #18bfef;
+	border-radius: 1em;
 	color: white;
 }
 #searchResultsTitle{
+	font-size: 2em;
 	padding-left: 1em;
 	white-space: nowrap;
 	float: left;
@@ -42,7 +47,7 @@ img{
 	padding: 0.2em;
 	margin: 1em;
 	white-space: nowrap;
-	border-radius: 1em;
+	border-radius: 2em;
 	padding-right: 1em;
 }
 
@@ -128,16 +133,22 @@ img{
 }
 
 #pagenumber{
+	margin: 1em 20em 1em 30em;
 	text-align: center;
 
 
 }
 #number{
-	background-color: #183263;
+	
 }
 #pagenumber a{
+	background-color: #183263;
 	color: white;
-	padding-right: 0.3em;
+	padding: 0.1em 0.5em 0.1em 0.5em;
+	margin-right: 0.1em;
+	border-radius: 2em;
+	text-align: center;
+	text-decoration: none;
 }
 #pagenumber a:hover{
 	color: tomato;
@@ -151,5 +162,15 @@ img{
 }
 
 #number >a.active {
+	text-decoration: underline;
 	color:orange;
 }
+
+#refineSearchBtn{
+	margin: 1em
+}
+
+.refinelabel{
+	margin: 1em 0em 0.5em 0em;
+}
+

@@ -101,7 +101,7 @@ $name = $_SESSION['user']->firstName;
 
 <ul class="breadcrumb">
     <a href="homeWithoutTables.php">Home</a> &gt; &gt;
-    <a>Profile</a>
+    Profile
 </ul>
 
 <main>

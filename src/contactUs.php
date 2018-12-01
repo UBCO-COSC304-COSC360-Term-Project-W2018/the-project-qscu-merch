@@ -32,7 +32,7 @@ include "header.php";
 
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-    <a >Contact Us</a>
+    Contact Us
 </ul>
 
 
