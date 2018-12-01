@@ -114,17 +114,26 @@ try {
                 //get the cost of that product and size from db
                 $singluarProductCost;
                 $product_cost_sql = "SELECT price FROM Product WHERE pNo = ? AND size = ?";
+                echo "<p>beginning of if-statement</p>";
                 if ($product_cost = $mysqli->prepare($product_cost_sql)) {
+                    echo "<p>entered if-statement</p>";
                     $product_cost->bind_param("ss", $pNo, $size);
+                    echo "<p>binded param</p>";
                     $product_cost->execute();
+                    echo "<p>executed</p>";
 
 //                    $product_cost_result = $product_cost->get_result();
                     $product_cost->bind_result($dbPrice);
+                    echo "<p>binded result</p>";
+                    echo "<p>".$dbPrice."</p>";
 
                     while ($product_cost->fetch()) {
+                        echo "<p>entering product cost loop</p>";
                         $singularProductCost = $dbPrice;
+                        echo "<p>".$singularProductCost."</p>";
                     }
                 }
+                echo "<p>exited if statement</p>";
                 $productNetCost = $singularProductCost * $quantity;
 
                 //watch out for case where user tries to buy something we don't have in inventory
