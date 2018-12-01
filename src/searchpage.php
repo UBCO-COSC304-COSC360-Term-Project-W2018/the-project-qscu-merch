@@ -23,7 +23,6 @@ $headerSet = 0;
 
 <head lang="en">
     <meta charset="utf-8">
-    <title>QSCU Merch Store</title>
     <link rel="stylesheet" href="css/searchpage.css"/>
     <?php include 'includes/headerFooterHead.php';?>
     <script type="text/javascript" src="script/search_controller.js"></script>
@@ -38,7 +37,7 @@ $headerSet = 0;
 
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-    <a>Search</a>
+    Search
 </ul>
 
     <!-- Main Body -->
@@ -50,13 +49,9 @@ $headerSet = 0;
 						<legend>Refine Results</legend>
 
             <div id="itemsperpage">
-              <p class="refinelabel"><label>Items per Page:</label></p>
+              <p class="refinelabel"><label>Items per Page:</label>
 							<input type="number" id="iperpage" value="6" min="2" max="25" step="1">
-							<output name="price" for="max"></output><br>
-            </div>
-
-            <div id="pricerange">
-              <button id="refineSearchBtn">Search</button>
+							</p>
             </div>
 						<!--<div id="pricerange">
 							<p class="refinelabel"><label>Price Range:</label></p>
@@ -90,13 +85,16 @@ $headerSet = 0;
     						}
     					?>
 						</div>
+						<button id="refineSearchBtn">Refine Results</button>
 					</fieldset>
+					
 				</form>
 		</div>
 
   	<div id="categoryviews">
   		<div id="sortby">
         <p id='searchResultsTitle'>Search Results<?php if(isset($_GET['Search'])) echo " for: &quot;".$_GET['Search']."&quot;";?></p> <!--could include what we searched for in this line. Simple Query, extra -->
+<!--
     		<form id="sortform">
     			<label id="sortlabel">Sort By:</label>
     			<select name="sort" id="sort">
@@ -105,6 +103,7 @@ $headerSet = 0;
     				<option value="hightolow">Price: High to Low</option>
     			</select>
     		</form>
+-->
   		</div>
 
       <div id="resultHolder">
