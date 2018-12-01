@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $item['productName'] = $pname;
                             $item['productContentType'] = $contentType;
                             $item['productImage'] = base64_encode($image);
-                            if ($searchType == "productNameWithRating") {
+                            if ($searchType == "productNameWithRating" || $searchType == "productCategoryWithRating" || $searchType == "productNameAndCategoryWithRating") {
                                 $item['productRating'] = $rating;
                             }
                             $item['variations'] = array($size => array("productSize" => $size, "productPrice" => $price, "productQuantity" => $quantity, "productDescription" => $description));

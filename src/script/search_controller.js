@@ -103,7 +103,7 @@ function doSearch() {
 					}
 					htmlStr+="</p>"
 								+"<p class=\"addtocart\">"
-									+"<button>View Product <i class=\"fa fa-arrow-right\"></i></button>"
+									+"<a href=\"singleProduct.php?pNo="+current.productNumber+"\"><button>View Product <i class=\"fa fa-arrow-right\"></i></button></a>"
 								+"</p>"
 							+"</div>"
 						+"</div>";
