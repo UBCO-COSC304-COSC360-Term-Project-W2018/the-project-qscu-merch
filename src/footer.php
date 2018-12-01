@@ -1,5 +1,6 @@
     <!--    start footer-->
     <footer>
+	    <div id="foot">
         <div class="footLogo">
             <a href="homeWithoutTables.php"><img src="images/QSCU_whitePlain.png" alt="Quantitative Sciences Course Union" > </a>
         </div>
@@ -22,5 +23,6 @@
             <p class="copyright">&copy; COSC 304/360 Project 2018</p>
 
         </div>
+	    </div>
     </footer>
 
