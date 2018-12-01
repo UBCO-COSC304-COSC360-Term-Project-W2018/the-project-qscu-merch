@@ -52,7 +52,7 @@ try {
         $items_not_available = array();
 
         //create shipment- a new shipment will be created for each order (:
-        $createShipment = "INSERT INTO shipment(dateShipped, uid, shippedFrom) VALUES (CURRENT_DATE ,?,?)";
+        $createShipment = "INSERT INTO Shipment(dateShipped, uid, shippedFrom) VALUES (CURRENT_DATE ,?,?)";
         if ($shipment = $mysqli->prepare($createShipment)) {
             $shipment->bind_param("ss", $userid, $warehouseId);
             $shipment->execute();
