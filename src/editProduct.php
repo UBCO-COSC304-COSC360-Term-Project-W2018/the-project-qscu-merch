@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_
                         <label for="productDescription">Description:</label>
                     </td>
                     <td>
-                        <textarea rows="4" cols="50" name="productDescription" id="productDescription" maxlength="254" placeholder="Enter Description..."><?php echo $product['description'] ?></textarea>
+                        <textarea rows="4" cols="50" name="productDescription" id="productDescription" maxlength="500" placeholder="Enter Description..."><?php echo $product['description'] ?></textarea>
                     </td>
                 </tr>
 
