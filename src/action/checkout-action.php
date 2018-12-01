@@ -144,10 +144,10 @@ try {
             $cart_quantity = $twoDimArray[$i]['quantity'];
 //            echo "<p>".$cart_quantity."</p>";
             $warehouseId = 1;
-            $singularProductCost;
-            $productNetCost;
+//            $singularProductCost;
+//            $productNetCost;
 
-            print_r($twoDimArray);
+//            print_r($twoDimArray);
 
             $product_cost_sql = "SELECT price FROM Product WHERE pNo=? AND size=?";
             if ($product_cost = $mysqli->prepare($product_cost_sql)) {
