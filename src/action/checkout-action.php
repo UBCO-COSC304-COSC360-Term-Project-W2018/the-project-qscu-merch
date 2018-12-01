@@ -30,7 +30,7 @@ try {
             $isBanned_user->bind_param("s", $userid);
             $isBanned_user->execute();
 
-            $isBanned_user->bind_param($dbUserBanned);
+            $isBanned_user->bind_result($dbUserBanned);
             $isBanned_user_status = false;
 
             while ($isBanned_user->fetch()) {
@@ -194,7 +194,7 @@ try {
                         $remove_order->bind_param("s", $oNo);
                         $remove_order->execute();
                     }
-                    
+
                     header("Location: ../orderError.php");
                     $_SESSION['order_error'] = true;
 //                    echo "<p>Our apologies! We do not have the products that you want to order in our inventory</p>";
