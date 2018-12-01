@@ -149,15 +149,15 @@ else {
                 $user_cart->bind_param("s", $userid);
                 $user_cart->execute();
 
-                $result = $user_cart->get_result();
-
+//                $result = $user_cart->get_result();
+                $user_cart -> bind_result($dbQuantity, $dbPname, $dbSize, $dbPrice);
                 $count = 0;
 
-                while ($row = $result->fetch_assoc()) {
-                    $quantity = $row['quantity'];
-                    $product_name = $row['pname'];
-                    $size = $row['size'];
-                    $price = $row['price'];
+                while ($user_cart->fetch()) {
+                    $quantity = $dbQuantity;
+                    $product_name = $dbPname;
+                    $size = $dbSize;
+                    $price = $dbPrice;
 
                     $total_price = $price * $quantity;
                     $subtotal = $subtotal + $total_price;
@@ -269,11 +269,11 @@ else {
     console.log("hit the script tag");
 
     $('#editOrderButton').click(function() {
-        location.replace("http://localhost/the-project-qscu-merch/src/viewcart.php");
+        location.replace("viewcart.php");
     });
 
     $('#confirmOrderButton').click(function () {
-        location.replace("http://localhost/the-project-qscu-merch/src/action/checkout-action.php");
+        location.replace("action/checkout-action.php");
 
         //call the ajax function which will link to the action php file
 
