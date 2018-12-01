@@ -78,11 +78,12 @@ try {
         $user_info->bind_param("s", $userid);
         $user_info->execute();
 
-        $result = $user_info->get_result();
+//        $result = $user_info->get_result();
+        $user_info -> bind_result($dbFname, $dbLname);
 
-        while ($row = $result->fetch_assoc()) {
-            $firstName = $row['fname'];
-            $lastName = $row['lname'];
+        while ($user_info->fetch()) {
+            $firstName = $dbFname;
+            $lastName = $dbLname;
         }
     }
     $fullName = $firstName . " " . $lastName;

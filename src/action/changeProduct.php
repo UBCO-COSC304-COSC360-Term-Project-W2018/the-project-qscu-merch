@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['pno']) && $_POST['pno'
             }
         }
 
-
+        $_POST['productDescription'] = sanitizeInput($_POST['productDescription']);
         if (arrayExists($_POST, $fields) && arrayIsValidInput($_POST, $fields)) {
 
             $query = "UPDATE Product SET pname = ?, price = ?, description = ?, isEnabled = ? WHERE pNo = ?";
