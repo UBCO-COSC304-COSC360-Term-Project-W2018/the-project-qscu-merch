@@ -64,12 +64,9 @@ try {
 
 
         <?php include 'includes/headerFooterHead.php'; ?>
-        <link rel="stylesheet" href="../src/css/singleProduct.css">
         <script type="text/javascript" src="script/quantity.js"></script>
         <script type="text/javascript" src="script/reviewModal.js"></script>
         <script type="text/javascript" src="script/addToCart.js"></script>
-
-
         <link rel="stylesheet" href="css/singleProduct.css">
     </head>
     <!--    Body-->
