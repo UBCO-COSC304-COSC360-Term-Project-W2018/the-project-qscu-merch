@@ -8,9 +8,11 @@ if (isset($_SESSION['user'])) {
 $errorType;
 $error;
 
-if(isset($_SESSION['hasError'])){
+if(isset($_SESSION['hasError']) && isset($_SESSION['error'])){
     $errorType = $_SESSION['errorType'];
     $error = $_SESSION['error'];
+    unset($_SESSION['errorType']);
+    unset($_SESSION['error']);
 }
 
 
