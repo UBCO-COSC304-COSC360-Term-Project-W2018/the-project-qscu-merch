@@ -147,6 +147,8 @@ else {
                 "FROM hascart JOIN product ON hascart.pno = product.pno AND hascart.size = product.size " .
                 "WHERE hascart.uid = ?";
 
+            echo "<p>before if statement</p>";
+
             if ($user_cart = $mysqli->prepare($sql)) {
                 $user_cart->bind_param("s", $userid);
                 $user_cart->execute();
@@ -183,6 +185,8 @@ else {
                         </tr>";
                 }
             }
+
+            echo "<p>after if statement</p>";
 
             $taxTotal = 0;
             $tax = 0;
