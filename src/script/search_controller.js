@@ -2,13 +2,20 @@ $(document).ready(function() {
 
 	$("#searchform").on('submit', function(e) {
 		e.preventDefault();
-		doSearch();
+		return doSearch();
 	});
 	$("#searchicon").on('click', function(e) {
 		e.preventDefault();
-		$("#searchform").trigger('submit');
+		return doSearch();
 	});
-	console.log($("#searchTransferForLoad").val());
+	$("#refineSeachBtn").on('click', function(e) {
+		e.preventDefault();
+		return doSearch();
+	});
+	$("#refineform").on('submit', function(e) {
+		e.preventDefault();
+		return doSearch();
+	});
 	$("#textinput").val($("#searchTransferForLoad").val());
 	doSearch();
 
@@ -18,19 +25,30 @@ function doSearch() {
 	console.log("Doing search");
 	// Some basic sanitation
 	var searchString = sanitize($("#textinput").val());
+	var catSelected = sanitize($("input[name=category]:checked").val());
+	if (typeof catSelected == "undefined") {
+		catSelected = "-1";
+	}
+	var searchType = "productNameAndCategoryWithRating";
+	var orderBy = sanitize($("#sort").val());
+	if (catSelected == "-1" || catSelected == -1 || !catSelected || typeof catSelected == "undefined") {
+		searchType = "productNameWithRating";
+	}
 	var data = {
-		searchType:"productNameWithRating",
+		searchType:searchType,
 		buildType:"deepgrouped",
-		searchInput:searchString
+		searchInput:searchString,
+		categorySelect:catSelected
 	};
 
 	$.ajax({
 		url:"action/getProductList.php",
-		method:"post",
+		method:"POST",
 		dataType:"json",
 		data:JSON.stringify(data),
 		beforeSend:function() {
 
+			console.log(data);
 			console.log("Searching....");
 			$("#resultHolder").html("<p>Searching...</p>");
 
@@ -85,7 +103,7 @@ function doSearch() {
 					}
 					htmlStr+="</p>"
 								+"<p class=\"addtocart\">"
-									+"<button>Add to Cart <i class=\"fa fa-shopping-cart\"></i></button>"
+									+"<a href=\"singleProduct.php?pNo="+current.productNumber+"\"><button>View Product <i class=\"fa fa-arrow-right\"></i></button></a>"
 								+"</p>"
 							+"</div>"
 						+"</div>";
@@ -97,7 +115,7 @@ function doSearch() {
 
 		}
 	});
-
+	return false;
 }
 function sanitize(str) {
 	if (typeof str == "String")

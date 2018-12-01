@@ -3,13 +3,17 @@ include("../includes/init.php");
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
 $validActionArray = array('setReview', 'setComment', 'updatePage');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = json_decode(file_get_contents('php://input'), TRUE);
 
     if (isset($input['action']) && in_array($input['action'], $validActionArray) && isset($input['pno']) && isset($_SESSION['user'])) {
-        $datetime = (new DateTime('now'))->format('Y-m-d H:i:s');
+
+        $dateObj = new DateTime('now', new DateTimeZone('Pacific/Nauru'));
+        $datetime = $dateObj->format('Y-m-d H:i:sP');
+
         $json['status'] = 'failed';
         $json['msg'] = 'undeterred error';
         try {
@@ -23,7 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $mysql->prepare($query);
             $stmt->bind_param('i', $_SESSION['user']->id);
             $stmt->execute();
-            $stmt->store_result();
+
+            $stmt -> store_result();
+
 
             if ($stmt->num_rows !== 1) {
                 $json['status'] = 'failed';
