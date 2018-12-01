@@ -7,6 +7,9 @@ Assumptions:
 -price in HasOrder is the cost of quantity * price
 */
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include '../includes/session.php';
 include '../includes/db_credentials.php';
 
@@ -27,11 +30,11 @@ try {
             $isBanned_user->bind_param("s", $userid);
             $isBanned_user->execute();
 
-            $isBanned_user_result = $isBanned_user->get_result();
+            $isBanned_user->bind_result($dbUserBanned);
             $isBanned_user_status = false;
 
-            while ($isBanned_user_row = $isBanned_user_result->fetch_assoc()) {
-                $isBanned_user_status = $isBanned_user_row['customerBanned'];
+            while ($isBanned_user->fetch()) {
+                $isBanned_user_status = $dbUserBanned;
             }
         }
 
@@ -49,7 +52,7 @@ try {
         $items_not_available = array();
 
         //create shipment- a new shipment will be created for each order (:
-        $createShipment = "INSERT INTO shipment(dateShipped, uid, shippedFrom) VALUES (CURRENT_DATE ,?,?)";
+        $createShipment = "INSERT INTO Shipment(dateShipped, uid, shippedFrom) VALUES (CURRENT_DATE ,?,?)";
         if ($shipment = $mysqli->prepare($createShipment)) {
             $shipment->bind_param("ss", $userid, $warehouseId);
             $shipment->execute();
@@ -79,6 +82,7 @@ try {
             $user_order->execute();
 //            echo "<p>You successfully made the order</p>";
         } else {
+            echo "<p>Throwing exception at orderInsertSQL</p>";
             throw new Exception();
         }
 
@@ -98,28 +102,41 @@ try {
             $user_cart->bind_param("s", $userid);
             $user_cart->execute();
 
-            $result = $user_cart->get_result();
+            $user_cart->bind_result($dbUid, $dbPno, $dbSize, $dbQuantity);
 
 //            echo "<p>".$result -> num_rows."</p>";
             //go thru each item in cart and update db
-            while ($row = $result->fetch_assoc()) {
-                $pNo = $row['pNo'];
-                $size = $row['size'];
-                $quantity = $row['quantity'];
+            while ($user_cart->fetch()) {
+                $pNo = $dbUid;
+                $size = $dbPno;
+                $quantity = $dbQuantity;
 
                 //get the cost of that product and size from db
                 $singluarProductCost;
                 $product_cost_sql = "SELECT price FROM Product WHERE pNo = ? AND size = ?";
+                echo "<p>beginning of if-statement</p>";
+                $product_cost = $mysqli->prepare($product_cost_sql);
+                echo var_dump($product_cost);
+                print_r($mysqli->error_list);
                 if ($product_cost = $mysqli->prepare($product_cost_sql)) {
+                    echo "<p>entered if-statement</p>";
                     $product_cost->bind_param("ss", $pNo, $size);
+                    echo "<p>binded param</p>";
                     $product_cost->execute();
+                    echo "<p>executed</p>";
 
-                    $product_cost_result = $product_cost->get_result();
+//                    $product_cost_result = $product_cost->get_result();
+                    $product_cost->bind_result($dbPrice);
+                    echo "<p>binded result</p>";
+                    echo "<p>".$dbPrice."</p>";
 
-                    while ($product_cost_row = $product_cost_result->fetch_assoc()) {
-                        $singularProductCost = $product_cost_row['price'];
+                    while ($product_cost->fetch()) {
+                        echo "<p>entering product cost loop</p>";
+                        $singularProductCost = $dbPrice;
+                        echo "<p>".$singularProductCost."</p>";
                     }
                 }
+                echo "<p>exited if statement</p>";
                 $productNetCost = $singularProductCost * $quantity;
 
                 //watch out for case where user tries to buy something we don't have in inventory
@@ -136,6 +153,7 @@ try {
                         //TODO: add to array here
                     } //something really went wrong lol
                     else {
+                        echo "<p>Throwing exception at updateOrderSQL</p>";
                         throw new Exception();
                     }
                     continue;
@@ -146,11 +164,13 @@ try {
                     $product_enabled->bind_param("ss", $pNo, $size);
                     $product_enabled->execute();
 
-                    $product_enabled_result = $product_enabled->get_result();
+//                    $product_enabled_result = $product_enabled->get_result();
+
+                    $product_enabled->bind_result($dbProductEnabled);
 
                     $product_enabled_status = false;
-                    while ($product_enabled_row = $product_enabled_result->fetch_assoc()) {
-                        $product_enabled_status = $product_enabled_row['isEnabled'];
+                    while ($product_enabled->fetch()) {
+                        $product_enabled_status = $dbProductEnabled;
                     }
                     //item is removed from cart in finally statement
                     if (!$product_enabled_status) {
@@ -174,11 +194,13 @@ try {
                 $order_product_error_check->bind_param("s", $oNo);
                 $order_product_error_check->execute();
 
-                $order_product_error_check_result = $order_product_error_check->get_result();
+                $order_product_error_check->bind_result($dbProdCount);
+                $order_product_error_check->store_result();
+//                $order_product_error_check_result = $order_product_error_check->get_result();
 //                echo "<p>".$order_product_error_check_result -> num_rows."</p>";
 
                 //if there are no products associated with this order number, then we are gonna delete the order from Orders
-                if ($order_product_error_check_result->num_rows === 0) {
+                if ($order_product_error_check->num_rows === 0) {
 //                    echo "<p>".$oNo."</p>";
                     $remove_order_sql = "DELETE FROM Orders WHERE oNo = ?";
 
@@ -186,8 +208,7 @@ try {
                         $remove_order->bind_param("s", $oNo);
                         $remove_order->execute();
                     }
-                    //TODO: REPLACE WITH REDIRECT
-                    //TODO: REPLACE WITH ACTUAL URL REDIRECt RACHELLE USE RELATIVE
+
                     header("Location: ../orderError.php");
                     $_SESSION['order_error'] = true;
 //                    echo "<p>Our apologies! We do not have the products that you want to order in our inventory</p>";
@@ -205,13 +226,16 @@ try {
 
         }
 
-    } else {
+    }
+    else {
         header('location: ../error404.php');
-        die();
     }
 } catch (Exception $exception) {
-    die();
+    $mysqli->close();
+//    die();
 } finally {
+
+    $mysqli = new mysqli (DBHOST, DBUSER, DBPASS, DBNAME);
 
     $remove_cart_sql = "DELETE FROM HasCart WHERE uid = ?";
     if ($remove_cart = $mysqli->prepare($remove_cart_sql)) {
