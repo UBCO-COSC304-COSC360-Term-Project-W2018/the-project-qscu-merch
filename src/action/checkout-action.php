@@ -212,12 +212,15 @@ try {
 
         }
 
-    } else {
+    }
+    else {
         header('location: ../error404.php');
-        die();
+
     }
 } catch (Exception $exception) {
-    die();
+    echo "<p>we hit an exception</p>";
+    $mysqli->close();
+//    die();
 } finally {
 
     $remove_cart_sql = "DELETE FROM HasCart WHERE uid = ?";
