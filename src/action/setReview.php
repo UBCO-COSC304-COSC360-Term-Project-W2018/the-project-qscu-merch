@@ -1,15 +1,20 @@
 <?php
 include("../includes/init.php");
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 $validActionArray = array('setReview', 'setComment', 'updatePage');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = json_decode(file_get_contents('php://input'), TRUE);
 
+    date_default_timezone_set('Pacific/Nauru');
+
+    $dateObj = new DateTime();
+    $datetimeZ = $dateObj->format('Y-m-d H:i:sP');
+    $datetime = substr($datetimeZ, 0, 19);
+
     if (isset($input['action']) && in_array($input['action'], $validActionArray) && isset($input['pno']) && isset($_SESSION['user'])) {
-        $datetime = (new DateTime('now'))->format('Y-m-d H:i:s');
+
+
         $json['status'] = 'failed';
         $json['msg'] = 'undeterred error';
         try {
@@ -23,7 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $mysql->prepare($query);
             $stmt->bind_param('i', $_SESSION['user']->id);
             $stmt->execute();
+
             $stmt->store_result();
+
 
             if ($stmt->num_rows !== 1) {
                 $json['status'] = 'failed';
@@ -32,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             $stmt->close();
 
-            if (isset($_POST['userReviewInput'])) {
-                $comment = sanitizeInput($_POST['userReviewInput']);
+            if (isset($input['userReviewInput'])) {
+                $comment = sanitizeInput($input['userReviewInput']);
 
                 if ($input['action'] == 'setComment' && isset($input['uid'])) {
 
@@ -45,27 +52,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $json['status'] = 'success';
 
                 }
+            }
 
-                $validRatingArray = array('1', '2', '3', '4', '5');
-                if ($input['action'] === 'setReview' && isset($input['userRatingInput'])) {
+            $validRatingArray = array('1', '2', '3', '4', '5');
+            if ($input['action'] === 'setReview' && isset($input['userRatingInput'])) {
 
-                    if (in_array($input['userRatingInput'], $validRatingArray)) {
+                if (in_array($input['userRatingInput'], $validRatingArray)) {
 
-                        $rating = sanitizeInput($_POST['userRatingInput']);
+                    $rating = sanitizeInput($input['userRatingInput']);
 
-                        $query = "INSERT INTO Reviews ( uid, pNo, rating, comment, date, isEnabled) VALUES (?, ?, ?, ?, ?, 1)";
-                        $stmt = $mysql->prepare($query);
-                        $stmt->bind_param('iiiss', $_SESSION['user']->id, $input['pno'], $rating, $comment, $datetime);
-                        $stmt->execute();
-                        if ($stmt->errno == 1062) {
-                            $json['msg'] = "You already has a review for this product";
-                            throw new Exception();
-                        } else {
-                            $json['status'] = 'success';
-                        }
+                    $query = "INSERT INTO Reviews ( uid, pNo, rating, comment, date, isEnabled) VALUES (?, ?, ?, ?, ?, 1)";
+                    $stmt = $mysql->prepare($query);
+                    $stmt->bind_param('iiiss', $_SESSION['user']->id, $input['pno'], $rating, $comment, $datetime);
+                    $stmt->execute();
+                    if ($stmt->errno == 1062) {
+                        $json['msg'] = "You already has a review for this product";
+                        throw new Exception();
+                    } else {
+                        $json['status'] = 'success';
                     }
                 }
             }
+
         } catch (Exception $e) {
 
         } finally {
@@ -75,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $send = json_encode($json);
         echo $send;
     }
-}else {
+} else {
     header('location: ../error404.php');
     die();
 }

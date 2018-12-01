@@ -248,7 +248,7 @@ function buildReview(json, withComment = true) {
 
     pro = $('<p class="userRating"></p>');
     for (let i = 0; i < 5; i++) {
-        if (i <= json.rating) {
+        if (i < json.rating) {
             pro.append('<span class="fa fa-star checked"></span>');
         } else {
             pro.append('<span class="fa fa-star"></span>');

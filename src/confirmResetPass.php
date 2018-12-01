@@ -50,7 +50,7 @@ $headerSet = 0;
 <?php include "header.php"; ?>
 <ul class="breadcrumb">
 	<a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-	<a>New Password</a>
+	New Password
 </ul>
 <main>
 <div id="forms">
