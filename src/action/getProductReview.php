@@ -17,7 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             throw new Exception();
         }
 
-        $datetime = (new DateTime('now'))->format('Y-m-d H:i:s');
+        $dateObj = new DateTime('now', new DateTimeZone('Pacific/Nauru'));
+        $datetime = $dateObj->format('Y-m-d H:i:sP');        $datetime = (new DateTime('now'))->format('Y-m-d H:i:s');
         $return = [];
         if ($input['action'] == 'loadNew' && isset($input['date'])) {
             $return = array('com' => [], 'rev' => [], 'date' => $datetime);
