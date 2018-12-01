@@ -87,14 +87,14 @@ $headerSet = 0;
 						</div>
 						<button id="refineSearchBtn">Refine Results</button>
 					</fieldset>
-					
+
 				</form>
 		</div>
 
   	<div id="categoryviews">
   		<div id="sortby">
         <p id='searchResultsTitle'>Search Results<?php if(isset($_GET['Search'])) echo " for: &quot;".$_GET['Search']."&quot;";?></p> <!--could include what we searched for in this line. Simple Query, extra -->
-<!--
+
     		<form id="sortform">
     			<label id="sortlabel">Sort By:</label>
     			<select name="sort" id="sort">
@@ -103,7 +103,7 @@ $headerSet = 0;
     				<option value="hightolow">Price: High to Low</option>
     			</select>
     		</form>
--->
+
   		</div>
 
       <div id="resultHolder">
