@@ -1,7 +1,10 @@
 main{
     margin: 1em;
 }
-
+main img{
+	max-height: 100px;
+	max-width:100px;
+}
 .adminListHeaders{
 	border-bottom: 2px solid #183263;
 }
