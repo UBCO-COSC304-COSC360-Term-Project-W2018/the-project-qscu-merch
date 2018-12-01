@@ -53,6 +53,7 @@ img{
 
 #sortform{
 	float: right;
+	padding-top: 0.5em;
 	margin-bottom: 0em;
 	white-space: nowrap;
 }
@@ -139,7 +140,7 @@ img{
 
 }
 #number{
-	
+
 }
 #pagenumber a{
 	background-color: #183263;
@@ -173,4 +174,3 @@ img{
 .refinelabel{
 	margin: 1em 0em 0.5em 0em;
 }
-
