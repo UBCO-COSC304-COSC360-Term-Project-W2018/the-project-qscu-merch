@@ -31,7 +31,7 @@ function isAdmin($userid) {
 }
 
 function validationFailed() {
-    header('error404.php');
+    header('location: error404.php');
 //    header('HTTP/1.1 404 Not Found');
 //    $_GET['e'] = 404;
     exit();
