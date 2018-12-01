@@ -97,13 +97,12 @@ $cartRows = array();
         foreach($cart as $itemID => $item){
 			$prod = array();
             //add to the array
-            
-            
+
 			$prod["pNo"] = $cart[$itemID]['pNo'];
 			$prod["pname"] =  $cart[$itemID]['pname'];
 			$prod["size"] =  $cart[$itemID]['size'];
 			$prod["quantity"] =  $cart[$itemID]['qty'];
-			$total = $cart[$itemID]['price']*$quantity;
+			$total = $cart[$itemID]['price']*$prod["quantity"];
 			$prod["total"] =   $cart[$itemID]['price'];
 
             array_push($cartRows, $prod);
@@ -129,7 +128,7 @@ $cartRows = array();
             
             echo '<td><a href="singleProduct.php?pNo='.$prod['pNo'].'">'.$prod['pname'].'</a></td>';
         
-            echo '<td class="centerContents"><input class="quant" type="number" name="newQuantity" pattern="\d+" value="' .$prod['quantity']. '"></td>';
+            echo '<td class="centerContents"><input class="quant" type="number" name="newQuantity" min="1" pattern="\d+" value="' .$prod['quantity']. '"></td>';
             echo '<td class="centerContents">'.$prod['size'].'</td>';
             echo '<td>$' .$prod['total']. '</td>';
             echo '<input type = "hidden" name = "pNo" value = "'.$prod['pNo'].'">';
