@@ -82,6 +82,7 @@ try {
             $user_order->execute();
 //            echo "<p>You successfully made the order</p>";
         } else {
+            echo "<p>Throwing exception at orderInsertSQL</p>";
             throw new Exception();
         }
 
@@ -140,6 +141,7 @@ try {
                         //TODO: add to array here
                     } //something really went wrong lol
                     else {
+                        echo "<p>Throwing exception at updateOrderSQL</p>";
                         throw new Exception();
                     }
                     continue;
