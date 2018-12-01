@@ -7,6 +7,9 @@ include "includes/init.php";
 //}
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+$subtotal = 0;
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($_SESSION['user'])) {
         header('Location: login.php');
@@ -142,7 +145,6 @@ else {
                 "FROM hascart JOIN product ON hascart.pno = product.pno AND hascart.size = product.size " .
                 "WHERE hascart.uid = ?";
 
-            $subtotal = 0;
             if ($user_cart = $mysqli->prepare($sql)) {
                 $user_cart->bind_param("s", $userid);
                 $user_cart->execute();
@@ -222,7 +224,10 @@ else {
             }
 
             $taxTotal = number_format((float)($subtotal * $tax), 2, '.', '');
+            echo "<p>".$taxTotal."</p>";
             $netTotal = number_format((float)($subtotal + $taxTotal), 2, '.', '');
+            echo "<p>".$netTotal."</p>";
+
 
             $fullShippingAddress = $shippingAddressLine.",".$shippingCity.",".$shippingProvince.",".$shippingCountry.",".$shippingPostalCode;
 
