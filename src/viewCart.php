@@ -38,7 +38,7 @@ $cartRows = array();
 
     <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-    <a>Your Cart</a>
+    Your Cart
 </ul>
 <main>
 

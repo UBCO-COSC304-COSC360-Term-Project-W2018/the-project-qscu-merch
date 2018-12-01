@@ -80,7 +80,7 @@ try {
     <ul class="breadcrumb">
         <a href="homeWithoutTables.php">Home</a> &gt; &gt;
         <a href="searchpage.php">Categories</a> &gt; &gt;
-        <a>Product</a>
+        Product
     </ul>
 
     <main>

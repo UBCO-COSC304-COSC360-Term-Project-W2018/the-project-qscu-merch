@@ -32,7 +32,7 @@ if(isset($_SESSION['hasError']) && isset($_SESSION['error'])){
 
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
-    <a>Login</a>
+    Login
 </ul>
 <main>
 <div id="forms">
