@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     date_default_timezone_set('Pacific/Nauru');
 
     $dateObj = new DateTime();
-    $datetime = $dateObj->format('Y-m-d H:i:sP');
+    $datetimeZ = $dateObj->format('Y-m-d H:i:sP');
+    $datetime = substr($datetimeZ, 0 ,19);
 
     if (isset($input['action']) && in_array($input['action'], $validActionArray) && isset($input['pno'])) {
 
