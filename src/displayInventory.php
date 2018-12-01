@@ -47,6 +47,7 @@ if($con -> connect_errno){
 
             // Create the data table.
             var data = new google.visualization.DataTable();
+            // data.addColumn('number', )
             data.addColumn('string', 'Topping');
             data.addColumn('number', 'Slices');
             data.addRows([
