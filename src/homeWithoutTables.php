@@ -19,7 +19,7 @@ try {
     die("Session Terminated.");
 }
 try {
-	$sqlCats = "SELECT cname FROM Category";
+	$sqlCats = "SELECT cname FROM Category ORDER BY cname ASC";
   if(!($cats = $con->query($sqlCats))) {
 		die("Category Query failed.");
 	}

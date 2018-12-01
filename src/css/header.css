@@ -193,7 +193,9 @@ header.sticky.top {
 	margin-left: 0.1em;
 }
 
+
 .breadcrumb {
+	min-width:620px;
 	margin:0;
 	background-color:#183263;
 	color: white;
