@@ -240,3 +240,7 @@ button:hover , input[type=submit]:hover {
 .breadcrumb a:hover{
 	color: tomato;
 }
+
+.fa.fa-star.checked {
+  color: orange;
+}
