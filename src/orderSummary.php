@@ -1,13 +1,13 @@
 <?php
 include "includes/init.php";
 
-if ( !isset($_SESSION['user'])) {
-    header("Location: homeWithoutTables.php");
-    exit();
-}
+//if ( !isset($_SESSION['user'])) {
+//    header("Location: homeWithoutTables.php");
+//    exit();
+//}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (!isset($_SESSION['userid'])) {
+    if (!isset($_SESSION['user'])) {
         header('Location: login.php');
         exit();
     } else {
