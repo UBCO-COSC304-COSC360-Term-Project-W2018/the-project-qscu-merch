@@ -9,10 +9,14 @@ $validActionArray = array('setReview', 'setComment', 'updatePage');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = json_decode(file_get_contents('php://input'), TRUE);
 
+    date_default_timezone_set('Pacific/Nauru');
+
+    $dateObj = new DateTime();
+    $datetimeZ = $dateObj->format('Y-m-d H:i:sP');
+    $datetime = substr($datetimeZ, 0 ,19);
+
     if (isset($input['action']) && in_array($input['action'], $validActionArray) && isset($input['pno']) && isset($_SESSION['user'])) {
 
-        $dateObj = new DateTime('now', new DateTimeZone('Pacific/Nauru'));
-        $datetime = $dateObj->format('Y-m-d H:i:sP');
 
         $json['status'] = 'failed';
         $json['msg'] = 'undeterred error';
