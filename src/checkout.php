@@ -50,7 +50,7 @@ try {
 //        echo "<p>getting billing info</p>";
 
 //        $result = $user_billing_info->get_result();
-        $user_billing_info -> bind_result($dbAddress, $dbCity, $dbProvince, $dbCountry, $dbPostalCode, $dbCreditCardNum, $dbExpiry, $dbCCV);
+        $user_billing_info -> bind_result($dbAddress, $dbCity, $dbProvince, $dbCountry, $dbPostalCode, $dbCreditCardNum, $dbExpiry, $dbCCV, $dbUid);
 
         while ($user_billing_info->fetch()) {
             $addressLine = $dbAddress;
