@@ -269,7 +269,7 @@ else {
     console.log("hit the script tag");
 
     $('#editOrderButton').click(function() {
-        location.replace("viewcart.php");
+        location.replace("viewCart.php");
     });
 
     $('#confirmOrderButton').click(function () {
