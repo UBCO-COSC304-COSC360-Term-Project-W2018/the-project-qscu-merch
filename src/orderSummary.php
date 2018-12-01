@@ -42,11 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $billingCountry = $_POST['billingCountry'];
             $billingPostalCode = $_POST['billingPostalCode'];
 
+
             $mysqli = new mysqli (DBHOST, DBUSER, DBPASS, DBNAME);
 
-            $sql = "UPDATE billinginfo SET country = ?, province = ?, city = ?, address = ?,
+            $sql = "UPDATE BillingInfo SET country = ?, province = ?, city = ?, address = ?,
                         postalCode = ?, creditCardNumber = ?, cardExpiryDate = ?, ccv=?
                          WHERE uid = ?";
+
 
             //update DB with billing info
             if ( $user_billing_info = $mysqli -> prepare($sql) ) {
@@ -81,12 +83,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $shippingPostalCode = $_POST['shippingPostalCode'];
             }
 
-            //TODO: Take these out when you are done testing
-            $headerSet = 1;
-
         }
         catch (Exception $exception) {
 //            die();
+            echo $mysqli->error_list;
             echo "<p>went to catch</p>";
         }
 
