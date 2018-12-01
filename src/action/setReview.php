@@ -24,7 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $mysql->prepare($query);
             $stmt->bind_param('i', $_SESSION['user']->id);
             $stmt->execute();
+
             $stmt -> store_result();
+
 
             if ($stmt->num_rows !== 1) {
                 $json['status'] = 'failed';
@@ -68,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             }
         } catch (Exception $e) {
-            header('location: ../error404.php');
+
         } finally {
             $mysql->close();
         }

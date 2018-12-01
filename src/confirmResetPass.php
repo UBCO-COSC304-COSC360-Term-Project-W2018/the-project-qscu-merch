@@ -64,7 +64,7 @@ $headerSet = 0;
             <div id="loginFormInputElements">
                 <div class="SUformElement">
                     <label id="SUpasswordLabel" class="signUpLabel" for="signUpPasswordInput">Password: </label>
-                    <input type="password" name="password" id="signUpPasswordInput" required>
+                    <input type="password" name="passwordInput" id="signUpPasswordInput" required>
                 </div>
 
                 <div class="SUformElement">
@@ -73,7 +73,7 @@ $headerSet = 0;
                 </div>
             </div>
             <div class="loginFormElement">
-				<input type="hidden" name="action" value="changePassword" required>
+				<input type="hidden" name="action" value="resetPassword" required>
 				<input type="hidden" name="uid" value="<?php echo $uid;?>" required>
 				<input type="hidden" name="authToken" value="<?php echo $token;?>" required>
                 <button type="submit">Save Password</button>
