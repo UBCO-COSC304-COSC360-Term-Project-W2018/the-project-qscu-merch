@@ -24,9 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $mysql->prepare($query);
             $stmt->bind_param('i', $_SESSION['user']->id);
             $stmt->execute();
-            $rst = $stmt->get_result();
+            $stmt -> store_result();
 
-            if ($rst->num_rows !== 1) {
+            if ($stmt->num_rows !== 1) {
                 $json['status'] = 'failed';
                 $json['msg'] = 'User is banned and can not make reviews or comments';
                 throw new Exception();
