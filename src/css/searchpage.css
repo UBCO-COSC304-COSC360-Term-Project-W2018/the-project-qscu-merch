@@ -72,6 +72,7 @@ img{
 }
 
 .item{
+	border-radius: 1em;
 	margin: 1em;
 	display: flex;
 	flex-direction: row;
@@ -151,7 +152,7 @@ img{
 	text-align: center;
 	text-decoration: none;
 }
-#pagenumber a:hover{
+#pagenumber a:hover,  #pagenumber a:visited:hover{
 	color: tomato;
 }
 #pagenumber a:visited{

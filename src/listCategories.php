@@ -15,7 +15,7 @@ catch (Exception $e) {
 	die("Error with Cart. Session Terminated.");
 }
 					
-					$sqlCats = "SELECT cname FROM Category";
+					$sqlCats = "SELECT cname FROM Category ORDER BY cname ASC";
 
 					if($cats = $con->query($sqlCats)) {
 						
