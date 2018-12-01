@@ -119,7 +119,7 @@ finally {
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
     <a href="viewCart.php">Cart</a> &gt; &gt;
-    <a>Checkout</a>
+    Checkout
 </ul>
 <main>
     <form method="post" action="orderSummary.php" id="checkOutForm">
