@@ -142,6 +142,7 @@ else {
                 "FROM hascart JOIN product ON hascart.pno = product.pno AND hascart.size = product.size " .
                 "WHERE hascart.uid = ?";
 
+            $subtotal = 0;
             if ($user_cart = $mysqli->prepare($sql)) {
                 $user_cart->bind_param("s", $userid);
                 $user_cart->execute();
@@ -149,7 +150,7 @@ else {
                 $result = $user_cart->get_result();
 
                 $count = 0;
-                $subtotal = 0;
+
                 while ($row = $result->fetch_assoc()) {
                     $quantity = $row['quantity'];
                     $product_name = $row['pname'];
