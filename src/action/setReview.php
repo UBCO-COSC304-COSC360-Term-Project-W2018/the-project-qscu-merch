@@ -3,6 +3,7 @@ include("../includes/init.php");
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
 $validActionArray = array('setReview', 'setComment', 'updatePage');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -23,7 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $mysql->prepare($query);
             $stmt->bind_param('i', $_SESSION['user']->id);
             $stmt->execute();
-            $stmt->store_result();
+
+            $stmt -> store_result();
+
 
             if ($stmt->num_rows !== 1) {
                 $json['status'] = 'failed';
