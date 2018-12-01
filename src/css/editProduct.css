@@ -98,8 +98,8 @@
 	border-radius: 1em;
 	margin-top: 3.2em;
 	margin-right: 3em;
-	text-align: left;
-	padding-left: 1em;
+	text-align: center;
+
 }
 
 
@@ -108,8 +108,7 @@
 	border-radius: 1em;
 	margin-top: 3.2em;
 	margin-left: 3em;
-	text-align: right;
-	padding-right: 1em;
+	text-align: center;
 }
 .hasCategorys, .hasNotCategorys{
 

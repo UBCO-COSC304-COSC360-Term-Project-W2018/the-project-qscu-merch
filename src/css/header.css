@@ -128,6 +128,7 @@ header.sticky.top {
 }
 
 #browsedropnav{
+	max-height: 500px;
 	display: none;
 	margin: -3em 0em 0em 0.2em;
 	background-color: #183263;
@@ -138,14 +139,18 @@ header.sticky.top {
 	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
+
 #browsedroptitle {
     color: #18bfef;
     float: left;
     font-size: 2em;
-    margin: 0.5em 1em 1em 0.5em;
+    margin: 0.5em 1em 0.5em 0.5em;
 }
 
 #browsedroplist {
+	overflow-y: auto;
+	margin-top: 0em;
+	max-height: 350px;
     padding-bottom: 0.5em;
     list-style: none;
     padding-left: 2em;
