@@ -6,7 +6,7 @@ $dbcred = true;
 //define("DBPASS", "40215162");
 
 define("DBHOST","localhost");
-define("DBNAME", "qscurachelle");
-define("DBUSER", "rachellegelden");
-define("DBPASS", "rachelle");
+define("DBNAME", "QSCUShop");
+define("DBUSER", "james");
+define("DBPASS", "james");
 ?>

@@ -46,7 +46,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 					$stmt->store_result();
 					$numRows = $stmt->num_rows;
 					$stmt->bind_result($quant);
-					echo $numRows;
+
 					while($stmt->fetch()){
 						$quantityToUpdate = $quant;
 	           		}
