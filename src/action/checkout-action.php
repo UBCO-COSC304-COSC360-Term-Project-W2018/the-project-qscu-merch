@@ -6,6 +6,7 @@ Assumptions:
 -every shipment is coming from warehouse 1
 -price in HasOrder is the cost of quantity * price
 */
+
 include '../includes/session.php';
 include '../includes/db_credentials.php';
 
