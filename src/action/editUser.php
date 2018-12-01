@@ -10,8 +10,7 @@ ini_set('display_errors', 0);
 //IF THIS PAGE ISN'T WORKING FOR YOU UNCOMMENT the echo around LINE 141
 
 
-function generateSalt()
-{
+function generateSalt() {
     $randString = "";
     $charUniverse = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     for ($i = 0; $i < 32; $i++) {
@@ -67,41 +66,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $stmt = $mysql->prepare($query);
                     $stmt->bind_param('sssi', $_POST['firstNameInput'], $_POST['lastNameInput'], $_POST['emailInput'], $_SESSION['user']->id);
                     $stmt->execute();
-                    if($mysql->affected_rows == 1){
-                        $_SESSION['user']->updateUser($_POST['firstNameInput'],$_POST['lastNameInput']);
-                    }
-
-                }
-                $fieldsPassword = array('oldPasswordInput', 'passwordInput');
-                if ($_POST['action'] === 'changePassword' && arrayExists($_POST, $fieldsPassword) && $_POST['passwordInput'] === $_POST['confirmPasswordInput']) {
-                    $query = 'SELECT uEmail, salt FROM User WHERE uid = ?';
-                    $stmt = $mysql->prepare($query);
-                    $stmt->bind_param('i', $_SESSION['user']->id);
-                    $stmt->execute();
-                    $stmt->bind_result($uEmail, $salt);
-                    if ($stmt->fetch()) {
-                        $email = $uEmail;
-                        $oldHashword = hash_pbkdf2("sha256", $_POST['oldPasswordInput'], $salt, 2500);
-                        $newSalt = generateSalt();
-                        $hashword = hash_pbkdf2("sha256", $_POST['passwordInput'], $newSalt, 2500);
-
-                        $stmt->close();
-
-                        $query = 'UPDATE User SET password = ?, salt = ? WHERE uEmail = ? AND password = ? AND uid = ?';
-                        $stmt = $mysql->prepare($query);
-                        $stmt->bind_param('ssssi', $hashword,$newSalt, $email, $oldHashword, $_SESSION['user']->id);
-                        $stmt->execute();
-
+                    if ($mysql->affected_rows == 1) {
+                        $_SESSION['user']->updateUser($_POST['firstNameInput'], $_POST['lastNameInput']);
                     }
                 }
 
                 $billingInformation = array('billingAddress', 'billingCity', 'billingProvince', 'billingPostalCode', 'cardNumber', 'expiryInput', 'securityCode');
-
                 if ($_POST['action'] === 'billingInfo' && arrayExists($_POST, $billingInformation) && arrayIsValidInput($_POST, $billingInformation)) {
                     $query = 'SELECT uid FROM BillingInfo WHERE uid = ?';
                     $stmt = $mysql->prepare($query);
 
-                    $stmt->bind_param('i',$_SESSION['user']->id);
+                    $stmt->bind_param('i', $_SESSION['user']->id);
                     $stmt->execute();
                     $stmt->bind_result($stop);
 
@@ -111,41 +86,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 //                        $stmt->bind_param('ssssssss', $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode'], $_SESSION['user']->id);
 //
 //                    }
-                    $stmt ->store_result();
-                    if($stmt->num_rows > 0){
+                    $stmt->store_result();
+                    if ($stmt->num_rows > 0) {
                         $query = 'UPDATE BillingInfo SET address = ?, city = ?, province = ?, postalCode = ?, creditCardNumber = ?, cardExpiryDate = ?, CCV = ? WHERE uid = ?';
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('ssssssss', $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode'], $_SESSION['user']->id);
 
-                    }
-                    else{
+                    } else {
                         $query = 'INSERT INTO BillingInfo (uid, address, city, province, postalCode, creditCardNumber, cardExpiryDate, CCV, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "Canada")';
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('isssssss', $_SESSION['user']->id, $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode']);
-
                     }
+                    $stmt->execute();
+                }
+            }
+            $fieldsPassword = array('oldPasswordInput');
+            $resetPassword = array('uid', 'authToken');
 
-                   $stmt->execute();
+            if ($_POST['action'] === 'changePassword' && isset($_POST['passwordInput']) || $_POST['action'] === 'resetPassword' && isset($_POST['passwordInput'])) {
+                $email;
+                $salt;
+                $userChangePassword = false;
+                if ($_POST['action'] === 'changePassword' && isset($_SESSION['user']) && isset($_POST['oldPasswordInput'])) {
+                    $userChangePassword = true;
 
+                    $query = 'SELECT uEmail, salt FROM User WHERE uid = ?';
+                    $stmt = $mysql->prepare($query);
+                    $stmt->bind_param('i', $_SESSION['user']->id);
+                    $stmt->execute();
+                    $stmt->bind_result($uEmail, $usalt);
+                    $stmt->store_result();
+                    $numRows = $stmt->num_rows;
+                    $stmt->fetch();
 
+                    $email = $uEmail;
+                    $salt = $usalt;
+
+                    $stmt->close();
+
+                    $oldHashword = hash_pbkdf2("sha256", $_POST['oldPasswordInput'], $salt, 2500);
                 }
 
-            }
+                $newSalt = generateSalt();
+                $hashword = hash_pbkdf2("sha256", $_POST['passwordInput'], $newSalt, 2500);
 
-            $resetPassword = array('uid', 'authToken');
-            if ($_POST['action'] == 'changePassword' && arrayExists($_POST, $resetPassword) && $_POST['authToken'] != 'null') {
-                $salt = generateSalt();
-                $hashword = hash_pbkdf2("sha256", $_POST['passwordInput'], $salt, 2500);
-                $query = 'UPDATE User SET authToken= ?,  password = ?, salt = ? WHERE uid = ? AND authToken = ? ';
-                $stmt = $mysql->prepare($query);
-                $stmt->bind_param('sssis', $null, $hashword, $salt, $_POST['uid'], $_POST['authToken']);
-                $stmt->execute();
+                if ($userChangePassword) {
+                    $query = 'UPDATE User SET password = ?, salt = ? WHERE uEmail = ? AND password = ? AND uid = ?';
+                    $stmt = $mysql->prepare($query);
+                    $stmt->bind_param('ssssi', $hashword, $newSalt, $email, $oldHashword, $_SESSION['user']->id);
+                    $stmt->execute();
+                }
 
+                if ($_POST['action'] == 'resetPassword' && $_POST['authToken'] != 'null' && isset($_POST['uid'])) {
+                    $query = 'UPDATE User SET authToken= ?,  password = ?, salt = ? WHERE uid = ? AND authToken = ? ';
+                    $stmt = $mysql->prepare($query);
+                    $stmt->bind_param('sssis', $null, $hashword, $newSalt, $_POST['uid'], $_POST['authToken']);
+                    $stmt->execute();
+
+                }
                 $mysql->close();
-            }
-        }
 
-        catch (Exception $e) {
+            }
+
+
+        } catch (Exception $e) {
             $mysql->close();
         } finally {
             $mysql->close();
