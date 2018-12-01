@@ -4,7 +4,10 @@ include '../includes/db_credentials.php';
 include '../includes/inputValidation.php';
 include '../includes/regex.php';
 
-//IF THIS PAGE ISN'T WORKING FOR YOU UNCOMMENT LINE 123
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+
+//IF THIS PAGE ISN'T WORKING FOR YOU UNCOMMENT the echo around LINE 141
 
 
 function generateSalt()
@@ -102,19 +105,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $stmt->execute();
                     $stmt->bind_result($stop);
 
-                    if($stmt->get_result()->num_rows > 0){
+//                    if($stop->num_rows > 0){
+//                        $query = 'UPDATE BillingInfo SET address = ?, city = ?, province = ?, postalCode = ?, creditCardNumber = ?, cardExpiryDate = ?, CCV = ? WHERE uid = ?';
+//                        $stmt = $mysql->prepare($query);
+//                        $stmt->bind_param('ssssssss', $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode'], $_SESSION['user']->id);
+//
+//                    }
+                    $stmt ->store_result();
+                    if($stmt->num_rows > 0){
                         $query = 'UPDATE BillingInfo SET address = ?, city = ?, province = ?, postalCode = ?, creditCardNumber = ?, cardExpiryDate = ?, CCV = ? WHERE uid = ?';
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('ssssssss', $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode'], $_SESSION['user']->id);
 
-                    }else{
+                    }
+                    else{
                         $query = 'INSERT INTO BillingInfo (uid, address, city, province, postalCode, creditCardNumber, cardExpiryDate, CCV, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, "Canada")';
                         $stmt = $mysql->prepare($query);
                         $stmt->bind_param('isssssss', $_SESSION['user']->id, $_POST['billingAddress'], $_POST['billingCity'], $_POST['billingProvince'], $_POST['billingPostalCode'], $_POST['cardNumber'], $_POST['expiryInput'], $_POST['securityCode']);
 
                     }
 
-                   $stmt->execute();;
+                   $stmt->execute();
 
 
                 }
@@ -132,8 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 $mysql->close();
             }
-        } catch (Exception $e) {
-
+        }
 
         catch (Exception $e) {
             $mysql->close();

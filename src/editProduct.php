@@ -180,11 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_
         </div>
 
         <div class="categoryContainer">
-            <div class="hasNotCategorys">
-                <?php foreach ($notCategorys AS $key1 => $value1) {
-                    echo '<div class="categoryItem" data-pno="' . $_GET['pno'] . '" data-cid="' . $notCategorys[$key1]['cid'] . '"><p>' . $notCategorys[$key1]['cname'] . '</p></div>';
-                } ?>
-            </div>
+
             <div class="categoryOptions">
                 <div id="deleteButtons">
                     <div id="removeCategory">
@@ -193,6 +189,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_
                     <div id="deleteCategory">
                         <button class="button" onclick="deleteCategory()">Delete Category</button>
                     </div>
+                    <div class="hasNotCategorys">
+                <?php foreach ($notCategorys AS $key1 => $value1) {
+                    echo '<div class="categoryItem" data-pno="' . $_GET['pno'] . '" data-cid="' . $notCategorys[$key1]['cid'] . '"><p>' . $notCategorys[$key1]['cname'] . '</p></div>';
+                } ?>
+            </div>
                 </div>
                 <div>
                     <input type="text" id="newCategoryName" placeholder="Enter Category Name" data-pno="<?php echo $_GET['pno'] ?>">
@@ -204,15 +205,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_
                     <div id="createCategory">
                         <button class="button" onclick="newCategory()">Create Category</button>
                     </div>
-
-                </div>
-            </div>
-            <div class="hasCategorys">
+                    <div class="hasCategorys">
                 <?php foreach ($hasCategorys AS $key2 => $value2) {
                     echo '<div class="categoryItem" data-pno="' . $_GET['pno'] . '" data-cid="' . $hasCategorys[$key2]['cid'] . '"><p>' . $hasCategorys[$key2]['cname'] . '</p></div>';
                 } ?>
 
             </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 </main>

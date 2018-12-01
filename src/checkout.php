@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include "includes/init.php";
 
 try {
@@ -38,7 +41,7 @@ try {
 //    echo "<p> You are connected to the database</p>";
     }
 //get info user info if they exist
-    $sql1 = "SELECT * FROM BillingInfo WHERE uid = ?";
+    $sql1 = "SELECT address, city, province,country, postalCode, creditCardNumber, cardExpiryDate, CCV  FROM BillingInfo WHERE uid = ?";
 
     if ($user_billing_info = $mysqli->prepare($sql1)) {
         $user_billing_info->bind_param("s", $userid);
@@ -46,17 +49,18 @@ try {
 
 //        echo "<p>getting billing info</p>";
 
-        $result = $user_billing_info->get_result();
+//        $result = $user_billing_info->get_result();
+        $user_billing_info -> bind_result($dbAddress, $dbCity, $dbProvince, $dbCountry, $dbPostalCode, $dbCreditCardNum, $dbExpiry, $dbCCV);
 
-        while ($row = $result->fetch_assoc()) {
-            $addressLine = $row['address'];
-            $city = $row['city'];
-            $province = $row['province'];
-            $country = $row['country'];
-            $postalcode = $row['postalCode'];
-            $creditCardNum = $row['creditCardNumber'];
-            $creditCardExpiryDate = $row['cardExpiryDate'];
-            $ccv = $row['CCV'];
+        while ($user_billing_info->fetch()) {
+            $addressLine = $dbAddress;
+            $city = $dbCity;
+            $province = $dbProvince;
+            $country = $dbCountry;
+            $postalcode = $dbPostalCode;
+            $creditCardNum = $dbCreditCardNum;
+            $creditCardExpiryDate = $dbExpiry;
+            $ccv = $dbCCV;
         }
     }
 //    echo "<p>".$addressLine."</p>";
