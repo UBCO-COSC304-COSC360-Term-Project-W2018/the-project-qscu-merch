@@ -72,7 +72,7 @@ try {
 //    echo "<p>".$creditCardExpiryDate."</p>";
 //    echo "<p>".$ccv."</p>";
 
-    $sql2 = "SELECT fname, lname FROM user WHERE uid= ?";
+    $sql2 = "SELECT fname, lname FROM User WHERE uid= ?";
 
     if ($user_info = $mysqli->prepare($sql2)) {
         $user_info->bind_param("s", $userid);
@@ -83,7 +83,9 @@ try {
 
         while ($user_info->fetch()) {
             $firstName = $dbFname;
+            echo $firstName;
             $lastName = $dbLname;
+            echo $lastName;
         }
     }
     $fullName = $firstName . " " . $lastName;
