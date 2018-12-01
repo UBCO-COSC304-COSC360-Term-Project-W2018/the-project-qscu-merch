@@ -5,6 +5,10 @@
 	margin:2em 2em 0em 2em;
 }
 
+img{
+	max-height:120px;
+	max-width: 120px;
+}
 
 #refinecol{
 	display: flex;
