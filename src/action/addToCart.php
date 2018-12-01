@@ -3,6 +3,7 @@ include "../includes/init.php";
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user']->id;
 }
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = array("rst" => true);
     $input = json_decode(file_get_contents('php://input'), true);

@@ -5,7 +5,8 @@ include "includes/init.php";
 //    header("Location: homeWithoutTables.php");
 //    exit();
 //}
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($_SESSION['user'])) {
         header('Location: login.php');
