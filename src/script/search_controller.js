@@ -16,6 +16,52 @@ $(document).ready(function() {
 		e.preventDefault();
 		return doSearch();
 	});
+	$("#sort >option").on("click", function () {
+		var key = sanitize($("#sort").val());
+    var $wrapper = $('#resultHolder'),
+        $articles = $wrapper.find('div.item');
+    [].sort.call($articles, function(a,b) {
+			switch(key) {
+				case "lowtohigh":
+					var contentA =parseInt( $(a).attr('data-price'));
+					var contentB =parseInt( $(b).attr('data-price'));
+					return (contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0;
+					break;
+				case "hightolow":
+					var contentA =parseInt( $(a).attr('data-price'));
+					var contentB =parseInt( $(b).attr('data-price'));
+					return (contentA > contentB) ? -1 : (contentA < contentB) ? 1 : 0;
+					break;
+				case "rating":
+					var contentA =parseInt( $(a).attr('data-rating'));
+					var contentB =parseInt( $(b).attr('data-rating'));
+					return (contentA > contentB) ? -1 : (contentA < contentB) ? 1 : 0;
+			}
+    });
+		var maxResults = sanitize($("#iperpage").val());
+		var pageinator = 0;
+		$("#number").html("");
+    $articles.each(function(index){
+			if (index >= pageinator*maxResults) {
+				pageinator++;
+				var $newPage = $("<a href=\"#\" "+(pageinator==1?"class=\"active\" ":"")+"data-pageyboi=\""+pageinator+"\">"+pageinator+"</a>");
+				$newPage.click(function(e) {
+					$("#number >a").removeClass("active");
+					$(e.currentTarget).addClass("active");
+					var goto = $(e.currentTarget).attr("data-pageyboi");
+					$(".item").addClass("hidden");
+					$(".item[data-pageinate='"+goto+"']").removeClass("hidden");
+				});
+				$("#number").append($newPage);
+			}
+      $wrapper.append(this);
+			$(this).attr('data-pageinate',pageinator);
+			$(this).removeClass('hidden');
+			if (pageinator != 1) {
+				$(this).addClass('hidden');
+			}
+    });
+	});
 	$("#textinput").val($("#searchTransferForLoad").val());
 	doSearch();
 
@@ -30,7 +76,6 @@ function doSearch() {
 		catSelected = "-1";
 	}
 	var searchType = "productNameAndCategoryWithRating";
-	var orderBy = sanitize($("#sort").val());
 	if (catSelected == "-1" || catSelected == -1 || !catSelected || typeof catSelected == "undefined") {
 		searchType = "productNameWithRating";
 	}
@@ -87,7 +132,7 @@ function doSearch() {
 					var doHide = false;
 					if (i >= maxResults) doHide = true;
 					var htmlStr =
-						"<div class=\"item"+(doHide?" hidden":"")+"\" data-pageinate=\""+pageinator+"\">"
+						"<div class=\"item"+(doHide?" hidden":"")+"\" data-price=\""+price+"\" data-rating=\""+((current.productRating !== null)?current.productRating:"0")+"\" data-pageinate=\""+pageinator+"\">"
 							+"<div class=\"itempicture\"><a href=\"singleProduct.php?pNo="+current.productNumber+"\"><img src=\"data:"+current.productContentType+";base64,"+current.productImage+"\" alt=\""+current.productName+" Picture\"/></a></div>"
 							+"<div class=\"iteminfo\">"
 								+"<p class=\"pname\"><a href=\"singleProduct.php?pNo="+current.productNumber+"\">"+current.productName+"</a></p>"
