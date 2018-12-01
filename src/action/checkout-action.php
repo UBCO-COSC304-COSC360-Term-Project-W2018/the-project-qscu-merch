@@ -217,13 +217,15 @@ try {
     }
     else {
         header('location: ../error404.php');
-
     }
 } catch (Exception $exception) {
-    echo "<p>we hit an exception</p>";
+    echo "<p>.$mysqli->error_list.</p>";
+
     $mysqli->close();
 //    die();
 } finally {
+
+    $mysqli = new mysqli (DBHOST, DBUSER, DBPASS, DBNAME);
 
     $remove_cart_sql = "DELETE FROM HasCart WHERE uid = ?";
     if ($remove_cart = $mysqli->prepare($remove_cart_sql)) {
