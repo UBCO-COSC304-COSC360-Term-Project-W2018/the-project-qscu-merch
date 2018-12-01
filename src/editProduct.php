@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['pno']) && arrayExists($_
                     </td>
                     <form method="post" action="action/changeProduct.php">
                         <td>
-                            <input type="text" name="productName" id="productName" maxlength="254" placeholder="Enter Product Name" required value="<?php echo $product['pname'] ?>">
+                            <input type="text" name="productName" id="productName" maxlength="500" placeholder="Enter Product Name" required value="<?php echo $product['pname'] ?>">
 
                         </td>
                         <td rowspan="4">
