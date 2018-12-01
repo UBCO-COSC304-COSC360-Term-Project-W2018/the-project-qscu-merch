@@ -82,9 +82,7 @@ try {
 
         while ($user_info->fetch()) {
             $firstName = $dbFname;
-            echo $firstName;
             $lastName = $dbLname;
-            echo $lastName;
         }
     }
     $fullName = $firstName . " " . $lastName;
