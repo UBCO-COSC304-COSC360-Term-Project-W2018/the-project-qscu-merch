@@ -4,8 +4,12 @@ class userCart{
     var $cart = [];
 
     function addItem($pNo, $pname, $size, $qty = 1, $itemPrice = -1){
-        $item = array('pNo' => $pNo, 'pname' => $pname,'size' => $size, 'qty' => $qty, 'price' => $itemPrice);
-        array_push($this->cart, $item);
+        if($this->isItemInCart($pNo, $size)){
+            $this->updateItem($pNo,$size, $qty,$itemPrice);
+        }else{
+            $item = array('pNo' => $pNo, 'pname' => $pname,'size' => $size, 'qty' => $qty, 'price' => $itemPrice);
+            array_push($this->cart, $item);
+        }
     }
 
     function getCart(){
@@ -25,6 +29,14 @@ class userCart{
         array_multisort($newArray, SORT_ASC, $this->cart);
     }
 
+    function isItemInCart($pNo, $size){
+        if($this->getItemKey($pNo, $size) != -1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
     function updateItem($pNo, $size, $qty = null, $price = null){
         $key = $this->getItemKey($pNo, $size);
@@ -33,10 +45,11 @@ class userCart{
             $this->cart[$key]['price'] = $price;
         }
         if ($qty != null) {
-            if ($qty < 1) {
+            $itemQty = $this->cart[$key]['qty'];
+            if ($itemQty + $qty < 1) {
                 $this->removeItemByKey($key);
             } else {
-                $this->cart[$key]['qty'] = $qty;
+                $this->cart[$key]['qty'] = $itemQty + $qty;
             }
         }
 
