@@ -251,7 +251,32 @@ function onChangeStatus(uid) {
 
 }
 
-function onSendRecovery(uid) {
+function onSendRecovery(uid, email) {
+
+    let recoveryBtn = $('.'+uid+'SendRecovery');
+    $.ajax({
+        url:"action/resetPass.php",
+        method:"post",
+        data:"email="+email,
+        beforeSend:function() {
+            recoveryBtn.prop('disabled', true);
+            recoveryBtn.text('sending...');
+        },
+        success:function(res) {
+            console.log(res);
+            let results = JSON.parse(res);
+            if (results.status == "success") {
+                recoveryBtn.text('Email sent!');
+            } else {
+                recoveryBtn.text('Failed to send');
+                recoveryBtn.prop('disabled', false);
+                setTimeout(function () {
+                    recoveryBtn.text('Send Recovery Email');
+                },2000)
+            }
+
+        }
+    });
 
 }
 
@@ -403,7 +428,7 @@ function buildUserItem(json) {
 
     let cells1 = $('<td><button class="' + json.userid + 'ChangeStatus" data-banned="' + json.isBanned + '" data-admin="' + json.isAdmin + '" data-status="false" onclick="onChangeStatus(' + json.userid + ')">Change Status</button></td>');
     // <td><button class="<uid>ChangeStatus" data-status="false" onclick="onChangeStatus(<uid>)">Change Status</button></td>
-    let cells2 = $('<td><button class="' + json.userid + 'SendRecovery" onclick="onSendRecovery(' + json.userid + ')">Send Recovery Email</button></td>');
+    let cells2 = $('<td><button class="' + json.userid + 'SendRecovery" onclick="onSendRecovery('+json.userid+ ',\''+ json.userEmail + '\')">Send Recovery Email</button></td>');
     // <td><button class="<uid>SendRecovery" onclick="onSendRecovery(<uid>)">Send Recovery Email</button></td>
     let cells3 = $('<td><button class="' + json.userid + 'CopyRecovery" onclick="onCopyRecovery(' + json.userid + ')" disabled>Copy Recovery Token</button></td>');
     // <td><button class="<uid>CopyRecovery" onclick="onCopyRecovery(<uid>)">Copy Recovery Token</button></td>
