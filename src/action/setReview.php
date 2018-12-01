@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $dateObj = new DateTime();
     $datetimeZ = $dateObj->format('Y-m-d H:i:sP');
-    $datetime = substr($datetimeZ, 0 ,19);
+    $datetime = substr($datetimeZ, 0, 19);
 
     if (isset($input['action']) && in_array($input['action'], $validActionArray) && isset($input['pno']) && isset($_SESSION['user'])) {
 
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bind_param('i', $_SESSION['user']->id);
             $stmt->execute();
 
-            $stmt -> store_result();
+            $stmt->store_result();
 
 
             if ($stmt->num_rows !== 1) {
@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             $stmt->close();
 
-            if (isset($_POST['userReviewInput'])) {
-                $comment = sanitizeInput($_POST['userReviewInput']);
+            if (isset($input['userReviewInput'])) {
+                $comment = sanitizeInput($input['userReviewInput']);
 
                 if ($input['action'] == 'setComment' && isset($input['uid'])) {
 
@@ -55,27 +55,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $json['status'] = 'success';
 
                 }
+            }
 
-                $validRatingArray = array('1', '2', '3', '4', '5');
-                if ($input['action'] === 'setReview' && isset($input['userRatingInput'])) {
+            $validRatingArray = array('1', '2', '3', '4', '5');
+            if ($input['action'] === 'setReview' && isset($input['userRatingInput'])) {
 
-                    if (in_array($input['userRatingInput'], $validRatingArray)) {
+                if (in_array($input['userRatingInput'], $validRatingArray)) {
 
-                        $rating = sanitizeInput($_POST['userRatingInput']);
+                    $rating = sanitizeInput($input['userRatingInput']);
 
-                        $query = "INSERT INTO Reviews ( uid, pNo, rating, comment, date, isEnabled) VALUES (?, ?, ?, ?, ?, 1)";
-                        $stmt = $mysql->prepare($query);
-                        $stmt->bind_param('iiiss', $_SESSION['user']->id, $input['pno'], $rating, $comment, $datetime);
-                        $stmt->execute();
-                        if ($stmt->errno == 1062) {
-                            $json['msg'] = "You already has a review for this product";
-                            throw new Exception();
-                        } else {
-                            $json['status'] = 'success';
-                        }
+                    $query = "INSERT INTO Reviews ( uid, pNo, rating, comment, date, isEnabled) VALUES (?, ?, ?, ?, ?, 1)";
+                    $stmt = $mysql->prepare($query);
+                    $stmt->bind_param('iiiss', $_SESSION['user']->id, $input['pno'], $rating, $comment, $datetime);
+                    $stmt->execute();
+                    if ($stmt->errno == 1062) {
+                        $json['msg'] = "You already has a review for this product";
+                        throw new Exception();
+                    } else {
+                        $json['status'] = 'success';
                     }
                 }
             }
+
         } catch (Exception $e) {
 
         } finally {
@@ -85,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $send = json_encode($json);
         echo $send;
     }
-}else {
+} else {
     header('location: ../error404.php');
     die();
 }
