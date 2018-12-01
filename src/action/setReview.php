@@ -10,7 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = json_decode(file_get_contents('php://input'), TRUE);
 
     if (isset($input['action']) && in_array($input['action'], $validActionArray) && isset($input['pno']) && isset($_SESSION['user'])) {
-        $datetime = (new DateTime('now'))->format('Y-m-d H:i:s');
+
+        $dateObj = new DateTime('now', new DateTimeZone('Pacific/Nauru'));
+        $datetime = $dateObj->format('Y-m-d H:i:sP');
+
         $json['status'] = 'failed';
         $json['msg'] = 'undeterred error';
         try {
