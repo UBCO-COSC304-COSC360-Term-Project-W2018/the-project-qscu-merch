@@ -3,12 +3,16 @@ include '../includes/session.php';
 include '../includes/inputValidation.php';
 include '../includes/db_credentials.php';
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     $validActionArray = array('loadAll', 'loadNew');
+
+
+    date_default_timezone_set('Pacific/Nauru');
+
+    $dateObj = new DateTime();
+    $datetimeZ = $dateObj->format('Y-m-d H:i:sP');
+    $datetime = substr($datetimeZ, 0 ,19);
 
     if (isset($input['action']) && in_array($input['action'], $validActionArray) && isset($input['pno'])) {
 
@@ -17,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             throw new Exception();
         }
 
-        $datetime = (new DateTime('now'))->format('Y-m-d H:i:s');
         $return = [];
         if ($input['action'] == 'loadNew' && isset($input['date'])) {
             $return = array('com' => [], 'rev' => [], 'date' => $datetime);

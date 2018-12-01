@@ -8,6 +8,7 @@
 	margin: 2em 2em 2em 0em;
 	background-color: #183263;
 	color: white;
+	border-radius: 2em;
 }
 
 #browsetitle{
@@ -42,10 +43,13 @@
 /* item formatting */
 
 #productviews{
+	min-width: 305px;
 	overflow: auto;
 }
 
 .products{
+	min-width: 295px;
+	border-radius: 1em;
 	margin: 2em 0em 2em 0em; 
 	overflow-x: hidden;
 	border: medium solid #183263;
@@ -104,4 +108,8 @@ img{
 .numberOfLiams{
 	margin: 0.5em;
 	margin-top: 5em;
+}
+
+.fa.fa-star.checked {
+	color: orange;
 }
