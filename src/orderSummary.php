@@ -143,9 +143,9 @@ else {
             $cartTwoDimArray = array();
 
 
-            $sql = "SELECT hascart.quantity, product.pname, hascart.size, product.price " .
-                "FROM hascart JOIN product ON hascart.pno = product.pno AND hascart.size = product.size " .
-                "WHERE hascart.uid = ?";
+            $sql = "SELECT HasCart.quantity, Product.pname, HasCart.size, Product.price " .
+                "FROM HasCart JOIN Product ON HasCart.pno = Product.pno AND HasCart.size = Product.size " .
+                "WHERE HasCart.uid = ?";
 
             echo "<p>before if statement</p>";
 
