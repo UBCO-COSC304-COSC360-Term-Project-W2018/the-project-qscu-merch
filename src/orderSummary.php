@@ -86,6 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $shippingPostalCode = $_POST['shippingPostalCode'];
             }
 
+            echo "<p>.$shippingProvince.</p>";
+
         }
         catch (Exception $exception) {
 //            die();
@@ -148,12 +150,16 @@ else {
             if ($user_cart = $mysqli->prepare($sql)) {
                 $user_cart->bind_param("s", $userid);
                 $user_cart->execute();
+                echo "<p>Executed uf statement to prepare sql</p>";
 
 //                $result = $user_cart->get_result();
                 $user_cart -> bind_result($dbQuantity, $dbPname, $dbSize, $dbPrice);
+                echo "<p>Binded results</p>";
+
                 $count = 0;
 
                 while ($user_cart->fetch()) {
+                    echo "<p>one iteration of user cart fetch loop</p>";
                     $quantity = $dbQuantity;
                     $product_name = $dbPname;
                     $size = $dbSize;
@@ -168,6 +174,7 @@ else {
                 }
 
                 foreach ($cartTwoDimArray as $item) {
+                    echo "<p>One iteration of for each loop for 2d array</p>";
                     echo "<tr class=\"userOrderTableRow\">
                             <td>" . $item['quantity'] . "</td>
                             <td>" . $item['productName'] . "</td>
