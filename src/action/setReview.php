@@ -29,8 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->bind_param('i', $_SESSION['user']->id);
             $stmt->execute();
 
-            $stmt->store_result();
 
+            $stmt->store_result();
 
             if ($stmt->num_rows !== 1) {
                 $json['status'] = 'failed';

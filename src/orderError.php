@@ -22,6 +22,21 @@ if ( !isset($_SESSION['order_error']) OR $_SESSION['order_error'] === false ) {
 <main>
     <p>Our apologies! We do not have the products that you want to order in our inventory</p>
     <p><a href="homeWithoutTables.php">Return Home</a></p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
 </main>
 <?php include "footer.php"; ?>
