@@ -53,14 +53,14 @@ try {
         $user_billing_info -> bind_result($dbAddress, $dbCity, $dbProvince, $dbCountry, $dbPostalCode, $dbCreditCardNum, $dbExpiry, $dbCCV);
 
         while ($user_billing_info->fetch()) {
-            $addressLine = $row['address'];
-            $city = $row['city'];
-            $province = $row['province'];
-            $country = $row['country'];
-            $postalcode = $row['postalCode'];
-            $creditCardNum = $row['creditCardNumber'];
-            $creditCardExpiryDate = $row['cardExpiryDate'];
-            $ccv = $row['CCV'];
+            $addressLine = $dbAddress;
+            $city = $dbCity;
+            $province = $dbProvince;
+            $country = $dbCountry;
+            $postalcode = $dbPostalCode;
+            $creditCardNum = $dbCreditCardNum;
+            $creditCardExpiryDate = $dbExpiry;
+            $ccv = $dbCCV;
         }
     }
 //    echo "<p>".$addressLine."</p>";
