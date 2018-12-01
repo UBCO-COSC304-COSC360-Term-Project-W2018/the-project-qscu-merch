@@ -219,7 +219,7 @@ try {
         header('location: ../error404.php');
     }
 } catch (Exception $exception) {
-    echo "<p>.$mysqli->error_list.</p>";
+    print_r($mysqli->error_list);
 
     $mysqli->close();
 //    die();
