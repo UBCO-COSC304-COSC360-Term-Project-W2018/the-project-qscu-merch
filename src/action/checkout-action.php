@@ -116,7 +116,7 @@ try {
                 $product_cost_sql = "SELECT price FROM Product WHERE pNo = ? AND size = ?";
                 echo "<p>beginning of if-statement</p>";
                 $product_cost = $mysqli->prepare($product_cost_sql);
-                echo "<p>".$product_cost."</p>";
+                echo var_dump($product_cost);
                 if ($product_cost = $mysqli->prepare($product_cost_sql)) {
                     echo "<p>entered if-statement</p>";
                     $product_cost->bind_param("ss", $pNo, $size);
