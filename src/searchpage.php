@@ -8,6 +8,10 @@ try {
   if($con -> connect_errno){
   	die("Connection Failed: ".$con -> connect_errno);
   }
+	$sqlCats = "SELECT cid, cname FROM Category";
+  if(!($cats = $con->query($sqlCats))) {
+		die("Category Query failed.");
+	}
 } catch (Exception $e) {
 	die("Session Terminated.");
 }
@@ -51,31 +55,40 @@ $headerSet = 0;
 							<output name="price" for="max"></output><br>
             </div>
 
-						<div id="pricerange">
+            <div id="pricerange">
+              <button id="refineSearchBtn">Search</button>
+            </div>
+						<!--<div id="pricerange">
 							<p class="refinelabel"><label>Price Range:</label></p>
 							<input type="range" id="max" name="pricemax" value="1000">
 							<output name="price" for="max"></output><br>
-						</div>
+						</div>-->
 
 						<div id="colourselect">
-							<p class="refinelabel"><label id="colour">Colour:</label></p>
-							<input type="checkbox" name="colour1" value="Blue"> Blue<br>
-							<input type="checkbox" name="colour2" value="Red"> Red<br>
-							<input type="checkbox" name="colour3" value="Green"> Green<br>
-							<input type="checkbox" name="colour4" value="Orange"> Orange<br>
-							<input type="checkbox" name="colour5" value="Purple"> Purple<br>
-							<input type="checkbox" name="colour6" value="Red"> Grey<br>
-							<input type="checkbox" name="colour7" value="Red"> Black<br>
-						</div>
-						<div id="colourselect">
-							<p class="refinelabel"><label id="colour">Rating:</label></p>
-							<input type="checkbox" name="all" value="all"> All<br>
-							<input type="checkbox" name="5liams" value="5"> 5 Stars<br>
-							<input type="checkbox" name="4liams" value="4"> 4 Stars<br>
-							<input type="checkbox" name="3liams" value="3"> 3 Stars<br>
-							<input type="checkbox" name="2liams" value="2"> 2 Stars<br>
-							<input type="checkbox" name="1liam" value="1"> 1 Star<br>
-							<input type="checkbox" name="unrated" value="0"> Unrated<br>
+							<p class="refinelabel"><label id="colour">Category: </label></p>
+
+              <?php
+                $check = isset($_GET['cat'])&&$_GET['cat']!="";
+                if (!$check) {
+                  echo "<input type=\"radio\" name=\"category\" value=\"-1\" id=\"cat-1\" checked=\"true\">";
+                } else {
+                  echo "<input type=\"radio\" name=\"category\" value=\"-1\" id=\"cat-1\">";
+                }
+                echo "<label for=\"cat-1\">ALL</label><br>";
+    						foreach($cats as $cat) {
+                  if ($check) {
+                    $curCat = urldecode($_GET['cat']);
+                    if ($cat['cname']==$curCat) {
+                      echo "<input type=\"radio\" name=\"category\" value=\"" . $cat['cid'] . "\" id=\"cat" . $cat['cid'] . "\" checked=\"true\">";
+                    } else {
+                      echo "<input type=\"radio\" name=\"category\" value=\"" . $cat['cid'] . "\" id=\"cat" . $cat['cid'] . "\">";
+                    }
+                  } else {
+                    echo "<input type=\"radio\" name=\"category\" value=\"" . $cat['cid'] . "\" id=\"cat" . $cat['cid'] . "\">";
+                  }
+                  echo "<label for=\"cat".$cat['cid']."\">" . $cat['cname'] . "</label><br>";
+    						}
+    					?>
 						</div>
 					</fieldset>
 				</form>
@@ -83,11 +96,10 @@ $headerSet = 0;
 
   	<div id="categoryviews">
   		<div id="sortby">
-  			<p id='searchResultsTitle'>Search Results<?php if(isset($_GET['Search'])) echo " for: &quot;".$_GET['Search']."&quot;";?></p> <!--could include what we searched for in this line. Simple Query, extra -->
+        <p id='searchResultsTitle'>Search Results<?php if(isset($_GET['Search'])) echo " for: &quot;".$_GET['Search']."&quot;";?></p> <!--could include what we searched for in this line. Simple Query, extra -->
     		<form id="sortform">
     			<label id="sortlabel">Sort By:</label>
     			<select name="sort" id="sort">
-    				<option value="liamspicks">Liam's Picks</option>
     				<option value="rating">Rating</option>
     				<option value="lowtohigh">Price: Low to High</option>
     				<option value="hightolow">Price: High to Low</option>
