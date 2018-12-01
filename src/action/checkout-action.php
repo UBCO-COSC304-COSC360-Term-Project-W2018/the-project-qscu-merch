@@ -30,11 +30,11 @@ try {
             $isBanned_user->bind_param("s", $userid);
             $isBanned_user->execute();
 
-            $isBanned_user_result = $isBanned_user->get_result();
+            $isBanned_user->bind_param($dbUserBanned);
             $isBanned_user_status = false;
 
-            while ($isBanned_user_row = $isBanned_user_result->fetch_assoc()) {
-                $isBanned_user_status = $isBanned_user_row['customerBanned'];
+            while ($isBanned_user->fetch()) {
+                $isBanned_user_status = $dbUserBanned;
             }
         }
 
@@ -101,14 +101,14 @@ try {
             $user_cart->bind_param("s", $userid);
             $user_cart->execute();
 
-            $result = $user_cart->get_result();
+            $user_cart->bind_result($dbUid, $dbPno, $dbSize, $dbQuantity);
 
 //            echo "<p>".$result -> num_rows."</p>";
             //go thru each item in cart and update db
-            while ($row = $result->fetch_assoc()) {
-                $pNo = $row['pNo'];
-                $size = $row['size'];
-                $quantity = $row['quantity'];
+            while ($user_cart->fetch()) {
+                $pNo = $dbUid;
+                $size = $dbPno;
+                $quantity = $dbQuantity;
 
                 //get the cost of that product and size from db
                 $singluarProductCost;
@@ -117,10 +117,11 @@ try {
                     $product_cost->bind_param("ss", $pNo, $size);
                     $product_cost->execute();
 
-                    $product_cost_result = $product_cost->get_result();
+//                    $product_cost_result = $product_cost->get_result();
+                    $product_cost->bind_result($dbPrice);
 
-                    while ($product_cost_row = $product_cost_result->fetch_assoc()) {
-                        $singularProductCost = $product_cost_row['price'];
+                    while ($product_cost->fetch()) {
+                        $singularProductCost = $dbPrice;
                     }
                 }
                 $productNetCost = $singularProductCost * $quantity;
@@ -149,11 +150,13 @@ try {
                     $product_enabled->bind_param("ss", $pNo, $size);
                     $product_enabled->execute();
 
-                    $product_enabled_result = $product_enabled->get_result();
+//                    $product_enabled_result = $product_enabled->get_result();
+
+                    $product_enabled->bind_result($dbProductEnabled);
 
                     $product_enabled_status = false;
-                    while ($product_enabled_row = $product_enabled_result->fetch_assoc()) {
-                        $product_enabled_status = $product_enabled_row['isEnabled'];
+                    while ($product_enabled->fetch()) {
+                        $product_enabled_status = $dbProductEnabled;
                     }
                     //item is removed from cart in finally statement
                     if (!$product_enabled_status) {
@@ -177,11 +180,13 @@ try {
                 $order_product_error_check->bind_param("s", $oNo);
                 $order_product_error_check->execute();
 
-                $order_product_error_check_result = $order_product_error_check->get_result();
+                $order_product_error_check->bind_result($dbProdCount);
+                $order_product_error_check->store_result();
+//                $order_product_error_check_result = $order_product_error_check->get_result();
 //                echo "<p>".$order_product_error_check_result -> num_rows."</p>";
 
                 //if there are no products associated with this order number, then we are gonna delete the order from Orders
-                if ($order_product_error_check_result->num_rows === 0) {
+                if ($order_product_error_check->num_rows === 0) {
 //                    echo "<p>".$oNo."</p>";
                     $remove_order_sql = "DELETE FROM Orders WHERE oNo = ?";
 
@@ -189,8 +194,7 @@ try {
                         $remove_order->bind_param("s", $oNo);
                         $remove_order->execute();
                     }
-                    //TODO: REPLACE WITH REDIRECT
-                    //TODO: REPLACE WITH ACTUAL URL REDIRECt RACHELLE USE RELATIVE
+                    
                     header("Location: ../orderError.php");
                     $_SESSION['order_error'] = true;
 //                    echo "<p>Our apologies! We do not have the products that you want to order in our inventory</p>";
