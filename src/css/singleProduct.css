@@ -306,6 +306,12 @@ select.size {
     font-size: 18px;
 }
 
+#commentInput {
+    width: 100%;
+    max-width: 100%;
+    min-width: 50%;
+    font-size: 18px;
+}
 .modal-footer .footerNote {
     margin: 0;
     padding-top: 0.5em;
