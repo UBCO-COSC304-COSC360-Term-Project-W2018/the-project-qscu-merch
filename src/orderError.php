@@ -22,6 +22,8 @@ if ( !isset($_SESSION['order_error']) OR $_SESSION['order_error'] === false ) {
 <main>
     <p>Our apologies! We do not have the products that you want to order in our inventory</p>
     <p><a href="homeWithoutTables.php">Return Home</a></p>
+
+    <img style="max-width: 50%;" src="resources/yikes-shrug.gif">
     <br>
     <br>
     <br>
