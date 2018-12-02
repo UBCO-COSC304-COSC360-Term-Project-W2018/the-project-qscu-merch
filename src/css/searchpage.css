@@ -20,7 +20,11 @@ img{
 	margin: 2em 2em 2em 0em;
 	background-color: #183263;
 	color: white;
+<<<<<<< HEAD
 	border-radius: 2em;
+=======
+	border-radius: 1em;
+>>>>>>> f41ce5a413abf9b05b204eb8e4a3b4597102b4e4
 }
 
 #refineform{
@@ -35,7 +39,10 @@ img{
 	color: white;
 }
 #searchResultsTitle{
+<<<<<<< HEAD
 	font-size: 2em;
+=======
+>>>>>>> f41ce5a413abf9b05b204eb8e4a3b4597102b4e4
 	padding-left: 1em;
 	white-space: nowrap;
 	float: left;
@@ -47,7 +54,11 @@ img{
 	padding: 0.2em;
 	margin: 1em;
 	white-space: nowrap;
+<<<<<<< HEAD
 	border-radius: 2em;
+=======
+	border-radius: 1em;
+>>>>>>> f41ce5a413abf9b05b204eb8e4a3b4597102b4e4
 	padding-right: 1em;
 }
 

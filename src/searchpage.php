@@ -53,6 +53,10 @@ $headerSet = 0;
 							<input type="number" id="iperpage" value="6" min="2" max="25" step="1">
 							</p>
             </div>
+
+<!--            <div id="pricerange">-->
+<!--              <button id="refineSearchBtn">Search</button>-->
+<!--            </div>-->
 						<!--<div id="pricerange">
 							<p class="refinelabel"><label>Price Range:</label></p>
 							<input type="range" id="max" name="pricemax" value="1000">
