@@ -21,17 +21,13 @@ if ( !isset($_SESSION['order_placed']) OR $_SESSION['order_placed'] === false ) 
 <?php include "header.php" ?>
 
 <main>
+    <img src="images/truck.jpeg">
+
     <h1>Your order is on its way!</h1>
 
     <h3>We appreciate your business here at the QSCU!</h3>
     <p><a href="homeWithoutTables.php">Return Home to More Really Cool Things You Can Buy</a></p>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+
     <br>
     <br>
     <br>
