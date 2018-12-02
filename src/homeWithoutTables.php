@@ -19,7 +19,7 @@ try {
     die("Session Terminated.");
 }
 try {
-	$sqlCats = "SELECT cname FROM Category";
+	$sqlCats = "SELECT cname FROM Category ORDER BY cname ASC";
   if(!($cats = $con->query($sqlCats))) {
 		die("Category Query failed.");
 	}
@@ -31,7 +31,7 @@ try {
   if (!($productsLiams = $con->query($sqlProdsLiams))) {
     die(mysqli_error($con));
   }
-  $sqlProdsStaff = "SELECT Product.pNo, pname, image, contentType, Product.price, description, AVG(rating) AS rating FROM (Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo) WHERE Product.isEnabled = 1 AND Product.pNo IN (SELECT pNo FROM ProductInCategory WHERE cid = '8') GROUP BY Product.pNo ORDER BY rating DESC, pname ASC LIMIT 5";
+  $sqlProdsStaff = "SELECT Product.pNo, pname, image, contentType, Product.price, description, AVG(rating) AS rating FROM (Product LEFT JOIN Reviews ON Product.pNo = Reviews.pNo) WHERE Product.isEnabled = 1 AND Product.pNo IN (SELECT pNo FROM ProductInCategory WHERE cid = '6') GROUP BY Product.pNo ORDER BY rating DESC, pname ASC LIMIT 5";
   if (!($productsStaff = $con->query($sqlProdsStaff))) {
     die(mysqli_error($con));
   }

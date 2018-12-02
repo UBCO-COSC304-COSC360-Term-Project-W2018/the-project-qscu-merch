@@ -19,7 +19,7 @@ include "includes/init.php";
 <ul class="breadcrumb">
     <a href = "homeWithoutTables.php">Home</a> &gt; &gt;
     <a href="login.php">Login</a> &gt; &gt;
-    <a>Sign Up</a>
+    Sign Up
 </ul>
 <main>
 <div id="forms">

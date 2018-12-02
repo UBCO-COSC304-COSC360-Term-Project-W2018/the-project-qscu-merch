@@ -21,88 +21,20 @@ if ( !isset($_SESSION['order_placed']) OR $_SESSION['order_placed'] === false ) 
 <?php include "header.php" ?>
 
 <main>
+    <img src="images/truck.jpeg">
+
     <h1>Your order is on its way!</h1>
 
-    <h2>But just in case you missed it, have you seen: </h2>
+    <h3>We appreciate your business here at the QSCU!</h3>
+    <p><a href="homeWithoutTables.php">Return Home to More Really Cool Things You Can Buy</a></p>
 
-    <div id="liamspicks" class="products">
-        <div class="viewnamediv">
-            <p class="viewname">Liam's Picks</p></div>
-        <div class="productlist">
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <p class="pname">Ping Pong Balls</p>
-                <div class="extraStuff">
-                    <a href="singleProduct.php"><img src="images/pingpong.jpg" alt="Product Picture" class="pimg"/></a>
-                    <div class="itemInfo">
-                        <p class="itemPrice">$200</p>
-                        <p class="numberOfLiams">5/5 Liams</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- put in a fun image -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
 
 </main>
