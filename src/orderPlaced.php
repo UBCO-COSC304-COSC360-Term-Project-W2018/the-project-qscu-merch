@@ -27,7 +27,13 @@ if ( !isset($_SESSION['order_placed']) OR $_SESSION['order_placed'] === false ) 
 
     <h3>We appreciate your business here at the QSCU!</h3>
     <p><a href="homeWithoutTables.php">Return Home to More Really Cool Things You Can Buy</a></p>
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <br>
     <br>
     <br>
