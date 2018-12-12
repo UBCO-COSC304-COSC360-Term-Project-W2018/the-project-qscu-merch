@@ -5,6 +5,5 @@ if(!isset($dbcred)){
     define("DBNAME", "db_rgelden");
     define("DBUSER", "rgelden");
     define("DBPASS", "40215162");
-
 }
 ?>
